@@ -99,9 +99,64 @@ h1, h2, h3, h4, h5, h6 {
   animation-delay: 1.5s;
 }
 
+/* Smooth entrance animations for Hero and Pinned Sections */
+@keyframes hero-fade-up {
+  0% {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes hero-scale-enter {
+  0% {
+    opacity: 0;
+    transform: scale(0.94) translateY(18px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.animate-hero-badge {
+  animation: hero-fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-hero-title {
+  animation: hero-fade-up 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.08s both;
+}
+
+.animate-hero-desc {
+  animation: hero-fade-up 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.16s both;
+}
+
+.animate-hero-ctas {
+  animation: hero-fade-up 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.24s both;
+}
+
+.animate-hero-pills {
+  animation: hero-fade-up 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.32s both;
+}
+
+.animate-hero-video {
+  animation: hero-scale-enter 1s cubic-bezier(0.16, 1, 0.3, 1) 0.12s both;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .animate-whatsapp-pulse {
+  .animate-whatsapp-pulse,
+  .animate-hero-badge,
+  .animate-hero-title,
+  .animate-hero-desc,
+  .animate-hero-ctas,
+  .animate-hero-pills,
+  .animate-hero-video {
     animation: none;
+    opacity: 1;
+    transform: none;
   }
   .whatsapp-smooth-enter,
   .whatsapp-smooth-hidden {
@@ -109,4 +164,292 @@ h1, h2, h3, h4, h5, h6 {
     transition: opacity 0.6s ease-in-out;
   }
 }
+
+/* ========================================================
+   LIGHT THEME ACCESSIBLE COLOR MAPPING
+/* ========================================================
+   LIGHT THEME ACCESSIBLE COLOR MAPPING
+   Ensures WCAG AA contrast (≥ 4.5:1), distinct card surfaces,
+   and crisp readability across all screen sizes
+======================================================== */
+html.light {
+  color-scheme: light;
+}
+
+html.light body,
+html.light #root,
+html.light .bg-\[\#081331\] {
+  background-color: #f8fafc !important;
+  color: #1e293b;
+}
+
+html.light ::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+html.light ::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+}
+html.light ::-webkit-scrollbar-thumb:hover {
+  background: #0284c7;
+}
+
+/* Nav & Sticky Header */
+html.light header.bg-\[\#081331\]\/95 {
+  background-color: rgba(255, 255, 255, 0.94) !important;
+  border-bottom-color: #cbd5e1 !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+/* Mobile navigation drawer */
+html.light #mobile-navigation {
+  background-color: #ffffff !important;
+  border-color: #cbd5e1 !important;
+}
+
+/* Surfaces and Cards: crisp border, elevated shadow, white surface */
+html.light .bg-\[\#0e1e4a\],
+html.light .bg-\[\#0e1e4a\]\/80,
+html.light .bg-\[\#0e1e4a\]\/70,
+html.light .bg-\[\#0e1e4a\]\/60,
+html.light .bg-\[\#0e1e4a\]\/50 {
+  background-color: #ffffff !important;
+  border-color: #cbd5e1 !important;
+  box-shadow: 0 4px 20px -2px rgba(8, 19, 49, 0.07), 0 2px 6px -1px rgba(8, 19, 49, 0.04) !important;
+}
+
+html.light .bg-\[\#0b183d\] {
+  background-color: #ffffff !important;
+  border-color: #cbd5e1 !important;
+  box-shadow: 0 4px 24px -2px rgba(8, 19, 49, 0.08) !important;
+}
+
+html.light .bg-\[\#122456\],
+html.light .bg-\[\#122456\]\/90,
+html.light .bg-\[\#122456\]\/70,
+html.light .bg-\[\#122456\]\/60 {
+  background-color: #f1f5f9 !important;
+  border-color: #cbd5e1 !important;
+}
+
+html.light .bg-\[\#07112d\] {
+  background-color: #07112d !important; /* Preserved dark backdrop for video card */
+}
+
+html.light .bg-\[\#050d24\] {
+  background-color: #f1f5f9 !important;
+}
+
+/* Internal nested card surfaces (e.g. in Section 5 & Section 8) */
+html.light .p-4.rounded-xl.bg-\[\#081331\],
+html.light .p-4.rounded-xl.bg-\[\#081331\]\/80,
+html.light div.rounded-xl.bg-\[\#081331\] {
+  background-color: #f8fafc !important;
+  border-color: #dbe4ef !important;
+  box-shadow: 0 1px 3px rgba(8, 19, 49, 0.05);
+}
+
+/* Service cards icon badge in Section 4 */
+html.light .group .w-12.h-12.bg-\[\#122456\] {
+  background-color: #e0f2fe !important;
+  color: #0284c7 !important;
+}
+
+/* Step cards number "01", "02", "03" in Section 6 */
+html.light .text-\[\#4FD6F4\]\/30 {
+  color: #0284c7 !important;
+  opacity: 0.38 !important;
+}
+
+/* FAQ cards in Section 10 */
+html.light div.rounded-xl.border.bg-\[\#0e1e4a\]\/50 {
+  background-color: #ffffff !important;
+  border-color: #cbd5e1 !important;
+  box-shadow: 0 2px 8px rgba(8, 19, 49, 0.04) !important;
+}
+html.light div.rounded-xl.border.bg-\[\#0e1e4a\]\/50:hover {
+  border-color: #94a3b8 !important;
+}
+
+/* Card hover lift effect */
+html.light .group.bg-\[\#0e1e4a\]\/60:hover {
+  border-color: #0284c7 !important;
+  box-shadow: 0 14px 34px -4px rgba(8, 19, 49, 0.12) !important;
+}
+
+/* Borders */
+html.light .border-\[\#1e3878\],
+html.light .border-\[\#162c66\],
+html.light .border-\[\#122456\] {
+  border-color: #cbd5e1 !important;
+}
+
+html.light .border-\[\#1e3878\]\/80,
+html.light .border-\[\#1e3878\]\/60,
+html.light .border-\[\#1e3878\]\/40 {
+  border-color: #dbe4ef !important;
+}
+
+/* Typography contrast mapping for accessibility */
+html.light h1:not(.media-dark-overlay *),
+html.light h2:not(.media-dark-overlay *),
+html.light h3:not(.media-dark-overlay *),
+html.light h4:not(.media-dark-overlay *),
+html.light h5:not(.media-dark-overlay *),
+html.light h6:not(.media-dark-overlay *),
+html.light .text-white:not(.media-dark-overlay *):not([aria-label*="Vídeo"] *):not(.bg-\[\#4FD6F4\] *):not(.bg-\[\#25D366\] *) {
+  color: #081331 !important;
+}
+
+html.light .text-slate-100:not(.media-dark-overlay *) {
+  color: #0f172a !important;
+}
+
+html.light .text-slate-200:not(.media-dark-overlay *) {
+  color: #1e293b !important;
+}
+
+html.light .text-slate-300:not(.media-dark-overlay *) {
+  color: #334155 !important;
+}
+
+html.light .text-slate-400:not(.media-dark-overlay *) {
+  color: #64748b !important;
+}
+
+html.light .text-\[\#94a9c9\],
+html.light .text-\[\#8ea5c8\] {
+  color: #475569 !important;
+}
+
+/* Brand Accent Cyan (WCAG AA ≥ 4.5:1 contrast against light background: #0284c7) */
+html.light .text-\[\#4FD6F4\]:not(.media-dark-overlay *):not([aria-label*="Vídeo"] *) {
+  color: #0284c7 !important;
+}
+html.light .text-\[\#36c5e5\]:not(.media-dark-overlay *) {
+  color: #0369a1 !important;
+}
+html.light a:hover .text-\[\#4FD6F4\],
+html.light .hover\:text-\[\#4FD6F4\]:hover {
+  color: #0284c7 !important;
+}
+html.light .hover\:text-\[\#36c5e5\]:hover {
+  color: #0369a1 !important;
+}
+
+/* Cyan Action Buttons (Primary CTAs) */
+html.light .bg-\[\#4FD6F4\] {
+  background-color: #0284c7 !important;
+  color: #ffffff !important;
+}
+html.light .bg-\[\#4FD6F4\] * {
+  color: #ffffff !important;
+}
+html.light .hover\:bg-\[\#36c5e5\]:hover {
+  background-color: #0369a1 !important;
+  color: #ffffff !important;
+}
+
+/* Secondary Buttons & Links */
+html.light a.bg-\[\#0e1e4a\],
+html.light button.bg-\[\#0e1e4a\],
+html.light .hover\:bg-\[\#162c66\]:hover {
+  background-color: #ffffff !important;
+  color: #081331 !important;
+  border-color: #cbd5e1 !important;
+}
+html.light a.bg-\[\#122456\],
+html.light button.bg-\[\#122456\] {
+  background-color: #f1f5f9 !important;
+  color: #081331 !important;
+  border-color: #cbd5e1 !important;
+}
+
+/* Badges / Pill tags in light mode */
+html.light .inline-flex.bg-\[\#0e1e4a\].border-\[\#1e3878\] {
+  background-color: #e0f2fe !important;
+  border-color: #bae6fd !important;
+  color: #0369a1 !important;
+}
+html.light .inline-flex.bg-\[\#0e1e4a\].border-\[\#1e3878\] * {
+  color: #0369a1 !important;
+}
+
+/* Form inputs & controls in light mode */
+html.light input,
+html.light textarea,
+html.light select {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+  border-color: #cbd5e1 !important;
+}
+html.light input::placeholder,
+html.light textarea::placeholder {
+  color: #94a3b8 !important;
+}
+
+/* Exceptions: Elements that preserve contrast inside media containers */
+html.light .aspect-\[9\/16\],
+html.light [aria-label*="Vídeo"],
+html.light [aria-label*="vídeo"],
+html.light .bg-\[\#060e24\],
+html.light .bg-\[\#060d21\] {
+  background-color: #060e24 !important;
+}
+
+html.light [aria-label*="Vídeo"] .text-white,
+html.light [aria-label*="vídeo"] .text-white,
+html.light [aria-label*="Vídeo"] [class*="text-slate"],
+html.light [aria-label*="vídeo"] [class*="text-slate"] {
+  color: #ffffff !important;
+}
+
+/* ========================================================
+   DARK MEDIA OVERLAYS PRESERVATION IN LIGHT MODE
+   Ensures text on Section 3 (Autoconhecimento) and Section 11 (Chamada Final)
+   remains crisp, luminous white/light slate over dark video scrims
+======================================================== */
+html.light .media-dark-overlay,
+html.light .media-dark-overlay h1,
+html.light .media-dark-overlay h2,
+html.light .media-dark-overlay h3,
+html.light .media-dark-overlay h4,
+html.light .media-dark-overlay .text-white {
+  color: #ffffff !important;
+}
+
+html.light .media-dark-overlay p,
+html.light .media-dark-overlay .text-slate-100,
+html.light .media-dark-overlay .text-slate-200,
+html.light .media-dark-overlay .text-slate-300 {
+  color: #f1f5f9 !important;
+}
+
+html.light .media-dark-overlay .text-slate-400 {
+  color: #cbd5e1 !important;
+}
+
+html.light .media-dark-overlay .bg-\[\#122456\],
+html.light .media-dark-overlay .bg-\[\#122456\]\/90 {
+  background-color: rgba(18, 36, 86, 0.92) !important;
+  border-color: rgba(79, 214, 244, 0.45) !important;
+}
+
+html.light .media-dark-overlay .text-\[\#4FD6F4\] {
+  color: #4FD6F4 !important;
+}
+
+html.light .media-dark-overlay a.bg-\[\#0e1e4a\] {
+  background-color: rgba(14, 30, 74, 0.9) !important;
+  color: #ffffff !important;
+  border-color: rgba(79, 214, 244, 0.3) !important;
+}
+
+html.light .bg-\[\#25D366\] {
+  background-color: #25D366 !important;
+  color: #ffffff !important;
+}
+html.light .bg-\[\#25D366\] * {
+  color: #ffffff !important;
+}
+
 

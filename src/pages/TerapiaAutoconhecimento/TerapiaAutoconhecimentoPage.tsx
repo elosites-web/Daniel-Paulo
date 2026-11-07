@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { SeoHead } from '../../components/seo/SeoHead';
 import { Breadcrumbs } from '../../components/breadcrumbs/Breadcrumbs';
+import { ReadingProgressBar } from '../../components/ui/ReadingProgressBar';
 import { getWhatsAppUrl } from '../../config/siteConfig';
 import { Sparkles, MessageCircle, ArrowRight, Compass, Eye, ShieldCheck, Smile, Clock } from 'lucide-react';
 
@@ -16,6 +17,8 @@ export const TerapiaAutoconhecimentoPage: React.FC = () => {
           { name: 'Terapia e Autoconhecimento', url: '/terapia-e-autoconhecimento' }
         ]}
       />
+
+      <ReadingProgressBar label="Progresso de leitura: Terapia e Autoconhecimento" />
 
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12 space-y-16">
         

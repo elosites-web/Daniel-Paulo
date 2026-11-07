@@ -1,33 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useRef } from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { SeoHead } from '../../components/seo/SeoHead';
 import { Breadcrumbs } from '../../components/breadcrumbs/Breadcrumbs';
+import { ReadingProgressBar } from '../../components/ui/ReadingProgressBar';
 import { initialBlogPosts } from '../../data/blogPosts';
 import { siteConfig, getWhatsAppUrl } from '../../config/siteConfig';
 import { Clock, User, ArrowLeft, ArrowRight, MessageCircle, AlertCircle, BookOpen, ShieldCheck, Tag } from 'lucide-react';
 
 export const BlogPostPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
-  const [scrollProgress, setScrollProgress] = useState(0);
+  const articleRef = useRef<HTMLElement>(null);
 
   const post = initialBlogPosts.find((p) => p.slug === slug);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
-      if (totalScroll <= 0) {
-        setScrollProgress(0);
-        return;
-      }
-      const currentProgress = (window.scrollY / totalScroll) * 100;
-      setScrollProgress(Math.min(100, Math.max(0, currentProgress)));
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
-
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   if (!post) {
     return <Navigate to="/blog" replace />;
@@ -47,20 +31,8 @@ export const BlogPostPage: React.FC = () => {
         ]}
       />
 
-      {/* Horizontal Reading Progress Bar at the top of the page */}
-      <div
-        className="fixed top-0 left-0 right-0 z-[60] w-full h-1 sm:h-1.5 bg-[#081331]/40 backdrop-blur-xs pointer-events-none"
-        role="progressbar"
-        aria-valuenow={Math.round(scrollProgress)}
-        aria-valuemin={0}
-        aria-valuemax={100}
-        aria-label="Progresso de leitura do artigo"
-      >
-        <div
-          className="h-full bg-gradient-to-r from-[#4FD6F4] via-[#36c5e5] to-[#25D366] transition-[width] duration-150 ease-out shadow-[0_0_10px_rgba(79,214,244,0.7)]"
-          style={{ width: `${scrollProgress}%` }}
-        />
-      </div>
+      {/* Reading Progress Bar at the top of the viewport */}
+      <ReadingProgressBar label={`Progresso de leitura: ${post.title}`} />
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12 space-y-12">
         

@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { mainNavItems } from '../../data/navigation';
 import { siteConfig, getWhatsAppUrl } from '../../config/siteConfig';
 import { Menu, X, ChevronDown, MessageCircle } from 'lucide-react';
+import { ThemeSwitcher } from '../ui/ThemeSwitcher';
 
 export const Navbar: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -28,7 +29,7 @@ export const Navbar: React.FC = () => {
   }, []);
 
   return (
-    <header className="sticky top-0 z-50 bg-[#081331]/95 backdrop-blur-md border-b border-[#162c66]/80 transition-all duration-300">
+    <header className="sticky top-0 z-50 bg-[#081331]/95 backdrop-blur-md border-b border-[#162c66]/80 transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           
@@ -130,8 +131,9 @@ export const Navbar: React.FC = () => {
             })}
           </nav>
 
-          {/* Desktop Direct CTA Button */}
+          {/* Desktop Actions: Theme Switcher & Direct CTA Button */}
           <div className="hidden lg:flex items-center gap-3">
+            <ThemeSwitcher />
             <a
               href={getWhatsAppUrl()}
               target="_blank"
@@ -144,8 +146,9 @@ export const Navbar: React.FC = () => {
             </a>
           </div>
 
-          {/* Mobile hamburger button */}
-          <div className="flex items-center lg:hidden">
+          {/* Mobile actions: Theme Switcher + hamburger button */}
+          <div className="flex items-center gap-2 lg:hidden">
+            <ThemeSwitcher />
             <button
               type="button"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -206,7 +209,12 @@ export const Navbar: React.FC = () => {
             })}
           </div>
 
-          <div className="mt-5 pt-4 border-t border-[#1e3878]">
+          <div className="mt-5 pt-4 border-t border-[#1e3878] space-y-3">
+            <div className="flex items-center justify-between px-2 py-1">
+              <span className="text-sm font-medium text-slate-300">Aparência do site</span>
+              <ThemeSwitcher showLabel={true} />
+            </div>
+
             <a
               href={getWhatsAppUrl()}
               target="_blank"

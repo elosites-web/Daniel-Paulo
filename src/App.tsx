@@ -40,11 +40,14 @@ import { TermosPage } from './pages/Termos/TermosPage';
 import { MapaSitePage } from './pages/MapaSite/MapaSitePage';
 import { NotFoundPage } from './pages/NotFound/NotFoundPage';
 
+import { ThemeProvider } from './context/ThemeContext';
+
 export default function App() {
   return (
-    <BrowserRouter>
-      <ScrollToTop />
-      <Layout>
+    <ThemeProvider>
+      <BrowserRouter>
+        <ScrollToTop />
+        <Layout>
         <Routes>
           {/* Home */}
           <Route path="/" element={<HomePage />} />
@@ -99,5 +102,6 @@ export default function App() {
         </Routes>
       </Layout>
     </BrowserRouter>
-  );
+  </ThemeProvider>
+);
 }
