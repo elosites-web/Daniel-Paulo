@@ -1,0 +1,112 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-dark: #081331;
+  --color-brand-surface: #0e1e4a;
+  --color-brand-card: #122456;
+  --color-brand-border: #1e3878;
+  --color-brand-cyan: #4FD6F4;
+  --color-brand-cyan-hover: #36c5e5;
+  --color-brand-muted: #94a9c9;
+  --font-heading: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+:root {
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-family: var(--font-body);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #081331;
+}
+::-webkit-scrollbar-thumb {
+  background: #1e3878;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #4FD6F4;
+}
+
+/* Skip link focus */
+.skip-link:focus {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  z-index: 100;
+  padding: 0.75rem 1.25rem;
+  background-color: #4FD6F4;
+  color: #081331;
+  font-weight: 600;
+  border-radius: 0.5rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  outline: 2px solid white;
+}
+
+/* Smooth entrance transition for Floating WhatsApp */
+.whatsapp-smooth-enter {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: auto;
+}
+
+.whatsapp-smooth-hidden {
+  opacity: 0;
+  transform: translateY(28px) scale(0.8);
+  pointer-events: none;
+  transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Subtle periodic pulse animation for Floating WhatsApp button */
+@keyframes whatsapp-subtle-pulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 10px 25px -5px rgba(37, 211, 102, 0.4), 0 8px 10px -6px rgba(37, 211, 102, 0.2);
+  }
+  12% {
+    transform: scale(1.06);
+    box-shadow: 0 14px 28px -4px rgba(37, 211, 102, 0.55), 0 0 0 8px rgba(37, 211, 102, 0.2);
+  }
+  24% {
+    transform: scale(1);
+    box-shadow: 0 10px 25px -5px rgba(37, 211, 102, 0.4), 0 0 0 14px rgba(37, 211, 102, 0);
+  }
+  36% {
+    transform: scale(1.04);
+    box-shadow: 0 12px 26px -5px rgba(37, 211, 102, 0.45), 0 0 0 6px rgba(37, 211, 102, 0.15);
+  }
+  48% {
+    transform: scale(1);
+    box-shadow: 0 10px 25px -5px rgba(37, 211, 102, 0.4), 0 0 0 12px rgba(37, 211, 102, 0);
+  }
+}
+
+.animate-whatsapp-pulse {
+  animation: whatsapp-subtle-pulse 5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  animation-delay: 1.5s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-whatsapp-pulse {
+    animation: none;
+  }
+  .whatsapp-smooth-enter,
+  .whatsapp-smooth-hidden {
+    transform: none;
+    transition: opacity 0.6s ease-in-out;
+  }
+}
+

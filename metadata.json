@@ -1,0 +1,6 @@
+{
+  "name": "Daniel Paulo | Psicanalista e Terapeuta",
+  "description": "Site institucional de Daniel Paulo, psicanalista, terapeuta e professor em Jundiaí-SP. Atendimento humanizado e acolhedor, online e presencial.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

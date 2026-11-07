@@ -1,0 +1,21 @@
+{
+  "name": "Daniel Paulo | Psicanalista e Terapeuta",
+  "short_name": "Daniel Paulo",
+  "description": "Atendimento humanizado em psicanálise e terapia, presencial em Jundiaí-SP e online.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#081331",
+  "theme_color": "#081331",
+  "icons": [
+    {
+      "src": "/assets/favicon/favicon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/favicon/favicon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

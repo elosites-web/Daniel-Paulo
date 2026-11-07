@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Sitemap condicionado ao domínio de produção oficial (atualmente pendente de definição em siteConfig.ts)
+# Sitemap: https://[DOMINIO_A_DEFINIR]/sitemap.xml
