@@ -44,7 +44,7 @@ export const TrajetoriaPage: React.FC = () => {
         </div>
 
         {/* Timeline */}
-        <div className="relative border-l-2 border-[#1e3878] ml-4 sm:ml-8 pl-6 sm:pl-10 space-y-10 my-10">
+        <div id="linha-do-tempo" className="relative border-l-2 border-[#1e3878] ml-4 sm:ml-8 pl-6 sm:pl-10 space-y-10 my-10">
           {professionalExperiences.map((exp, index) => (
             <div key={exp.id} className="relative group">
               
@@ -93,7 +93,7 @@ export const TrajetoriaPage: React.FC = () => {
         </div>
 
         {/* Social / Voluntary section (discreet textual mention without religious imagery) */}
-        <div className="p-8 rounded-3xl bg-[#0b183d] border border-[#1e3878] space-y-3">
+        <div id="voluntariado" className="p-8 rounded-3xl bg-[#0b183d] border border-[#1e3878] space-y-3">
           <div className="inline-flex items-center gap-2 text-xs font-semibold text-[#4FD6F4] uppercase tracking-wider">
             <HeartHandshake className="w-4 h-4" />
             <span>Iniciativas Sociais e Voluntárias</span>

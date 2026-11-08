@@ -17,6 +17,7 @@ interface ScrollVideoProps {
   onProgress?: (progress: number) => void;
   keepPosterOnZeroProgress?: boolean;
   aspectRatio?: string;
+  animateOnView?: boolean;
 }
 
 export const ScrollVideo: React.FC<ScrollVideoProps> = ({
@@ -33,6 +34,7 @@ export const ScrollVideo: React.FC<ScrollVideoProps> = ({
   onProgress,
   keepPosterOnZeroProgress = false,
   aspectRatio = 'aspect-[9/16]',
+  animateOnView = false,
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -139,12 +141,21 @@ export const ScrollVideo: React.FC<ScrollVideoProps> = ({
     (keepPosterOnZeroProgress && progress <= 0.015);
 
   const containerAspectClass = aspectRatio === 'none' ? '' : aspectRatio;
+  const isShiftUp = videoClassName.includes('-translate-y');
 
   return (
-    <div
+    <motion.div
       ref={containerRef}
       className={`relative overflow-hidden isolate z-0 ${containerAspectClass} bg-[#060e24] ${className}`}
       aria-label={altText}
+      {...(animateOnView && !reducedMotion
+        ? {
+            initial: { opacity: 0, y: 16 },
+            whileInView: { opacity: 1, y: 0 },
+            viewport: { once: true, margin: '-40px' },
+            transition: { duration: 0.85, ease: [0.16, 1, 0.3, 1] as const },
+          }
+        : {})}
     >
       {/* Optimized Poster Image with explicit aspect ratio hints to eliminate Layout Shift (CLS = 0) */}
       <img
@@ -162,7 +173,11 @@ export const ScrollVideo: React.FC<ScrollVideoProps> = ({
             : 'opacity-0 z-0 absolute inset-0'
         } ${videoClassName}`}
         style={{
-          transform: !isVideoReady ? `scale(${1 + progress * 0.03})` : undefined,
+          transform: !isVideoReady
+            ? `${isShiftUp ? 'translateY(-1px) ' : ''}scale(${1 + progress * 0.03})`
+            : isShiftUp
+            ? 'translateY(-1px)'
+            : undefined,
           transition: 'transform 0.15s ease-out, opacity 0.5s ease-in-out',
         }}
       />
@@ -230,6 +245,6 @@ export const ScrollVideo: React.FC<ScrollVideoProps> = ({
           </div>
         </>
       )}
-    </div>
+    </motion.div>
   );
 };

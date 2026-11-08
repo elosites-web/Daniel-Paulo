@@ -45,7 +45,7 @@ export const OQueEAPsicanalisePage: React.FC = () => {
           </header>
 
           <div className="prose prose-invert max-w-none text-slate-300 space-y-6 text-base sm:text-lg leading-relaxed font-light">
-            <div className="p-6 rounded-2xl bg-[#0e1e4a]/60 border border-[#1e3878]">
+            <div id="definicao" className="p-6 rounded-2xl bg-[#0e1e4a]/60 border border-[#1e3878]">
               <h2 className="text-xl font-bold text-white mb-2 font-['Plus_Jakarta_Sans']">
                 Definição Essencial
               </h2>
@@ -54,7 +54,7 @@ export const OQueEAPsicanalisePage: React.FC = () => {
               </p>
             </div>
 
-            <h2 className="text-2xl font-bold text-white font-['Plus_Jakarta_Sans'] pt-4">
+            <h2 id="regra-fundamental" className="text-2xl font-bold text-white font-['Plus_Jakarta_Sans'] pt-4">
               A Regra Fundamental: Falar com Liberdade
             </h2>
             <p>
@@ -64,7 +64,7 @@ export const OQueEAPsicanalisePage: React.FC = () => {
               Isso significa dizer o que vier à mente: pensamentos incoerentes, dúvidas que parecem bobas, lembranças repentinas, sentimentos dos quais você tem vergonha ou sonhos. É exatamente nas pequenas frestas e deslizes da linguagem que o inconsciente se revela.
             </p>
 
-            <h2 className="text-2xl font-bold text-white font-['Plus_Jakarta_Sans'] pt-4">
+            <h2 id="beneficios" className="text-2xl font-bold text-white font-['Plus_Jakarta_Sans'] pt-4">
               Para que serve o processo analítico?
             </h2>
             <ul className="space-y-2.5 not-prose text-slate-300 text-base">
@@ -82,7 +82,7 @@ export const OQueEAPsicanalisePage: React.FC = () => {
               </li>
             </ul>
 
-            <h2 className="text-2xl font-bold text-white font-['Plus_Jakarta_Sans'] pt-4">
+            <h2 id="limites-eticos" className="text-2xl font-bold text-white font-['Plus_Jakarta_Sans'] pt-4">
               Limites Éticos e Esclarecimentos
             </h2>
             <p>

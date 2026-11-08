@@ -41,7 +41,7 @@ export const PrivacidadePage: React.FC = () => {
             </p>
           </header>
 
-          <section className="space-y-3">
+          <section id="controlador" className="space-y-3">
             <h2 className="text-xl font-bold text-white font-['Plus_Jakarta_Sans']">
               1. Identificação do Controlador dos Dados
             </h2>
@@ -50,7 +50,7 @@ export const PrivacidadePage: React.FC = () => {
             </p>
           </section>
 
-          <section className="space-y-3">
+          <section id="dados-coletados" className="space-y-3">
             <h2 className="text-xl font-bold text-white font-['Plus_Jakarta_Sans']">
               2. Dados Coletados e Finalidade
             </h2>
@@ -67,7 +67,7 @@ export const PrivacidadePage: React.FC = () => {
             </p>
           </section>
 
-          <section className="space-y-3">
+          <section id="processamento" className="space-y-3">
             <h2 className="text-xl font-bold text-white font-['Plus_Jakarta_Sans']">
               3. Forma de Processamento e Ausência de Banco de Dados Próprio
             </h2>
@@ -79,7 +79,7 @@ export const PrivacidadePage: React.FC = () => {
             </p>
           </section>
 
-          <section className="space-y-3">
+          <section id="cookies" className="space-y-3">
             <h2 className="text-xl font-bold text-white font-['Plus_Jakarta_Sans']">
               4. Cookies e Tecnologias de Rastreamento
             </h2>
@@ -88,7 +88,7 @@ export const PrivacidadePage: React.FC = () => {
             </p>
           </section>
 
-          <section className="space-y-3">
+          <section id="direitos-titular" className="space-y-3">
             <h2 className="text-xl font-bold text-white font-['Plus_Jakarta_Sans']">
               5. Direitos do Titular de Dados
             </h2>
@@ -97,7 +97,7 @@ export const PrivacidadePage: React.FC = () => {
             </p>
           </section>
 
-          <section className="space-y-3">
+          <section id="sigilo-profissional" className="space-y-3">
             <h2 className="text-xl font-bold text-white font-['Plus_Jakarta_Sans']">
               6. Sigilo Profissional
             </h2>

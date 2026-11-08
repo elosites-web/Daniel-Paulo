@@ -4,11 +4,22 @@ import { mainNavItems } from '../../data/navigation';
 import { siteConfig, getWhatsAppUrl } from '../../config/siteConfig';
 import { Menu, X, ChevronDown, MessageCircle } from 'lucide-react';
 import { ThemeSwitcher } from '../ui/ThemeSwitcher';
+import { motion, useScroll, useSpring } from 'motion/react';
+import { useReducedMotion } from '../../hooks/useReducedMotion';
 
 export const Navbar: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const location = useLocation();
+  const reducedMotion = useReducedMotion();
+
+  // Full-page scroll progress
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 140,
+    damping: 30,
+    restDelta: 0.001,
+  });
 
   // Close menus on route change
   useEffect(() => {
@@ -29,7 +40,7 @@ export const Navbar: React.FC = () => {
   }, []);
 
   return (
-    <header className="sticky top-0 z-50 bg-[#081331]/95 backdrop-blur-md border-b border-[#162c66]/80 transition-colors duration-300">
+    <header className="sticky top-0 z-50 bg-[#081331]/80 backdrop-blur-[12px] border-b border-[#162c66]/80 transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           
@@ -161,6 +172,21 @@ export const Navbar: React.FC = () => {
             </button>
           </div>
         </div>
+      </div>
+
+      {/* Slim, full-width scroll progress bar immediately below the header */}
+      <div
+        className="absolute top-full inset-x-0 w-full h-[2.5px] bg-[#081331]/30 pointer-events-none overflow-hidden z-50"
+        role="progressbar"
+        aria-label="Progresso de rolagem da página"
+      >
+        <motion.div
+          className="h-full bg-gradient-to-r from-[#4FD6F4] via-[#36c5e5] to-[#25D366] shadow-[0_0_8px_rgba(79,214,244,0.7)] origin-left"
+          style={{
+            scaleX: reducedMotion ? scrollYProgress : scaleX,
+            transformOrigin: '0% 50%',
+          }}
+        />
       </div>
 
       {/* Mobile Drawer Menu */}

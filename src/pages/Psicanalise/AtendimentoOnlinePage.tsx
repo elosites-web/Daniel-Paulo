@@ -42,7 +42,7 @@ export const AtendimentoOnlinePage: React.FC = () => {
           </header>
 
           <div className="text-slate-300 space-y-6 text-base sm:text-lg leading-relaxed font-light">
-            <div className="p-6 rounded-2xl bg-[#0e1e4a]/60 border border-[#1e3878]">
+            <div id="como-funciona" className="p-6 rounded-2xl bg-[#0e1e4a]/60 border border-[#1e3878]">
               <h2 className="text-xl font-bold text-white mb-2 font-['Plus_Jakarta_Sans']">
                 Como Funciona a Modalidade Online?
               </h2>
@@ -51,7 +51,7 @@ export const AtendimentoOnlinePage: React.FC = () => {
               </p>
             </div>
 
-            <h2 className="text-2xl font-bold text-white font-['Plus_Jakarta_Sans'] pt-4">
+            <h2 id="vantagens" className="text-2xl font-bold text-white font-['Plus_Jakarta_Sans'] pt-4">
               Vantagens da Sessão Remota
             </h2>
             <ul className="space-y-3 not-prose text-slate-300 text-base">
@@ -69,7 +69,7 @@ export const AtendimentoOnlinePage: React.FC = () => {
               </li>
             </ul>
 
-            <h2 className="text-2xl font-bold text-white font-['Plus_Jakarta_Sans'] pt-4">
+            <h2 id="recomendacoes" className="text-2xl font-bold text-white font-['Plus_Jakarta_Sans'] pt-4">
               Recomendações para a Sessão Online
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
@@ -92,7 +92,7 @@ export const AtendimentoOnlinePage: React.FC = () => {
           </div>
 
           {/* CTA */}
-          <div className="p-8 rounded-3xl bg-[#0b183d] border border-[#1e3878] text-center space-y-4">
+          <div id="agendamento" className="p-8 rounded-3xl bg-[#0b183d] border border-[#1e3878] text-center space-y-4">
             <h3 className="text-2xl font-bold text-white font-['Plus_Jakarta_Sans']">
               Quer saber mais sobre o atendimento online?
             </h3>

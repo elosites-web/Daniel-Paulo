@@ -36,10 +36,11 @@ export const ServicosHubPage: React.FC = () => {
         </div>
 
         {/* Services List */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div id="lista-servicos" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {servicesData.map((svc) => (
             <div
               key={svc.id}
+              id={svc.id}
               className="bg-[#0e1e4a]/60 border border-[#1e3878] rounded-2xl p-7 hover:border-[#4FD6F4]/50 transition-all flex flex-col justify-between shadow-lg hover:shadow-2xl hover:shadow-[#4FD6F4]/5"
             >
               <div>
@@ -91,7 +92,7 @@ export const ServicosHubPage: React.FC = () => {
         </div>
 
         {/* Ethical Box */}
-        <div className="p-8 rounded-3xl bg-[#0b183d] border border-[#1e3878] max-w-4xl mx-auto flex items-start gap-4 text-xs sm:text-sm text-slate-300 font-light">
+        <div id="criterio-etico" className="p-8 rounded-3xl bg-[#0b183d] border border-[#1e3878] max-w-4xl mx-auto flex items-start gap-4 text-xs sm:text-sm text-slate-300 font-light">
           <ShieldCheck className="w-6 h-6 text-[#4FD6F4] flex-shrink-0 mt-0.5" />
           <p className="leading-relaxed">
             <strong>Critério e Clareza:</strong> Daniel Paulo atua estritamente dentro dos parâmetros informados. Não são ofertados tratamentos médicos ou procedimentos que exijam registros em conselhos de classe não informados. Para esclarecer qual modalidade atende melhor às suas necessidades atuais, entre em contato diretamente pelo WhatsApp.

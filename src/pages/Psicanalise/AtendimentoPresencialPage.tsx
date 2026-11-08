@@ -42,7 +42,7 @@ export const AtendimentoPresencialPage: React.FC = () => {
           </header>
 
           <div className="text-slate-300 space-y-6 text-base sm:text-lg leading-relaxed font-light">
-            <div className="p-6 rounded-2xl bg-[#0e1e4a]/60 border border-[#1e3878]">
+            <div id="localizacao" className="p-6 rounded-2xl bg-[#0e1e4a]/60 border border-[#1e3878]">
               <div className="flex items-center gap-2 text-white font-bold text-lg mb-2">
                 <MapPin className="w-5 h-5 text-[#4FD6F4]" />
                 <span>Localização e Modalidade Presencial</span>
@@ -52,7 +52,7 @@ export const AtendimentoPresencialPage: React.FC = () => {
               </p>
             </div>
 
-            <h2 className="text-2xl font-bold text-white font-['Plus_Jakarta_Sans'] pt-4">
+            <h2 id="experiencia" className="text-2xl font-bold text-white font-['Plus_Jakarta_Sans'] pt-4">
               A Experiência do Encontro Presencial
             </h2>
             <p>
@@ -62,14 +62,14 @@ export const AtendimentoPresencialPage: React.FC = () => {
               O trajeto até o consultório e o tempo de retorno muitas vezes funcionam como momentos valiosos de digestão emocional e reflexão sobre os temas mobilizados na sessão.
             </p>
 
-            <h2 className="text-2xl font-bold text-white font-['Plus_Jakarta_Sans'] pt-4">
+            <h2 id="como-agendar" className="text-2xl font-bold text-white font-['Plus_Jakarta_Sans'] pt-4">
               Como Confirmar seu Horário
             </h2>
             <p>
               Por se tratar de um atendimento individualizado e com agenda reservada, o primeiro passo é entrar em contato pelo WhatsApp para verificar a compatibilidade de dias e horários.
             </p>
 
-            <div className="p-6 rounded-2xl bg-[#081331] border border-[#162c66] space-y-2">
+            <div id="horarios" className="p-6 rounded-2xl bg-[#081331] border border-[#162c66] space-y-2">
               <h3 className="font-bold text-white text-base flex items-center gap-2">
                 <Clock className="w-4 h-4 text-[#4FD6F4]" />
                 <span>Horários e Agendamento</span>
@@ -81,7 +81,7 @@ export const AtendimentoPresencialPage: React.FC = () => {
           </div>
 
           {/* CTA Box */}
-          <div className="p-8 rounded-3xl bg-[#0b183d] border border-[#1e3878] text-center space-y-4">
+          <div id="agendamento" className="p-8 rounded-3xl bg-[#0b183d] border border-[#1e3878] text-center space-y-4">
             <h3 className="text-2xl font-bold text-white font-['Plus_Jakarta_Sans']">
               Deseja atendimento presencial em Jundiaí?
             </h3>

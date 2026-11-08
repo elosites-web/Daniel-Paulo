@@ -71,7 +71,7 @@ export const PsicanalistaJundiaiPage: React.FC = () => {
               Modalidades Disponíveis para Moradores de Jundiaí e Região
             </h2>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 pt-2">
+            <div id="modalidades" className="grid grid-cols-1 sm:grid-cols-2 gap-5 pt-2">
               <div className="p-6 rounded-2xl bg-[#081331] border border-[#162c66] space-y-3">
                 <div className="w-10 h-10 rounded-xl bg-[#122456] flex items-center justify-center text-[#4FD6F4]">
                   <MapPin className="w-5 h-5" />
@@ -122,7 +122,7 @@ export const PsicanalistaJundiaiPage: React.FC = () => {
           </div>
 
           {/* Local FAQs */}
-          <div className="space-y-4 pt-4">
+          <div id="faq" className="space-y-4 pt-4">
             <h2 className="text-2xl font-bold text-white font-['Plus_Jakarta_Sans']">
               Perguntas Frequentes sobre Atendimento em Jundiaí
             </h2>
@@ -160,7 +160,7 @@ export const PsicanalistaJundiaiPage: React.FC = () => {
           </div>
 
           {/* CTA Box */}
-          <div className="p-8 rounded-3xl bg-[#0b183d] border border-[#1e3878] text-center space-y-4">
+          <div id="agendamento" className="p-8 rounded-3xl bg-[#0b183d] border border-[#1e3878] text-center space-y-4">
             <h3 className="text-2xl font-bold text-white font-['Plus_Jakarta_Sans']">
               Agende sua conversa em Jundiaí-SP
             </h3>

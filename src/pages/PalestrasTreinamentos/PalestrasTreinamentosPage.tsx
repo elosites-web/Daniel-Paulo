@@ -87,7 +87,7 @@ export const PalestrasTreinamentosPage: React.FC = () => {
         {/* 2 Main Segments */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           
-          <div className="p-8 rounded-3xl bg-[#0e1e4a]/60 border border-[#1e3878] space-y-4 hover:border-[#4FD6F4]/50 transition-all flex flex-col justify-between shadow-xl">
+          <div id="empresas" className="p-8 rounded-3xl bg-[#0e1e4a]/60 border border-[#1e3878] space-y-4 hover:border-[#4FD6F4]/50 transition-all flex flex-col justify-between shadow-xl">
             <div>
               <div className="w-12 h-12 rounded-2xl bg-[#122456] flex items-center justify-center text-[#4FD6F4] mb-4">
                 <Building2 className="w-6 h-6" />
@@ -123,7 +123,7 @@ export const PalestrasTreinamentosPage: React.FC = () => {
             </Link>
           </div>
 
-          <div className="p-8 rounded-3xl bg-[#0e1e4a]/60 border border-[#1e3878] space-y-4 hover:border-[#4FD6F4]/50 transition-all flex flex-col justify-between shadow-xl">
+          <div id="escolas" className="p-8 rounded-3xl bg-[#0e1e4a]/60 border border-[#1e3878] space-y-4 hover:border-[#4FD6F4]/50 transition-all flex flex-col justify-between shadow-xl">
             <div>
               <div className="w-12 h-12 rounded-2xl bg-[#122456] flex items-center justify-center text-[#4FD6F4] mb-4">
                 <GraduationCap className="w-6 h-6" />

@@ -84,12 +84,13 @@ export const PerguntasFrequentesPage: React.FC = () => {
         </div>
 
         {/* Accordion */}
-        <div className="space-y-4">
+        <div id="lista-duvidas" className="space-y-4">
           {detailedFaqs.map((faq, idx) => {
             const isOpen = openIndex === idx;
             return (
               <div
                 key={idx}
+                id={`duvida-${idx + 1}`}
                 className="rounded-2xl border border-[#1e3878] bg-[#0e1e4a]/60 overflow-hidden transition-all shadow-md"
               >
                 <button
@@ -119,7 +120,7 @@ export const PerguntasFrequentesPage: React.FC = () => {
         </div>
 
         {/* Still have questions? */}
-        <div className="p-8 rounded-3xl bg-[#0b183d] border border-[#1e3878] text-center space-y-4">
+        <div id="contato-direto" className="p-8 rounded-3xl bg-[#0b183d] border border-[#1e3878] text-center space-y-4">
           <h3 className="text-2xl font-bold text-white font-['Plus_Jakarta_Sans']">
             Sua dúvida não está listada aqui?
           </h3>

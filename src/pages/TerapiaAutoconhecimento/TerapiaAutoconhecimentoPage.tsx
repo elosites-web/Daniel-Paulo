@@ -41,9 +41,9 @@ export const TerapiaAutoconhecimentoPage: React.FC = () => {
         </div>
 
         {/* 4 Pillars of reflection */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div id="pilares-reflexao" className="grid grid-cols-1 md:grid-cols-2 gap-8">
           
-          <div className="p-8 rounded-3xl bg-[#0e1e4a]/60 border border-[#1e3878] space-y-4 hover:border-[#4FD6F4]/40 transition-colors">
+          <div id="identidade" className="p-8 rounded-3xl bg-[#0e1e4a]/60 border border-[#1e3878] space-y-4 hover:border-[#4FD6F4]/40 transition-colors">
             <div className="w-12 h-12 rounded-2xl bg-[#122456] flex items-center justify-center text-[#4FD6F4]">
               <Eye className="w-6 h-6" />
             </div>
@@ -61,7 +61,7 @@ export const TerapiaAutoconhecimentoPage: React.FC = () => {
             </div>
           </div>
 
-          <div className="p-8 rounded-3xl bg-[#0e1e4a]/60 border border-[#1e3878] space-y-4 hover:border-[#4FD6F4]/40 transition-colors">
+          <div id="inteligencia-emocional" className="p-8 rounded-3xl bg-[#0e1e4a]/60 border border-[#1e3878] space-y-4 hover:border-[#4FD6F4]/40 transition-colors">
             <div className="w-12 h-12 rounded-2xl bg-[#122456] flex items-center justify-center text-[#4FD6F4]">
               <Compass className="w-6 h-6" />
             </div>
@@ -79,7 +79,7 @@ export const TerapiaAutoconhecimentoPage: React.FC = () => {
             </div>
           </div>
 
-          <div className="p-8 rounded-3xl bg-[#0e1e4a]/60 border border-[#1e3878] space-y-4 hover:border-[#4FD6F4]/40 transition-colors">
+          <div id="procrastinacao" className="p-8 rounded-3xl bg-[#0e1e4a]/60 border border-[#1e3878] space-y-4 hover:border-[#4FD6F4]/40 transition-colors">
             <div className="w-12 h-12 rounded-2xl bg-[#122456] flex items-center justify-center text-[#4FD6F4]">
               <Clock className="w-6 h-6" />
             </div>
@@ -97,7 +97,7 @@ export const TerapiaAutoconhecimentoPage: React.FC = () => {
             </div>
           </div>
 
-          <div className="p-8 rounded-3xl bg-[#0e1e4a]/60 border border-[#1e3878] space-y-4 hover:border-[#4FD6F4]/40 transition-colors">
+          <div id="ressignificacao" className="p-8 rounded-3xl bg-[#0e1e4a]/60 border border-[#1e3878] space-y-4 hover:border-[#4FD6F4]/40 transition-colors">
             <div className="w-12 h-12 rounded-2xl bg-[#122456] flex items-center justify-center text-[#4FD6F4]">
               <Smile className="w-6 h-6" />
             </div>

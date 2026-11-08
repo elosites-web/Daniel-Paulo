@@ -40,7 +40,7 @@ export const ContatoPage: React.FC = () => {
           <div className="lg:col-span-5 space-y-8">
             
             {/* Primary WhatsApp Card */}
-            <div className="p-7 rounded-3xl bg-[#0e1e4a]/80 border border-[#1e3878] space-y-4 shadow-xl">
+            <div id="whatsapp" className="p-7 rounded-3xl bg-[#0e1e4a]/80 border border-[#1e3878] space-y-4 shadow-xl">
               <div className="w-12 h-12 rounded-2xl bg-[#25D366]/20 text-[#25D366] flex items-center justify-center">
                 <MessageCircle className="w-6 h-6 fill-current" />
               </div>
@@ -63,7 +63,7 @@ export const ContatoPage: React.FC = () => {
             </div>
 
             {/* Location & Modalities */}
-            <div className="p-7 rounded-3xl bg-[#0e1e4a]/60 border border-[#1e3878] space-y-4">
+            <div id="localizacao" className="p-7 rounded-3xl bg-[#0e1e4a]/60 border border-[#1e3878] space-y-4">
               <div className="w-10 h-10 rounded-xl bg-[#122456] text-[#4FD6F4] flex items-center justify-center">
                 <MapPin className="w-5 h-5" />
               </div>
@@ -118,7 +118,7 @@ export const ContatoPage: React.FC = () => {
           </div>
 
           {/* Right Column: Contact Form */}
-          <div className="lg:col-span-7">
+          <div id="formulario" className="lg:col-span-7">
             <ContactForm />
           </div>
 

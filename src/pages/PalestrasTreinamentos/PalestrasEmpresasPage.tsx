@@ -27,7 +27,7 @@ export const PalestrasEmpresasPage: React.FC = () => {
           ]}
         />
 
-        <article className="space-y-8">
+        <article id="conteudo" className="space-y-8">
           <header className="space-y-4">
             <span className="text-xs font-semibold tracking-wider text-[#4FD6F4] uppercase">
               Âmbito Corporativo
@@ -41,7 +41,7 @@ export const PalestrasEmpresasPage: React.FC = () => {
           </header>
 
           <div className="text-slate-300 space-y-6 text-base sm:text-lg leading-relaxed font-light">
-            <div className="p-6 rounded-2xl bg-[#0e1e4a]/60 border border-[#1e3878]">
+            <div id="destaque" className="p-6 rounded-2xl bg-[#0e1e4a]/60 border border-[#1e3878]">
               <h2 className="text-xl font-bold text-white mb-2 font-['Plus_Jakarta_Sans']">
                 Temas de Destaque para Organizações
               </h2>
@@ -50,29 +50,31 @@ export const PalestrasEmpresasPage: React.FC = () => {
               </p>
             </div>
 
-            <h2 className="text-2xl font-bold text-white font-['Plus_Jakarta_Sans'] pt-4">
-              Eixos Temáticos Sugeridos
-            </h2>
-            <div className="space-y-4 not-prose">
-              <div className="p-5 rounded-2xl bg-[#081331] border border-[#162c66] space-y-1">
-                <h3 className="font-bold text-white text-base">Inteligência Emocional e Máscaras no Trabalho</h3>
-                <p className="text-xs sm:text-sm text-slate-300">
-                  Como evitar o esgotamento profissional por excesso de representação e construir relações profissionais genuínas e maduras.
-                </p>
-              </div>
+            <div id="eixos-tematicos" className="space-y-4 pt-2">
+              <h2 className="text-2xl font-bold text-white font-['Plus_Jakarta_Sans'] pt-2">
+                Eixos Temáticos Sugeridos
+              </h2>
+              <div className="space-y-4 not-prose">
+                <div id="tema-inteligencia-emocional" className="p-5 rounded-2xl bg-[#081331] border border-[#162c66] space-y-1">
+                  <h3 className="font-bold text-white text-base">Inteligência Emocional e Máscaras no Trabalho</h3>
+                  <p className="text-xs sm:text-sm text-slate-300">
+                    Como evitar o esgotamento profissional por excesso de representação e construir relações profissionais genuínas e maduras.
+                  </p>
+                </div>
 
-              <div className="p-5 rounded-2xl bg-[#081331] border border-[#162c66] space-y-1">
-                <h3 className="font-bold text-white text-base">Procrastinação: Por Que Adiamos o Que Importa?</h3>
-                <p className="text-xs sm:text-sm text-slate-300">
-                  Compreendendo a ansiedade e o perfeccionismo por trás do adiamento de decisões e metas corporativas.
-                </p>
-              </div>
+                <div id="tema-procrastinacao" className="p-5 rounded-2xl bg-[#081331] border border-[#162c66] space-y-1">
+                  <h3 className="font-bold text-white text-base">Procrastinação: Por Que Adiamos o Que Importa?</h3>
+                  <p className="text-xs sm:text-sm text-slate-300">
+                    Compreendendo a ansiedade e o perfeccionismo por trás do adiamento de decisões e metas corporativas.
+                  </p>
+                </div>
 
-              <div className="p-5 rounded-2xl bg-[#081331] border border-[#162c66] space-y-1">
-                <h3 className="font-bold text-white text-base">Liderança Humanizada e Comunicação Não-Violenta</h3>
-                <p className="text-xs sm:text-sm text-slate-300">
-                  O poder da escuta atenta para engajar colaboradores e mediar conflitos interpessoais de forma construtiva.
-                </p>
+                <div id="tema-lideranca-humanizada" className="p-5 rounded-2xl bg-[#081331] border border-[#162c66] space-y-1">
+                  <h3 className="font-bold text-white text-base">Liderança Humanizada e Comunicação Não-Violenta</h3>
+                  <p className="text-xs sm:text-sm text-slate-300">
+                    O poder da escuta atenta para engajar colaboradores e mediar conflitos interpessoais de forma construtiva.
+                  </p>
+                </div>
               </div>
             </div>
 
@@ -81,7 +83,7 @@ export const PalestrasEmpresasPage: React.FC = () => {
             </p>
           </div>
 
-          <div className="p-8 rounded-3xl bg-[#0b183d] border border-[#1e3878] text-center space-y-4">
+          <div id="proposta" className="p-8 rounded-3xl bg-[#0b183d] border border-[#1e3878] text-center space-y-4">
             <h3 className="text-2xl font-bold text-white font-['Plus_Jakarta_Sans']">
               Interessado em levar esta palestra para sua equipe?
             </h3>

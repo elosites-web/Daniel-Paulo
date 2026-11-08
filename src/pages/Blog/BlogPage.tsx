@@ -88,7 +88,7 @@ export const BlogPage: React.FC = () => {
 
         {/* TAB 1: PUBLIC VIEW (Shows Empty State because all 3 are draft: true as instructed) */}
         {activeTab === 'public' && (
-          <div className="py-12 max-w-2xl mx-auto text-center space-y-5 bg-[#0e1e4a]/40 border border-[#1e3878] rounded-3xl p-8 sm:p-12">
+          <div id="artigos-publicados" className="py-12 max-w-2xl mx-auto text-center space-y-5 bg-[#0e1e4a]/40 border border-[#1e3878] rounded-3xl p-8 sm:p-12">
             <div className="w-14 h-14 rounded-2xl bg-[#122456] text-[#4FD6F4] flex items-center justify-center mx-auto">
               <Clock className="w-7 h-7" />
             </div>
@@ -113,10 +113,10 @@ export const BlogPage: React.FC = () => {
 
         {/* TAB 2: EDITORIAL PREVIEW (Shows the 3 drafts and 7 future topics) */}
         {activeTab === 'editorial' && (
-          <div className="space-y-12 animate-in fade-in duration-200">
+          <div id="painel-editorial" className="space-y-12 animate-in fade-in duration-200">
             
             {/* Search and Category Filters */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-between items-center bg-[#0e1e4a]/50 p-4 rounded-2xl border border-[#1e3878]">
+            <div id="filtros-editorial" className="flex flex-col sm:flex-row gap-4 justify-between items-center bg-[#0e1e4a]/50 p-4 rounded-2xl border border-[#1e3878]">
               <div className="relative w-full sm:w-80">
                 <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
                 <input
@@ -145,7 +145,7 @@ export const BlogPage: React.FC = () => {
             </div>
 
             {/* List of 3 Draft Articles */}
-            <div className="space-y-6">
+            <div id="rascunhos-iniciais" className="space-y-6">
               <div className="flex items-center justify-between">
                 <h3 className="text-xl font-bold text-white font-['Plus_Jakarta_Sans'] flex items-center gap-2">
                   <span className="w-2.5 h-2.5 rounded-full bg-amber-400"></span>
@@ -160,6 +160,7 @@ export const BlogPage: React.FC = () => {
                 {filteredDrafts.map((post) => (
                   <article
                     key={post.slug}
+                    id={`post-${post.slug}`}
                     className="bg-[#0e1e4a]/70 border border-[#1e3878] rounded-2xl p-6 hover:border-[#4FD6F4]/50 transition-all flex flex-col justify-between group shadow-xl"
                   >
                     <div className="space-y-3">
@@ -199,7 +200,7 @@ export const BlogPage: React.FC = () => {
             </div>
 
             {/* List of 7 Future Editorial Topics */}
-            <div className="p-8 rounded-3xl bg-[#0b183d] border border-[#1e3878] space-y-6">
+            <div id="pautas-futuras" className="p-8 rounded-3xl bg-[#0b183d] border border-[#1e3878] space-y-6">
               <div>
                 <h3 className="text-xl font-bold text-white font-['Plus_Jakarta_Sans'] mb-1">
                   Pautas Editoriais Futuras (Calendário de Conteúdo)

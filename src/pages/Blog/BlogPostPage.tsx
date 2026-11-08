@@ -19,6 +19,82 @@ export const BlogPostPage: React.FC = () => {
 
   const relatedPosts = initialBlogPosts.filter((p) => p.slug !== post.slug).slice(0, 2);
 
+  const formatInlineText = (text: string): React.ReactNode => {
+    const parts = text.split(/(\*\*[^*]+\*\*|\*[^*]+\*)/g);
+    return parts.map((part, i) => {
+      if (part.startsWith('**') && part.endsWith('**')) {
+        return <strong key={i} className="font-semibold text-white">{part.slice(2, -2)}</strong>;
+      }
+      if (part.startsWith('*') && part.endsWith('*')) {
+        return <em key={i} className="italic text-slate-200">{part.slice(1, -1)}</em>;
+      }
+      return part;
+    });
+  };
+
+  const renderArticleContent = (rawContent: string) => {
+    const blocks = rawContent.trim().split(/\n\s*\n/);
+    return blocks.map((block, idx) => {
+      const trimmed = block.trim();
+
+      // Heading 3 with optional {#anchor-id}
+      const headingMatch = trimmed.match(/^###\s+(.+?)(?:\s+\{#([a-zA-Z0-9_-]+)\})?$/);
+      if (headingMatch) {
+        const headingText = headingMatch[1].trim();
+        const headingId = headingMatch[2];
+        return (
+          <h3
+            key={idx}
+            id={headingId}
+            className="text-2xl font-bold text-white font-['Plus_Jakarta_Sans'] pt-8 pb-3 border-b border-[#1e3878]/50"
+          >
+            {formatInlineText(headingText)}
+          </h3>
+        );
+      }
+
+      // Unordered list
+      const lines = trimmed.split('\n');
+      if (lines.length > 0 && lines.every((l) => l.trim().startsWith('- ') || l.trim().startsWith('* '))) {
+        return (
+          <ul key={idx} className="space-y-2 list-disc list-inside text-slate-300 pl-2">
+            {lines.map((line, lIdx) => {
+              const itemText = line.trim().replace(/^[-*]\s+/, '');
+              return (
+                <li key={lIdx} className="leading-relaxed">
+                  {formatInlineText(itemText)}
+                </li>
+              );
+            })}
+          </ul>
+        );
+      }
+
+      // Ordered list
+      if (lines.length > 0 && lines.every((l) => /^\d+\.\s+/.test(l.trim()))) {
+        return (
+          <ol key={idx} className="space-y-2 list-decimal list-inside text-slate-300 pl-2">
+            {lines.map((line, lIdx) => {
+              const itemText = line.trim().replace(/^\d+\.\s+/, '');
+              return (
+                <li key={lIdx} className="leading-relaxed">
+                  {formatInlineText(itemText)}
+                </li>
+              );
+            })}
+          </ol>
+        );
+      }
+
+      // Paragraph
+      return (
+        <p key={idx} className="text-slate-300 leading-relaxed font-light">
+          {formatInlineText(trimmed)}
+        </p>
+      );
+    });
+  };
+
   return (
     <>
       <SeoHead
@@ -43,7 +119,7 @@ export const BlogPostPage: React.FC = () => {
           ]}
         />
 
-        <article className="space-y-8">
+        <article id="conteudo-artigo" ref={articleRef} className="space-y-8">
           
           {/* Header */}
           <header className="space-y-4 border-b border-[#1e3878] pb-8">
@@ -80,7 +156,7 @@ export const BlogPostPage: React.FC = () => {
           </header>
 
           {/* TL;DR Summary Box (2-3 lines) */}
-          <div className="p-6 rounded-2xl bg-[#0e1e4a]/80 border border-[#4FD6F4]/40 shadow-lg space-y-2">
+          <div id="resumo" className="p-6 rounded-2xl bg-[#0e1e4a]/80 border border-[#4FD6F4]/40 shadow-lg space-y-2">
             <span className="text-xs font-bold text-[#4FD6F4] uppercase tracking-wider block">
               Resumo Rápido (TL;DR)
             </span>
@@ -91,7 +167,7 @@ export const BlogPostPage: React.FC = () => {
 
           {/* Table of Contents (Navigable Anchors) */}
           {post.tableOfContents && post.tableOfContents.length > 0 && (
-            <div className="p-6 rounded-2xl bg-[#081331] border border-[#1e3878] space-y-3">
+            <div id="indice" className="p-6 rounded-2xl bg-[#081331] border border-[#1e3878] space-y-3">
               <span className="text-xs font-bold text-slate-400 uppercase tracking-wider block">
                 Índice Navegável
               </span>
@@ -108,13 +184,13 @@ export const BlogPostPage: React.FC = () => {
             </div>
           )}
 
-          {/* Body Content */}
-          <div className="text-slate-200 space-y-6 text-base sm:text-lg leading-relaxed font-light whitespace-pre-line">
-            {post.content}
+          {/* Body Content with semantic heading IDs */}
+          <div className="text-slate-200 space-y-6 text-base sm:text-lg leading-relaxed font-light">
+            {renderArticleContent(post.content)}
           </div>
 
           {/* Tags */}
-          <div className="pt-6 border-t border-[#1e3878] flex flex-wrap items-center gap-2">
+          <div id="tags" className="pt-6 border-t border-[#1e3878] flex flex-wrap items-center gap-2">
             <Tag className="w-4 h-4 text-[#4FD6F4] mr-1" />
             {post.tags.map((tag) => (
               <span key={tag} className="text-xs px-2.5 py-1 rounded-lg bg-[#0e1e4a] text-slate-300">
@@ -124,7 +200,7 @@ export const BlogPostPage: React.FC = () => {
           </div>
 
           {/* Mandatory Informational Disclaimer */}
-          <div className="p-5 rounded-2xl bg-[#081331] border border-[#162c66] flex items-start gap-3 text-xs text-slate-400">
+          <div id="aviso-responsabilidade" className="p-5 rounded-2xl bg-[#081331] border border-[#162c66] flex items-start gap-3 text-xs text-slate-400">
             <ShieldCheck className="w-5 h-5 text-[#4FD6F4] flex-shrink-0 mt-0.5" />
             <p>
               <strong>Aviso de responsabilidade:</strong> O conteúdo deste artigo é de caráter exclusivamente informativo e reflexivo, não constituindo prescrição clínica, conselho médico nem substituindo o acompanhamento psicanalítico ou terapêutico individualizado.
@@ -132,7 +208,7 @@ export const BlogPostPage: React.FC = () => {
           </div>
 
           {/* About Author Box */}
-          <div className="p-7 rounded-3xl bg-[#0b183d] border border-[#1e3878] flex flex-col sm:flex-row items-center gap-6">
+          <div id="sobre-autor" className="p-7 rounded-3xl bg-[#0b183d] border border-[#1e3878] flex flex-col sm:flex-row items-center gap-6">
             <img
               src="/assets/fotos-daniel/daniel-paulo-avatar.webp"
               alt="Daniel Paulo"
@@ -150,7 +226,7 @@ export const BlogPostPage: React.FC = () => {
           </div>
 
           {/* Discrete CTA for Contact */}
-          <div className="p-8 rounded-3xl bg-[#0e1e4a]/60 border border-[#1e3878] text-center space-y-4">
+          <div id="contato" className="p-8 rounded-3xl bg-[#0e1e4a]/60 border border-[#1e3878] text-center space-y-4">
             <h3 className="text-xl font-bold text-white font-['Plus_Jakarta_Sans']">
               Identificou-se com esta reflexão?
             </h3>

@@ -42,7 +42,7 @@ export const PrimeiraSessaoPage: React.FC = () => {
           </header>
 
           <div className="text-slate-300 space-y-6 text-base sm:text-lg leading-relaxed font-light">
-            <div className="p-6 rounded-2xl bg-[#0e1e4a]/60 border border-[#1e3878]">
+            <div id="o-que-acontece" className="p-6 rounded-2xl bg-[#0e1e4a]/60 border border-[#1e3878]">
               <h2 className="text-xl font-bold text-white mb-2 font-['Plus_Jakarta_Sans']">
                 O que acontece no primeiro encontro?
               </h2>
@@ -51,7 +51,7 @@ export const PrimeiraSessaoPage: React.FC = () => {
               </p>
             </div>
 
-            <h2 className="text-2xl font-bold text-white font-['Plus_Jakarta_Sans'] pt-4">
+            <h2 id="sem-pressao" className="text-2xl font-bold text-white font-['Plus_Jakarta_Sans'] pt-4">
               Sem Roteiros Fixos e Sem Pressão
             </h2>
             <p>
@@ -61,7 +61,7 @@ export const PrimeiraSessaoPage: React.FC = () => {
               Você pode começar por uma situação recente que causou incômodo, por uma lembrança espontânea ou simplesmente pelo silêncio, organizando os pensamentos à medida que a conversa se desenvolve.
             </p>
 
-            <h2 className="text-2xl font-bold text-white font-['Plus_Jakarta_Sans'] pt-4">
+            <h2 id="condicoes" className="text-2xl font-bold text-white font-['Plus_Jakarta_Sans'] pt-4">
               Alinhamento Individual de Condições
             </h2>
             <p>
@@ -88,7 +88,7 @@ export const PrimeiraSessaoPage: React.FC = () => {
           </div>
 
           {/* CTA Box */}
-          <div className="p-8 rounded-3xl bg-[#0b183d] border border-[#1e3878] text-center space-y-4">
+          <div id="agendamento" className="p-8 rounded-3xl bg-[#0b183d] border border-[#1e3878] text-center space-y-4">
             <h3 className="text-2xl font-bold text-white font-['Plus_Jakarta_Sans']">
               Deseja conversar sobre como iniciar?
             </h3>

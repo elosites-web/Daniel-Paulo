@@ -22,7 +22,7 @@ export const SobrePage: React.FC = () => {
         <Breadcrumbs items={[{ label: 'Sobre Daniel Paulo' }]} />
 
         {/* Hero Section of Sobre */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <div id="apresentacao" className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           
           <div className="lg:col-span-5 flex justify-center">
             <div className="relative w-full max-w-md aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl border border-[#1e3878] bg-[#060e24]">
@@ -96,7 +96,7 @@ export const SobrePage: React.FC = () => {
         </div>
 
         {/* Pillars / Values Section */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-6">
+        <div id="pilares" className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-6">
           <div className="p-7 rounded-2xl bg-[#0e1e4a]/60 border border-[#1e3878] space-y-3">
             <div className="w-10 h-10 rounded-xl bg-[#122456] flex items-center justify-center text-[#4FD6F4]">
               <Shield className="w-5 h-5" />
@@ -135,7 +135,7 @@ export const SobrePage: React.FC = () => {
         </div>
 
         {/* Subpages Navigation Links */}
-        <div className="p-8 rounded-3xl bg-[#0b183d] border border-[#1e3878] flex flex-col md:flex-row items-center justify-between gap-6">
+        <div id="certificados" className="p-8 rounded-3xl bg-[#0b183d] border border-[#1e3878] flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="space-y-1 text-center md:text-left">
             <h3 className="text-xl font-bold text-white font-['Plus_Jakarta_Sans']">
               Deseja conhecer os certificados acadêmicos?

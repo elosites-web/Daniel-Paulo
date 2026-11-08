@@ -121,6 +121,7 @@ export const HomePage: React.FC = () => {
             SEÇÃO 1 — HERO PRINCIPAL (PINNED SCROLL VIDEO)
         ======================================================== */}
         <section
+          id="inicio"
           ref={heroTrackRef}
           className="relative h-[220vh] sm:h-[240vh]"
           aria-label="Apresentação institucional Daniel Paulo"
@@ -231,6 +232,7 @@ export const HomePage: React.FC = () => {
             SEÇÃO 2 — QUEM É DANIEL PAULO (PINNED SCROLL VIDEO)
         ======================================================== */}
         <section
+          id="sobre"
           ref={aboutTrackRef}
           className="relative h-[220vh] sm:h-[240vh]"
           aria-label="Sobre o profissional Daniel Paulo"
@@ -324,6 +326,7 @@ export const HomePage: React.FC = () => {
             SEÇÃO 3 — OLHAR PARA DENTRO: AUTOCONHECIMENTO (PINNED SCROLL VIDEO)
         ======================================================== */}
         <section
+          id="autoconhecimento"
           ref={section3TrackRef}
           className="relative h-[220vh] sm:h-[240vh]"
           aria-label="Autoconhecimento e reflexão com Daniel Paulo"
@@ -409,7 +412,7 @@ export const HomePage: React.FC = () => {
         {/* ========================================================
             SEÇÃO 4 — ÁREAS DE ATUAÇÃO E SERVIÇOS
         ======================================================== */}
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section id="servicos" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-14 space-y-4">
             <span className="text-xs font-semibold tracking-wider text-[#4FD6F4] uppercase">
               Serviços & Atuação
@@ -479,6 +482,7 @@ export const HomePage: React.FC = () => {
             SEÇÃO 5 — ATENDIMENTO ONLINE E PRESENCIAL (PINNED SCROLL VIDEO)
         ======================================================== */}
         <section
+          id="modalidades"
           ref={section5TrackRef}
           className="relative h-[220vh] sm:h-[240vh]"
           aria-label="Modalidades de atendimento online e presencial"
@@ -547,7 +551,9 @@ export const HomePage: React.FC = () => {
                       src="/assets/videos/daniel-mesa-telefone-horizontal-scroll.mp4"
                       poster="/assets/videos/daniel-mesa-telefone-horizontal-poster.jpg"
                       altText="Daniel ao telefone organizando contatos"
-                      className="w-full h-full"
+                      className="w-full h-full animate-fade-slide-up"
+                      videoClassName="-translate-y-px"
+                      animateOnView={true}
                       aspectRatio="none"
                       trackRef={section5TrackRef}
                       showIndicator={true}
@@ -565,7 +571,7 @@ export const HomePage: React.FC = () => {
         {/* ========================================================
             SEÇÃO 6 — PRIMEIRO CONTATO EM 3 PASSOS SIMPLES
         ======================================================== */}
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section id="etapas" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-12 space-y-3">
             <span className="text-xs font-semibold tracking-wider text-[#4FD6F4] uppercase">
               Passo a Passo
@@ -623,7 +629,7 @@ export const HomePage: React.FC = () => {
         {/* ========================================================
             SEÇÃO 7 — FORMAÇÃO E CERTIFICADOS COMPROVADOS
         ======================================================== */}
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section id="certificados" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-12 space-y-3">
             <span className="text-xs font-semibold tracking-wider text-[#4FD6F4] uppercase">
               Transparência & Rigor
@@ -642,7 +648,7 @@ export const HomePage: React.FC = () => {
         {/* ========================================================
             SEÇÃO 8 — DOCÊNCIA E PALESTRAS
         ======================================================== */}
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section id="palestras" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="bg-[#0e1e4a]/60 border border-[#1e3878] rounded-3xl p-8 sm:p-12 lg:p-14">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
               
@@ -715,7 +721,7 @@ export const HomePage: React.FC = () => {
         {/* ========================================================
             SEÇÃO 9 — ARTIGOS E REFLEXÕES (BLOG)
         ======================================================== */}
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section id="artigos" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
             <div>
               <span className="text-xs font-semibold tracking-wider text-[#4FD6F4] uppercase">
@@ -759,7 +765,7 @@ export const HomePage: React.FC = () => {
         {/* ========================================================
             SEÇÃO 10 — PERGUNTAS FREQUENTES
         ======================================================== */}
-        <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section id="duvidas" className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10 space-y-2">
             <span className="text-xs font-semibold tracking-wider text-[#4FD6F4] uppercase">
               Esclarecimentos
@@ -820,6 +826,7 @@ export const HomePage: React.FC = () => {
             SEÇÃO 11 — CHAMADA FINAL COM VÍDEO PRAIA AO ENTARDECER (PINNED SCROLL VIDEO)
         ======================================================== */}
         <section
+          id="contato"
           ref={section11TrackRef}
           className="relative h-[220vh] sm:h-[240vh]"
           aria-label="Primeiro passo para agendamento com Daniel Paulo"

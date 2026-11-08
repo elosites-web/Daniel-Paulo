@@ -51,10 +51,12 @@ export const FormacaoCertificadosPage: React.FC = () => {
         </div>
 
         {/* The 7 verified certificates gallery with lightbox */}
-        <CertificateGallery />
+        <div id="galeria-certificados">
+          <CertificateGallery />
+        </div>
 
         {/* Ethical commitment card */}
-        <div className="p-8 rounded-3xl bg-[#0b183d] border border-[#1e3878] max-w-4xl mx-auto text-center space-y-4">
+        <div id="compromisso-etico" className="p-8 rounded-3xl bg-[#0b183d] border border-[#1e3878] max-w-4xl mx-auto text-center space-y-4">
           <h3 className="text-xl font-bold text-white font-['Plus_Jakarta_Sans']">
             Compromisso com a Verdade e a Ética Profissional
           </h3>

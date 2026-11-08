@@ -27,7 +27,7 @@ export const ConsultoriaOnlinePage: React.FC = () => {
           ]}
         />
 
-        <article className="space-y-8">
+        <article id="conteudo" className="space-y-8">
           <header className="space-y-4">
             <span className="text-xs font-semibold tracking-wider text-[#4FD6F4] uppercase">
               Atendimento Remoto
@@ -41,7 +41,7 @@ export const ConsultoriaOnlinePage: React.FC = () => {
           </header>
 
           <div className="text-slate-300 space-y-6 text-base sm:text-lg leading-relaxed font-light">
-            <div className="p-6 rounded-2xl bg-[#0e1e4a]/60 border border-[#1e3878]">
+            <div id="sobre" className="p-6 rounded-2xl bg-[#0e1e4a]/60 border border-[#1e3878]">
               <h2 className="text-xl font-bold text-white mb-2 font-['Plus_Jakarta_Sans']">
                 Sobre a Consultoria Online
               </h2>
@@ -50,11 +50,13 @@ export const ConsultoriaOnlinePage: React.FC = () => {
               </p>
             </div>
 
-            <p>
-              Como as necessidades e demandas variam amplamente para cada projeto, o escopo, a periodicidade e os formatos dos encontros são alinhados diretamente entre Daniel e o cliente interessado.
-            </p>
+            <div id="formato" className="space-y-3">
+              <p>
+                Como as necessidades e demandas variam amplamente para cada projeto, o escopo, a periodicidade e os formatos dos encontros são alinhados diretamente entre Daniel e o cliente interessado.
+              </p>
+            </div>
 
-            <div className="p-5 rounded-2xl bg-[#081331] border border-[#162c66] flex items-start gap-3 text-xs text-slate-400">
+            <div id="condicoes" className="p-5 rounded-2xl bg-[#081331] border border-[#162c66] flex items-start gap-3 text-xs text-slate-400">
               <ShieldCheck className="w-5 h-5 text-[#4FD6F4] flex-shrink-0 mt-0.5" />
               <p>
                 As informações específicas sobre disponibilidade de agenda, escopo de projeto e condições contratuais são fornecidas mediante contato individual.
@@ -62,7 +64,7 @@ export const ConsultoriaOnlinePage: React.FC = () => {
             </div>
           </div>
 
-          <div className="p-8 rounded-3xl bg-[#0b183d] border border-[#1e3878] text-center space-y-4">
+          <div id="agendamento" className="p-8 rounded-3xl bg-[#0b183d] border border-[#1e3878] text-center space-y-4">
             <h3 className="text-2xl font-bold text-white font-['Plus_Jakarta_Sans']">
               Interessado em consultoria online?
             </h3>

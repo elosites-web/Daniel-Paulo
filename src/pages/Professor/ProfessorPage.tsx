@@ -36,7 +36,7 @@ export const ProfessorPage: React.FC = () => {
 
           <div className="text-slate-300 space-y-6 text-base sm:text-lg leading-relaxed font-light">
             {/* Primary Card */}
-            <div className="p-6 rounded-2xl bg-[#0e1e4a]/60 border border-[#1e3878] space-y-4">
+            <div id="docencia-anhanguera" className="p-6 rounded-2xl bg-[#0e1e4a]/60 border border-[#1e3878] space-y-4">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-xl bg-[#122456] flex items-center justify-center text-[#4FD6F4]">
                   <GraduationCap className="w-6 h-6" />
@@ -54,7 +54,7 @@ export const ProfessorPage: React.FC = () => {
             </div>
 
             {/* Secondary Pedagogical Experience */}
-            <div className="p-6 rounded-2xl bg-[#0e1e4a]/60 border border-[#1e3878] space-y-4">
+            <div id="coordenacao-unika" className="p-6 rounded-2xl bg-[#0e1e4a]/60 border border-[#1e3878] space-y-4">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-xl bg-[#122456] flex items-center justify-center text-[#4FD6F4]">
                   <BookOpen className="w-6 h-6" />
@@ -71,7 +71,7 @@ export const ProfessorPage: React.FC = () => {
               </p>
             </div>
 
-            <h2 className="text-2xl font-bold text-white font-['Plus_Jakarta_Sans'] pt-4">
+            <h2 id="metodologia" className="text-2xl font-bold text-white font-['Plus_Jakarta_Sans'] pt-4">
               Conexão entre Docência, Gestão e Clínica
             </h2>
             <p>
@@ -82,7 +82,7 @@ export const ProfessorPage: React.FC = () => {
             </p>
           </div>
 
-          <div className="p-8 rounded-3xl bg-[#0b183d] border border-[#1e3878] text-center space-y-4">
+          <div id="convites-academicos" className="p-8 rounded-3xl bg-[#0b183d] border border-[#1e3878] text-center space-y-4">
             <h3 className="text-2xl font-bold text-white font-['Plus_Jakarta_Sans']">
               Convites para Aulas Magnas e Eventos Acadêmicos
             </h3>

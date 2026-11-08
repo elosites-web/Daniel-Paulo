@@ -81,7 +81,7 @@ export const PsicanaliseHubPage: React.FC = () => {
         </div>
 
         {/* Informative grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div id="subpaginas" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {psicanaliseSubpages.map((sub) => {
             const Icon = sub.icon;
             return (
@@ -112,7 +112,7 @@ export const PsicanaliseHubPage: React.FC = () => {
         </div>
 
         {/* Ethical disclaimer card */}
-        <div className="p-8 rounded-3xl bg-[#0b183d] border border-[#1e3878] space-y-4 max-w-4xl mx-auto">
+        <div id="etica" className="p-8 rounded-3xl bg-[#0b183d] border border-[#1e3878] space-y-4 max-w-4xl mx-auto">
           <div className="flex items-center gap-2 text-sm font-semibold text-[#4FD6F4]">
             <ShieldCheck className="w-5 h-5" />
             <span>Fundamentos e Limites Éticos</span>
@@ -123,7 +123,7 @@ export const PsicanaliseHubPage: React.FC = () => {
         </div>
 
         {/* Direct CTA */}
-        <div className="text-center space-y-4 pt-4">
+        <div id="agendamento" className="text-center space-y-4 pt-4">
           <h3 className="text-2xl font-bold text-white font-['Plus_Jakarta_Sans']">
             Pronto para conversar sobre o atendimento?
           </h3>

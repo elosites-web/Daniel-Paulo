@@ -41,7 +41,7 @@ export const TermosPage: React.FC = () => {
             </p>
           </header>
 
-          <section className="space-y-3">
+          <section id="objeto" className="space-y-3">
             <h2 className="text-xl font-bold text-white font-['Plus_Jakarta_Sans']">
               1. Objeto e Natureza Informativa
             </h2>
@@ -53,7 +53,7 @@ export const TermosPage: React.FC = () => {
             </p>
           </section>
 
-          <section className="space-y-3">
+          <section id="propriedade-intelectual" className="space-y-3">
             <h2 className="text-xl font-bold text-white font-['Plus_Jakarta_Sans']">
               2. Propriedade Intelectual e Uso de Imagens
             </h2>
@@ -62,7 +62,7 @@ export const TermosPage: React.FC = () => {
             </p>
           </section>
 
-          <section className="space-y-3">
+          <section id="ausencia-promessas" className="space-y-3">
             <h2 className="text-xl font-bold text-white font-['Plus_Jakarta_Sans']">
               3. Ausência de Promessas de Resultado
             </h2>
@@ -71,7 +71,7 @@ export const TermosPage: React.FC = () => {
             </p>
           </section>
 
-          <section className="space-y-3">
+          <section id="contratacao" className="space-y-3">
             <h2 className="text-xl font-bold text-white font-['Plus_Jakarta_Sans']">
               4. Contratação e Agendamento
             </h2>
@@ -80,7 +80,7 @@ export const TermosPage: React.FC = () => {
             </p>
           </section>
 
-          <section className="space-y-3">
+          <section id="foro" className="space-y-3">
             <h2 className="text-xl font-bold text-white font-['Plus_Jakarta_Sans']">
               5. Foro
             </h2>

@@ -27,7 +27,7 @@ export const AcompanhanteTerapeuticoPage: React.FC = () => {
           ]}
         />
 
-        <article className="space-y-8">
+        <article id="conteudo" className="space-y-8">
           <header className="space-y-4">
             <span className="text-xs font-semibold tracking-wider text-[#4FD6F4] uppercase">
               Cuidado no Cotidiano
@@ -41,7 +41,7 @@ export const AcompanhanteTerapeuticoPage: React.FC = () => {
           </header>
 
           <div className="text-slate-300 space-y-6 text-base sm:text-lg leading-relaxed font-light">
-            <div className="p-6 rounded-2xl bg-[#0e1e4a]/60 border border-[#1e3878]">
+            <div id="o-que-e" className="p-6 rounded-2xl bg-[#0e1e4a]/60 border border-[#1e3878]">
               <h2 className="text-xl font-bold text-white mb-2 font-['Plus_Jakarta_Sans']">
                 O que é a Atuação como Acompanhante Terapêutico?
               </h2>
@@ -50,25 +50,27 @@ export const AcompanhanteTerapeuticoPage: React.FC = () => {
               </p>
             </div>
 
-            <h2 className="text-2xl font-bold text-white font-['Plus_Jakarta_Sans'] pt-4">
-              Princípios da Abordagem
-            </h2>
-            <ul className="space-y-3 not-prose text-slate-300 text-base">
-              <li className="flex items-start gap-3">
-                <CheckCircle2 className="w-5 h-5 text-[#4FD6F4] flex-shrink-0 mt-0.5" />
-                <span>Presença atenta e escuta contínua nas situações concretas da vida.</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <CheckCircle2 className="w-5 h-5 text-[#4FD6F4] flex-shrink-0 mt-0.5" />
-                <span>Mediação de conflitos e suporte na superação de bloqueios relacionais.</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <CheckCircle2 className="w-5 h-5 text-[#4FD6F4] flex-shrink-0 mt-0.5" />
-                <span>Construção gradual de autonomia, respeitando o ritmo de cada pessoa.</span>
-              </li>
-            </ul>
+            <div id="principios" className="space-y-4 pt-2">
+              <h2 className="text-2xl font-bold text-white font-['Plus_Jakarta_Sans'] pt-2">
+                Princípios da Abordagem
+              </h2>
+              <ul className="space-y-3 not-prose text-slate-300 text-base">
+                <li className="flex items-start gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-[#4FD6F4] flex-shrink-0 mt-0.5" />
+                  <span>Presença atenta e escuta contínua nas situações concretas da vida.</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-[#4FD6F4] flex-shrink-0 mt-0.5" />
+                  <span>Mediação de conflitos e suporte na superação de bloqueios relacionais.</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-[#4FD6F4] flex-shrink-0 mt-0.5" />
+                  <span>Construção gradual de autonomia, respeitando o ritmo de cada pessoa.</span>
+                </li>
+              </ul>
+            </div>
 
-            <div className="p-5 rounded-2xl bg-[#081331] border border-[#162c66] flex items-start gap-3 text-xs text-slate-400">
+            <div id="esclarecimento-etico" className="p-5 rounded-2xl bg-[#081331] border border-[#162c66] flex items-start gap-3 text-xs text-slate-400">
               <ShieldCheck className="w-5 h-5 text-[#4FD6F4] flex-shrink-0 mt-0.5" />
               <p>
                 <strong>Esclarecimento ético:</strong> Esta modalidade é prestada com responsabilidade e cuidado, não constituindo atendimento médico ou ato privativo de psicologia regulamentada. As condições e objetivos são estabelecidos em diálogo prévio.
@@ -76,7 +78,7 @@ export const AcompanhanteTerapeuticoPage: React.FC = () => {
             </div>
           </div>
 
-          <div className="p-8 rounded-3xl bg-[#0b183d] border border-[#1e3878] text-center space-y-4">
+          <div id="agendamento" className="p-8 rounded-3xl bg-[#0b183d] border border-[#1e3878] text-center space-y-4">
             <h3 className="text-2xl font-bold text-white font-['Plus_Jakarta_Sans']">
               Quer consultar disponibilidade para este serviço?
             </h3>

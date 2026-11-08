@@ -18,7 +18,20 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 5.5rem; /* 88px offset so sticky header never occludes anchored headings */
   font-family: var(--font-body);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Ensure smooth anchoring across all sections and routes */
+:target,
+[id] {
+  scroll-margin-top: 5.5rem;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -146,6 +159,38 @@ h1, h2, h3, h4, h5, h6 {
   animation: hero-scale-enter 1s cubic-bezier(0.16, 1, 0.3, 1) 0.12s both;
 }
 
+/* Fade-in with subtle slide-up animation */
+@keyframes fade-slide-up {
+  0% {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-slide-up {
+  animation: fade-slide-up 0.85s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Pull internal frames (img and video) up by exactly 1px */
+.animate-fade-slide-up > img,
+.animate-fade-slide-up > video {
+  transform: translateY(-1px);
+}
+
+/* Target Section 5 video container element */
+div#root > div > main#main-content > div > section:nth-of-type(5) > div > div > div > div > div:nth-of-type(2) > div:nth-of-type(1) {
+  animation: fade-slide-up 0.85s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+div#root > div > main#main-content > div > section:nth-of-type(5) > div > div > div > div > div:nth-of-type(2) > div:nth-of-type(1) > img,
+div#root > div > main#main-content > div > section:nth-of-type(5) > div > div > div > div > div:nth-of-type(2) > div:nth-of-type(1) > video {
+  transform: translateY(-1px);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .animate-whatsapp-pulse,
   .animate-hero-badge,
@@ -153,7 +198,9 @@ h1, h2, h3, h4, h5, h6 {
   .animate-hero-desc,
   .animate-hero-ctas,
   .animate-hero-pills,
-  .animate-hero-video {
+  .animate-hero-video,
+  .animate-fade-slide-up,
+  div#root > div > main#main-content > div > section:nth-of-type(5) > div > div > div > div > div:nth-of-type(2) > div:nth-of-type(1) {
     animation: none;
     opacity: 1;
     transform: none;
@@ -193,17 +240,83 @@ html.light ::-webkit-scrollbar-thumb:hover {
   background: #0284c7;
 }
 
-/* Nav & Sticky Header */
-html.light header.bg-\[\#081331\]\/95 {
-  background-color: rgba(255, 255, 255, 0.94) !important;
-  border-bottom-color: #cbd5e1 !important;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+/* Nav & Sticky Header (Selector 1 & 2) */
+div#root > div > header,
+header {
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+}
+
+html.light div#root > div > header,
+html.light header {
+  background-color: rgba(255, 255, 255, 0.82) !important;
+  border-bottom-color: rgba(203, 213, 225, 0.85) !important;
+  box-shadow: 0 4px 20px -2px rgba(8, 19, 49, 0.05) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+}
+
+/* Light mode alternating colors for Header inner container (Selector 2) */
+html.light div#root > div > header > div:nth-of-type(1) nav a:not([class*="bg-"]),
+html.light div#root > div > header > div:nth-of-type(1) nav button {
+  color: #334155 !important;
+}
+
+html.light div#root > div > header > div:nth-of-type(1) nav a:hover,
+html.light div#root > div > header > div:nth-of-type(1) nav button:hover {
+  color: #081331 !important;
+  background-color: rgba(241, 245, 249, 0.85) !important;
+}
+
+html.light div#root > div > header > div:nth-of-type(1) nav a.text-\[\#4FD6F4\],
+html.light div#root > div > header > div:nth-of-type(1) nav button.text-\[\#4FD6F4\] {
+  color: #0284c7 !important;
+  background-color: #e0f2fe !important;
+}
+
+html.light div#root > div > header > div:nth-of-type(1) .bg-\[\#0b183d\] {
+  background-color: rgba(255, 255, 255, 0.96) !important;
+  border-color: #cbd5e1 !important;
+  box-shadow: 0 10px 30px -5px rgba(8, 19, 49, 0.12) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+}
+
+html.light div#root > div > header > div:nth-of-type(1) button[aria-controls="mobile-navigation"] {
+  color: #334155 !important;
+}
+
+html.light div#root > div > header > div:nth-of-type(1) button[aria-controls="mobile-navigation"]:hover {
+  color: #081331 !important;
+  background-color: #f1f5f9 !important;
+}
+
+/* Header scroll progress bar styling */
+header [role="progressbar"] {
+  height: 2.5px;
+  background-color: rgba(8, 19, 49, 0.4);
+}
+
+header [role="progressbar"] > div {
+  background: linear-gradient(to right, #4FD6F4, #36c5e5, #25D366);
+  box-shadow: 0 0 8px rgba(79, 214, 244, 0.7);
+}
+
+html.light header [role="progressbar"] {
+  background-color: rgba(203, 213, 225, 0.5) !important;
+}
+
+html.light header [role="progressbar"] > div {
+  background: linear-gradient(to right, #0284c7, #0ea5e9, #10b981) !important;
+  box-shadow: 0 0 6px rgba(2, 132, 199, 0.45) !important;
 }
 
 /* Mobile navigation drawer */
 html.light #mobile-navigation {
-  background-color: #ffffff !important;
+  background-color: rgba(255, 255, 255, 0.95) !important;
   border-color: #cbd5e1 !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
 }
 
 /* Surfaces and Cards: crisp border, elevated shadow, white surface */

@@ -27,7 +27,7 @@ export const OrientacaoFamiliarPage: React.FC = () => {
           ]}
         />
 
-        <article className="space-y-8">
+        <article id="conteudo" className="space-y-8">
           <header className="space-y-4">
             <span className="text-xs font-semibold tracking-wider text-[#4FD6F4] uppercase">
               Relações & Diálogo
@@ -41,7 +41,7 @@ export const OrientacaoFamiliarPage: React.FC = () => {
           </header>
 
           <div className="text-slate-300 space-y-6 text-base sm:text-lg leading-relaxed font-light">
-            <div className="p-6 rounded-2xl bg-[#0e1e4a]/60 border border-[#1e3878]">
+            <div id="como-funciona" className="p-6 rounded-2xl bg-[#0e1e4a]/60 border border-[#1e3878]">
               <h2 className="text-xl font-bold text-white mb-2 font-['Plus_Jakarta_Sans']">
                 Como Funciona a Orientação
               </h2>
@@ -50,30 +50,32 @@ export const OrientacaoFamiliarPage: React.FC = () => {
               </p>
             </div>
 
-            <h2 className="text-2xl font-bold text-white font-['Plus_Jakarta_Sans'] pt-4">
-              Objetivos do Trabalho
-            </h2>
-            <ul className="space-y-3 not-prose text-slate-300 text-base">
-              <li className="flex items-start gap-3">
-                <CheckCircle2 className="w-5 h-5 text-[#4FD6F4] flex-shrink-0 mt-0.5" />
-                <span>Facilitar a expressão de sentimentos represados de forma respeitosa.</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <CheckCircle2 className="w-5 h-5 text-[#4FD6F4] flex-shrink-0 mt-0.5" />
-                <span>Compreender papéis que cada membro assumiu e como reajustá-los.</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <CheckCircle2 className="w-5 h-5 text-[#4FD6F4] flex-shrink-0 mt-0.5" />
-                <span>Apoiar a tomada de decisões compartilhadas em momentos de transição ou crise.</span>
-              </li>
-            </ul>
+            <div id="objetivos" className="space-y-4 pt-2">
+              <h2 className="text-2xl font-bold text-white font-['Plus_Jakarta_Sans'] pt-2">
+                Objetivos do Trabalho
+              </h2>
+              <ul className="space-y-3 not-prose text-slate-300 text-base">
+                <li className="flex items-start gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-[#4FD6F4] flex-shrink-0 mt-0.5" />
+                  <span>Facilitar a expressão de sentimentos represados de forma respeitosa.</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-[#4FD6F4] flex-shrink-0 mt-0.5" />
+                  <span>Compreender papéis que cada membro assumiu e como reajustá-los.</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-[#4FD6F4] flex-shrink-0 mt-0.5" />
+                  <span>Apoiar a tomada de decisões compartilhadas em momentos de transição ou crise.</span>
+                </li>
+              </ul>
+            </div>
 
             <p className="text-sm text-slate-400">
               * O formato das sessões, a presença conjunta ou individual dos familiares e o número de encontros são alinhados na conversa inicial de acordo com a necessidade específica de cada contexto.
             </p>
           </div>
 
-          <div className="p-8 rounded-3xl bg-[#0b183d] border border-[#1e3878] text-center space-y-4">
+          <div id="agendamento" className="p-8 rounded-3xl bg-[#0b183d] border border-[#1e3878] text-center space-y-4">
             <h3 className="text-2xl font-bold text-white font-['Plus_Jakarta_Sans']">
               Deseja conversar sobre sua família?
             </h3>
