@@ -1,9 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { SeoHead } from '../../components/seo/SeoHead';
 import { Breadcrumbs } from '../../components/breadcrumbs/Breadcrumbs';
-import { getWhatsAppUrl } from '../../config/siteConfig';
-import { GraduationCap, ArrowRight, CheckCircle2 } from 'lucide-react';
+import { siteConfig, getWhatsAppUrl } from '../../config/siteConfig';
 import { WhatsAppIcon } from '../../components/ui/WhatsAppIcon';
 
 export const PalestrasEscolasPage: React.FC = () => {
@@ -51,40 +49,46 @@ export const PalestrasEscolasPage: React.FC = () => {
               </p>
             </div>
 
-            <div id="temas-escolas" className="space-y-4 pt-2">
-              <h2 className="text-2xl font-bold text-white font-['Plus_Jakarta_Sans'] pt-2">
-                Palestras e Treinamentos
-              </h2>
-              <div className="space-y-4 not-prose">
-                <div id="tema-papeis" className="p-5 rounded-2xl bg-[#081331] border border-[#162c66] space-y-1">
-                  <h3 className="font-bold text-white text-base">Papéis e Personagens</h3>
-                  <p className="text-xs sm:text-sm text-slate-300">
-                    Compreensão dos papéis exercidos por educadores, famílias e estudantes nas relações interpessoais.
-                  </p>
-                </div>
+            {siteConfig.showSpeakerTopicsDraft ? (
+              <div id="temas-escolas" className="space-y-4 pt-2">
+                <h2 className="text-2xl font-bold text-white font-['Plus_Jakarta_Sans'] pt-2">
+                  Palestras e Treinamentos
+                </h2>
+                <div className="space-y-4 not-prose">
+                  <div id="tema-papeis" className="p-5 rounded-2xl bg-[#081331] border border-[#162c66] space-y-1">
+                    <h3 className="font-bold text-white text-base">Papéis e Personagens</h3>
+                    <p className="text-xs sm:text-sm text-slate-300">
+                      Compreensão dos papéis exercidos por educadores, famílias e estudantes nas relações interpessoais.
+                    </p>
+                  </div>
 
-                <div id="tema-mascaras" className="p-5 rounded-2xl bg-[#081331] border border-[#162c66] space-y-1">
-                  <h3 className="font-bold text-white text-base">Máscaras Sociais</h3>
-                  <p className="text-xs sm:text-sm text-slate-300">
-                    Acolhimento da vulnerabilidade e superação da pressão por desempenhos perfeitos.
-                  </p>
-                </div>
+                  <div id="tema-mascaras" className="p-5 rounded-2xl bg-[#081331] border border-[#162c66] space-y-1">
+                    <h3 className="font-bold text-white text-base">Máscaras Sociais</h3>
+                    <p className="text-xs sm:text-sm text-slate-300">
+                      Acolhimento da vulnerabilidade e superação da pressão por desempenhos perfeitos.
+                    </p>
+                  </div>
 
-                <div id="tema-procrastinacao" className="p-5 rounded-2xl bg-[#081331] border border-[#162c66] space-y-1">
-                  <h3 className="font-bold text-white text-base">Procrastinação</h3>
-                  <p className="text-xs sm:text-sm text-slate-300">
-                    Reflexão sobre ansiedade e bloqueios que afetam o aprendizado e a realização pessoal.
-                  </p>
-                </div>
+                  <div id="tema-procrastinacao" className="p-5 rounded-2xl bg-[#081331] border border-[#162c66] space-y-1">
+                    <h3 className="font-bold text-white text-base">Procrastinação</h3>
+                    <p className="text-xs sm:text-sm text-slate-300">
+                      Reflexão sobre ansiedade e bloqueios que afetam o aprendizado e a realização pessoal.
+                    </p>
+                  </div>
 
-                <div id="tema-autoconhecimento" className="p-5 rounded-2xl bg-[#081331] border border-[#162c66] space-y-1">
-                  <h3 className="font-bold text-white text-base">Autoconhecimento</h3>
-                  <p className="text-xs sm:text-sm text-slate-300">
-                    Diálogos sobre autenticidade, respeito mútuo e desenvolvimento emocional de comunidades escolares.
-                  </p>
+                  <div id="tema-autoconhecimento" className="p-5 rounded-2xl bg-[#081331] border border-[#162c66] space-y-1">
+                    <h3 className="font-bold text-white text-base">Autoconhecimento</h3>
+                    <p className="text-xs sm:text-sm text-slate-300">
+                      Diálogos sobre autenticidade, respeito mútuo e desenvolvimento emocional de comunidades escolares.
+                    </p>
+                  </div>
                 </div>
               </div>
-            </div>
+            ) : (
+              <p className="text-base sm:text-lg text-slate-300 pt-2">
+                Palestras e treinamentos. Conversa e detalhes combinados pelo WhatsApp.
+              </p>
+            )}
           </div>
 
           <div id="proposta" className="p-8 rounded-3xl bg-[#0b183d] border border-[#1e3878] text-center space-y-4">

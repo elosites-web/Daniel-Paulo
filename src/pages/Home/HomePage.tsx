@@ -8,6 +8,7 @@ import { servicesData } from '../../data/services';
 import { siteConfig, getWhatsAppUrl } from '../../config/siteConfig';
 import { useMediaQuery } from '../../hooks/useMediaQuery';
 import { WhatsAppIcon } from '../../components/ui/WhatsAppIcon';
+import { initialBlogPosts } from '../../data/blogPosts';
 import { 
   ArrowRight, 
   ShieldCheck, 
@@ -19,9 +20,7 @@ import {
   MapPin, 
   CheckCircle2, 
   ChevronDown, 
-  Sparkles,
-  HelpCircle,
-  FileText
+  Sparkles
 } from 'lucide-react';
 
 const heroContainerVariants: Variants = {
@@ -36,29 +35,6 @@ const heroContainerVariants: Variants = {
 };
 
 const heroItemVariants: Variants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.8,
-      ease: [0.16, 1, 0.3, 1] as const,
-    },
-  },
-};
-
-const cardContentContainerVariants: Variants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.12,
-      delayChildren: 0.08,
-    },
-  },
-};
-
-const cardContentItemVariants: Variants = {
   hidden: { opacity: 0, y: 20 },
   visible: {
     opacity: 1,
@@ -96,11 +72,12 @@ const homeFaqs = [
 export const HomePage: React.FC = () => {
   const isDesktop = useMediaQuery('(min-width: 1024px)');
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
-  const heroTrackRef = useRef<HTMLElement>(null);
-  const aboutTrackRef = useRef<HTMLElement>(null);
-  const section3TrackRef = useRef<HTMLElement>(null);
-  const section5TrackRef = useRef<HTMLElement>(null);
-  const section11TrackRef = useRef<HTMLElement>(null);
+  const publishedBlogPosts = initialBlogPosts.filter((post) => !post.draft);
+  const heroTrackRef = useRef<HTMLDivElement>(null);
+  const aboutTrackRef = useRef<HTMLDivElement>(null);
+  const section3TrackRef = useRef<HTMLDivElement>(null);
+  const section5TrackRef = useRef<HTMLDivElement>(null);
+  const section11TrackRef = useRef<HTMLDivElement>(null);
 
   const toggleFaq = (idx: number) => {
     setOpenFaqIndex(openFaqIndex === idx ? null : idx);
@@ -122,107 +99,95 @@ export const HomePage: React.FC = () => {
         ======================================================== */}
         <section
           id="inicio"
-          ref={heroTrackRef}
-          className="relative h-[220vh] sm:h-[240vh]"
+          className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 lg:grid lg:grid-cols-12 lg:gap-10 relative"
           aria-label="Apresentação institucional Daniel Paulo"
         >
-          {/* Pinned inner container */}
-          <div className="sticky top-20 h-[calc(100dvh-5rem)] w-full flex items-center overflow-hidden">
-            {/* Subtle gradient radial background */}
-            <div className="absolute top-0 right-1/4 w-[600px] h-[600px] bg-[#4FD6F4]/5 rounded-full blur-[140px] pointer-events-none" />
-            <div className="absolute bottom-10 left-10 w-[450px] h-[450px] bg-[#0e1e4a]/40 rounded-full blur-[100px] pointer-events-none" />
+          {/* Subtle gradient radial background */}
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            <div className="absolute top-0 right-1/4 w-[600px] h-[600px] bg-[#4FD6F4]/5 rounded-full blur-[140px]" />
+            <div className="absolute bottom-10 left-10 w-[450px] h-[450px] bg-[#0e1e4a]/40 rounded-full blur-[100px]" />
+          </div>
 
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10 py-4 sm:py-6 lg:py-0">
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 items-center">
-                
-                {/* Text column with Framer Motion entrance animations */}
-                <motion.div
-                  variants={heroContainerVariants}
-                  initial="hidden"
-                  animate="visible"
-                  className="lg:col-span-7 space-y-4 sm:space-y-6 text-center lg:text-left"
-                >
-                  <motion.div variants={heroItemVariants} className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0e1e4a] border border-[#1e3878] text-xs font-semibold text-[#4FD6F4]">
-                    <Sparkles className="w-3.5 h-3.5 text-[#4FD6F4]" />
-                    <span>Espaço de Escuta e Autoconhecimento</span>
-                  </motion.div>
+          {/* Coluna de texto: sticky no desktop, fluxo normal no mobile */}
+          <motion.div
+            variants={heroContainerVariants}
+            initial="hidden"
+            animate="visible"
+            className="lg:col-span-7 lg:sticky lg:top-24 lg:self-start lg:min-h-[calc(100svh-6rem)] lg:flex lg:flex-col lg:justify-center py-10 lg:py-0 space-y-4 sm:space-y-6 text-center lg:text-left relative z-10"
+          >
+            <motion.div variants={heroItemVariants} className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0e1e4a] border border-[#1e3878] text-xs font-semibold text-[#4FD6F4]">
+              <Sparkles className="w-3.5 h-3.5 text-[#4FD6F4]" />
+              <span>Espaço de Escuta e Autoconhecimento</span>
+            </motion.div>
 
-                  <motion.h1 variants={heroItemVariants} className="text-2xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-bold tracking-tight text-white font-['Plus_Jakarta_Sans'] leading-[1.15]">
-                    Psicanalista e terapeuta em Jundiaí{' '}
-                    <span className="text-[#4FD6F4] block sm:inline">
-                      | Atendimento online e presencial
-                    </span>
-                  </motion.h1>
+            <motion.h1 variants={heroItemVariants} className="text-2xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-bold tracking-tight text-white font-['Plus_Jakarta_Sans'] leading-[1.15]">
+              Psicanalista e terapeuta em Jundiaí{' '}
+              <span className="text-[#4FD6F4] block sm:inline">
+                | Atendimento online e presencial
+              </span>
+            </motion.h1>
 
-                  <motion.p variants={heroItemVariants} className="text-sm sm:text-base md:text-lg text-slate-300 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-light">
-                    Uma abordagem humanizada, calorosa e sem julgamentos morais. Um lugar seguro para contemplar suas profundezas, elaborar conflitos e reencontrar sua autenticidade.
-                  </motion.p>
+            <motion.p variants={heroItemVariants} className="text-sm sm:text-base md:text-lg text-slate-300 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-light">
+              Uma abordagem humanizada, calorosa e sem julgamentos morais. Um lugar seguro para contemplar suas profundezas, elaborar conflitos e reencontrar sua autenticidade.
+            </motion.p>
 
-                  {/* CTAs */}
-                  <motion.div variants={heroItemVariants} className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-1">
-                    <a
-                      href={getWhatsAppUrl('Olá Daniel, conheci seu site institucional e gostaria de agendar uma conversa sobre atendimento.')}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-3.5 sm:px-7 sm:py-4 rounded-xl font-bold text-sm sm:text-base bg-[#4FD6F4] text-[#081331] hover:bg-[#36c5e5] transition-all transform hover:-translate-y-0.5 shadow-xl shadow-[#4FD6F4]/20 focus:outline-none focus:ring-4 focus:ring-[#4FD6F4]/40"
-                      aria-label="Agendar conversa pelo WhatsApp com Daniel Paulo"
-                    >
-                      <WhatsAppIcon className="w-5 h-5" />
-                      <span>Agendar Conversa</span>
-                    </a>
+            {/* CTAs */}
+            <motion.div variants={heroItemVariants} className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-1">
+              <a
+                href={getWhatsAppUrl('Olá Daniel, conheci seu site institucional e gostaria de agendar uma conversa sobre atendimento.')}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-3.5 sm:px-7 sm:py-4 rounded-xl font-bold text-sm sm:text-base bg-[#4FD6F4] text-[#081331] hover:bg-[#36c5e5] transition-all transform hover:-translate-y-0.5 shadow-xl shadow-[#4FD6F4]/20 focus:outline-none focus:ring-4 focus:ring-[#4FD6F4]/40"
+                aria-label="Agendar conversa pelo WhatsApp com Daniel Paulo"
+              >
+                <WhatsAppIcon className="w-5 h-5" />
+                <span>Agendar Conversa</span>
+              </a>
 
-                    <Link
-                      to="/psicanalise"
-                      className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3.5 sm:px-6 sm:py-4 rounded-xl font-semibold text-sm sm:text-base bg-[#0e1e4a] text-slate-200 hover:text-white hover:bg-[#162c66] border border-[#1e3878] transition-all"
-                    >
-                      <span>Conhecer a Psicanálise</span>
-                      <ArrowRight className="w-4 h-4" />
-                    </Link>
-                  </motion.div>
+              <Link
+                to="/psicanalise"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3.5 sm:px-6 sm:py-4 rounded-xl font-semibold text-sm sm:text-base bg-[#0e1e4a] text-slate-200 hover:text-white hover:bg-[#162c66] border border-[#1e3878] transition-all"
+              >
+                <span>Conhecer a Psicanálise</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </motion.div>
 
-                  {/* Key feature pills */}
-                  <motion.div variants={heroItemVariants} className="pt-2 flex flex-wrap items-center justify-center lg:justify-start gap-4 sm:gap-6 text-xs text-slate-400">
-                    <div className="flex items-center gap-2">
-                      <ShieldCheck className="w-4 h-4 text-[#4FD6F4]" />
-                      <span>Sigilo e Ética Profissional</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <MapPin className="w-4 h-4 text-[#4FD6F4]" />
-                      <span>Presencial em Jundiaí & Online</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <GraduationCap className="w-4 h-4 text-[#4FD6F4]" />
-                      <span>Formação Multidisciplinar</span>
-                    </div>
-                  </motion.div>
-                </motion.div>
+            {/* Key feature pills */}
+            <motion.div variants={heroItemVariants} className="pt-2 flex flex-wrap items-center justify-center lg:justify-start gap-4 sm:gap-6 text-xs text-slate-400">
+              <div className="flex items-center gap-2">
+                <ShieldCheck className="w-4 h-4 text-[#4FD6F4]" />
+                <span>Sigilo e Ética Profissional</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <MapPin className="w-4 h-4 text-[#4FD6F4]" />
+                <span>Presencial em Jundiaí & Online</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <GraduationCap className="w-4 h-4 text-[#4FD6F4]" />
+                <span>Formação Multidisciplinar</span>
+              </div>
+            </motion.div>
+          </motion.div>
 
-                {/* Video column: hero-daniel-terno-entrada-fundo-escuro-vertical */}
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.95, y: 20 }}
-                  animate={{ opacity: 1, scale: 1, y: 0 }}
-                  transition={{ duration: 0.9, delay: 0.15, ease: [0.16, 1, 0.3, 1] as const }}
-                  className="lg:col-span-5 flex justify-center"
-                >
-                  <div className="relative w-full max-w-[260px] sm:max-w-xs md:max-w-sm aspect-[9/16] rounded-3xl overflow-hidden shadow-2xl border border-[#1e3878]/80 bg-[#060e24] transition-shadow duration-500 hover:shadow-[0_0_35px_rgba(79,214,244,0.25)]">
-                    <ScrollVideo
-                      src="/assets/videos/hero-daniel-terno-entrada-fundo-escuro-vertical-scroll.mp4"
-                      poster="/assets/videos/hero-daniel-terno-entrada-fundo-escuro-vertical-poster.jpg"
-                      altText="Daniel Paulo de terno azul com braços cruzados"
-                      className="w-full h-full"
-                      priority={true}
-                      trackRef={heroTrackRef}
-                      topOffset={80}
-                      showIndicator={true}
-                      indicatorLabel="Apresentação"
-                      keepPosterOnZeroProgress={true}
-                    />
-                    {/* Subtle edge overlay for visual blend */}
-                    <div className="absolute inset-0 ring-1 ring-inset ring-white/10 rounded-3xl pointer-events-none" />
-                    <div className="absolute bottom-0 inset-x-0 h-24 bg-gradient-to-t from-[#081331] via-[#081331]/40 to-transparent pointer-events-none" />
-                  </div>
-                </motion.div>
-
+          {/* Coluna do vídeo: trilha de scroll */}
+          <div ref={heroTrackRef} className="lg:col-span-5 relative h-[200svh] lg:h-[240vh]">
+            <div className="sticky top-20 h-[calc(100svh-5rem)] flex items-center justify-center">
+              <div className="relative aspect-[9/16] h-[min(calc(100svh-7rem),calc((100vw-2rem)*16/9))] max-w-full rounded-3xl overflow-hidden shadow-2xl border border-[#1e3878]/80 bg-[#060e24] transition-shadow duration-500 hover:shadow-[0_0_35px_rgba(79,214,244,0.25)]">
+                <ScrollVideo
+                  src="/assets/videos/hero-daniel-terno-entrada-fundo-escuro-vertical-scroll.mp4"
+                  poster="/assets/videos/hero-daniel-terno-entrada-fundo-escuro-vertical-poster.jpg"
+                  altText="Daniel Paulo de terno azul com braços cruzados"
+                  className="w-full h-full"
+                  priority={true}
+                  trackRef={heroTrackRef}
+                  topOffset={80}
+                  startAt={0.15}
+                  endAt={0.8}
+                />
+                {/* Subtle edge overlay for visual blend */}
+                <div className="absolute inset-0 ring-1 ring-inset ring-white/10 rounded-3xl pointer-events-none" />
+                <div className="absolute bottom-0 inset-x-0 h-24 bg-gradient-to-t from-[#081331] via-[#081331]/40 to-transparent pointer-events-none" />
               </div>
             </div>
           </div>
@@ -233,90 +198,69 @@ export const HomePage: React.FC = () => {
         ======================================================== */}
         <section
           id="sobre"
-          ref={aboutTrackRef}
-          className="relative h-[220vh] sm:h-[240vh]"
+          className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 lg:grid lg:grid-cols-12 lg:gap-10 relative"
           aria-label="Sobre o profissional Daniel Paulo"
         >
-          {/* Pinned inner container */}
-          <div className="sticky top-20 h-[calc(100dvh-5rem)] w-full flex items-center overflow-hidden">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-4 sm:py-6 lg:py-0">
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-                
-                {/* Visual element with Video 2: daniel-terno-biblioteca-vertical */}
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.95, y: 20 }}
-                  whileInView={{ opacity: 1, scale: 1, y: 0 }}
-                  viewport={{ once: true, margin: '-50px' }}
-                  transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as const }}
-                  className="lg:col-span-5 order-2 lg:order-1 flex justify-center"
-                >
-                  <div className="relative w-full max-w-[260px] sm:max-w-xs md:max-w-sm aspect-[9/16] rounded-3xl overflow-hidden shadow-2xl border border-[#1e3878] bg-[#060e24] transition-shadow duration-500 hover:shadow-[0_0_35px_rgba(79,214,244,0.25)]">
-                    <ScrollVideo
-                      src="/assets/videos/daniel-terno-biblioteca-vertical-scroll.mp4"
-                      poster="/assets/videos/daniel-terno-biblioteca-vertical-poster.jpg"
-                      altText="Ambientação visual de Daniel Paulo com livros ao fundo"
-                      className="w-full h-full"
-                      trackRef={aboutTrackRef}
-                      topOffset={80}
-                      showIndicator={true}
-                      indicatorLabel="Ambientação de Estudo"
-                    />
-                    <div className="absolute bottom-3 inset-x-3 p-3 rounded-xl bg-[#081331]/80 backdrop-blur-md border border-[#1e3878]/60 text-center pointer-events-none z-10">
-                      <p className="text-[11px] text-slate-400">
-                        Ambientação visual e simbólica de estudo contínuo
-                      </p>
-                    </div>
-                  </div>
-                </motion.div>
+          {/* Coluna de texto: ordem 1 no mobile para leitura direta */}
+          <div className="lg:col-span-7 order-1 lg:order-2 lg:sticky lg:top-24 lg:self-start lg:min-h-[calc(100svh-6rem)] lg:flex lg:flex-col lg:justify-center py-10 lg:py-0 space-y-4 sm:space-y-6">
+            <div className="inline-flex items-center gap-2 text-xs font-semibold tracking-wider text-[#4FD6F4] uppercase">
+              <Compass className="w-4 h-4" />
+              <span>Sobre o Profissional</span>
+            </div>
 
-                {/* Content element */}
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: '-50px' }}
-                  transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] as const }}
-                  className="lg:col-span-7 order-1 lg:order-2 space-y-4 sm:space-y-6"
-                >
-                  <div className="inline-flex items-center gap-2 text-xs font-semibold tracking-wider text-[#4FD6F4] uppercase">
-                    <Compass className="w-4 h-4" />
-                    <span>Sobre o Profissional</span>
-                  </div>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white font-['Plus_Jakarta_Sans']">
+              Uma escuta atenta, humanizada e acolhedora
+            </h2>
 
-                  <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white font-['Plus_Jakarta_Sans']">
-                    Uma escuta atenta, humanizada e acolhedora
-                  </h2>
+            <div className="space-y-3.5 sm:space-y-4 text-slate-300 text-sm sm:text-base md:text-lg leading-relaxed font-light">
+              <p>
+                Daniel Paulo atua como psicanalista, terapeuta, professor acadêmico e palestrante, desenvolvendo conteúdos e processos voltados ao desenvolvimento pessoal e profissional.
+              </p>
+              <p>
+                Na área de atendimento psicanalítico, prioriza uma abordagem sem julgamentos morais, proporcionando aos analisandos um espaço de diálogo sincero onde as próprias angústias e questionamentos possam ser elaborados.
+              </p>
+              <p>
+                Sua trajetória profissional também reúne sólida vivência em gestão de pessoas, liderança e coordenação pedagógica, complementada por estudos em Psicanálise, Neurociências, Filosofia e Antropologia.
+              </p>
+            </div>
 
-                  <div className="space-y-3.5 sm:space-y-4 text-slate-300 text-sm sm:text-base md:text-lg leading-relaxed font-light">
-                    <p>
-                      Daniel Paulo atua como psicanalista, terapeuta, professor acadêmico e palestrante, desenvolvendo conteúdos e processos voltados ao desenvolvimento pessoal e profissional.
-                    </p>
-                    <p>
-                      Na área de atendimento psicanalítico, prioriza uma abordagem sem julgamentos morais, proporcionando aos analisandos um espaço de diálogo sincero onde as próprias angústias e questionamentos possam ser elaborados.
-                    </p>
-                    <p>
-                      Sua trajetória profissional também reúne sólida vivência em gestão de pessoas, liderança e coordenação pedagógica, complementada por estudos em Psicanálise, Neurociências, Filosofia e Antropologia.
-                    </p>
-                  </div>
+            <div className="pt-2 flex flex-wrap gap-4">
+              <Link
+                to="/sobre"
+                className="inline-flex items-center gap-2 text-sm font-semibold text-[#4FD6F4] hover:text-[#36c5e5] group"
+              >
+                <span>Conhecer a biografia completa</span>
+                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+              </Link>
+              <span className="text-slate-600 hidden sm:inline">•</span>
+              <Link
+                to="/sobre/trajetoria"
+                className="inline-flex items-center gap-2 text-sm font-semibold text-slate-300 hover:text-white group"
+              >
+                <span>Ver linha do tempo profissional</span>
+                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+              </Link>
+            </div>
+          </div>
 
-                  <div className="pt-2 flex flex-wrap gap-4">
-                    <Link
-                      to="/sobre"
-                      className="inline-flex items-center gap-2 text-sm font-semibold text-[#4FD6F4] hover:text-[#36c5e5] group"
-                    >
-                      <span>Conhecer a biografia completa</span>
-                      <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                    </Link>
-                    <span className="text-slate-600 hidden sm:inline">•</span>
-                    <Link
-                      to="/sobre/trajetoria"
-                      className="inline-flex items-center gap-2 text-sm font-semibold text-slate-300 hover:text-white group"
-                    >
-                      <span>Ver linha do tempo profissional</span>
-                      <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                    </Link>
-                  </div>
-                </motion.div>
-
+          {/* Coluna do vídeo: trilha de scroll */}
+          <div ref={aboutTrackRef} className="lg:col-span-5 order-2 lg:order-1 relative h-[200svh] lg:h-[240vh]">
+            <div className="sticky top-20 h-[calc(100svh-5rem)] flex items-center justify-center">
+              <div className="relative aspect-[9/16] h-[min(calc(100svh-7rem),calc((100vw-2rem)*16/9))] max-w-full rounded-3xl overflow-hidden shadow-2xl border border-[#1e3878] bg-[#060e24] transition-shadow duration-500 hover:shadow-[0_0_35px_rgba(79,214,244,0.25)]">
+                <ScrollVideo
+                  src="/assets/videos/daniel-terno-biblioteca-vertical-scroll.mp4"
+                  poster="/assets/videos/daniel-terno-biblioteca-vertical-poster.jpg"
+                  altText="Ambientação visual de Daniel Paulo com livros ao fundo"
+                  className="w-full h-full"
+                  trackRef={aboutTrackRef}
+                  topOffset={80}
+                  endAt={0.68}
+                />
+                <div className="absolute bottom-3 inset-x-3 p-3 rounded-xl bg-[#081331]/80 backdrop-blur-md border border-[#1e3878]/60 text-center pointer-events-none z-10">
+                  <p className="text-[11px] text-slate-400">
+                    Ambientação visual e simbólica de estudo contínuo
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -327,83 +271,56 @@ export const HomePage: React.FC = () => {
         ======================================================== */}
         <section
           id="autoconhecimento"
-          ref={section3TrackRef}
-          className="relative h-[220vh] sm:h-[240vh]"
+          className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 lg:grid lg:grid-cols-12 lg:gap-10 relative"
           aria-label="Autoconhecimento e reflexão com Daniel Paulo"
         >
-          {/* Pinned inner container */}
-          <div className="sticky top-20 h-[calc(100dvh-5rem)] w-full flex items-center overflow-hidden py-4 sm:py-6">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-              <div className="media-dark-overlay relative rounded-3xl overflow-hidden border border-[#1e3878] bg-[#07112d] shadow-2xl">
-                
-                {/* Background Video: mar-por-do-sol-daniel (desktop horizontal, mobile vertical) */}
-                <div className="relative h-[480px] sm:h-[520px] lg:h-[560px] w-full">
-                  <ScrollVideo
-                    src={
-                      isDesktop
-                        ? '/assets/videos/mar-por-do-sol-daniel-horizontal-scroll.mp4'
-                        : '/assets/videos/mar-por-do-sol-daniel-vertical-scroll.mp4'
-                    }
-                    poster={
-                      isDesktop
-                        ? '/assets/videos/mar-por-do-sol-daniel-horizontal-poster.jpg'
-                        : '/assets/videos/mar-por-do-sol-daniel-vertical-poster.jpg'
-                    }
-                    altText="Daniel contemplando o mar ao entardecer"
-                    className="w-full h-full"
-                    aspectRatio="none"
-                    trackRef={section3TrackRef}
-                    showIndicator={true}
-                    indicatorLabel="Reflexão"
-                  />
-                  
-                  {/* Gradient scrim for perfect text readability */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-[#081331] via-[#081331]/85 to-transparent lg:w-3/4 z-10 pointer-events-none" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#081331] via-transparent to-transparent z-10 pointer-events-none" />
+          {/* Coluna de texto */}
+          <div className="lg:col-span-7 lg:sticky lg:top-24 lg:self-start lg:min-h-[calc(100svh-6rem)] lg:flex lg:flex-col lg:justify-center py-10 lg:py-0 space-y-5">
+            <div>
+              <span className="inline-block px-3 py-1 rounded-full bg-[#122456]/90 border border-[#4FD6F4]/40 text-xs font-semibold text-[#4FD6F4] uppercase tracking-wider backdrop-blur-sm">
+                Autoconhecimento & Reflexão
+              </span>
+            </div>
+            
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white font-['Plus_Jakarta_Sans'] leading-tight">
+              Aprender a olhar para dentro e acolher suas próprias profundezas
+            </h2>
 
-                  {/* Content over video with staggered entrance */}
-                  <motion.div
-                    variants={cardContentContainerVariants}
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true, margin: '-60px' }}
-                    className="absolute inset-0 z-20 flex items-center p-6 sm:p-10 lg:p-16"
-                  >
-                    <div className="max-w-xl space-y-5">
-                      <motion.div variants={cardContentItemVariants}>
-                        <span className="inline-block px-3 py-1 rounded-full bg-[#122456]/90 border border-[#4FD6F4]/40 text-xs font-semibold text-[#4FD6F4] uppercase tracking-wider backdrop-blur-sm">
-                          Autoconhecimento & Reflexão
-                        </span>
-                      </motion.div>
-                      
-                      <motion.h2
-                        variants={cardContentItemVariants}
-                        className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white font-['Plus_Jakarta_Sans'] leading-tight"
-                      >
-                        Aprender a olhar para dentro e acolher suas próprias profundezas
-                      </motion.h2>
+            <p className="text-sm sm:text-base text-slate-200 leading-relaxed font-light">
+              O processo de autoconhecimento não busca criar uma versão idealizada ou perfeita de si mesmo, mas desatar nós, reconhecer padrões automáticos e construir uma relação de clareza com a própria história.
+            </p>
 
-                      <motion.p
-                        variants={cardContentItemVariants}
-                        className="text-sm sm:text-base text-slate-200 leading-relaxed font-light"
-                      >
-                        O processo de autoconhecimento não busca criar uma versão idealizada ou perfeita de si mesmo, mas desatar nós, reconhecer padrões automáticos e construir uma relação de clareza com a própria história.
-                      </motion.p>
+            <div className="pt-2">
+              <Link
+                to="/terapia-e-autoconhecimento"
+                className="inline-flex items-center gap-2 px-5 py-3 rounded-xl font-semibold text-sm bg-[#4FD6F4] text-[#081331] hover:bg-[#36c5e5] transition-all shadow-md"
+              >
+                <span>Explorar temas de autoconhecimento</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
+          </div>
 
-                      <motion.div variants={cardContentItemVariants} className="pt-2">
-                        <Link
-                          to="/terapia-e-autoconhecimento"
-                          className="inline-flex items-center gap-2 px-5 py-3 rounded-xl font-semibold text-sm bg-[#4FD6F4] text-[#081331] hover:bg-[#36c5e5] transition-all shadow-md"
-                        >
-                          <span>Explorar temas de autoconhecimento</span>
-                          <ArrowRight className="w-4 h-4" />
-                        </Link>
-                      </motion.div>
-                    </div>
-                  </motion.div>
-
-                </div>
-
+          {/* Coluna do vídeo: no celular quadro 9/16, em desktop aspect-video */}
+          <div ref={section3TrackRef} className="lg:col-span-5 relative h-[200svh] lg:h-[240vh]">
+            <div className="sticky top-20 h-[calc(100svh-5rem)] flex items-center justify-center">
+              <div className="relative aspect-[9/16] lg:aspect-video h-[min(calc(100svh-7rem),calc((100vw-2rem)*16/9))] lg:h-auto lg:w-full max-w-full rounded-3xl overflow-hidden shadow-2xl border border-[#1e3878] bg-[#07112d]">
+                <ScrollVideo
+                  src={
+                    isDesktop
+                      ? '/assets/videos/mar-por-do-sol-daniel-horizontal-scroll.mp4'
+                      : '/assets/videos/mar-por-do-sol-daniel-vertical-scroll.mp4'
+                  }
+                  poster={
+                    isDesktop
+                      ? '/assets/videos/mar-por-do-sol-daniel-horizontal-poster.jpg'
+                      : '/assets/videos/mar-por-do-sol-daniel-vertical-poster.jpg'
+                  }
+                  altText="Daniel contemplando o mar ao entardecer"
+                  className="w-full h-full"
+                  aspectRatio="none"
+                  trackRef={section3TrackRef}
+                />
               </div>
             </div>
           </div>
@@ -483,86 +400,73 @@ export const HomePage: React.FC = () => {
         ======================================================== */}
         <section
           id="modalidades"
-          ref={section5TrackRef}
-          className="relative h-[220vh] sm:h-[240vh]"
+          className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 lg:grid lg:grid-cols-12 lg:gap-10 relative"
           aria-label="Modalidades de atendimento online e presencial"
         >
-          {/* Pinned inner container */}
-          <div className="sticky top-20 h-[calc(100dvh-5rem)] w-full flex items-center overflow-hidden py-4 sm:py-6">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-              <div className="bg-[#0b183d] border border-[#1e3878] rounded-3xl overflow-hidden shadow-2xl">
-                <div className="grid grid-cols-1 lg:grid-cols-12 items-center">
-                  
-                  {/* Text content */}
-                  <div className="lg:col-span-7 p-6 sm:p-10 lg:p-12 space-y-5">
-                    <span className="text-xs font-semibold tracking-wider text-[#4FD6F4] uppercase">
-                      Modalidades Flexíveis
-                    </span>
-                    
-                    <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white font-['Plus_Jakarta_Sans']">
-                      Atendimento online e presencial em Jundiaí
-                    </h2>
+          {/* Coluna de texto */}
+          <div className="lg:col-span-7 lg:sticky lg:top-24 lg:self-start lg:min-h-[calc(100svh-6rem)] lg:flex lg:flex-col lg:justify-center py-10 lg:py-0 space-y-5">
+            <span className="text-xs font-semibold tracking-wider text-[#4FD6F4] uppercase">
+              Modalidades Flexíveis
+            </span>
+            
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white font-['Plus_Jakarta_Sans']">
+              Atendimento online e presencial em Jundiaí
+            </h2>
 
-                    <div className="space-y-3.5 text-slate-300 text-sm sm:text-base leading-relaxed">
-                      <div className="p-4 rounded-xl bg-[#081331] border border-[#162c66] flex items-start gap-3">
-                        <MapPin className="w-5 h-5 text-[#4FD6F4] flex-shrink-0 mt-0.5" />
-                        <div>
-                          <h4 className="font-bold text-white text-base">Atendimento Presencial</h4>
-                          <p className="text-xs sm:text-sm text-slate-300 mt-1">
-                            Disponibilizado na cidade de Jundiaí-SP. Local, sala de atendimento e horários alinhados previamente via WhatsApp com o paciente.
-                          </p>
-                        </div>
-                      </div>
-
-                      <div className="p-4 rounded-xl bg-[#081331] border border-[#162c66] flex items-start gap-3">
-                        <Clock className="w-5 h-5 text-[#4FD6F4] flex-shrink-0 mt-0.5" />
-                        <div>
-                          <h4 className="font-bold text-white text-base">Atendimento Online</h4>
-                          <p className="text-xs sm:text-sm text-slate-300 mt-1">
-                            Realizado com sigilo e ética profissional e comodidade, em atendimento online.
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="pt-2 flex flex-wrap gap-4">
-                      <a
-                        href={getWhatsAppUrl('Olá Daniel, gostaria de saber sobre as opções de atendimento online e presencial em Jundiaí.')}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl font-bold text-sm bg-[#4FD6F4] text-[#081331] hover:bg-[#36c5e5] transition-all shadow-md"
-                      >
-                        <WhatsAppIcon className="w-4 h-4" />
-                        <span>Consultar Disponibilidade</span>
-                      </a>
-                      
-                      <Link
-                        to="/psicanalista-em-jundiai"
-                        className="inline-flex items-center gap-2 px-5 py-3.5 rounded-xl font-semibold text-sm bg-[#122456] text-white hover:bg-[#1a3378] transition-colors"
-                      >
-                        <span>Saiba mais sobre Jundiaí</span>
-                      </Link>
-                    </div>
-                  </div>
-
-                  {/* Video 4: daniel-mesa-telefone-horizontal-scroll.mp4 */}
-                  <div className="lg:col-span-5 h-72 sm:h-80 lg:h-full min-h-[280px] lg:min-h-[440px] relative overflow-hidden bg-[#060e24]">
-                    <ScrollVideo
-                      src="/assets/videos/daniel-mesa-telefone-horizontal-scroll.mp4"
-                      poster="/assets/videos/daniel-mesa-telefone-horizontal-poster.jpg"
-                      altText="Daniel ao telefone organizando contatos"
-                      className="w-full h-full animate-fade-slide-up"
-                      videoClassName="-translate-y-px"
-                      animateOnView={true}
-                      aspectRatio="none"
-                      trackRef={section5TrackRef}
-                      showIndicator={true}
-                      indicatorLabel="Atendimento"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#0b183d] via-transparent to-transparent lg:hidden pointer-events-none" />
-                  </div>
-
+            <div className="space-y-3.5 text-slate-300 text-sm sm:text-base leading-relaxed">
+              <div className="p-4 rounded-xl bg-[#081331] border border-[#162c66] flex items-start gap-3">
+                <MapPin className="w-5 h-5 text-[#4FD6F4] flex-shrink-0 mt-0.5" />
+                <div>
+                  <h4 className="font-bold text-white text-base">Atendimento Presencial</h4>
+                  <p className="text-xs sm:text-sm text-slate-300 mt-1">
+                    Disponibilizado na cidade de Jundiaí-SP. Local, sala de atendimento e horários alinhados previamente via WhatsApp com o paciente.
+                  </p>
                 </div>
+              </div>
+
+              <div className="p-4 rounded-xl bg-[#081331] border border-[#162c66] flex items-start gap-3">
+                <Clock className="w-5 h-5 text-[#4FD6F4] flex-shrink-0 mt-0.5" />
+                <div>
+                  <h4 className="font-bold text-white text-base">Atendimento Online</h4>
+                  <p className="text-xs sm:text-sm text-slate-300 mt-1">
+                    Realizado com sigilo e ética profissional e comodidade, em atendimento online.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="pt-2 flex flex-wrap gap-4">
+              <a
+                href={getWhatsAppUrl('Olá Daniel, gostaria de saber sobre as opções de atendimento online e presencial em Jundiaí.')}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl font-bold text-sm bg-[#4FD6F4] text-[#081331] hover:bg-[#36c5e5] transition-all shadow-md"
+              >
+                <WhatsAppIcon className="w-4 h-4" />
+                <span>Consultar Disponibilidade</span>
+              </a>
+              
+              <Link
+                to="/psicanalista-em-jundiai"
+                className="inline-flex items-center gap-2 px-5 py-3.5 rounded-xl font-semibold text-sm bg-[#122456] text-white hover:bg-[#1a3378] transition-colors"
+              >
+                <span>Saiba mais sobre Jundiaí</span>
+              </Link>
+            </div>
+          </div>
+
+          {/* Coluna do vídeo: mesa/telefone - no celular quadro aspect-video w-full e trilha curta h-[140svh] */}
+          <div ref={section5TrackRef} className="lg:col-span-5 relative h-[140svh] lg:h-[240vh]">
+            <div className="sticky top-20 h-[calc(100svh-5rem)] flex items-center justify-center">
+              <div className="relative aspect-video w-full max-w-full rounded-3xl overflow-hidden shadow-2xl border border-[#1e3878] bg-[#060e24]">
+                <ScrollVideo
+                  src="/assets/videos/daniel-mesa-telefone-horizontal-scroll.mp4"
+                  poster="/assets/videos/daniel-mesa-telefone-horizontal-poster.jpg"
+                  altText="Daniel ao telefone organizando contatos"
+                  className="w-full h-full"
+                  aspectRatio="none"
+                  trackRef={section5TrackRef}
+                />
               </div>
             </div>
           </div>
@@ -720,47 +624,57 @@ export const HomePage: React.FC = () => {
 
         {/* ========================================================
             SEÇÃO 9 — ARTIGOS E REFLEXÕES (BLOG)
+            Exibida apenas quando houver ao menos 1 artigo publicado (draft: false)
         ======================================================== */}
-        <section id="artigos" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
-            <div>
-              <span className="text-xs font-semibold tracking-wider text-[#4FD6F4] uppercase">
-                Produção Editorial
-              </span>
-              <h2 className="text-3xl font-bold text-white font-['Plus_Jakarta_Sans'] mt-1">
-                Artigos e Reflexões
-              </h2>
-            </div>
-            <Link
-              to="/blog"
-              className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#4FD6F4] hover:underline"
-            >
-              <span>Acessar área editorial do blog</span>
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
-
-          <div className="p-8 rounded-2xl bg-[#0b183d] border border-[#1e3878] flex flex-col sm:flex-row items-center justify-between gap-6">
-            <div className="space-y-2 text-center sm:text-left">
-              <div className="inline-flex items-center gap-2 text-xs font-semibold text-amber-400">
-                <FileText className="w-4 h-4" />
-                <span>Rascunhos Editoriais em Revisão</span>
+        {publishedBlogPosts.length > 0 && (
+          <section id="artigos" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
+              <div>
+                <span className="text-xs font-semibold tracking-wider text-[#4FD6F4] uppercase">
+                  Produção Editorial
+                </span>
+                <h2 className="text-3xl font-bold text-white font-['Plus_Jakarta_Sans'] mt-1">
+                  Artigos e Reflexões
+                </h2>
               </div>
-              <h3 className="text-xl font-bold text-white font-['Plus_Jakarta_Sans']">
-                Conteúdos sobre papéis sociais, psicanálise e procrastinação
-              </h3>
-              <p className="text-sm text-slate-300 max-w-xl font-light">
-                Três artigos estruturados sobre identidade, primeira sessão e hábitos estão em fase de revisão editorial final antes da publicação pública oficial.
-              </p>
+              <Link
+                to="/blog"
+                className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#4FD6F4] hover:underline"
+              >
+                <span>Acessar área editorial do blog</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
             </div>
-            <Link
-              to="/blog"
-              className="px-6 py-3 rounded-xl bg-[#122456] hover:bg-[#1a3378] text-white text-sm font-semibold transition-colors whitespace-nowrap"
-            >
-              Conhecer Linha Editorial
-            </Link>
-          </div>
-        </section>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {publishedBlogPosts.map((post) => (
+                <article
+                  key={post.slug}
+                  className="bg-[#0e1e4a]/60 border border-[#1e3878] rounded-2xl p-6 flex flex-col justify-between hover:border-[#4FD6F4]/50 transition-colors"
+                >
+                  <div className="space-y-3">
+                    <span className="text-xs font-semibold text-[#4FD6F4] uppercase">
+                      {post.category}
+                    </span>
+                    <h3 className="text-lg font-bold text-white font-['Plus_Jakarta_Sans']">
+                      {post.title}
+                    </h3>
+                    <p className="text-sm text-slate-300 font-light leading-relaxed">
+                      {post.description}
+                    </p>
+                  </div>
+                  <Link
+                    to={`/blog/${post.slug}`}
+                    className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#4FD6F4] hover:underline pt-4 border-t border-[#1e3878]/60 mt-4"
+                  >
+                    <span>Ler artigo</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
+                </article>
+              ))}
+            </div>
+          </section>
+        )}
 
         {/* ========================================================
             SEÇÃO 10 — PERGUNTAS FREQUENTES
@@ -827,91 +741,65 @@ export const HomePage: React.FC = () => {
         ======================================================== */}
         <section
           id="contato"
-          ref={section11TrackRef}
-          className="relative h-[220vh] sm:h-[240vh]"
+          className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 lg:grid lg:grid-cols-12 lg:gap-10 relative"
           aria-label="Primeiro passo para agendamento com Daniel Paulo"
         >
-          {/* Pinned inner container */}
-          <div className="sticky top-20 h-[calc(100dvh-5rem)] w-full flex items-center overflow-hidden py-4 sm:py-6">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-              <div className="media-dark-overlay relative rounded-3xl overflow-hidden border border-[#1e3878] shadow-2xl bg-[#060d21]">
-                
-                {/* Background video: praia-entardecer */}
-                <div className="relative h-[480px] sm:h-[520px] w-full">
-                  <ScrollVideo
-                    src={
-                      isDesktop
-                        ? '/assets/videos/praia-entardecer-horizontal-scroll.mp4'
-                        : '/assets/videos/praia-entardecer-vertical-scroll.mp4'
-                    }
-                    poster={
-                      isDesktop
-                        ? '/assets/videos/praia-entardecer-horizontal-poster.jpg'
-                        : '/assets/videos/praia-entardecer-vertical-poster.jpg'
-                    }
-                    altText="Praia serena ao entardecer"
-                    className="w-full h-full"
-                    aspectRatio="none"
-                    trackRef={section11TrackRef}
-                    showIndicator={true}
-                    indicatorLabel="Encerramento"
-                  />
-                  
-                  {/* Scrim */}
-                  <div className="absolute inset-0 bg-[#081331]/75 backdrop-blur-[2px] z-10 pointer-events-none" />
+          {/* Coluna de texto */}
+          <div className="lg:col-span-7 lg:sticky lg:top-24 lg:self-start lg:min-h-[calc(100svh-6rem)] lg:flex lg:flex-col lg:justify-center py-10 lg:py-0 space-y-6 text-center lg:text-left">
+            <div>
+              <span className="inline-block px-3.5 py-1.5 rounded-full bg-[#122456] border border-[#4FD6F4]/40 text-xs font-semibold text-[#4FD6F4] uppercase tracking-wider">
+                Dê o Primeiro Passo
+              </span>
+            </div>
 
-                  {/* Foreground content with staggered entrance */}
-                  <motion.div
-                    variants={cardContentContainerVariants}
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true, margin: '-60px' }}
-                    className="absolute inset-0 z-20 flex items-center justify-center p-6 text-center"
-                  >
-                    <div className="max-w-2xl space-y-6">
-                      <motion.div variants={cardContentItemVariants}>
-                        <span className="inline-block px-3.5 py-1.5 rounded-full bg-[#122456] border border-[#4FD6F4]/40 text-xs font-semibold text-[#4FD6F4] uppercase tracking-wider">
-                          Dê o Primeiro Passo
-                        </span>
-                      </motion.div>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white font-['Plus_Jakarta_Sans'] leading-tight">
+              Um espaço seguro para você falar sobre o que importa
+            </h2>
 
-                      <motion.h2
-                        variants={cardContentItemVariants}
-                        className="text-3xl sm:text-4xl md:text-5xl font-bold text-white font-['Plus_Jakarta_Sans'] leading-tight"
-                      >
-                        Um espaço seguro para você falar sobre o que importa
-                      </motion.h2>
+            <p className="text-base sm:text-lg text-slate-200 font-light max-w-xl mx-auto lg:mx-0 leading-relaxed">
+              Sem julgamentos e sem fórmulas prontas. Entre em contato diretamente pelo WhatsApp para esclarecer suas dúvidas e iniciar um diálogo.
+            </p>
 
-                      <motion.p
-                        variants={cardContentItemVariants}
-                        className="text-base sm:text-lg text-slate-200 font-light max-w-xl mx-auto leading-relaxed"
-                      >
-                        Sem julgamentos e sem fórmulas prontas. Entre em contato diretamente pelo WhatsApp para esclarecer suas dúvidas e iniciar um diálogo.
-                      </motion.p>
+            <div className="pt-2 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+              <a
+                href={getWhatsAppUrl('Olá Daniel, gostaria de conversar sobre o atendimento psicanalítico.')}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-xl font-bold text-base bg-[#4FD6F4] text-[#081331] hover:bg-[#36c5e5] transition-all transform hover:-translate-y-0.5 shadow-xl shadow-[#4FD6F4]/20"
+              >
+                <WhatsAppIcon className="w-5 h-5" />
+                <span>Conversar no WhatsApp</span>
+              </a>
 
-                      <motion.div variants={cardContentItemVariants} className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-4">
-                        <a
-                          href={getWhatsAppUrl('Olá Daniel, gostaria de conversar sobre o atendimento psicanalítico.')}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-xl font-bold text-base bg-[#4FD6F4] text-[#081331] hover:bg-[#36c5e5] transition-all transform hover:-translate-y-0.5 shadow-xl shadow-[#4FD6F4]/20"
-                        >
-                          <WhatsAppIcon className="w-5 h-5" />
-                          <span>Conversar no WhatsApp</span>
-                        </a>
+              <Link
+                to="/contato"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl font-semibold text-base bg-[#0e1e4a] text-white hover:bg-[#162c66] border border-[#1e3878] transition-colors"
+              >
+                <span>Formulário de Contato</span>
+              </Link>
+            </div>
+          </div>
 
-                        <Link
-                          to="/contato"
-                          className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl font-semibold text-base bg-[#0e1e4a] text-white hover:bg-[#162c66] border border-[#1e3878] transition-colors"
-                        >
-                          <span>Formulário de Contato</span>
-                        </Link>
-                      </motion.div>
-                    </div>
-                  </motion.div>
-
-                </div>
-
+          {/* Coluna do vídeo: no celular quadro 9/16, no desktop aspect-video */}
+          <div ref={section11TrackRef} className="lg:col-span-5 relative h-[200svh] lg:h-[240vh]">
+            <div className="sticky top-20 h-[calc(100svh-5rem)] flex items-center justify-center">
+              <div className="relative aspect-[9/16] lg:aspect-video h-[min(calc(100svh-7rem),calc((100vw-2rem)*16/9))] lg:h-auto lg:w-full max-w-full rounded-3xl overflow-hidden shadow-2xl border border-[#1e3878] bg-[#060d21]">
+                <ScrollVideo
+                  src={
+                    isDesktop
+                      ? '/assets/videos/praia-entardecer-horizontal-scroll.mp4'
+                      : '/assets/videos/praia-entardecer-vertical-scroll.mp4'
+                  }
+                  poster={
+                    isDesktop
+                      ? '/assets/videos/praia-entardecer-horizontal-poster.jpg'
+                      : '/assets/videos/praia-entardecer-vertical-poster.jpg'
+                  }
+                  altText="Praia serena ao entardecer"
+                  className="w-full h-full"
+                  aspectRatio="none"
+                  trackRef={section11TrackRef}
+                />
               </div>
             </div>
           </div>

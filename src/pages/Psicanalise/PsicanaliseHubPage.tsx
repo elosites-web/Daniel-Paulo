@@ -31,7 +31,7 @@ const psicanaliseSubpages = [
   {
     title: 'Atendimento Online',
     href: '/psicanalise/atendimento-online',
-    description: 'Flexibilidade e confidencialidade para realizar sessões de qualquer localidade.',
+    description: 'Flexibilidade e confidencialidade para realizar sessões de atendimento online.',
     icon: Monitor,
   },
   {

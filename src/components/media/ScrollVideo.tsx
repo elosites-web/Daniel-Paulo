@@ -11,12 +11,12 @@ interface ScrollVideoProps {
   priority?: boolean;
   trackRef?: React.RefObject<HTMLElement | null>;
   topOffset?: number;
-  showIndicator?: boolean;
-  indicatorLabel?: string;
   onProgress?: (progress: number) => void;
   keepPosterOnZeroProgress?: boolean;
   aspectRatio?: string;
   animateOnView?: boolean;
+  startAt?: number;
+  endAt?: number;
 }
 
 export const ScrollVideo: React.FC<ScrollVideoProps> = ({
@@ -31,6 +31,8 @@ export const ScrollVideo: React.FC<ScrollVideoProps> = ({
   keepPosterOnZeroProgress = false,
   aspectRatio = 'aspect-[9/16]',
   animateOnView = false,
+  startAt = 0,
+  endAt = 1,
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -40,6 +42,7 @@ export const ScrollVideo: React.FC<ScrollVideoProps> = ({
   const [isNearViewport, setIsNearViewport] = useState(priority);
   const [isVideoReady, setIsVideoReady] = useState(false);
   const [hasError, setHasError] = useState(false);
+  const [isPastZeroProgress, setIsPastZeroProgress] = useState(!keepPosterOnZeroProgress);
   const reducedMotion = useReducedMotion();
 
   // Check data saving preference
@@ -48,7 +51,7 @@ export const ScrollVideo: React.FC<ScrollVideoProps> = ({
     'connection' in navigator &&
     (navigator as unknown as { connection?: { saveData?: boolean } }).connection?.saveData === true;
 
-  // IntersectionObserver: preload="none" until within 800px of viewport
+  // IntersectionObserver: element rendered when within 800px of viewport
   useEffect(() => {
     if (priority || isNearViewport) return;
 
@@ -72,38 +75,40 @@ export const ScrollVideo: React.FC<ScrollVideoProps> = ({
     return () => observer.disconnect();
   }, [priority, isNearViewport]);
 
-  // Video metadata listener
+  // Video loadeddata listener (readyState >= 2) to prevent flashing black frames
   useEffect(() => {
     const video = videoRef.current;
     if (!video || reducedMotion || isDataSaving || !isNearViewport) return;
 
-    const handleLoadedMetadata = () => {
-      if (video.currentTime === 0) {
+    const handleLoadedData = () => {
+      if (video.duration && !isNaN(video.duration)) {
+        const initialTime = Math.max(0.001, startAt * video.duration);
         try {
-          video.currentTime = 0.001;
+          video.currentTime = initialTime;
         } catch {
-          // Ignore early buffering seek exception
+          // Ignore seek initialization exception
         }
       }
       setIsVideoReady(true);
     };
 
-    const handleCanPlay = () => {
-      setIsVideoReady(true);
+    const handleError = () => {
+      setHasError(true);
+      setIsVideoReady(false);
     };
 
-    video.addEventListener('loadedmetadata', handleLoadedMetadata);
-    video.addEventListener('canplay', handleCanPlay);
+    video.addEventListener('loadeddata', handleLoadedData);
+    video.addEventListener('error', handleError);
 
-    if (video.readyState >= 1) {
-      setIsVideoReady(true);
+    if (video.readyState >= 2) {
+      handleLoadedData();
     }
 
     return () => {
-      video.removeEventListener('loadedmetadata', handleLoadedMetadata);
-      video.removeEventListener('canplay', handleCanPlay);
+      video.removeEventListener('loadeddata', handleLoadedData);
+      video.removeEventListener('error', handleError);
     };
-  }, [isNearViewport, reducedMotion, isDataSaving]);
+  }, [isNearViewport, reducedMotion, isDataSaving, startAt]);
 
   // Framer Motion useScroll hook bound to target trackRef
   const { scrollYProgress } = useScroll(
@@ -118,13 +123,17 @@ export const ScrollVideo: React.FC<ScrollVideoProps> = ({
         }
   );
 
-  // RAF-based frame scrub without setState re-renders
+  // RAF-based frame scrub:
+  // p = clamp(progressoDoScroll / endAt, 0, 1)
+  // tempo = (startAt + p * (1 - startAt)) * video.duration
   const updateVideoFrame = useCallback(() => {
     const video = videoRef.current;
     const clamped = progressRef.current;
 
     if (video && video.duration && !isNaN(video.duration) && video.readyState >= 1) {
-      const targetTime = clamped * video.duration;
+      const p = Math.max(0, Math.min(1, endAt > 0 ? clamped / endAt : 1));
+      const targetTime = (startAt + p * (1 - startAt)) * video.duration;
+
       if (Math.abs(video.currentTime - targetTime) > 0.02) {
         try {
           if (
@@ -146,13 +155,22 @@ export const ScrollVideo: React.FC<ScrollVideoProps> = ({
     }
 
     rafIdRef.current = null;
-  }, [onProgress]);
+  }, [startAt, endAt, onProgress]);
 
-  // Motion scroll listener: updates ref and schedules RAF
+  // Motion scroll listener: updates ref, handles zero progress threshold and schedules RAF
   useMotionValueEvent(scrollYProgress, 'change', (latest) => {
     if (reducedMotion || isDataSaving) return;
 
-    progressRef.current = Math.max(0, Math.min(1, latest));
+    const clamped = Math.max(0, Math.min(1, latest));
+    progressRef.current = clamped;
+
+    if (keepPosterOnZeroProgress) {
+      if (clamped >= 0.01 && !isPastZeroProgress) {
+        setIsPastZeroProgress(true);
+      } else if (clamped < 0.01 && isPastZeroProgress) {
+        setIsPastZeroProgress(false);
+      }
+    }
 
     if (rafIdRef.current === null) {
       rafIdRef.current = requestAnimationFrame(updateVideoFrame);
@@ -180,6 +198,14 @@ export const ScrollVideo: React.FC<ScrollVideoProps> = ({
   // Informative vs decorative accessibility
   const isInformative = Boolean(altText && altText !== 'Vídeo institucional Daniel Paulo');
 
+  // True if poster should be shown instead of video
+  const showPoster =
+    !isVideoReady ||
+    hasError ||
+    reducedMotion ||
+    isDataSaving ||
+    (keepPosterOnZeroProgress && !isPastZeroProgress);
+
   return (
     <motion.div
       ref={containerRef}
@@ -205,9 +231,7 @@ export const ScrollVideo: React.FC<ScrollVideoProps> = ({
         decoding="async"
         onError={() => setHasError(true)}
         className={`w-full h-full object-cover select-none pointer-events-none transition-opacity duration-500 ${
-          !isVideoReady || hasError || reducedMotion || isDataSaving
-            ? 'opacity-100 z-10 relative'
-            : 'opacity-0 z-0 absolute inset-0'
+          showPoster ? 'opacity-100 z-10 relative' : 'opacity-0 z-0 absolute inset-0'
         } ${videoClassName}`}
       />
 
@@ -220,10 +244,13 @@ export const ScrollVideo: React.FC<ScrollVideoProps> = ({
           muted
           playsInline
           autoPlay={false}
-          preload={priority ? 'metadata' : 'none'}
-          onError={() => setHasError(true)}
+          preload="auto"
+          onError={() => {
+            setHasError(true);
+            setIsVideoReady(false);
+          }}
           className={`absolute inset-0 w-full h-full object-cover select-none pointer-events-none transition-opacity duration-500 ${
-            isVideoReady && !hasError ? 'opacity-100 z-10' : 'opacity-0 z-0'
+            !showPoster ? 'opacity-100 z-10' : 'opacity-0 z-0'
           } ${videoClassName}`}
           aria-hidden="true"
         />

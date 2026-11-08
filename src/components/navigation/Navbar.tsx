@@ -40,6 +40,31 @@ export const Navbar: React.FC = () => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
 
+  // Lock page scroll behind the menu when hamburger menu is open
+  useEffect(() => {
+    if (!isMobileMenuOpen) return;
+
+    const originalBodyOverflow = document.body.style.overflow;
+    const originalHtmlOverflow = document.documentElement.style.overflow;
+
+    document.body.style.overflow = 'hidden';
+    document.documentElement.style.overflow = 'hidden';
+
+    const handleResize = () => {
+      if (window.innerWidth >= 1024) {
+        setIsMobileMenuOpen(false);
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      document.body.style.overflow = originalBodyOverflow;
+      document.documentElement.style.overflow = originalHtmlOverflow;
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [isMobileMenuOpen]);
+
   return (
     <header className="sticky top-0 z-[100] bg-[#081331]/95 backdrop-blur-[14px] border-b border-[#162c66]/80 transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-4 xl:px-6 2xl:px-8 relative z-[110]">
@@ -212,67 +237,80 @@ export const Navbar: React.FC = () => {
 
       {/* Mobile Drawer Menu */}
       {isMobileMenuOpen && (
-        <div
-          id="mobile-navigation"
-          className="lg:hidden bg-[#081331] border-b border-[#1e3878] px-4 pt-3 pb-6 max-h-[85vh] overflow-y-auto"
-        >
-          <div className="space-y-1">
-            {mainNavItems.map((item) => {
-              const isActive = location.pathname === item.href || (item.href !== '/' && location.pathname.startsWith(item.href));
-              const hasChildren = item.children && item.children.length > 0;
+        <>
+          <div
+            id="mobile-navigation"
+            className="lg:hidden bg-[#081331] border-b border-[#1e3878] px-4 pt-3 pb-6 max-h-[calc(100svh-4.5rem)] overflow-y-auto overscroll-contain relative z-[101]"
+          >
+            <div className="space-y-1">
+              {mainNavItems.map((item) => {
+                const isActive = location.pathname === item.href || (item.href !== '/' && location.pathname.startsWith(item.href));
+                const hasChildren = item.children && item.children.length > 0;
 
-              return (
-                <div key={item.label} className="border-b border-[#122456]/60 pb-1">
-                  <div className="flex items-center justify-between">
-                    <Link
-                      to={item.href}
-                      className={`block py-2.5 text-base font-medium rounded-md px-2 ${
-                        isActive ? 'text-[#4FD6F4] bg-[#0e1e4a]' : 'text-slate-200 hover:text-white'
-                      }`}
-                    >
-                      {item.label}
-                    </Link>
-                  </div>
-
-                  {hasChildren && (
-                    <div className="pl-4 pr-1 py-1 space-y-1 bg-[#0a183d]/40 rounded-lg my-1">
-                      {item.children!.map((child) => (
-                        <Link
-                          key={child.href}
-                          to={child.href}
-                          className={`block py-2 text-sm rounded-md px-2 transition-colors ${
-                            location.pathname === child.href
-                              ? 'text-[#4FD6F4] font-medium bg-[#122456]'
-                              : 'text-slate-300 hover:text-white'
-                          }`}
-                        >
-                          {child.label}
-                        </Link>
-                      ))}
+                return (
+                  <div key={item.label} className="border-b border-[#122456]/60 pb-1">
+                    <div className="flex items-center justify-between">
+                      <Link
+                        to={item.href}
+                        onClick={() => setIsMobileMenuOpen(false)}
+                        className={`block py-2.5 text-base font-medium rounded-md px-2 ${
+                          isActive ? 'text-[#4FD6F4] bg-[#0e1e4a]' : 'text-slate-200 hover:text-white'
+                        }`}
+                      >
+                        {item.label}
+                      </Link>
                     </div>
-                  )}
-                </div>
-              );
-            })}
-          </div>
 
-          <div className="mt-5 pt-4 border-t border-[#1e3878] space-y-3">
-            <div className="flex items-center justify-between px-2 py-1">
-              <span className="text-sm font-medium text-slate-300">Aparência do site</span>
-              <ThemeSwitcher showLabel={true} />
+                    {hasChildren && (
+                      <div className="pl-4 pr-1 py-1 space-y-1 bg-[#0a183d]/40 rounded-lg my-1">
+                        {item.children!.map((child) => (
+                          <Link
+                            key={child.href}
+                            to={child.href}
+                            onClick={() => setIsMobileMenuOpen(false)}
+                            className={`block py-2 text-sm rounded-md px-2 transition-colors ${
+                              location.pathname === child.href
+                                ? 'text-[#4FD6F4] font-medium bg-[#122456]'
+                                : 'text-slate-300 hover:text-white'
+                            }`}
+                          >
+                            {child.label}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
             </div>
 
-            <a
-              href={getWhatsAppUrl()}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-full flex items-center justify-center gap-2 py-3 rounded-xl font-semibold bg-[#4FD6F4] text-[#081331] hover:bg-[#36c5e5] transition-colors shadow-md text-base"
-            >
-              <WhatsAppIcon className="w-5 h-5" />
-              <span>Agendar pelo WhatsApp</span>
-            </a>
+            <div className="mt-5 pt-4 border-t border-[#1e3878] space-y-3">
+              <div className="flex items-center justify-between px-2 py-1">
+                <span className="text-sm font-medium text-slate-300">Aparência do site</span>
+                <ThemeSwitcher showLabel={true} />
+              </div>
+
+              <a
+                href={getWhatsAppUrl()}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="w-full flex items-center justify-center gap-2 py-3 rounded-xl font-semibold bg-[#4FD6F4] text-[#081331] hover:bg-[#36c5e5] transition-colors shadow-md text-base"
+              >
+                <WhatsAppIcon className="w-5 h-5" />
+                <span>Agendar pelo WhatsApp</span>
+              </a>
+            </div>
           </div>
-        </div>
+
+          {/* Backdrop locking scroll and closing on tap outside */}
+          <div
+            className="fixed inset-0 top-18 lg:hidden bg-black/60 backdrop-blur-xs -z-10"
+            onClick={() => setIsMobileMenuOpen(false)}
+            onTouchMove={(e) => e.preventDefault()}
+            aria-hidden="true"
+          />
+        </>
       )}
     </header>
   );

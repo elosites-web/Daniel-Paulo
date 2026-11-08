@@ -11,7 +11,7 @@ export const AtendimentoOnlinePage: React.FC = () => {
     <>
       <SeoHead
         title="Atendimento Psicanalítico Online | Daniel Paulo"
-        description="Atendimento psicanalítico online com Daniel Paulo. Acompanhamento terapêutico humanizado e confidencial para pacientes em qualquer localidade."
+        description="Atendimento psicanalítico online com Daniel Paulo. Acompanhamento terapêutico humanizado e confidencial para pacientes em atendimento online."
         canonicalPath="/psicanalise/atendimento-online"
         breadcrumbs={[
           { name: 'Psicanálise', url: '/psicanalise' },

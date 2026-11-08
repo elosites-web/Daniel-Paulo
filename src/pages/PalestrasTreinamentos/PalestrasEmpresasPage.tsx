@@ -1,9 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { SeoHead } from '../../components/seo/SeoHead';
 import { Breadcrumbs } from '../../components/breadcrumbs/Breadcrumbs';
-import { getWhatsAppUrl } from '../../config/siteConfig';
-import { Building2, ArrowRight, CheckCircle2, ShieldCheck } from 'lucide-react';
+import { siteConfig, getWhatsAppUrl } from '../../config/siteConfig';
 import { WhatsAppIcon } from '../../components/ui/WhatsAppIcon';
 
 export const PalestrasEmpresasPage: React.FC = () => {
@@ -51,44 +49,52 @@ export const PalestrasEmpresasPage: React.FC = () => {
               </p>
             </div>
 
-            <div id="eixos-tematicos" className="space-y-4 pt-2">
-              <h2 className="text-2xl font-bold text-white font-['Plus_Jakarta_Sans'] pt-2">
-                Palestras e Treinamentos
-              </h2>
-              <div className="space-y-4 not-prose">
-                <div id="tema-papeis" className="p-5 rounded-2xl bg-[#081331] border border-[#162c66] space-y-1">
-                  <h3 className="font-bold text-white text-base">Papéis e Personagens</h3>
-                  <p className="text-xs sm:text-sm text-slate-300">
-                    Compreensão das funções que desempenhamos e preservação da integridade pessoal nas relações.
-                  </p>
+            {siteConfig.showSpeakerTopicsDraft ? (
+              <>
+                <div id="eixos-tematicos" className="space-y-4 pt-2">
+                  <h2 className="text-2xl font-bold text-white font-['Plus_Jakarta_Sans'] pt-2">
+                    Palestras e Treinamentos
+                  </h2>
+                  <div className="space-y-4 not-prose">
+                    <div id="tema-papeis" className="p-5 rounded-2xl bg-[#081331] border border-[#162c66] space-y-1">
+                      <h3 className="font-bold text-white text-base">Papéis e Personagens</h3>
+                      <p className="text-xs sm:text-sm text-slate-300">
+                        Compreensão das funções que desempenhamos e preservação da integridade pessoal nas relações.
+                      </p>
+                    </div>
+
+                    <div id="tema-mascaras" className="p-5 rounded-2xl bg-[#081331] border border-[#162c66] space-y-1">
+                      <h3 className="font-bold text-white text-base">Máscaras Sociais</h3>
+                      <p className="text-xs sm:text-sm text-slate-300">
+                        Como evitar o esgotamento por excesso de representação e construir convivências mais autênticas.
+                      </p>
+                    </div>
+
+                    <div id="tema-procrastinacao" className="p-5 rounded-2xl bg-[#081331] border border-[#162c66] space-y-1">
+                      <h3 className="font-bold text-white text-base">Procrastinação</h3>
+                      <p className="text-xs sm:text-sm text-slate-300">
+                        Compreendendo os mecanismos emocionais por trás do adiamento de tarefas e projetos.
+                      </p>
+                    </div>
+
+                    <div id="tema-autoconhecimento" className="p-5 rounded-2xl bg-[#081331] border border-[#162c66] space-y-1">
+                      <h3 className="font-bold text-white text-base">Autoconhecimento</h3>
+                      <p className="text-xs sm:text-sm text-slate-300">
+                        Desenvolvimento da percepção subjetiva, inteligência emocional e clareza de valores.
+                      </p>
+                    </div>
+                  </div>
                 </div>
 
-                <div id="tema-mascaras" className="p-5 rounded-2xl bg-[#081331] border border-[#162c66] space-y-1">
-                  <h3 className="font-bold text-white text-base">Máscaras Sociais</h3>
-                  <p className="text-xs sm:text-sm text-slate-300">
-                    Como evitar o esgotamento por excesso de representação e construir convivências mais autênticas.
-                  </p>
-                </div>
-
-                <div id="tema-procrastinacao" className="p-5 rounded-2xl bg-[#081331] border border-[#162c66] space-y-1">
-                  <h3 className="font-bold text-white text-base">Procrastinação</h3>
-                  <p className="text-xs sm:text-sm text-slate-300">
-                    Compreendendo os mecanismos emocionais por trás do adiamento de tarefas e projetos.
-                  </p>
-                </div>
-
-                <div id="tema-autoconhecimento" className="p-5 rounded-2xl bg-[#081331] border border-[#162c66] space-y-1">
-                  <h3 className="font-bold text-white text-base">Autoconhecimento</h3>
-                  <p className="text-xs sm:text-sm text-slate-300">
-                    Desenvolvimento da percepção subjetiva, inteligência emocional e clareza de valores.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <p className="text-sm text-slate-400">
-              * Os formatos (presenciais em sua empresa ou transmissões online), duração e adaptação ao público da sua organização são customizados em conversa prévia.
-            </p>
+                <p className="text-sm text-slate-400">
+                  * Os formatos (presenciais em sua empresa ou transmissões online), duração e adaptação ao público da sua organização são customizados em conversa prévia.
+                </p>
+              </>
+            ) : (
+              <p className="text-base sm:text-lg text-slate-300 pt-2">
+                Palestras e treinamentos. Conversa e detalhes combinados pelo WhatsApp.
+              </p>
+            )}
           </div>
 
           <div id="proposta" className="p-8 rounded-3xl bg-[#0b183d] border border-[#1e3878] text-center space-y-4">
