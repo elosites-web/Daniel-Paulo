@@ -5,6 +5,7 @@ import { useReducedMotion } from '../../hooks/useReducedMotion';
 
 export const FloatingWhatsApp: React.FC = () => {
   const [mounted, setMounted] = useState(false);
+  const [canPulse, setCanPulse] = useState(false);
   const reducedMotion = useReducedMotion();
 
   useEffect(() => {
@@ -12,7 +13,16 @@ export const FloatingWhatsApp: React.FC = () => {
     const timer = setTimeout(() => {
       setMounted(true);
     }, 35000);
-    return () => clearTimeout(timer);
+
+    // Only allow periodic pulse after entrance animation has completely and smoothly settled (3.5s later)
+    const pulseTimer = setTimeout(() => {
+      setCanPulse(true);
+    }, 38500);
+
+    return () => {
+      clearTimeout(timer);
+      clearTimeout(pulseTimer);
+    };
   }, []);
 
   const shouldAnimate = !reducedMotion;
@@ -26,7 +36,7 @@ export const FloatingWhatsApp: React.FC = () => {
             ? 'whatsapp-smooth-enter'
             : 'whatsapp-smooth-hidden'
           : mounted
-            ? 'opacity-100 transition-opacity duration-700'
+            ? 'opacity-100 transition-opacity duration-1000'
             : 'opacity-0 pointer-events-none'
       }`}
     >
@@ -35,7 +45,7 @@ export const FloatingWhatsApp: React.FC = () => {
         target="_blank"
         rel="noopener noreferrer"
         className={`group relative flex items-center justify-center w-14 h-14 rounded-full bg-[#25D366] text-white shadow-xl hover:bg-[#20ba5a] hover:scale-105 active:scale-95 transition-all focus:outline-none focus:ring-4 focus:ring-[#25D366]/40 ${
-          shouldAnimate && mounted ? 'animate-whatsapp-pulse' : ''
+          shouldAnimate && canPulse ? 'animate-whatsapp-pulse' : ''
         }`}
         aria-label="Abrir conversa no WhatsApp com Daniel Paulo"
       >

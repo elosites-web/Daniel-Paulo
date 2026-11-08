@@ -41,9 +41,9 @@ export const Navbar: React.FC = () => {
   }, []);
 
   return (
-    <header className="sticky top-0 z-50 bg-[#081331]/90 backdrop-blur-[12px] border-b border-[#162c66]/80 transition-colors duration-300">
-      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-6 xl:px-8">
-        <div className="flex items-center justify-between h-18 lg:h-20">
+    <header className="sticky top-0 z-[100] bg-[#081331]/95 backdrop-blur-[14px] border-b border-[#162c66]/80 transition-colors duration-300">
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-4 xl:px-6 2xl:px-8 relative z-[110]">
+        <div className="flex items-center justify-between h-18 lg:h-20 gap-2">
           
           {/* Logo brand - protected against text break/wrapping on tablets and desktop */}
           <Link
@@ -54,22 +54,22 @@ export const Navbar: React.FC = () => {
             <img
               src="/assets/logo/logo-daniel-paulo-sem-brilho-256.png"
               alt="Logotipo circular de Daniel Paulo com silhuetas em perfil"
-              className="w-9 h-9 sm:w-10 sm:h-10 lg:w-10 lg:h-10 xl:w-12 xl:h-12 object-contain group-hover:scale-105 transition-transform shrink-0"
-              width="48"
-              height="48"
+              className="w-9 h-9 sm:w-10 sm:h-10 lg:w-9 lg:h-9 xl:w-11 xl:h-11 object-contain group-hover:scale-105 transition-transform shrink-0"
+              width="44"
+              height="44"
             />
             <div className="flex flex-col shrink-0 min-w-0">
-              <span className="text-sm sm:text-base lg:text-base xl:text-lg font-bold tracking-tight text-white group-hover:text-[#4FD6F4] transition-colors font-['Plus_Jakarta_Sans'] whitespace-nowrap">
+              <span className="text-sm sm:text-base lg:text-sm xl:text-base 2xl:text-lg font-bold tracking-tight text-white group-hover:text-[#4FD6F4] transition-colors font-['Plus_Jakarta_Sans'] whitespace-nowrap">
                 Daniel Paulo
               </span>
-              <span className="text-[10px] lg:text-[11px] xl:text-xs tracking-wider text-[#94a9c9] uppercase font-medium whitespace-nowrap">
+              <span className="text-[10px] lg:text-[10px] xl:text-[11px] 2xl:text-xs tracking-wider text-[#94a9c9] uppercase font-medium whitespace-nowrap">
                 Psicanalista e Terapeuta
               </span>
             </div>
           </Link>
 
           {/* Desktop & Tablet Navigation */}
-          <nav className="hidden lg:flex items-center gap-0.5 xl:gap-1 2xl:gap-1.5 relative z-50" aria-label="Navegação principal">
+          <nav className="hidden lg:flex items-center gap-0.5 xl:gap-1 2xl:gap-1.5 relative z-[120]" aria-label="Navegação principal">
             {mainNavItems.map((item) => {
               const isActive = location.pathname === item.href || (item.href !== '/' && location.pathname.startsWith(item.href));
               const hasChildren = item.children && item.children.length > 0;
@@ -101,12 +101,12 @@ export const Navbar: React.FC = () => {
                       aria-haspopup="true"
                     >
                       <span>{displayLabel}</span>
-                      <ChevronDown className="w-3 h-3 xl:w-3.5 xl:h-3.5 transition-transform duration-200 opacity-70 group-hover:opacity-100" />
+                      <ChevronDown className="w-3 h-3 xl:w-3.5 xl:h-3.5 transition-transform duration-200 opacity-70 group-hover:opacity-100 shrink-0" />
                     </button>
 
                     {activeDropdown === item.label && (
-                      <div className="absolute top-[calc(100%-1px)] left-0 min-w-[220px] max-w-[280px] shadow-2xl animate-in fade-in slide-in-from-top-1 duration-150 z-[100]">
-                        <div className="bg-[#0b183d] border border-[#1e3878] rounded-xl p-1.5 shadow-2xl backdrop-blur-xl relative z-[101]">
+                      <div className="absolute top-full left-0 pt-1.5 min-w-[220px] max-w-[280px] z-[150] animate-in fade-in slide-in-from-top-1 duration-150">
+                        <div className="bg-[#0b183d] border border-[#1e3878] rounded-xl p-1.5 shadow-2xl backdrop-blur-xl relative z-[151]">
                           {item.children!.map((child) => {
                             const isChildActive = location.pathname === child.href;
                             return (
@@ -167,13 +167,23 @@ export const Navbar: React.FC = () => {
             </a>
           </div>
 
-          {/* Mobile actions: Theme Switcher + hamburger button */}
-          <div className="flex items-center gap-2 lg:hidden">
+          {/* Mobile & Tablet actions: Quick CTA + Theme Switcher + hamburger button */}
+          <div className="flex items-center gap-1.5 sm:gap-2 lg:hidden">
+            <a
+              href={getWhatsAppUrl()}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-[#4FD6F4] text-[#081331] hover:bg-[#36c5e5] transition-all shadow-md shrink-0 whitespace-nowrap"
+              aria-label="Agendar via WhatsApp"
+            >
+              <WhatsAppIcon className="w-3.5 h-3.5" />
+              <span>Agendar</span>
+            </a>
             <ThemeSwitcher />
             <button
               type="button"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="p-2.5 rounded-lg text-slate-300 hover:text-white hover:bg-[#0e1e4a] focus:outline-none focus:ring-2 focus:ring-[#4FD6F4]"
+              className="p-2 sm:p-2.5 rounded-lg text-slate-300 hover:text-white hover:bg-[#0e1e4a] focus:outline-none focus:ring-2 focus:ring-[#4FD6F4]"
               aria-label={isMobileMenuOpen ? 'Fechar menu de navegação' : 'Abrir menu de navegação'}
               aria-expanded={isMobileMenuOpen}
               aria-controls="mobile-navigation"
@@ -186,7 +196,7 @@ export const Navbar: React.FC = () => {
 
       {/* Slim, full-width scroll progress bar immediately below the header */}
       <div
-        className="absolute top-full inset-x-0 w-full h-[2.5px] bg-[#081331]/30 pointer-events-none overflow-hidden z-0"
+        className="absolute top-full inset-x-0 w-full h-[2.5px] bg-[#081331]/30 pointer-events-none overflow-hidden z-10"
         role="progressbar"
         aria-label="Progresso de rolagem da página"
       >

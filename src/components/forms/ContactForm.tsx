@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { siteConfig } from '../../config/siteConfig';
-import { CheckCircle, AlertCircle, ExternalLink, Send } from 'lucide-react';
+import { CheckCircle, AlertCircle, ExternalLink } from 'lucide-react';
 import { WhatsAppIcon } from '../ui/WhatsAppIcon';
 
 interface FormData {

@@ -13,7 +13,7 @@ export const FormacaoCertificadosPage: React.FC = () => {
         canonicalPath="/sobre/formacao-e-certificados"
         breadcrumbs={[
           { name: 'Sobre', url: '/sobre' },
-          { name: 'Formação e Certificados', url: '/sobre/formacao-e-certificados' }
+          { name: 'Formação', url: '/sobre/formacao-e-certificados' }
         ]}
       />
 
@@ -22,7 +22,7 @@ export const FormacaoCertificadosPage: React.FC = () => {
         <Breadcrumbs
           items={[
             { label: 'Sobre Daniel Paulo', href: '/sobre' },
-            { label: 'Formação e Certificados' }
+            { label: 'Formação' }
           ]}
         />
 

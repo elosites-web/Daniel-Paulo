@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { SeoHead } from '../../components/seo/SeoHead';
 import { Breadcrumbs } from '../../components/breadcrumbs/Breadcrumbs';
 import { GraduationCap, BookOpen } from 'lucide-react';
+import { getWhatsAppUrl } from '../../config/siteConfig';
+import { WhatsAppIcon } from '../../components/ui/WhatsAppIcon';
 
 export const ProfessorPage: React.FC = () => {
   return (
@@ -59,6 +61,27 @@ export const ProfessorPage: React.FC = () => {
                     Coordenador Pedagógico na Unika Negócios e Desenvolvimento Humano, de 01/2021 a 07/2025
                   </h2>
                 </div>
+              </div>
+            </div>
+
+            {/* Academic CTA */}
+            <div className="p-8 rounded-3xl bg-[#0b183d] border border-[#1e3878] text-center space-y-4 mt-8">
+              <h3 className="text-xl font-bold text-white font-['Plus_Jakarta_Sans']">
+                Deseja consultar sobre aulas, projetos pedagógicos ou palestras acadêmicas?
+              </h3>
+              <p className="text-sm text-slate-300 max-w-lg mx-auto font-light">
+                Converse diretamente com Daniel Paulo pelo WhatsApp para alinhar propostas institucionais e disponibilidade.
+              </p>
+              <div>
+                <a
+                  href={getWhatsAppUrl('Olá Daniel Paulo, gostaria de consultar informações sobre aulas ou projetos acadêmicos.')}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl font-bold text-sm bg-[#4FD6F4] text-[#081331] hover:bg-[#36c5e5] transition-all shadow-md"
+                >
+                  <WhatsAppIcon className="w-4 h-4 fill-current" />
+                  <span>Conversar pelo WhatsApp</span>
+                </a>
               </div>
             </div>
           </div>

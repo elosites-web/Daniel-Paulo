@@ -56,8 +56,9 @@ export const ContatoPage: React.FC = () => {
                   href={getWhatsAppUrl()}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-lg font-bold text-[#4FD6F4] hover:text-[#36c5e5]"
+                  className="inline-flex items-center gap-2.5 text-lg font-bold text-[#4FD6F4] hover:text-[#36c5e5] group"
                 >
+                  <WhatsAppIcon className="w-5 h-5 text-[#25D366] group-hover:scale-110 transition-transform" />
                   <span>{siteConfig.whatsappFormatted}</span>
                 </a>
               </div>

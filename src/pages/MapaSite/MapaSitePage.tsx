@@ -11,7 +11,7 @@ const siteMapSections = [
       { label: 'Página Inicial (Home)', href: '/' },
       { label: 'Sobre Daniel Paulo', href: '/sobre' },
       { label: 'Trajetória Profissional', href: '/sobre/trajetoria' },
-      { label: 'Formação Acadêmica e Certificados', href: '/sobre/formacao-e-certificados' },
+      { label: 'Formação', href: '/sobre/formacao-e-certificados' },
       { label: 'Terapia e Autoconhecimento', href: '/terapia-e-autoconhecimento' },
     ],
   },
