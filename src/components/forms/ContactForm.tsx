@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { siteConfig } from '../../config/siteConfig';
-import { CheckCircle, AlertCircle, ExternalLink } from 'lucide-react';
+import { CheckCircle, AlertCircle } from 'lucide-react';
 import { WhatsAppIcon } from '../ui/WhatsAppIcon';
 
 interface FormData {
@@ -234,12 +234,14 @@ export const ContactForm: React.FC = () => {
             className="w-full py-3.5 px-6 rounded-xl font-bold bg-[#4FD6F4] text-[#081331] hover:bg-[#36c5e5] transition-all flex items-center justify-center gap-2 shadow-lg shadow-[#4FD6F4]/15 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#4FD6F4] focus:ring-offset-[#081331]"
           >
             {isRedirecting ? (
-              <span>Abrindo o WhatsApp...</span>
+              <span className="inline-flex items-center gap-2">
+                <WhatsAppIcon className="w-5 h-5 animate-pulse" />
+                <span>Abrindo o WhatsApp...</span>
+              </span>
             ) : (
               <>
                 <WhatsAppIcon className="w-5 h-5" />
                 <span>Prosseguir no WhatsApp</span>
-                <ExternalLink className="w-4 h-4 ml-1 opacity-70" />
               </>
             )}
           </button>
