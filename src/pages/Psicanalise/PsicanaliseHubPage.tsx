@@ -9,11 +9,11 @@ import {
   Clock, 
   Monitor, 
   MapPin, 
-  MessageCircle, 
   ArrowRight, 
   CheckCircle2, 
   ShieldCheck 
 } from 'lucide-react';
+import { WhatsAppIcon } from '../../components/ui/WhatsAppIcon';
 
 const psicanaliseSubpages = [
   {
@@ -137,7 +137,7 @@ export const PsicanaliseHubPage: React.FC = () => {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl font-bold text-sm bg-[#4FD6F4] text-[#081331] hover:bg-[#36c5e5] transition-all shadow-lg"
             >
-              <MessageCircle className="w-4 h-4 fill-current" />
+              <WhatsAppIcon className="w-4 h-4" />
               <span>Conversar com Daniel Paulo</span>
             </a>
           </div>

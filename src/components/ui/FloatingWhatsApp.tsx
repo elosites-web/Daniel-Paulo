@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { getWhatsAppUrl } from '../../config/siteConfig';
-import { MessageCircle } from 'lucide-react';
+import { WhatsAppIcon } from './WhatsAppIcon';
 import { useReducedMotion } from '../../hooks/useReducedMotion';
 
 export const FloatingWhatsApp: React.FC = () => {
@@ -39,7 +39,7 @@ export const FloatingWhatsApp: React.FC = () => {
         }`}
         aria-label="Abrir conversa no WhatsApp com Daniel Paulo"
       >
-        <MessageCircle className="w-7 h-7 fill-current" />
+        <WhatsAppIcon className="w-7 h-7" />
         
         {/* Tooltip on hover (desktop only) */}
         <span className="hidden sm:inline-block pointer-events-none absolute right-full mr-3 px-3 py-1.5 rounded-lg bg-[#081331] text-xs font-medium text-white border border-[#1e3878] whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity shadow-lg">

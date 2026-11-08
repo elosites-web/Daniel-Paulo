@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import { SeoHead } from '../../components/seo/SeoHead';
 import { Breadcrumbs } from '../../components/breadcrumbs/Breadcrumbs';
 import { siteConfig, getWhatsAppUrl } from '../../config/siteConfig';
-import { MapPin, MessageCircle, ArrowRight, ShieldCheck, CheckCircle2, ChevronDown } from 'lucide-react';
+import { MapPin, ArrowRight, ShieldCheck, CheckCircle2, ChevronDown } from 'lucide-react';
+import { WhatsAppIcon } from '../../components/ui/WhatsAppIcon';
 
 const jundiaiFaqs = [
   {
@@ -174,7 +175,7 @@ export const PsicanalistaJundiaiPage: React.FC = () => {
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl font-bold text-sm bg-[#4FD6F4] text-[#081331] hover:bg-[#36c5e5] transition-all shadow-md"
               >
-                <MessageCircle className="w-4 h-4 fill-current" />
+                <WhatsAppIcon className="w-4 h-4 fill-current" />
                 <span>Conversar no WhatsApp</span>
               </a>
             </div>

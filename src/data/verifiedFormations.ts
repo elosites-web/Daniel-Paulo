@@ -8,7 +8,7 @@ export interface VerifiedFormation {
   type: FormationType;
   typeLabel: string;
   image: string;
-  description: string;
+  description?: string;
   verified: true;
 }
 
@@ -32,7 +32,6 @@ export const verifiedFormations: VerifiedFormation[] = [
     type: 'pos-graduacao',
     typeLabel: 'Pós-Graduação Lato Sensu',
     image: '/assets/certificados/certificado-pos-antropologia-facprisma.webp',
-    description: 'Estudo das dinâmicas socioculturais, simbolismos, estruturas humanas e relações contemporâneas.',
     verified: true,
   },
   {
@@ -43,7 +42,6 @@ export const verifiedFormations: VerifiedFormation[] = [
     type: 'pos-graduacao',
     typeLabel: 'Pós-Graduação Lato Sensu',
     image: '/assets/certificados/certificado-pos-filosofia-facprisma.webp',
-    description: 'Aprofundamento em ética, epistemologia, correntes do pensamento ocidental e reflexão crítica.',
     verified: true,
   },
   {
@@ -54,7 +52,6 @@ export const verifiedFormations: VerifiedFormation[] = [
     type: 'pos-graduacao',
     typeLabel: 'Pós-Graduação Lato Sensu',
     image: '/assets/certificados/certificado-pos-neurociencias-faculdade-iguacu.webp',
-    description: 'Bases neurobiológicas do comportamento, plasticidade cerebral, processos cognitivos e emocionais.',
     verified: true,
   },
   {
@@ -65,7 +62,6 @@ export const verifiedFormations: VerifiedFormation[] = [
     type: 'extensao',
     typeLabel: 'Extensão Universitária',
     image: '/assets/certificados/certificado-extensao-neuropsicopedagogia-faculdade-iguacu.webp',
-    description: 'Interlocução entre cérebro, aprendizagem, desenvolvimento cognitivo e processos educativos.',
     verified: true,
   },
   {
@@ -76,7 +72,6 @@ export const verifiedFormations: VerifiedFormation[] = [
     type: 'extensao',
     typeLabel: 'Extensão Universitária',
     image: '/assets/certificados/certificado-extensao-neuropsicanalise-faculdade-iguacu.webp',
-    description: 'Pontes entre os modelos neurobiológicos do afeto e a investigação subjetiva da mente e do inconsciente.',
     verified: true,
   },
   {
@@ -87,7 +82,6 @@ export const verifiedFormations: VerifiedFormation[] = [
     type: 'desenvolvimento',
     typeLabel: 'Desenvolvimento Profissional',
     image: '/assets/certificados/certificado-imersao-estrategica-estruturacao-comercial-bup.webp',
-    description: 'Capacitação em planejamento estratégico de operações e gestão de processos comerciais.',
     verified: true,
   },
   {
@@ -98,7 +92,6 @@ export const verifiedFormations: VerifiedFormation[] = [
     type: 'desenvolvimento',
     typeLabel: 'Capacitação Comportamental',
     image: '/assets/certificados/certificado-homem-ao-maximo-cmn.webp',
-    description: 'Treinamento sobre integridade, responsabilidade pessoal e desenvolvimento de liderança.',
     verified: true,
   },
 ];

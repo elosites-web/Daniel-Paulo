@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import { SeoHead } from '../../components/seo/SeoHead';
 import { Breadcrumbs } from '../../components/breadcrumbs/Breadcrumbs';
 import { getWhatsAppUrl } from '../../config/siteConfig';
-import { Clock, MessageCircle, ArrowRight, CheckCircle2, ShieldCheck, Heart } from 'lucide-react';
+import { Clock, ArrowRight, CheckCircle2, ShieldCheck, Heart } from 'lucide-react';
+import { WhatsAppIcon } from '../../components/ui/WhatsAppIcon';
 
 export const PrimeiraSessaoPage: React.FC = () => {
   return (
@@ -79,7 +80,7 @@ export const PrimeiraSessaoPage: React.FC = () => {
 
               <div className="p-5 rounded-xl bg-[#081331] border border-[#162c66] space-y-2">
                 <ShieldCheck className="w-5 h-5 text-[#4FD6F4]" />
-                <h3 className="font-bold text-white text-base">Sigilo Absoluto</h3>
+                <h3 className="font-bold text-white text-base">Sigilo e Ética Profissional</h3>
                 <p className="text-xs text-slate-300">
                   Todas as trocas e conteúdos trazidos são estritamente confidenciais.
                 </p>
@@ -102,7 +103,7 @@ export const PrimeiraSessaoPage: React.FC = () => {
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl font-bold text-sm bg-[#4FD6F4] text-[#081331] hover:bg-[#36c5e5] transition-all shadow-md"
               >
-                <MessageCircle className="w-4 h-4 fill-current" />
+                <WhatsAppIcon className="w-4 h-4" />
                 <span>Conversar pelo WhatsApp</span>
               </a>
             </div>

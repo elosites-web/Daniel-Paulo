@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import { SeoHead } from '../../components/seo/SeoHead';
 import { Breadcrumbs } from '../../components/breadcrumbs/Breadcrumbs';
 import { getWhatsAppUrl } from '../../config/siteConfig';
-import { Monitor, MessageCircle, ArrowRight, ShieldCheck } from 'lucide-react';
+import { Monitor, ArrowRight, ShieldCheck } from 'lucide-react';
+import { WhatsAppIcon } from '../../components/ui/WhatsAppIcon';
 
 export const ConsultoriaOnlinePage: React.FC = () => {
   return (
@@ -36,7 +37,7 @@ export const ConsultoriaOnlinePage: React.FC = () => {
               Consultoria Online
             </h1>
             <p className="text-lg text-slate-300 font-light leading-relaxed">
-              Encontros individuais remotos para alinhamento reflexivo, organização de objetivos e tomada de decisões conscientes.
+              Atendimento online individual. Detalhes combinados pelo WhatsApp.
             </p>
           </header>
 
@@ -46,20 +47,7 @@ export const ConsultoriaOnlinePage: React.FC = () => {
                 Sobre a Consultoria Online
               </h2>
               <p className="text-sm sm:text-base text-slate-300 leading-relaxed">
-                A consultoria online foi informada por Daniel Paulo como uma das áreas de atuação em seu leque de serviços. Trata-se de um espaço pontual de diálogo estruturado, projetado para analisar impasses profissionais, de carreira ou de desenvolvimento pessoal.
-              </p>
-            </div>
-
-            <div id="formato" className="space-y-3">
-              <p>
-                Como as necessidades e demandas variam amplamente para cada projeto, o escopo, a periodicidade e os formatos dos encontros são alinhados diretamente entre Daniel e o cliente interessado.
-              </p>
-            </div>
-
-            <div id="condicoes" className="p-5 rounded-2xl bg-[#081331] border border-[#162c66] flex items-start gap-3 text-xs text-slate-400">
-              <ShieldCheck className="w-5 h-5 text-[#4FD6F4] flex-shrink-0 mt-0.5" />
-              <p>
-                As informações específicas sobre disponibilidade de agenda, escopo de projeto e condições contratuais são fornecidas mediante contato individual.
+                Atendimento online individual. Detalhes combinados pelo WhatsApp.
               </p>
             </div>
           </div>
@@ -78,7 +66,7 @@ export const ConsultoriaOnlinePage: React.FC = () => {
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl font-bold text-sm bg-[#4FD6F4] text-[#081331] hover:bg-[#36c5e5] transition-all shadow-md"
               >
-                <MessageCircle className="w-4 h-4 fill-current" />
+                <WhatsAppIcon className="w-4 h-4 fill-current" />
                 <span>Conversar pelo WhatsApp</span>
               </a>
             </div>

@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import { SeoHead } from '../../components/seo/SeoHead';
 import { Breadcrumbs } from '../../components/breadcrumbs/Breadcrumbs';
 import { getWhatsAppUrl } from '../../config/siteConfig';
-import { Users, Building2, GraduationCap, MessageCircle, ArrowRight, CheckCircle2, Sparkles } from 'lucide-react';
+import { Users, Building2, GraduationCap, ArrowRight, CheckCircle2, Sparkles } from 'lucide-react';
+import { WhatsAppIcon } from '../../components/ui/WhatsAppIcon';
 
 export const PalestrasTreinamentosPage: React.FC = () => {
   return (
@@ -45,7 +46,7 @@ export const PalestrasTreinamentosPage: React.FC = () => {
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-bold text-sm bg-[#4FD6F4] text-[#081331] hover:bg-[#36c5e5] transition-all shadow-md"
               >
-                <MessageCircle className="w-4 h-4 fill-current" />
+                <WhatsAppIcon className="w-4 h-4 fill-current" />
                 <span>Consultar Disponibilidade de Agenda</span>
               </a>
 
@@ -85,6 +86,35 @@ export const PalestrasTreinamentosPage: React.FC = () => {
         </div>
 
         {/* 2 Main Segments */}
+        {/* Temas Principais */}
+        <div id="temas-principais" className="p-8 rounded-3xl bg-[#0e1e4a]/60 border border-[#1e3878] space-y-6 shadow-xl">
+          <h2 className="text-2xl font-bold text-white font-['Plus_Jakarta_Sans']">
+            Palestras e Treinamentos
+          </h2>
+          <p className="text-sm sm:text-base text-slate-300 font-light leading-relaxed">
+            Temas voltados à reflexão subjetiva e desenvolvimento pessoal:
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 not-prose">
+            <div className="p-4 rounded-xl bg-[#081331] border border-[#162c66] flex items-center gap-3">
+              <CheckCircle2 className="w-5 h-5 text-[#4FD6F4] flex-shrink-0" />
+              <span className="text-sm font-semibold text-white">Papéis e Personagens</span>
+            </div>
+            <div className="p-4 rounded-xl bg-[#081331] border border-[#162c66] flex items-center gap-3">
+              <CheckCircle2 className="w-5 h-5 text-[#4FD6F4] flex-shrink-0" />
+              <span className="text-sm font-semibold text-white">Máscaras Sociais</span>
+            </div>
+            <div className="p-4 rounded-xl bg-[#081331] border border-[#162c66] flex items-center gap-3">
+              <CheckCircle2 className="w-5 h-5 text-[#4FD6F4] flex-shrink-0" />
+              <span className="text-sm font-semibold text-white">Procrastinação</span>
+            </div>
+            <div className="p-4 rounded-xl bg-[#081331] border border-[#162c66] flex items-center gap-3">
+              <CheckCircle2 className="w-5 h-5 text-[#4FD6F4] flex-shrink-0" />
+              <span className="text-sm font-semibold text-white">Autoconhecimento</span>
+            </div>
+          </div>
+        </div>
+
+        {/* 2 Main Segments */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           
           <div id="empresas" className="p-8 rounded-3xl bg-[#0e1e4a]/60 border border-[#1e3878] space-y-4 hover:border-[#4FD6F4]/50 transition-all flex flex-col justify-between shadow-xl">
@@ -96,22 +126,8 @@ export const PalestrasTreinamentosPage: React.FC = () => {
                 Para Empresas e Organizações
               </h2>
               <p className="text-sm sm:text-base text-slate-300 font-light leading-relaxed mb-4">
-                Encontros desenhados para equipes, gestores e lideranças que buscam humanizar o ambiente corporativo, reduzir o esgotamento por máscaras sociais e alinhar produtividade com saúde emocional.
+                Palestras e treinamentos corporativos com temas em papéis e personagens, máscaras sociais, procrastinação e autoconhecimento.
               </p>
-              <ul className="space-y-2 text-xs sm:text-sm text-slate-300 mb-6">
-                <li className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-[#4FD6F4]" />
-                  <span>Inteligência emocional no ambiente de trabalho</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-[#4FD6F4]" />
-                  <span>Procrastinação e gestão da ansiedade em equipes</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-[#4FD6F4]" />
-                  <span>Liderança humanizada e comunicação empática</span>
-                </li>
-              </ul>
             </div>
 
             <Link
@@ -132,22 +148,8 @@ export const PalestrasTreinamentosPage: React.FC = () => {
                 Para Escolas e Instituições Educacionais
               </h2>
               <p className="text-sm sm:text-base text-slate-300 font-light leading-relaxed mb-4">
-                Apresentações e dinâmicas que conectam autoconhecimento, identidade e valores de convivência para comunidades escolares, educadores e pais.
+                Palestras e encontros formativos para comunidades educacionais sobre identidade, convivência e autoconhecimento.
               </p>
-              <ul className="space-y-2 text-xs sm:text-sm text-slate-300 mb-6">
-                <li className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-[#4FD6F4]" />
-                  <span>Identidade e autenticidade juvenil</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-[#4FD6F4]" />
-                  <span>Acolhimento emocional para corpo docente</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-[#4FD6F4]" />
-                  <span>Diálogos sobre orientação familiar e convivência</span>
-                </li>
-              </ul>
             </div>
 
             <Link

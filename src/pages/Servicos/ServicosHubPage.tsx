@@ -4,7 +4,8 @@ import { SeoHead } from '../../components/seo/SeoHead';
 import { Breadcrumbs } from '../../components/breadcrumbs/Breadcrumbs';
 import { servicesData } from '../../data/services';
 import { getWhatsAppUrl } from '../../config/siteConfig';
-import { Compass, BookOpen, Users, ArrowRight, MessageCircle, ShieldCheck } from 'lucide-react';
+import { Compass, BookOpen, Users, ArrowRight, ShieldCheck } from 'lucide-react';
+import { WhatsAppIcon } from '../../components/ui/WhatsAppIcon';
 
 export const ServicosHubPage: React.FC = () => {
   return (
@@ -84,7 +85,7 @@ export const ServicosHubPage: React.FC = () => {
                   className="p-2 rounded-lg bg-[#122456] hover:bg-[#4FD6F4] hover:text-[#081331] text-slate-300 transition-colors"
                   aria-label={`Conversar sobre ${svc.title} no WhatsApp`}
                 >
-                  <MessageCircle className="w-4 h-4" />
+                  <WhatsAppIcon className="w-4 h-4 fill-current" />
                 </a>
               </div>
             </div>

@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import { SeoHead } from '../../components/seo/SeoHead';
 import { Breadcrumbs } from '../../components/breadcrumbs/Breadcrumbs';
 import { getWhatsAppUrl } from '../../config/siteConfig';
-import { Building2, MessageCircle, ArrowRight, CheckCircle2, ShieldCheck } from 'lucide-react';
+import { Building2, ArrowRight, CheckCircle2, ShieldCheck } from 'lucide-react';
+import { WhatsAppIcon } from '../../components/ui/WhatsAppIcon';
 
 export const PalestrasEmpresasPage: React.FC = () => {
   return (
@@ -52,27 +53,34 @@ export const PalestrasEmpresasPage: React.FC = () => {
 
             <div id="eixos-tematicos" className="space-y-4 pt-2">
               <h2 className="text-2xl font-bold text-white font-['Plus_Jakarta_Sans'] pt-2">
-                Eixos Temáticos Sugeridos
+                Palestras e Treinamentos
               </h2>
               <div className="space-y-4 not-prose">
-                <div id="tema-inteligencia-emocional" className="p-5 rounded-2xl bg-[#081331] border border-[#162c66] space-y-1">
-                  <h3 className="font-bold text-white text-base">Inteligência Emocional e Máscaras no Trabalho</h3>
+                <div id="tema-papeis" className="p-5 rounded-2xl bg-[#081331] border border-[#162c66] space-y-1">
+                  <h3 className="font-bold text-white text-base">Papéis e Personagens</h3>
                   <p className="text-xs sm:text-sm text-slate-300">
-                    Como evitar o esgotamento profissional por excesso de representação e construir relações profissionais genuínas e maduras.
+                    Compreensão das funções que desempenhamos e preservação da integridade pessoal nas relações.
+                  </p>
+                </div>
+
+                <div id="tema-mascaras" className="p-5 rounded-2xl bg-[#081331] border border-[#162c66] space-y-1">
+                  <h3 className="font-bold text-white text-base">Máscaras Sociais</h3>
+                  <p className="text-xs sm:text-sm text-slate-300">
+                    Como evitar o esgotamento por excesso de representação e construir convivências mais autênticas.
                   </p>
                 </div>
 
                 <div id="tema-procrastinacao" className="p-5 rounded-2xl bg-[#081331] border border-[#162c66] space-y-1">
-                  <h3 className="font-bold text-white text-base">Procrastinação: Por Que Adiamos o Que Importa?</h3>
+                  <h3 className="font-bold text-white text-base">Procrastinação</h3>
                   <p className="text-xs sm:text-sm text-slate-300">
-                    Compreendendo a ansiedade e o perfeccionismo por trás do adiamento de decisões e metas corporativas.
+                    Compreendendo os mecanismos emocionais por trás do adiamento de tarefas e projetos.
                   </p>
                 </div>
 
-                <div id="tema-lideranca-humanizada" className="p-5 rounded-2xl bg-[#081331] border border-[#162c66] space-y-1">
-                  <h3 className="font-bold text-white text-base">Liderança Humanizada e Comunicação Não-Violenta</h3>
+                <div id="tema-autoconhecimento" className="p-5 rounded-2xl bg-[#081331] border border-[#162c66] space-y-1">
+                  <h3 className="font-bold text-white text-base">Autoconhecimento</h3>
                   <p className="text-xs sm:text-sm text-slate-300">
-                    O poder da escuta atenta para engajar colaboradores e mediar conflitos interpessoais de forma construtiva.
+                    Desenvolvimento da percepção subjetiva, inteligência emocional e clareza de valores.
                   </p>
                 </div>
               </div>
@@ -97,7 +105,7 @@ export const PalestrasEmpresasPage: React.FC = () => {
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl font-bold text-sm bg-[#4FD6F4] text-[#081331] hover:bg-[#36c5e5] transition-all shadow-md"
               >
-                <MessageCircle className="w-4 h-4 fill-current" />
+                <WhatsAppIcon className="w-4 h-4 fill-current" />
                 <span>Solicitar Proposta para Empresa</span>
               </a>
             </div>

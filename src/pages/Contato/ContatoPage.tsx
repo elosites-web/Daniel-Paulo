@@ -3,7 +3,8 @@ import { SeoHead } from '../../components/seo/SeoHead';
 import { Breadcrumbs } from '../../components/breadcrumbs/Breadcrumbs';
 import { ContactForm } from '../../components/forms/ContactForm';
 import { siteConfig, getWhatsAppUrl } from '../../config/siteConfig';
-import { MessageCircle, MapPin, Instagram, Linkedin, ShieldCheck, Clock } from 'lucide-react';
+import { MapPin, Instagram, Linkedin, ShieldCheck, Clock } from 'lucide-react';
+import { WhatsAppIcon } from '../../components/ui/WhatsAppIcon';
 
 export const ContatoPage: React.FC = () => {
   return (
@@ -42,7 +43,7 @@ export const ContatoPage: React.FC = () => {
             {/* Primary WhatsApp Card */}
             <div id="whatsapp" className="p-7 rounded-3xl bg-[#0e1e4a]/80 border border-[#1e3878] space-y-4 shadow-xl">
               <div className="w-12 h-12 rounded-2xl bg-[#25D366]/20 text-[#25D366] flex items-center justify-center">
-                <MessageCircle className="w-6 h-6 fill-current" />
+                <WhatsAppIcon className="w-6 h-6 fill-current" />
               </div>
               <h2 className="text-xl font-bold text-white font-['Plus_Jakarta_Sans']">
                 WhatsApp Oficial
@@ -74,7 +75,7 @@ export const ContatoPage: React.FC = () => {
                 <strong>Presencial:</strong> Em espaço reservado na cidade de <strong>Jundiaí-SP</strong> (endereço e orientações alinhados individualmente).
               </p>
               <p className="text-sm text-slate-300 leading-relaxed font-light">
-                <strong>Online:</strong> Acompanhamento digital para pacientes de qualquer cidade do Brasil e exterior.
+                <strong>Online:</strong> Atendimento online.
               </p>
             </div>
 

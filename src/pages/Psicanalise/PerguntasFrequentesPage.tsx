@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { SeoHead } from '../../components/seo/SeoHead';
 import { Breadcrumbs } from '../../components/breadcrumbs/Breadcrumbs';
 import { getWhatsAppUrl } from '../../config/siteConfig';
-import { HelpCircle, ChevronDown, MessageCircle, ArrowRight } from 'lucide-react';
+import { HelpCircle, ChevronDown, ArrowRight } from 'lucide-react';
+import { WhatsAppIcon } from '../../components/ui/WhatsAppIcon';
 
 const detailedFaqs = [
   {
@@ -14,12 +15,8 @@ const detailedFaqs = [
     answer: 'O primeiro contato é realizado preferencialmente por mensagem via WhatsApp. É uma conversa inicial acolhedora para que você apresente brevemente suas dúvidas e expectativas, e para que possam alinhar disponibilidade de dias e horários.',
   },
   {
-    question: 'Existe um número mínimo ou obrigatório de sessões?',
-    answer: 'Não existe um pacote fixo ou número pré-determinado de encontros. O processo psicanalítico respeita o tempo singular de elaboração de cada indivíduo, podendo durar o tempo que for benéfico e fizer sentido para você.',
-  },
-  {
-    question: 'O atendimento online tem a mesma eficácia do presencial?',
-    answer: 'Sim. A escuta psicanalítica, o sigilo profissional e a dedicação do terapeuta permanecem idênticos. A modalidade online requer apenas que você esteja em um local privado e com boa conexão à internet.',
+    question: 'Como funciona a escolha entre atendimento online e presencial?',
+    answer: 'O atendimento pode ser feito online ou presencialmente; a escolha é combinada no primeiro contato.',
   },
   {
     question: 'Preciso ter um diagnóstico ou problema grave para fazer psicanálise?',
@@ -134,7 +131,7 @@ export const PerguntasFrequentesPage: React.FC = () => {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl font-bold text-sm bg-[#4FD6F4] text-[#081331] hover:bg-[#36c5e5] transition-all shadow-md"
             >
-              <MessageCircle className="w-4 h-4 fill-current" />
+              <WhatsAppIcon className="w-4 h-4" />
               <span>Tirar Dúvida no WhatsApp</span>
             </a>
           </div>

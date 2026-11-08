@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { mainNavItems } from '../../data/navigation';
 import { siteConfig, getWhatsAppUrl } from '../../config/siteConfig';
-import { Menu, X, ChevronDown, MessageCircle } from 'lucide-react';
+import { Menu, X, ChevronDown } from 'lucide-react';
+import { WhatsAppIcon } from '../ui/WhatsAppIcon';
 import { ThemeSwitcher } from '../ui/ThemeSwitcher';
 import { motion, useScroll, useSpring } from 'motion/react';
 import { useReducedMotion } from '../../hooks/useReducedMotion';
@@ -40,38 +41,46 @@ export const Navbar: React.FC = () => {
   }, []);
 
   return (
-    <header className="sticky top-0 z-50 bg-[#081331]/80 backdrop-blur-[12px] border-b border-[#162c66]/80 transition-colors duration-300">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
+    <header className="sticky top-0 z-50 bg-[#081331]/90 backdrop-blur-[12px] border-b border-[#162c66]/80 transition-colors duration-300">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-6 xl:px-8">
+        <div className="flex items-center justify-between h-18 lg:h-20">
           
-          {/* Logo brand */}
+          {/* Logo brand - protected against text break/wrapping on tablets and desktop */}
           <Link
             to="/"
-            className="flex items-center gap-3 group focus:outline-none focus:ring-2 focus:ring-[#4FD6F4] rounded-lg p-1"
+            className="flex items-center gap-2 sm:gap-2.5 xl:gap-3 group focus:outline-none focus:ring-2 focus:ring-[#4FD6F4] rounded-lg p-1 shrink-0"
             aria-label="Daniel Paulo - Página Inicial"
           >
             <img
               src="/assets/logo/logo-daniel-paulo-sem-brilho-256.png"
               alt="Logotipo circular de Daniel Paulo com silhuetas em perfil"
-              className="w-12 h-12 object-contain group-hover:scale-105 transition-transform"
+              className="w-9 h-9 sm:w-10 sm:h-10 lg:w-10 lg:h-10 xl:w-12 xl:h-12 object-contain group-hover:scale-105 transition-transform shrink-0"
               width="48"
               height="48"
             />
-            <div className="flex flex-col">
-              <span className="text-lg font-bold tracking-tight text-white group-hover:text-[#4FD6F4] transition-colors font-['Plus_Jakarta_Sans']">
+            <div className="flex flex-col shrink-0 min-w-0">
+              <span className="text-sm sm:text-base lg:text-base xl:text-lg font-bold tracking-tight text-white group-hover:text-[#4FD6F4] transition-colors font-['Plus_Jakarta_Sans'] whitespace-nowrap">
                 Daniel Paulo
               </span>
-              <span className="text-xs tracking-wider text-[#94a9c9] uppercase font-medium">
+              <span className="text-[10px] lg:text-[11px] xl:text-xs tracking-wider text-[#94a9c9] uppercase font-medium whitespace-nowrap">
                 Psicanalista e Terapeuta
               </span>
             </div>
           </Link>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-1 xl:gap-2" aria-label="Navegação principal">
+          {/* Desktop & Tablet Navigation */}
+          <nav className="hidden lg:flex items-center gap-0.5 xl:gap-1 2xl:gap-1.5 relative z-50" aria-label="Navegação principal">
             {mainNavItems.map((item) => {
               const isActive = location.pathname === item.href || (item.href !== '/' && location.pathname.startsWith(item.href));
               const hasChildren = item.children && item.children.length > 0;
+              const displayLabel = item.shortLabel ? (
+                <>
+                  <span className="hidden xl:inline">{item.label}</span>
+                  <span className="xl:hidden">{item.shortLabel}</span>
+                </>
+              ) : (
+                item.label
+              );
 
               if (hasChildren) {
                 return (
@@ -83,7 +92,7 @@ export const Navbar: React.FC = () => {
                   >
                     <button
                       type="button"
-                      className={`flex items-center gap-1 px-3 py-2 text-sm font-medium rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-[#4FD6F4] ${
+                      className={`flex items-center gap-0.5 px-1.5 xl:px-2.5 2xl:px-3 py-1.5 text-xs xl:text-sm font-medium rounded-md transition-colors whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-[#4FD6F4] ${
                         isActive
                           ? 'text-[#4FD6F4] bg-[#0e1e4a]'
                           : 'text-slate-200 hover:text-white hover:bg-[#0e1e4a]/60'
@@ -91,28 +100,28 @@ export const Navbar: React.FC = () => {
                       aria-expanded={activeDropdown === item.label}
                       aria-haspopup="true"
                     >
-                      <span>{item.label}</span>
-                      <ChevronDown className="w-4 h-4 transition-transform duration-200 opacity-70 group-hover:opacity-100" />
+                      <span>{displayLabel}</span>
+                      <ChevronDown className="w-3 h-3 xl:w-3.5 xl:h-3.5 transition-transform duration-200 opacity-70 group-hover:opacity-100" />
                     </button>
 
                     {activeDropdown === item.label && (
-                      <div className="absolute top-full left-0 w-64 pt-2 shadow-2xl animate-in fade-in slide-in-from-top-1 duration-150">
-                        <div className="bg-[#0b183d] border border-[#1e3878] rounded-xl p-2 shadow-2xl backdrop-blur-xl">
+                      <div className="absolute top-[calc(100%-1px)] left-0 min-w-[220px] max-w-[280px] shadow-2xl animate-in fade-in slide-in-from-top-1 duration-150 z-[100]">
+                        <div className="bg-[#0b183d] border border-[#1e3878] rounded-xl p-1.5 shadow-2xl backdrop-blur-xl relative z-[101]">
                           {item.children!.map((child) => {
                             const isChildActive = location.pathname === child.href;
                             return (
                               <Link
                                 key={child.href}
                                 to={child.href}
-                                className={`block px-3 py-2.5 rounded-lg text-sm transition-colors ${
+                                className={`block px-3 py-2 rounded-lg text-xs xl:text-sm transition-colors ${
                                   isChildActive
                                     ? 'bg-[#122456] text-[#4FD6F4] font-medium'
                                     : 'text-slate-300 hover:bg-[#122456]/70 hover:text-white'
                                 }`}
                               >
-                                <div className="font-medium">{child.label}</div>
+                                <div className="font-medium whitespace-nowrap">{child.label}</div>
                                 {child.description && (
-                                  <div className="text-xs text-[#8ea5c8] mt-0.5 line-clamp-1">
+                                  <div className="text-[11px] text-[#8ea5c8] mt-0.5 line-clamp-1">
                                     {child.description}
                                   </div>
                                 )}
@@ -130,30 +139,31 @@ export const Navbar: React.FC = () => {
                 <Link
                   key={item.label}
                   to={item.href}
-                  className={`px-3 py-2 text-sm font-medium rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-[#4FD6F4] ${
+                  className={`px-1.5 xl:px-2.5 2xl:px-3 py-1.5 text-xs xl:text-sm font-medium rounded-md transition-colors whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-[#4FD6F4] ${
                     isActive
                       ? 'text-[#4FD6F4] bg-[#0e1e4a]'
                       : 'text-slate-200 hover:text-white hover:bg-[#0e1e4a]/60'
                   }`}
                 >
-                  {item.label}
+                  {displayLabel}
                 </Link>
               );
             })}
           </nav>
 
-          {/* Desktop Actions: Theme Switcher & Direct CTA Button */}
-          <div className="hidden lg:flex items-center gap-3">
+          {/* Desktop & Tablet Actions: Theme Switcher & Direct CTA Button */}
+          <div className="hidden lg:flex items-center gap-1.5 xl:gap-3 shrink-0">
             <ThemeSwitcher />
             <a
               href={getWhatsAppUrl()}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-semibold bg-[#4FD6F4] text-[#081331] hover:bg-[#36c5e5] transition-all transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#4FD6F4] focus:ring-offset-[#081331] shadow-lg shadow-[#4FD6F4]/10"
+              className="inline-flex items-center gap-1.5 px-2.5 xl:px-4 py-2 rounded-lg text-xs xl:text-sm font-semibold bg-[#4FD6F4] text-[#081331] hover:bg-[#36c5e5] transition-all transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#4FD6F4] focus:ring-offset-[#081331] shadow-lg shadow-[#4FD6F4]/10 whitespace-nowrap shrink-0"
               aria-label="Abrir conversa no WhatsApp com Daniel Paulo"
             >
-              <MessageCircle className="w-4 h-4 fill-current" />
-              <span>Agendar Conversa</span>
+              <WhatsAppIcon className="w-3.5 h-3.5 xl:w-4 xl:h-4" />
+              <span className="hidden xl:inline">Agendar Conversa</span>
+              <span className="xl:hidden">Agendar</span>
             </a>
           </div>
 
@@ -176,7 +186,7 @@ export const Navbar: React.FC = () => {
 
       {/* Slim, full-width scroll progress bar immediately below the header */}
       <div
-        className="absolute top-full inset-x-0 w-full h-[2.5px] bg-[#081331]/30 pointer-events-none overflow-hidden z-50"
+        className="absolute top-full inset-x-0 w-full h-[2.5px] bg-[#081331]/30 pointer-events-none overflow-hidden z-0"
         role="progressbar"
         aria-label="Progresso de rolagem da página"
       >
@@ -188,6 +198,7 @@ export const Navbar: React.FC = () => {
           }}
         />
       </div>
+
 
       {/* Mobile Drawer Menu */}
       {isMobileMenuOpen && (
@@ -247,7 +258,7 @@ export const Navbar: React.FC = () => {
               rel="noopener noreferrer"
               className="w-full flex items-center justify-center gap-2 py-3 rounded-xl font-semibold bg-[#4FD6F4] text-[#081331] hover:bg-[#36c5e5] transition-colors shadow-md text-base"
             >
-              <MessageCircle className="w-5 h-5 fill-current" />
+              <WhatsAppIcon className="w-5 h-5" />
               <span>Agendar pelo WhatsApp</span>
             </a>
           </div>

@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { siteConfig, getWhatsAppUrl } from '../../config/siteConfig';
-import { Instagram, Linkedin, MessageCircle, MapPin, AlertCircle } from 'lucide-react';
+import { Instagram, Linkedin, MapPin, AlertCircle } from 'lucide-react';
+import { WhatsAppIcon } from '../ui/WhatsAppIcon';
 
 export const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
@@ -84,7 +85,7 @@ export const Footer: React.FC = () => {
                 className="w-10 h-10 rounded-lg bg-[#0e1e4a] hover:bg-[#25D366] hover:text-white text-slate-300 flex items-center justify-center transition-all focus:outline-none focus:ring-2 focus:ring-[#25D366]"
                 aria-label="Contato direto via WhatsApp"
               >
-                <MessageCircle className="w-5 h-5" />
+                <WhatsAppIcon className="w-5 h-5" />
               </a>
             </div>
           </div>

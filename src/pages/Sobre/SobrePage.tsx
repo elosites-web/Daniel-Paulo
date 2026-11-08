@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import { SeoHead } from '../../components/seo/SeoHead';
 import { Breadcrumbs } from '../../components/breadcrumbs/Breadcrumbs';
 import { siteConfig, getWhatsAppUrl } from '../../config/siteConfig';
-import { MessageCircle, ArrowRight, Shield, Award, BookOpen, Heart, GraduationCap } from 'lucide-react';
+import { ArrowRight, Shield, Award, BookOpen, Heart, GraduationCap } from 'lucide-react';
+import { WhatsAppIcon } from '../../components/ui/WhatsAppIcon';
 
 export const SobrePage: React.FC = () => {
   return (
@@ -79,7 +80,7 @@ export const SobrePage: React.FC = () => {
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-bold text-sm bg-[#4FD6F4] text-[#081331] hover:bg-[#36c5e5] transition-all shadow-md"
               >
-                <MessageCircle className="w-4 h-4 fill-current" />
+                <WhatsAppIcon className="w-4 h-4" />
                 <span>Conversar com Daniel</span>
               </a>
 

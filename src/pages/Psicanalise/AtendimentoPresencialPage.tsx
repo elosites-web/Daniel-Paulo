@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import { SeoHead } from '../../components/seo/SeoHead';
 import { Breadcrumbs } from '../../components/breadcrumbs/Breadcrumbs';
 import { siteConfig, getWhatsAppUrl } from '../../config/siteConfig';
-import { MapPin, MessageCircle, ArrowRight, ShieldCheck, CheckCircle2, Clock } from 'lucide-react';
+import { MapPin, ArrowRight, ShieldCheck, CheckCircle2, Clock } from 'lucide-react';
+import { WhatsAppIcon } from '../../components/ui/WhatsAppIcon';
 
 export const AtendimentoPresencialPage: React.FC = () => {
   return (
@@ -37,7 +38,7 @@ export const AtendimentoPresencialPage: React.FC = () => {
               Atendimento presencial em Jundiaí: encontro e presença física
             </h1>
             <p className="text-lg text-slate-300 font-light leading-relaxed">
-              Para quem valoriza o encontro face a face e o ambiente reservado de um consultório presencial na região de Jundiaí-SP.
+              Para quem valoriza o encontro face a face e o atendimento presencial em Jundiaí, com local e horários combinados pelo WhatsApp.
             </p>
           </header>
 
@@ -48,7 +49,7 @@ export const AtendimentoPresencialPage: React.FC = () => {
                 <span>Localização e Modalidade Presencial</span>
               </div>
               <p className="text-sm sm:text-base text-slate-300 leading-relaxed">
-                Daniel Paulo disponibiliza atendimentos presenciais na cidade de <strong>Jundiaí, Estado de São Paulo</strong>. As orientações detalhadas de endereço, sala e horários são alinhadas diretamente via WhatsApp com cada paciente no momento do primeiro contato.
+                Daniel Paulo disponibiliza atendimento presencial em Jundiaí, com local e horários combinados pelo WhatsApp.
               </p>
             </div>
 
@@ -56,10 +57,7 @@ export const AtendimentoPresencialPage: React.FC = () => {
               A Experiência do Encontro Presencial
             </h2>
             <p>
-              Estar fisicamente em um espaço dedicado exclusivamente à sua escuta permite um distanciamento saudável dos ruídos e demandas imediatas da casa ou do trabalho.
-            </p>
-            <p>
-              O trajeto até o consultório e o tempo de retorno muitas vezes funcionam como momentos valiosos de digestão emocional e reflexão sobre os temas mobilizados na sessão.
+              O atendimento presencial em Jundiaí, com local e horários combinados pelo WhatsApp, permite um momento dedicado à reflexão e escuta.
             </p>
 
             <h2 id="como-agendar" className="text-2xl font-bold text-white font-['Plus_Jakarta_Sans'] pt-4">
@@ -95,7 +93,7 @@ export const AtendimentoPresencialPage: React.FC = () => {
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl font-bold text-sm bg-[#4FD6F4] text-[#081331] hover:bg-[#36c5e5] transition-all shadow-md"
               >
-                <MessageCircle className="w-4 h-4 fill-current" />
+                <WhatsAppIcon className="w-4 h-4" />
                 <span>Alinhar Horário Presencial</span>
               </a>
             </div>

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { siteConfig } from '../../config/siteConfig';
-import { MessageCircle, CheckCircle, AlertCircle, ExternalLink, Send } from 'lucide-react';
+import { CheckCircle, AlertCircle, ExternalLink, Send } from 'lucide-react';
+import { WhatsAppIcon } from '../ui/WhatsAppIcon';
 
 interface FormData {
   name: string;
@@ -236,7 +237,7 @@ export const ContactForm: React.FC = () => {
               <span>Abrindo o WhatsApp...</span>
             ) : (
               <>
-                <MessageCircle className="w-5 h-5 fill-current" />
+                <WhatsAppIcon className="w-5 h-5" />
                 <span>Prosseguir no WhatsApp</span>
                 <ExternalLink className="w-4 h-4 ml-1 opacity-70" />
               </>

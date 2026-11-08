@@ -5,7 +5,10 @@ import { Breadcrumbs } from '../../components/breadcrumbs/Breadcrumbs';
 import { ReadingProgressBar } from '../../components/ui/ReadingProgressBar';
 import { initialBlogPosts } from '../../data/blogPosts';
 import { siteConfig, getWhatsAppUrl } from '../../config/siteConfig';
-import { Clock, User, ArrowLeft, ArrowRight, MessageCircle, AlertCircle, BookOpen, ShieldCheck, Tag } from 'lucide-react';
+import { Clock, User, ArrowLeft, ArrowRight, AlertCircle, BookOpen, ShieldCheck, Tag } from 'lucide-react';
+import { WhatsAppIcon } from '../../components/ui/WhatsAppIcon';
+
+import { NotFoundPage } from '../NotFound/NotFoundPage';
 
 export const BlogPostPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -13,8 +16,9 @@ export const BlogPostPage: React.FC = () => {
 
   const post = initialBlogPosts.find((p) => p.slug === slug);
 
-  if (!post) {
-    return <Navigate to="/blog" replace />;
+  // Return 404 for draft: true in production (show drafts only with import.meta.env.DEV)
+  if (!post || (post.draft && !import.meta.env.DEV)) {
+    return <NotFoundPage />;
   }
 
   const relatedPosts = initialBlogPosts.filter((p) => p.slug !== post.slug).slice(0, 2);
@@ -101,6 +105,17 @@ export const BlogPostPage: React.FC = () => {
         title={post.title}
         description={post.description}
         canonicalPath={`/blog/${post.slug}`}
+        noindex={Boolean(post.draft)}
+        articleSchema={
+          !post.draft
+            ? {
+                headline: post.title,
+                description: post.description,
+                datePublished: post.date || undefined,
+                dateModified: post.updated || post.date || undefined,
+              }
+            : undefined
+        }
         breadcrumbs={[
           { name: 'Blog', url: '/blog' },
           { name: post.title, url: `/blog/${post.slug}` }
@@ -240,7 +255,7 @@ export const BlogPostPage: React.FC = () => {
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-sm bg-[#4FD6F4] text-[#081331] hover:bg-[#36c5e5] transition-all shadow-md"
               >
-                <MessageCircle className="w-4 h-4 fill-current" />
+                <WhatsAppIcon className="w-4 h-4 fill-current" />
                 <span>Conversar pelo WhatsApp</span>
               </a>
             </div>

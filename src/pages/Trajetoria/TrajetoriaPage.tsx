@@ -102,7 +102,7 @@ export const TrajetoriaPage: React.FC = () => {
             Engajamento Comunitário e Música
           </h3>
           <p className="text-sm text-slate-300 leading-relaxed font-light">
-            Além da atuação profissional em consultório, sala de aula e empresas, Daniel Paulo participa de iniciativas voluntárias de apoio social em sua comunidade, incluindo ações de corte de cabelo gratuito e projetos com música, compartilhando acolhimento prático no cotidiano.
+            Além da atuação profissional em atendimentos, sala de aula e empresas, Daniel Paulo participa de iniciativas voluntárias de apoio social em sua comunidade, incluindo ações de corte de cabelo gratuito e projetos com música, compartilhando acolhimento prático no cotidiano.
           </p>
         </div>
 

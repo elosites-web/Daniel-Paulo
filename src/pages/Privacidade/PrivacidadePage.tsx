@@ -81,10 +81,13 @@ export const PrivacidadePage: React.FC = () => {
 
           <section id="cookies" className="space-y-3">
             <h2 className="text-xl font-bold text-white font-['Plus_Jakarta_Sans']">
-              4. Cookies e Tecnologias de Rastreamento
+              4. Cookies, Fontes e Recursos Técnicos
             </h2>
             <p>
-              Este website utiliza apenas cookies técnicos ou recursos essenciais de sessão e cache de navegador indispensáveis para a renderização responsiva da interface, vídeos e elementos visuais. Não são instalados por padrão pixels de rastreamento invasivo ou softwares de gravação de tela de terceiros.
+              Este website utiliza apenas cookies técnicos e recursos essenciais de sessão e cache de navegador indispensáveis para a renderização responsiva da interface, vídeos e elementos visuais. Não são instalados por padrão pixels de rastreamento invasivo ou softwares de gravação de tela de terceiros.
+            </p>
+            <p>
+              Para a padronização tipográfica e legibilidade visual, o site carrega estilos e fontes tipográficas (Plus Jakarta Sans e Inter) por meio do serviço Google Fonts (Google LLC). O navegador do usuário estabelece conexão direta com os servidores de fontes para renderização adequada das páginas.
             </p>
           </section>
 

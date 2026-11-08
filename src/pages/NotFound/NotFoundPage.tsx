@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { SeoHead } from '../../components/seo/SeoHead';
-import { Compass, Home, MessageCircle, ArrowLeft } from 'lucide-react';
+import { Compass, Home, ArrowLeft } from 'lucide-react';
+import { WhatsAppIcon } from '../../components/ui/WhatsAppIcon';
 
 export const NotFoundPage: React.FC = () => {
   return (
@@ -44,7 +45,7 @@ export const NotFoundPage: React.FC = () => {
               to="/contato"
               className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-[#122456] text-white font-semibold text-sm hover:bg-[#1a3378] transition-colors"
             >
-              <MessageCircle className="w-4 h-4" />
+              <WhatsAppIcon className="w-4 h-4 fill-current" />
               <span>Fale Conosco</span>
             </Link>
           </div>

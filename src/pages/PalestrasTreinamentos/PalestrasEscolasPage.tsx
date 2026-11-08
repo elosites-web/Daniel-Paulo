@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import { SeoHead } from '../../components/seo/SeoHead';
 import { Breadcrumbs } from '../../components/breadcrumbs/Breadcrumbs';
 import { getWhatsAppUrl } from '../../config/siteConfig';
-import { GraduationCap, MessageCircle, ArrowRight, CheckCircle2 } from 'lucide-react';
+import { GraduationCap, ArrowRight, CheckCircle2 } from 'lucide-react';
+import { WhatsAppIcon } from '../../components/ui/WhatsAppIcon';
 
 export const PalestrasEscolasPage: React.FC = () => {
   return (
@@ -50,29 +51,36 @@ export const PalestrasEscolasPage: React.FC = () => {
               </p>
             </div>
 
-            <div id="publicos-abordagens" className="space-y-4 pt-2">
+            <div id="temas-escolas" className="space-y-4 pt-2">
               <h2 className="text-2xl font-bold text-white font-['Plus_Jakarta_Sans'] pt-2">
-                Públicos e Abordagens
+                Palestras e Treinamentos
               </h2>
               <div className="space-y-4 not-prose">
-                <div id="encontros-docentes" className="p-5 rounded-2xl bg-[#081331] border border-[#162c66] space-y-1">
-                  <h3 className="font-bold text-white text-base">Encontros com Docentes e Equipes Pedagógicas</h3>
+                <div id="tema-papeis" className="p-5 rounded-2xl bg-[#081331] border border-[#162c66] space-y-1">
+                  <h3 className="font-bold text-white text-base">Papéis e Personagens</h3>
                   <p className="text-xs sm:text-sm text-slate-300">
-                    Reflexão sobre a sobrecarga emocional do professor, mediação de conflitos em sala e preservação da saúde mental na docência.
+                    Compreensão dos papéis exercidos por educadores, famílias e estudantes nas relações interpessoais.
                   </p>
                 </div>
 
-                <div id="dialogos-responsaveis" className="p-5 rounded-2xl bg-[#081331] border border-[#162c66] space-y-1">
-                  <h3 className="font-bold text-white text-base">Diálogos com Pais e Responsáveis</h3>
+                <div id="tema-mascaras" className="p-5 rounded-2xl bg-[#081331] border border-[#162c66] space-y-1">
+                  <h3 className="font-bold text-white text-base">Máscaras Sociais</h3>
                   <p className="text-xs sm:text-sm text-slate-300">
-                    Construção de pontes entre família e escola, limites afetivos e compreensão das angústias juvenis contemporâneas.
+                    Acolhimento da vulnerabilidade e superação da pressão por desempenhos perfeitos.
                   </p>
                 </div>
 
-                <div id="palestras-jovens" className="p-5 rounded-2xl bg-[#081331] border border-[#162c66] space-y-1">
-                  <h3 className="font-bold text-white text-base">Palestras para Jovens e Estudantes</h3>
+                <div id="tema-procrastinacao" className="p-5 rounded-2xl bg-[#081331] border border-[#162c66] space-y-1">
+                  <h3 className="font-bold text-white text-base">Procrastinação</h3>
                   <p className="text-xs sm:text-sm text-slate-300">
-                    Temas sobre autenticidade, pressão por aceitação, escolhas de futuro e regulação emocional sem jargões.
+                    Reflexão sobre ansiedade e bloqueios que afetam o aprendizado e a realização pessoal.
+                  </p>
+                </div>
+
+                <div id="tema-autoconhecimento" className="p-5 rounded-2xl bg-[#081331] border border-[#162c66] space-y-1">
+                  <h3 className="font-bold text-white text-base">Autoconhecimento</h3>
+                  <p className="text-xs sm:text-sm text-slate-300">
+                    Diálogos sobre autenticidade, respeito mútuo e desenvolvimento emocional de comunidades escolares.
                   </p>
                 </div>
               </div>
@@ -93,7 +101,7 @@ export const PalestrasEscolasPage: React.FC = () => {
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl font-bold text-sm bg-[#4FD6F4] text-[#081331] hover:bg-[#36c5e5] transition-all shadow-md"
               >
-                <MessageCircle className="w-4 h-4 fill-current" />
+                <WhatsAppIcon className="w-4 h-4 fill-current" />
                 <span>Solicitar Proposta para Escola</span>
               </a>
             </div>

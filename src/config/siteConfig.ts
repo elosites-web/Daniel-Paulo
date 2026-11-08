@@ -30,6 +30,7 @@ export interface SiteConfig {
   showFaithContent: boolean;
   showUnverifiedFormations: boolean;
   showEmergencyNotice: boolean;
+  showSpeakerTopicsDraft: boolean;
 }
 
 export const siteConfig: SiteConfig = {
@@ -57,6 +58,7 @@ export const siteConfig: SiteConfig = {
   showFaithContent: false,
   showUnverifiedFormations: false,
   showEmergencyNotice: false,
+  showSpeakerTopicsDraft: false,
 };
 
 export function getWhatsAppUrl(customMessage?: string): string {

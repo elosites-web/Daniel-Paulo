@@ -1,7 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { motion, useScroll, useMotionValueEvent } from 'motion/react';
 import { useReducedMotion } from '../../hooks/useReducedMotion';
-import { ChevronDown, Check, Sparkles } from 'lucide-react';
 
 interface ScrollVideoProps {
   src: string;
@@ -23,14 +22,11 @@ interface ScrollVideoProps {
 export const ScrollVideo: React.FC<ScrollVideoProps> = ({
   src,
   poster,
-  altText = 'Vídeo institucional Daniel Paulo',
+  altText,
   className = '',
   videoClassName = '',
   priority = false,
   trackRef,
-  topOffset = 80,
-  showIndicator = false,
-  indicatorLabel = 'Vídeo',
   onProgress,
   keepPosterOnZeroProgress = false,
   aspectRatio = 'aspect-[9/16]',
@@ -38,9 +34,12 @@ export const ScrollVideo: React.FC<ScrollVideoProps> = ({
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const progressRef = useRef(0);
+  const rafIdRef = useRef<number | null>(null);
+
+  const [isNearViewport, setIsNearViewport] = useState(priority);
   const [isVideoReady, setIsVideoReady] = useState(false);
   const [hasError, setHasError] = useState(false);
-  const [progress, setProgress] = useState(0);
   const reducedMotion = useReducedMotion();
 
   // Check data saving preference
@@ -49,21 +48,41 @@ export const ScrollVideo: React.FC<ScrollVideoProps> = ({
     'connection' in navigator &&
     (navigator as unknown as { connection?: { saveData?: boolean } }).connection?.saveData === true;
 
-  // Video preloader and GPU texture warmup
+  // IntersectionObserver: preload="none" until within 800px of viewport
+  useEffect(() => {
+    if (priority || isNearViewport) return;
+
+    const el = containerRef.current;
+    if (!el || typeof IntersectionObserver === 'undefined') {
+      setIsNearViewport(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0]?.isIntersecting) {
+          setIsNearViewport(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: '800px' }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [priority, isNearViewport]);
+
+  // Video metadata listener
   useEffect(() => {
     const video = videoRef.current;
-    if (!video || reducedMotion || isDataSaving) return;
-
-    // Explicitly configure preloader
-    video.preload = priority ? 'auto' : 'auto';
+    if (!video || reducedMotion || isDataSaving || !isNearViewport) return;
 
     const handleLoadedMetadata = () => {
-      // Warm up first frame in GPU memory so scrub is instantaneous with zero delay
       if (video.currentTime === 0) {
         try {
           video.currentTime = 0.001;
         } catch {
-          // Ignore seek issues during early buffering
+          // Ignore early buffering seek exception
         }
       }
       setIsVideoReady(true);
@@ -75,19 +94,16 @@ export const ScrollVideo: React.FC<ScrollVideoProps> = ({
 
     video.addEventListener('loadedmetadata', handleLoadedMetadata);
     video.addEventListener('canplay', handleCanPlay);
-    video.addEventListener('canplaythrough', handleCanPlay);
 
-    // If video is already ready from browser cache
-    if (video.readyState >= 2) {
+    if (video.readyState >= 1) {
       setIsVideoReady(true);
     }
 
     return () => {
       video.removeEventListener('loadedmetadata', handleLoadedMetadata);
       video.removeEventListener('canplay', handleCanPlay);
-      video.removeEventListener('canplaythrough', handleCanPlay);
     };
-  }, [priority, reducedMotion, isDataSaving]);
+  }, [isNearViewport, reducedMotion, isDataSaving]);
 
   // Framer Motion useScroll hook bound to target trackRef
   const { scrollYProgress } = useScroll(
@@ -102,20 +118,13 @@ export const ScrollVideo: React.FC<ScrollVideoProps> = ({
         }
   );
 
-  // Subscribe to Framer Motion scroll updates and scrub video frame
-  useMotionValueEvent(scrollYProgress, 'change', (latest) => {
-    if (reducedMotion || isDataSaving) return;
-
-    const clamped = Math.max(0, Math.min(1, latest));
-    setProgress(clamped);
-    if (onProgress) {
-      onProgress(clamped);
-    }
-
+  // RAF-based frame scrub without setState re-renders
+  const updateVideoFrame = useCallback(() => {
     const video = videoRef.current;
+    const clamped = progressRef.current;
+
     if (video && video.duration && !isNaN(video.duration) && video.readyState >= 1) {
       const targetTime = clamped * video.duration;
-      // Seek frame if difference is meaningful
       if (Math.abs(video.currentTime - targetTime) > 0.02) {
         try {
           if (
@@ -131,23 +140,51 @@ export const ScrollVideo: React.FC<ScrollVideoProps> = ({
         }
       }
     }
+
+    if (onProgress) {
+      onProgress(clamped);
+    }
+
+    rafIdRef.current = null;
+  }, [onProgress]);
+
+  // Motion scroll listener: updates ref and schedules RAF
+  useMotionValueEvent(scrollYProgress, 'change', (latest) => {
+    if (reducedMotion || isDataSaving) return;
+
+    progressRef.current = Math.max(0, Math.min(1, latest));
+
+    if (rafIdRef.current === null) {
+      rafIdRef.current = requestAnimationFrame(updateVideoFrame);
+    }
   });
 
-  const shouldShowPoster =
-    !isVideoReady ||
-    reducedMotion ||
-    isDataSaving ||
-    hasError ||
-    (keepPosterOnZeroProgress && progress <= 0.015);
+  useEffect(() => {
+    return () => {
+      if (rafIdRef.current !== null) {
+        cancelAnimationFrame(rafIdRef.current);
+      }
+    };
+  }, []);
 
   const containerAspectClass = aspectRatio === 'none' ? '' : aspectRatio;
-  const isShiftUp = videoClassName.includes('-translate-y');
+  const isHorizontal =
+    aspectRatio.includes('16/9') ||
+    aspectRatio.includes('aspect-video') ||
+    src.includes('horizontal') ||
+    poster.includes('horizontal');
+
+  const posterWidth = isHorizontal ? '800' : '450';
+  const posterHeight = isHorizontal ? '450' : '800';
+
+  // Informative vs decorative accessibility
+  const isInformative = Boolean(altText && altText !== 'Vídeo institucional Daniel Paulo');
 
   return (
     <motion.div
       ref={containerRef}
       className={`relative overflow-hidden isolate z-0 ${containerAspectClass} bg-[#060e24] ${className}`}
-      aria-label={altText}
+      {...(isInformative ? { role: 'img', 'aria-label': altText } : { 'aria-hidden': 'true' })}
       {...(animateOnView && !reducedMotion
         ? {
             initial: { opacity: 0, y: 16 },
@@ -157,33 +194,25 @@ export const ScrollVideo: React.FC<ScrollVideoProps> = ({
           }
         : {})}
     >
-      {/* Optimized Poster Image with explicit aspect ratio hints to eliminate Layout Shift (CLS = 0) */}
+      {/* Optimized Poster Image with explicit aspect ratio hints */}
       <img
         src={poster}
-        alt={altText}
-        width="450"
-        height="800"
+        alt={isInformative ? altText : ''}
+        width={posterWidth}
+        height={posterHeight}
         loading={priority ? 'eager' : 'lazy'}
         fetchPriority={priority ? 'high' : 'auto'}
         decoding="async"
         onError={() => setHasError(true)}
         className={`w-full h-full object-cover select-none pointer-events-none transition-opacity duration-500 ${
-          shouldShowPoster
+          !isVideoReady || hasError || reducedMotion || isDataSaving
             ? 'opacity-100 z-10 relative'
             : 'opacity-0 z-0 absolute inset-0'
         } ${videoClassName}`}
-        style={{
-          transform: !isVideoReady
-            ? `${isShiftUp ? 'translateY(-1px) ' : ''}scale(${1 + progress * 0.03})`
-            : isShiftUp
-            ? 'translateY(-1px)'
-            : undefined,
-          transition: 'transform 0.15s ease-out, opacity 0.5s ease-in-out',
-        }}
       />
 
-      {/* Preloaded Video element */}
-      {!reducedMotion && !isDataSaving && (
+      {/* Video element */}
+      {!reducedMotion && !isDataSaving && isNearViewport && (
         <video
           ref={videoRef}
           src={src}
@@ -191,59 +220,13 @@ export const ScrollVideo: React.FC<ScrollVideoProps> = ({
           muted
           playsInline
           autoPlay={false}
-          preload={priority ? 'auto' : 'auto'}
+          preload={priority ? 'metadata' : 'none'}
           onError={() => setHasError(true)}
           className={`absolute inset-0 w-full h-full object-cover select-none pointer-events-none transition-opacity duration-500 ${
-            isVideoReady && !hasError && !shouldShowPoster ? 'opacity-100 z-10' : 'opacity-0 z-0'
+            isVideoReady && !hasError ? 'opacity-100 z-10' : 'opacity-0 z-0'
           } ${videoClassName}`}
           aria-hidden="true"
         />
-      )}
-
-      {/* Preloader shimmer indicator if still buffering */}
-      {!isVideoReady && !hasError && !reducedMotion && (
-        <div className="absolute top-3 left-3 z-20 pointer-events-none">
-          <div className="inline-flex items-center gap-1.5 px-2 py-1 rounded-full bg-[#081331]/80 backdrop-blur-md border border-[#4FD6F4]/30 text-[9px] font-medium text-[#4FD6F4]">
-            <Sparkles className="w-2.5 h-2.5 animate-spin" />
-            <span>Vídeo pré-carregado</span>
-          </div>
-        </div>
-      )}
-
-      {/* Interactive Framer Motion scrub indicator & progress bar */}
-      {showIndicator && !reducedMotion && (
-        <>
-          {/* Framer Motion GPU hardware-accelerated progress bar */}
-          <div className="absolute bottom-0 inset-x-0 h-1 bg-white/10 z-20 pointer-events-none">
-            <motion.div
-              className="h-full bg-gradient-to-r from-[#4FD6F4] to-[#36c5e5] shadow-[0_0_10px_#4FD6F4]"
-              style={{
-                scaleX: scrollYProgress,
-                transformOrigin: '0% 50%',
-              }}
-            />
-          </div>
-
-          {/* Interactive floating pill status */}
-          <div className="absolute top-3 right-3 z-20 pointer-events-none">
-            {progress < 0.04 ? (
-              <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#081331]/85 backdrop-blur-md border border-[#4FD6F4]/40 text-[10px] font-semibold text-[#4FD6F4] shadow-lg animate-pulse">
-                <span>Role para animar</span>
-                <ChevronDown className="w-3 h-3 animate-bounce" />
-              </div>
-            ) : progress >= 0.96 ? (
-              <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#081331]/90 backdrop-blur-md border border-emerald-500/50 text-[10px] font-semibold text-emerald-400 shadow-lg">
-                <Check className="w-3 h-3" />
-                <span>Vídeo concluído</span>
-              </div>
-            ) : (
-              <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#081331]/85 backdrop-blur-md border border-[#4FD6F4]/60 text-[10px] font-semibold text-white shadow-lg">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#4FD6F4] animate-ping" />
-                <span>{Math.round(progress * 100)}%</span>
-              </div>
-            )}
-          </div>
-        </>
       )}
     </motion.div>
   );

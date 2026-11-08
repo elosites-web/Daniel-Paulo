@@ -43,7 +43,7 @@ export const ReadingProgressBar: React.FC<ReadingProgressBarProps> = ({
 
   return (
     <aside
-      className={`fixed top-0 left-0 right-0 z-[70] w-full h-1 sm:h-1.5 bg-[#081331]/30 backdrop-blur-[2px] pointer-events-none ${className}`}
+      className={`fixed top-0 left-0 right-0 z-30 w-full h-1 sm:h-1.5 bg-[#081331]/30 backdrop-blur-[2px] pointer-events-none ${className}`}
       role="progressbar"
       aria-valuenow={currentPercent}
       aria-valuemin={0}

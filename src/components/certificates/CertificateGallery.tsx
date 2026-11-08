@@ -174,9 +174,11 @@ export const CertificateGallery: React.FC = () => {
                 <p className="text-xs text-[#8ea5c8] mt-1 font-medium">
                   Instituição: <span className="text-slate-300">{cert.institution}</span>
                 </p>
-                <p className="text-xs text-slate-400 mt-2.5 leading-relaxed">
-                  {cert.description}
-                </p>
+                {cert.description && (
+                  <p className="text-xs text-slate-400 mt-2.5 leading-relaxed">
+                    {cert.description}
+                  </p>
+                )}
               </div>
 
               <div className="mt-4 pt-3 border-t border-[#1e3878]/60 flex items-center justify-between text-xs text-emerald-400">

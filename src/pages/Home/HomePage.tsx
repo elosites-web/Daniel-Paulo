@@ -7,8 +7,8 @@ import { CertificateGallery } from '../../components/certificates/CertificateGal
 import { servicesData } from '../../data/services';
 import { siteConfig, getWhatsAppUrl } from '../../config/siteConfig';
 import { useMediaQuery } from '../../hooks/useMediaQuery';
+import { WhatsAppIcon } from '../../components/ui/WhatsAppIcon';
 import { 
-  MessageCircle, 
   ArrowRight, 
   ShieldCheck, 
   Compass, 
@@ -167,7 +167,7 @@ export const HomePage: React.FC = () => {
                       className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-3.5 sm:px-7 sm:py-4 rounded-xl font-bold text-sm sm:text-base bg-[#4FD6F4] text-[#081331] hover:bg-[#36c5e5] transition-all transform hover:-translate-y-0.5 shadow-xl shadow-[#4FD6F4]/20 focus:outline-none focus:ring-4 focus:ring-[#4FD6F4]/40"
                       aria-label="Agendar conversa pelo WhatsApp com Daniel Paulo"
                     >
-                      <MessageCircle className="w-5 h-5 fill-current" />
+                      <WhatsAppIcon className="w-5 h-5" />
                       <span>Agendar Conversa</span>
                     </a>
 
@@ -519,7 +519,7 @@ export const HomePage: React.FC = () => {
                         <div>
                           <h4 className="font-bold text-white text-base">Atendimento Online</h4>
                           <p className="text-xs sm:text-sm text-slate-300 mt-1">
-                            Realizado com total sigilo e comodidade, permitindo acompanhamento para pessoas em qualquer cidade do Brasil e no exterior.
+                            Realizado com sigilo e ética profissional e comodidade, em atendimento online.
                           </p>
                         </div>
                       </div>
@@ -532,7 +532,7 @@ export const HomePage: React.FC = () => {
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl font-bold text-sm bg-[#4FD6F4] text-[#081331] hover:bg-[#36c5e5] transition-all shadow-md"
                       >
-                        <MessageCircle className="w-4 h-4 fill-current" />
+                        <WhatsAppIcon className="w-4 h-4" />
                         <span>Consultar Disponibilidade</span>
                       </a>
                       
@@ -896,7 +896,7 @@ export const HomePage: React.FC = () => {
                           rel="noopener noreferrer"
                           className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-xl font-bold text-base bg-[#4FD6F4] text-[#081331] hover:bg-[#36c5e5] transition-all transform hover:-translate-y-0.5 shadow-xl shadow-[#4FD6F4]/20"
                         >
-                          <MessageCircle className="w-5 h-5 fill-current" />
+                          <WhatsAppIcon className="w-5 h-5" />
                           <span>Conversar no WhatsApp</span>
                         </a>
 

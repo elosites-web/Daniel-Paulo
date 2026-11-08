@@ -46,7 +46,7 @@ export const FormacaoCertificadosPage: React.FC = () => {
         <div className="max-w-4xl mx-auto p-4 rounded-xl bg-[#0e1e4a]/60 border border-[#1e3878] flex items-center gap-3 text-xs text-slate-300">
           <ShieldCheck className="w-5 h-5 text-[#4FD6F4] flex-shrink-0" />
           <p>
-            <strong>Garantia de integridade:</strong> Todos os certificados exibidos abaixo possuem registro documental verificado pelas instituições de ensino, com dados cadastrais e identificadores sensíveis protegidos em respeito à LGPD.
+            Certificados exibidos com dados pessoais protegidos.
           </p>
         </div>
 

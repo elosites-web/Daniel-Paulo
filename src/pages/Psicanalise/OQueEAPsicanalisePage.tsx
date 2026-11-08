@@ -4,7 +4,8 @@ import { SeoHead } from '../../components/seo/SeoHead';
 import { Breadcrumbs } from '../../components/breadcrumbs/Breadcrumbs';
 import { ReadingProgressBar } from '../../components/ui/ReadingProgressBar';
 import { getWhatsAppUrl } from '../../config/siteConfig';
-import { Compass, MessageCircle, ArrowRight, CheckCircle2, ShieldCheck } from 'lucide-react';
+import { Compass, ArrowRight, CheckCircle2, ShieldCheck } from 'lucide-react';
+import { WhatsAppIcon } from '../../components/ui/WhatsAppIcon';
 
 export const OQueEAPsicanalisePage: React.FC = () => {
   return (
@@ -106,7 +107,7 @@ export const OQueEAPsicanalisePage: React.FC = () => {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-sm bg-[#4FD6F4] text-[#081331] hover:bg-[#36c5e5] transition-all"
             >
-              <MessageCircle className="w-4 h-4 fill-current" />
+              <WhatsAppIcon className="w-4 h-4" />
               <span>Conversar pelo WhatsApp</span>
             </a>
           </div>

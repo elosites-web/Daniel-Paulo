@@ -4,7 +4,8 @@ import { SeoHead } from '../../components/seo/SeoHead';
 import { Breadcrumbs } from '../../components/breadcrumbs/Breadcrumbs';
 import { ReadingProgressBar } from '../../components/ui/ReadingProgressBar';
 import { getWhatsAppUrl } from '../../config/siteConfig';
-import { Sparkles, MessageCircle, ArrowRight, Compass, Eye, ShieldCheck, Smile, Clock } from 'lucide-react';
+import { Sparkles, ArrowRight, Compass, Eye, ShieldCheck, Smile, Clock } from 'lucide-react';
+import { WhatsAppIcon } from '../../components/ui/WhatsAppIcon';
 
 export const TerapiaAutoconhecimentoPage: React.FC = () => {
   return (
@@ -136,7 +137,7 @@ export const TerapiaAutoconhecimentoPage: React.FC = () => {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl font-bold text-sm bg-[#4FD6F4] text-[#081331] hover:bg-[#36c5e5] transition-all shadow-md"
             >
-              <MessageCircle className="w-4 h-4 fill-current" />
+              <WhatsAppIcon className="w-4 h-4" />
               <span>Iniciar Diálogo pelo WhatsApp</span>
             </a>
           </div>

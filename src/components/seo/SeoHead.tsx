@@ -16,6 +16,7 @@ interface SeoHeadProps {
   description: string;
   canonicalPath?: string;
   ogImage?: string;
+  noindex?: boolean;
   breadcrumbs?: BreadcrumbItem[];
   faqs?: FaqItem[];
   articleSchema?: {
@@ -31,6 +32,7 @@ export const SeoHead: React.FC<SeoHeadProps> = ({
   description,
   canonicalPath = '',
   ogImage = '/assets/social/og-image-1200x630.png',
+  noindex = false,
   breadcrumbs,
   faqs,
   articleSchema,
@@ -49,7 +51,7 @@ export const SeoHead: React.FC<SeoHeadProps> = ({
     }
     metaDesc.setAttribute('content', description);
 
-    // Update Open Graph tags
+    // Helper to update or create meta tags
     const updateMeta = (selector: string, attr: string, value: string) => {
       let el = document.querySelector(selector);
       if (!el) {
@@ -63,29 +65,58 @@ export const SeoHead: React.FC<SeoHeadProps> = ({
       el.setAttribute(attr, value);
     };
 
+    // Meta robots for noindex (e.g. draft pages)
+    if (noindex) {
+      updateMeta('meta[name="robots"]', 'content', 'noindex, nofollow');
+    } else {
+      const robotsMeta = document.querySelector('meta[name="robots"]');
+      if (robotsMeta) {
+        robotsMeta.setAttribute('content', 'index, follow');
+      }
+    }
+
+    // Absolute URLs for og:image and og:url when SITE_URL exists
+    const fullOgImage = siteConfig.SITE_URL
+      ? (ogImage.startsWith('http') ? ogImage : `${siteConfig.SITE_URL}${ogImage.startsWith('/') ? ogImage : `/${ogImage}`}`)
+      : ogImage;
+
     updateMeta('meta[property="og:title"]', 'content', fullTitle);
     updateMeta('meta[property="og:description"]', 'content', description);
-    updateMeta('meta[property="og:image"]', 'content', ogImage);
+    updateMeta('meta[property="og:image"]', 'content', fullOgImage);
     updateMeta('meta[name="twitter:title"]', 'content', fullTitle);
     updateMeta('meta[name="twitter:description"]', 'content', description);
-    updateMeta('meta[name="twitter:image"]', 'content', ogImage);
+    updateMeta('meta[name="twitter:image"]', 'content', fullOgImage);
 
-    // Canonical URL (strictly conditioned on SITE_URL as instructed)
+    // og:url & Canonical URL (strictly conditioned on SITE_URL as instructed)
     let canonicalLink = document.querySelector('link[rel="canonical"]') as HTMLLinkElement | null;
     if (siteConfig.SITE_URL) {
       const fullUrl = `${siteConfig.SITE_URL}${canonicalPath.startsWith('/') ? canonicalPath : `/${canonicalPath}`}`;
+      updateMeta('meta[property="og:url"]', 'content', fullUrl);
       if (!canonicalLink) {
         canonicalLink = document.createElement('link');
         canonicalLink.setAttribute('rel', 'canonical');
         document.head.appendChild(canonicalLink);
       }
       canonicalLink.setAttribute('href', fullUrl);
-    } else if (canonicalLink) {
-      canonicalLink.remove();
+    } else {
+      const ogUrlMeta = document.querySelector('meta[property="og:url"]');
+      if (ogUrlMeta) ogUrlMeta.remove();
+      if (canonicalLink) {
+        canonicalLink.remove();
+      }
     }
 
     // Build JSON-LD structured data (strictly verified facts only)
-    const jsonLdElements: HTMLScriptElement[] = [];
+    const addJsonLd = (data: object, id: string) => {
+      let script = document.getElementById(id) as HTMLScriptElement | null;
+      if (!script) {
+        script = document.createElement('script');
+        script.id = id;
+        script.type = 'application/ld+json';
+        document.head.appendChild(script);
+      }
+      script.text = JSON.stringify(data);
+    };
 
     // 1. Person entity (Daniel Paulo)
     const sameAsUrls = [
@@ -120,19 +151,6 @@ export const SeoHead: React.FC<SeoHeadProps> = ({
         addressCountry: siteConfig.country,
       },
     };
-
-    const addJsonLd = (data: object, id: string) => {
-      let script = document.getElementById(id) as HTMLScriptElement | null;
-      if (!script) {
-        script = document.createElement('script');
-        script.id = id;
-        script.type = 'application/ld+json';
-        document.head.appendChild(script);
-      }
-      script.text = JSON.stringify(data);
-      jsonLdElements.push(script);
-    };
-
     addJsonLd(personSchema, 'schema-person');
 
     // 2. ProfessionalService
@@ -206,14 +224,40 @@ export const SeoHead: React.FC<SeoHeadProps> = ({
       addJsonLd(faqSchema, 'schema-faq');
     }
 
+    // 5. BlogPosting Schema if articleSchema provided
+    if (articleSchema) {
+      const blogPostingSchema = {
+        '@context': 'https://schema.org',
+        '@type': 'BlogPosting',
+        headline: articleSchema.headline,
+        description: articleSchema.description,
+        datePublished: articleSchema.datePublished,
+        dateModified: articleSchema.dateModified || articleSchema.datePublished,
+        author: {
+          '@type': 'Person',
+          name: siteConfig.name,
+        },
+        publisher: {
+          '@type': 'Person',
+          name: siteConfig.name,
+        },
+        mainEntityOfPage: siteConfig.SITE_URL
+          ? `${siteConfig.SITE_URL}${canonicalPath.startsWith('/') ? canonicalPath : `/${canonicalPath}`}`
+          : undefined,
+      };
+      addJsonLd(blogPostingSchema, 'schema-blog-posting');
+    }
+
     return () => {
       // Clean up dynamic route scripts on unmount
       const breadcrumbScript = document.getElementById('schema-breadcrumbs');
       if (breadcrumbScript) breadcrumbScript.remove();
       const faqScript = document.getElementById('schema-faq');
       if (faqScript) faqScript.remove();
+      const articleScript = document.getElementById('schema-blog-posting');
+      if (articleScript) articleScript.remove();
     };
-  }, [title, description, canonicalPath, ogImage, breadcrumbs, faqs, articleSchema]);
+  }, [title, description, canonicalPath, ogImage, noindex, breadcrumbs, faqs, articleSchema]);
 
   return null;
 };
