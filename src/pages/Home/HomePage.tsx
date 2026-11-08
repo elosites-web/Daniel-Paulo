@@ -271,56 +271,60 @@ export const HomePage: React.FC = () => {
         ======================================================== */}
         <section
           id="autoconhecimento"
-          className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 lg:grid lg:grid-cols-12 lg:gap-10 relative"
+          ref={section3TrackRef}
+          className="relative h-[200svh] lg:h-[240vh] max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
           aria-label="Autoconhecimento e reflexão com Daniel Paulo"
         >
-          {/* Coluna de texto */}
-          <div className="lg:col-span-7 lg:sticky lg:top-24 lg:self-start lg:min-h-[calc(100svh-6rem)] lg:flex lg:flex-col lg:justify-center py-10 lg:py-0 space-y-5">
-            <div>
-              <span className="inline-block px-3 py-1 rounded-full bg-[#122456]/90 border border-[#4FD6F4]/40 text-xs font-semibold text-[#4FD6F4] uppercase tracking-wider backdrop-blur-sm">
-                Autoconhecimento & Reflexão
-              </span>
-            </div>
-            
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white font-['Plus_Jakarta_Sans'] leading-tight">
-              Aprender a olhar para dentro e acolher suas próprias profundezas
-            </h2>
+          {/* Pinned inner container */}
+          <div className="sticky top-20 h-[calc(100svh-5rem)] flex items-center justify-center">
+            <div className="relative aspect-[9/16] lg:aspect-video h-[min(calc(100svh-7rem),calc((100vw-2rem)*16/9))] lg:h-auto lg:w-full max-w-full rounded-3xl overflow-hidden shadow-2xl border border-[#1e3878] bg-[#07112d]">
+              <ScrollVideo
+                src={
+                  isDesktop
+                    ? '/assets/videos/mar-por-do-sol-daniel-horizontal-scroll.mp4'
+                    : '/assets/videos/mar-por-do-sol-daniel-vertical-scroll.mp4'
+                }
+                poster={
+                  isDesktop
+                    ? '/assets/videos/mar-por-do-sol-daniel-horizontal-poster.jpg'
+                    : '/assets/videos/mar-por-do-sol-daniel-vertical-poster.jpg'
+                }
+                altText="Daniel contemplando o mar ao entardecer"
+                className="w-full h-full"
+                aspectRatio="none"
+                trackRef={section3TrackRef}
+              />
+              
+              {/* Gradient scrim for perfect text readability */}
+              <div className="absolute inset-0 bg-gradient-to-t from-[#081331] via-[#081331]/80 to-transparent lg:bg-gradient-to-r lg:from-[#081331] lg:via-[#081331]/85 lg:to-transparent lg:w-3/4 z-10 pointer-events-none" />
 
-            <p className="text-sm sm:text-base text-slate-200 leading-relaxed font-light">
-              O processo de autoconhecimento não busca criar uma versão idealizada ou perfeita de si mesmo, mas desatar nós, reconhecer padrões automáticos e construir uma relação de clareza com a própria história.
-            </p>
+              {/* Content inside video component */}
+              <div className="absolute inset-0 z-20 flex items-center p-6 sm:p-10 lg:p-16">
+                <div className="max-w-xl space-y-3.5 sm:space-y-5">
+                  <div>
+                    <span className="inline-block px-3 py-1 rounded-full bg-[#122456]/90 border border-[#4FD6F4]/40 text-xs font-semibold text-[#4FD6F4] uppercase tracking-wider backdrop-blur-sm">
+                      Autoconhecimento & Reflexão
+                    </span>
+                  </div>
+                  
+                  <h2 className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-bold text-white font-['Plus_Jakarta_Sans'] leading-tight">
+                    Aprender a olhar para dentro e acolher suas próprias profundezas
+                  </h2>
 
-            <div className="pt-2">
-              <Link
-                to="/terapia-e-autoconhecimento"
-                className="inline-flex items-center gap-2 px-5 py-3 rounded-xl font-semibold text-sm bg-[#4FD6F4] text-[#081331] hover:bg-[#36c5e5] transition-all shadow-md"
-              >
-                <span>Explorar temas de autoconhecimento</span>
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-            </div>
-          </div>
+                  <p className="text-xs sm:text-sm lg:text-base text-slate-200 leading-relaxed font-light line-clamp-4 sm:line-clamp-none">
+                    O processo de autoconhecimento não busca criar uma versão idealizada ou perfeita de si mesmo, mas desatar nós, reconhecer padrões automáticos e construir uma relação de clareza com a própria história.
+                  </p>
 
-          {/* Coluna do vídeo: no celular quadro 9/16, em desktop aspect-video */}
-          <div ref={section3TrackRef} className="lg:col-span-5 relative h-[200svh] lg:h-[240vh]">
-            <div className="sticky top-20 h-[calc(100svh-5rem)] flex items-center justify-center">
-              <div className="relative aspect-[9/16] lg:aspect-video h-[min(calc(100svh-7rem),calc((100vw-2rem)*16/9))] lg:h-auto lg:w-full max-w-full rounded-3xl overflow-hidden shadow-2xl border border-[#1e3878] bg-[#07112d]">
-                <ScrollVideo
-                  src={
-                    isDesktop
-                      ? '/assets/videos/mar-por-do-sol-daniel-horizontal-scroll.mp4'
-                      : '/assets/videos/mar-por-do-sol-daniel-vertical-scroll.mp4'
-                  }
-                  poster={
-                    isDesktop
-                      ? '/assets/videos/mar-por-do-sol-daniel-horizontal-poster.jpg'
-                      : '/assets/videos/mar-por-do-sol-daniel-vertical-poster.jpg'
-                  }
-                  altText="Daniel contemplando o mar ao entardecer"
-                  className="w-full h-full"
-                  aspectRatio="none"
-                  trackRef={section3TrackRef}
-                />
+                  <div className="pt-1 sm:pt-2">
+                    <Link
+                      to="/terapia-e-autoconhecimento"
+                      className="inline-flex items-center gap-2 px-4 py-2.5 sm:px-5 sm:py-3 rounded-xl font-semibold text-xs sm:text-sm bg-[#4FD6F4] text-[#081331] hover:bg-[#36c5e5] transition-all shadow-md"
+                    >
+                      <span>Explorar temas de autoconhecimento</span>
+                      <ArrowRight className="w-4 h-4" />
+                    </Link>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -741,65 +745,69 @@ export const HomePage: React.FC = () => {
         ======================================================== */}
         <section
           id="contato"
-          className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 lg:grid lg:grid-cols-12 lg:gap-10 relative"
+          ref={section11TrackRef}
+          className="relative h-[200svh] lg:h-[240vh] max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
           aria-label="Primeiro passo para agendamento com Daniel Paulo"
         >
-          {/* Coluna de texto */}
-          <div className="lg:col-span-7 lg:sticky lg:top-24 lg:self-start lg:min-h-[calc(100svh-6rem)] lg:flex lg:flex-col lg:justify-center py-10 lg:py-0 space-y-6 text-center lg:text-left">
-            <div>
-              <span className="inline-block px-3.5 py-1.5 rounded-full bg-[#122456] border border-[#4FD6F4]/40 text-xs font-semibold text-[#4FD6F4] uppercase tracking-wider">
-                Dê o Primeiro Passo
-              </span>
-            </div>
+          {/* Pinned inner container */}
+          <div className="sticky top-20 h-[calc(100svh-5rem)] flex items-center justify-center">
+            <div className="relative aspect-[9/16] lg:aspect-video h-[min(calc(100svh-7rem),calc((100vw-2rem)*16/9))] lg:h-auto lg:w-full max-w-full rounded-3xl overflow-hidden shadow-2xl border border-[#1e3878] bg-[#060d21]">
+              <ScrollVideo
+                src={
+                  isDesktop
+                    ? '/assets/videos/praia-entardecer-horizontal-scroll.mp4'
+                    : '/assets/videos/praia-entardecer-vertical-scroll.mp4'
+                }
+                poster={
+                  isDesktop
+                    ? '/assets/videos/praia-entardecer-horizontal-poster.jpg'
+                    : '/assets/videos/praia-entardecer-vertical-poster.jpg'
+                }
+                altText="Praia serena ao entardecer"
+                className="w-full h-full"
+                aspectRatio="none"
+                trackRef={section11TrackRef}
+              />
+              
+              {/* Scrim */}
+              <div className="absolute inset-0 bg-[#081331]/75 backdrop-blur-[2px] z-10 pointer-events-none" />
 
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white font-['Plus_Jakarta_Sans'] leading-tight">
-              Um espaço seguro para você falar sobre o que importa
-            </h2>
+              {/* Foreground content inside video component */}
+              <div className="absolute inset-0 z-20 flex items-center justify-center p-6 sm:p-10 text-center">
+                <div className="max-w-2xl space-y-4 sm:space-y-6">
+                  <div>
+                    <span className="inline-block px-3.5 py-1.5 rounded-full bg-[#122456] border border-[#4FD6F4]/40 text-xs font-semibold text-[#4FD6F4] uppercase tracking-wider">
+                      Dê o Primeiro Passo
+                    </span>
+                  </div>
 
-            <p className="text-base sm:text-lg text-slate-200 font-light max-w-xl mx-auto lg:mx-0 leading-relaxed">
-              Sem julgamentos e sem fórmulas prontas. Entre em contato diretamente pelo WhatsApp para esclarecer suas dúvidas e iniciar um diálogo.
-            </p>
+                  <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white font-['Plus_Jakarta_Sans'] leading-tight">
+                    Um espaço seguro para você falar sobre o que importa
+                  </h2>
 
-            <div className="pt-2 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
-              <a
-                href={getWhatsAppUrl('Olá Daniel, gostaria de conversar sobre o atendimento psicanalítico.')}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-xl font-bold text-base bg-[#4FD6F4] text-[#081331] hover:bg-[#36c5e5] transition-all transform hover:-translate-y-0.5 shadow-xl shadow-[#4FD6F4]/20"
-              >
-                <WhatsAppIcon className="w-5 h-5" />
-                <span>Conversar no WhatsApp</span>
-              </a>
+                  <p className="text-xs sm:text-base md:text-lg text-slate-200 font-light max-w-xl mx-auto leading-relaxed line-clamp-3 sm:line-clamp-none">
+                    Sem julgamentos e sem fórmulas prontas. Entre em contato diretamente pelo WhatsApp para esclarecer suas dúvidas e iniciar um diálogo.
+                  </p>
 
-              <Link
-                to="/contato"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl font-semibold text-base bg-[#0e1e4a] text-white hover:bg-[#162c66] border border-[#1e3878] transition-colors"
-              >
-                <span>Formulário de Contato</span>
-              </Link>
-            </div>
-          </div>
+                  <div className="pt-1 sm:pt-2 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
+                    <a
+                      href={getWhatsAppUrl('Olá Daniel, gostaria de conversar sobre o atendimento psicanalítico.')}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-3 sm:px-8 sm:py-4 rounded-xl font-bold text-sm sm:text-base bg-[#4FD6F4] text-[#081331] hover:bg-[#36c5e5] transition-all transform hover:-translate-y-0.5 shadow-xl shadow-[#4FD6F4]/20"
+                    >
+                      <WhatsAppIcon className="w-5 h-5" />
+                      <span>Conversar no WhatsApp</span>
+                    </a>
 
-          {/* Coluna do vídeo: no celular quadro 9/16, no desktop aspect-video */}
-          <div ref={section11TrackRef} className="lg:col-span-5 relative h-[200svh] lg:h-[240vh]">
-            <div className="sticky top-20 h-[calc(100svh-5rem)] flex items-center justify-center">
-              <div className="relative aspect-[9/16] lg:aspect-video h-[min(calc(100svh-7rem),calc((100vw-2rem)*16/9))] lg:h-auto lg:w-full max-w-full rounded-3xl overflow-hidden shadow-2xl border border-[#1e3878] bg-[#060d21]">
-                <ScrollVideo
-                  src={
-                    isDesktop
-                      ? '/assets/videos/praia-entardecer-horizontal-scroll.mp4'
-                      : '/assets/videos/praia-entardecer-vertical-scroll.mp4'
-                  }
-                  poster={
-                    isDesktop
-                      ? '/assets/videos/praia-entardecer-horizontal-poster.jpg'
-                      : '/assets/videos/praia-entardecer-vertical-poster.jpg'
-                  }
-                  altText="Praia serena ao entardecer"
-                  className="w-full h-full"
-                  aspectRatio="none"
-                  trackRef={section11TrackRef}
-                />
+                    <Link
+                      to="/contato"
+                      className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3 sm:px-6 sm:py-4 rounded-xl font-semibold text-xs sm:text-base bg-[#0e1e4a] text-white hover:bg-[#162c66] border border-[#1e3878] transition-colors"
+                    >
+                      <span>Formulário de Contato</span>
+                    </Link>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
