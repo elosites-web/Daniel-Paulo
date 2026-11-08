@@ -175,14 +175,22 @@ export const HomePage: React.FC = () => {
             <div className="sticky top-20 h-[calc(100svh-5rem)] flex items-center justify-center">
               <div className="relative aspect-[9/16] h-[min(calc(100svh-7rem),calc((100vw-2rem)*16/9))] max-w-full rounded-3xl overflow-hidden shadow-2xl border border-[#1e3878]/80 bg-[#060e24] transition-shadow duration-500 hover:shadow-[0_0_35px_rgba(79,214,244,0.25)]">
                 <ScrollVideo
-                  src="/assets/videos/hero-daniel-terno-entrada-fundo-escuro-vertical-scroll.mp4"
-                  poster="/assets/videos/hero-daniel-terno-entrada-fundo-escuro-vertical-poster.jpg"
-                  altText="Daniel Paulo de terno azul com braços cruzados"
+                  src={
+                    isDesktop
+                      ? '/assets/videos/hero-escuro-desktop-scroll.mp4'
+                      : '/assets/videos/hero-escuro-mobile-scroll.mp4'
+                  }
+                  poster={
+                    isDesktop
+                      ? '/assets/videos/hero-escuro-desktop-poster.jpg'
+                      : '/assets/videos/hero-escuro-mobile-poster.jpg'
+                  }
+                  altText="Daniel Paulo de terno azul com braços cruzados em ambiente noturno com vista ao mar"
                   className="w-full h-full"
+                  videoClassName="object-cover object-center lg:object-[80%_center]"
                   priority={true}
                   trackRef={heroTrackRef}
                   topOffset={80}
-                  startAt={0.15}
                   endAt={0.8}
                 />
                 {/* Subtle edge overlay for visual blend */}
@@ -248,10 +256,19 @@ export const HomePage: React.FC = () => {
             <div className="sticky top-20 h-[calc(100svh-5rem)] flex items-center justify-center">
               <div className="relative aspect-[9/16] h-[min(calc(100svh-7rem),calc((100vw-2rem)*16/9))] max-w-full rounded-3xl overflow-hidden shadow-2xl border border-[#1e3878] bg-[#060e24] transition-shadow duration-500 hover:shadow-[0_0_35px_rgba(79,214,244,0.25)]">
                 <ScrollVideo
-                  src="/assets/videos/daniel-terno-biblioteca-vertical-scroll.mp4"
-                  poster="/assets/videos/daniel-terno-biblioteca-vertical-poster.jpg"
-                  altText="Ambientação visual de Daniel Paulo com livros ao fundo"
+                  src={
+                    isDesktop
+                      ? '/assets/videos/hero-claro-desktop-scroll.mp4'
+                      : '/assets/videos/hero-claro-mobile-scroll.mp4'
+                  }
+                  poster={
+                    isDesktop
+                      ? '/assets/videos/hero-claro-desktop-poster.jpg'
+                      : '/assets/videos/hero-claro-mobile-poster.jpg'
+                  }
+                  altText="Daniel Paulo em ambiente claro e acolhedor de atendimento com vista ao mar"
                   className="w-full h-full"
+                  videoClassName="object-cover object-center lg:object-[80%_center]"
                   trackRef={aboutTrackRef}
                   topOffset={80}
                   endAt={0.68}

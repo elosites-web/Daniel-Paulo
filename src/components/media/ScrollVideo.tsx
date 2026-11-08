@@ -190,7 +190,9 @@ export const ScrollVideo: React.FC<ScrollVideoProps> = ({
     aspectRatio.includes('16/9') ||
     aspectRatio.includes('aspect-video') ||
     src.includes('horizontal') ||
-    poster.includes('horizontal');
+    poster.includes('horizontal') ||
+    src.includes('desktop') ||
+    poster.includes('desktop');
 
   const posterWidth = isHorizontal ? '800' : '450';
   const posterHeight = isHorizontal ? '450' : '800';
