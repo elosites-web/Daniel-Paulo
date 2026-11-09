@@ -103,6 +103,7 @@ export const BlogPostPage: React.FC = () => {
         title={post.title}
         description={post.description}
         canonicalPath={`/blog/${post.slug}`}
+        noindex={true}
         breadcrumbs={[
           { name: 'Blog', url: '/blog' },
           { name: post.title, url: `/blog/${post.slug}` }

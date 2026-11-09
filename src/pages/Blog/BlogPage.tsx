@@ -17,6 +17,7 @@ export const BlogPage: React.FC = () => {
         title="Blog e Artigos | Daniel Paulo"
         description="Artigos e ensaios reflexivos sobre psicanálise, autoconhecimento, identidade e desenvolvimento pessoal por Daniel Paulo."
         canonicalPath="/blog"
+        noindex={true}
         breadcrumbs={[
           { name: 'Blog', url: '/blog' }
         ]}

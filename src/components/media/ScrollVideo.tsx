@@ -21,6 +21,7 @@ interface ScrollVideoProps {
   animateOnView?: boolean;
   startAt?: number;
   endAt?: number;
+  scrollOffset?: any;
 }
 
 export const ScrollVideo: React.FC<ScrollVideoProps> = ({
@@ -41,6 +42,7 @@ export const ScrollVideo: React.FC<ScrollVideoProps> = ({
   animateOnView = false,
   startAt = 0,
   endAt = 1,
+  scrollOffset,
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -52,6 +54,19 @@ export const ScrollVideo: React.FC<ScrollVideoProps> = ({
   const [hasError, setHasError] = useState(false);
   const [isPastZeroProgress, setIsPastZeroProgress] = useState(!keepPosterOnZeroProgress);
   const reducedMotion = useReducedMotion();
+
+  // Framer Motion useScroll hook bound to target trackRef or containerRef
+  const { scrollYProgress } = useScroll(
+    trackRef
+      ? {
+          target: trackRef,
+          offset: scrollOffset || ['start start', 'end end'],
+        }
+      : {
+          target: containerRef,
+          offset: scrollOffset || ['start end', 'end start'],
+        }
+  );
 
   // Check data saving preference
   const isDataSaving =
@@ -84,15 +99,20 @@ export const ScrollVideo: React.FC<ScrollVideoProps> = ({
   }, [priority, isNearViewport]);
 
   // Video loadeddata listener (readyState >= 2) to prevent flashing black frames
+  // Synchronizes immediately with current scrollYProgress even if page was reloaded partially scrolled
   useEffect(() => {
     const video = videoRef.current;
     if (!video || reducedMotion || isDataSaving || !isNearViewport) return;
 
     const handleLoadedData = () => {
       if (video.duration && !isNaN(video.duration)) {
-        const initialTime = Math.max(0.001, startAt * video.duration);
+        const currentProgress = scrollYProgress.get() ?? 0;
+        progressRef.current = Math.max(0, Math.min(1, currentProgress));
+        const startTime = startAt * video.duration;
+        const endTime = endAt * video.duration;
+        const targetTime = startTime + progressRef.current * (endTime - startTime);
         try {
-          video.currentTime = initialTime;
+          video.currentTime = targetTime;
         } catch {
           // Ignore seek initialization exception
         }
@@ -124,20 +144,7 @@ export const ScrollVideo: React.FC<ScrollVideoProps> = ({
       video.removeEventListener('seeked', handleSeeked);
       video.removeEventListener('error', handleError);
     };
-  }, [isNearViewport, reducedMotion, isDataSaving, startAt]);
-
-  // Framer Motion useScroll hook bound to target trackRef
-  const { scrollYProgress } = useScroll(
-    trackRef
-      ? {
-          target: trackRef,
-          offset: ['start start', 'end end'],
-        }
-      : {
-          target: containerRef,
-          offset: ['start end', 'end start'],
-        }
-  );
+  }, [isNearViewport, reducedMotion, isDataSaving, startAt, endAt, scrollYProgress]);
 
   // RAF-based frame scrub:
   // Interpolates between startAt and endAt smoothly based on scroll progress
@@ -258,7 +265,7 @@ export const ScrollVideo: React.FC<ScrollVideoProps> = ({
           muted
           playsInline
           autoPlay={false}
-          preload="auto"
+          preload={priority ? 'auto' : isNearViewport ? 'metadata' : 'none'}
           onError={() => {
             setHasError(true);
             setIsVideoReady(false);

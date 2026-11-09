@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { siteConfig } from '../../config/siteConfig';
-import { CheckCircle, AlertCircle } from 'lucide-react';
+import { CheckCircle, AlertCircle, ShieldCheck } from 'lucide-react';
 import { WhatsAppIcon } from '../ui/WhatsAppIcon';
 
 interface FormData {
@@ -199,6 +199,13 @@ export const ContactForm: React.FC = () => {
               <span>{errors.message}</span>
             </p>
           )}
+
+          <div className="text-xs text-slate-400 mt-2 flex items-start gap-2 leading-relaxed bg-[#081331]/60 p-2.5 rounded-lg border border-[#1e3878]/60">
+            <ShieldCheck className="w-4 h-4 text-[#4FD6F4] flex-shrink-0 mt-0.5" />
+            <span>
+              <strong className="text-slate-300">Aviso de Sigilo Ético:</strong> Não envie relatos clínicos íntimos ou dados sensíveis neste formulário. Questões de ordem pessoal e terapêutica são tratadas exclusivamente em sessão.
+            </span>
+          </div>
         </div>
 
         {/* Checkbox de Consentimento LGPD */}

@@ -106,11 +106,11 @@ export const HomePage: React.FC = () => {
         <section
           id="inicio"
           ref={hero1TrackRef}
-          className="relative min-h-[170svh] lg:min-h-[195vh] -mt-6 sm:-mt-8"
+          className="relative min-h-0 py-6 sm:py-10 lg:py-0 lg:min-h-[195vh] -mt-6 sm:-mt-8"
           aria-label="Apresentação institucional Daniel Paulo"
         >
-          {/* Pinned inner container */}
-          <div className="sticky top-18 lg:top-20 min-h-[calc(100svh-4.5rem)] lg:h-[calc(100vh-5rem)] flex items-center overflow-hidden py-6 lg:py-0">
+          {/* Pinned inner container on desktop, natural flow on mobile */}
+          <div className="relative lg:sticky lg:top-20 min-h-0 lg:h-[calc(100vh-5rem)] flex items-center overflow-visible lg:overflow-hidden py-4 sm:py-6 lg:py-0">
             {/* Subtle atmospheric glow behind */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
               <div className="absolute top-1/4 right-1/6 w-[550px] h-[550px] bg-[#4FD6F4]/10 rounded-full blur-[140px]" />
@@ -122,7 +122,7 @@ export const HomePage: React.FC = () => {
             </div>
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full h-full relative z-10 flex items-center">
-              <div className="flex flex-col lg:flex-row items-center justify-between gap-6 lg:gap-10 w-full relative">
+              <div className="flex flex-col lg:flex-row items-center justify-between gap-6 lg:gap-10 w-full lg:h-full relative">
                 
                 {/* Text Layer: left side */}
                 <motion.div
@@ -188,7 +188,7 @@ export const HomePage: React.FC = () => {
 
                 {/* Video Layer: right side (Hero 1 - Camisa Azul WebM transparente com scroll scrub) */}
                 <div className="w-full lg:w-[50%] xl:w-[52%] lg:absolute lg:right-0 lg:bottom-0 lg:top-0 flex items-end justify-center lg:justify-end pointer-events-none z-10">
-                  <div className="relative w-full max-w-[360px] sm:max-w-[420px] lg:max-w-none -mt-14 sm:-mt-20 lg:mt-0 h-[440px] sm:h-[500px] lg:h-[calc(100vh-5rem)] max-h-[860px] flex items-end justify-center lg:justify-end overflow-hidden">
+                  <div className="relative w-full max-w-[340px] sm:max-w-[400px] lg:max-w-none h-[380px] sm:h-[440px] lg:h-full max-h-[820px] flex items-end justify-center lg:justify-end overflow-hidden mx-auto mt-2 sm:mt-4 lg:mt-0">
                     <ScrollVideo
                       key={isDesktop ? 'desktop-hero-1' : 'mobile-hero-1'}
                       src={
@@ -205,14 +205,15 @@ export const HomePage: React.FC = () => {
                       orientation={isDesktop ? 'horizontal' : 'vertical'}
                       transparentBg={true}
                       trackRef={hero1TrackRef}
+                      scrollOffset={isDesktop ? ['start start', 'end end'] : ['start 85%', 'end 15%']}
                       aspectRatio="none"
-                      startAt={0.125}
-                      endAt={0.90}
+                      startAt={isDesktop ? 0.25 : 0.20}
+                      endAt={isDesktop ? 0.92 : 0.88}
                       className="w-full h-full"
                       videoClassName={
                         isDesktop
-                          ? 'w-full h-full object-cover object-[82%_bottom] drop-shadow-[0_25px_60px_rgba(0,0,0,0.7)]'
-                          : 'w-full h-full object-cover object-[center_36%] drop-shadow-[0_20px_45px_rgba(0,0,0,0.6)]'
+                          ? 'w-full h-full object-cover object-[85%_15%] drop-shadow-[0_25px_60px_rgba(0,0,0,0.7)]'
+                          : 'w-full h-full object-cover object-[center_90%] drop-shadow-[0_20px_45px_rgba(0,0,0,0.6)]'
                       }
                     />
                     {/* Bottom gentle gradient fade into page bg */}
@@ -234,11 +235,11 @@ export const HomePage: React.FC = () => {
         <section
           id="sobre-daniel"
           ref={hero2TrackRef}
-          className="relative min-h-[170svh] lg:min-h-[195vh] border-t border-[#122456]/60 bg-gradient-to-b from-[#081331] via-[#060e24] to-[#081331]"
+          className="relative min-h-0 py-6 sm:py-10 lg:py-0 lg:min-h-[195vh] border-t border-[#122456]/60 bg-gradient-to-b from-[#081331] via-[#060e24] to-[#081331]"
           aria-label="Clínica, Docência e Formação Continuada de Daniel Paulo"
         >
-          {/* Pinned inner container */}
-          <div className="sticky top-18 lg:top-20 min-h-[calc(100svh-4.5rem)] lg:h-[calc(100vh-5rem)] flex items-center overflow-hidden py-6 lg:py-0">
+          {/* Pinned inner container on desktop, natural flow on mobile */}
+          <div className="relative lg:sticky lg:top-20 min-h-0 lg:h-[calc(100vh-5rem)] flex items-center overflow-visible lg:overflow-hidden py-4 sm:py-6 lg:py-0">
             {/* Subtle glow behind */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
               <div className="absolute top-1/3 right-1/6 w-[500px] h-[500px] bg-[#4FD6F4]/5 rounded-full blur-[140px]" />
@@ -248,11 +249,11 @@ export const HomePage: React.FC = () => {
             </div>
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full h-full relative z-10 flex items-center">
-              <div className="flex flex-col lg:flex-row items-center justify-between gap-6 lg:gap-10 w-full relative">
+              <div className="flex flex-col lg:flex-row items-center justify-between gap-6 lg:gap-10 w-full lg:h-full relative">
                 
                 {/* Video Layer: left side (Hero 2 - Terno Escuro WebM transparente com scroll scrub) */}
                 <div className="w-full lg:w-[50%] xl:w-[52%] lg:absolute lg:left-0 lg:bottom-0 lg:top-0 order-2 lg:order-1 flex items-end justify-center lg:justify-start pointer-events-none z-10">
-                  <div className="relative w-full max-w-[360px] sm:max-w-[420px] lg:max-w-none -mt-14 sm:-mt-20 lg:mt-0 h-[440px] sm:h-[500px] lg:h-[calc(100vh-5rem)] max-h-[860px] flex items-end justify-center lg:justify-start overflow-hidden">
+                  <div className="relative w-full max-w-[340px] sm:max-w-[400px] lg:max-w-none h-[380px] sm:h-[440px] lg:h-full max-h-[820px] flex items-end justify-center lg:justify-start overflow-hidden mx-auto mt-2 sm:mt-4 lg:mt-0">
                     <ScrollVideo
                       key={isDesktop ? 'desktop-hero-2' : 'mobile-hero-2'}
                       src={
@@ -269,14 +270,15 @@ export const HomePage: React.FC = () => {
                       orientation={isDesktop ? 'horizontal' : 'vertical'}
                       transparentBg={true}
                       trackRef={hero2TrackRef}
+                      scrollOffset={isDesktop ? ['start start', 'end end'] : ['start 85%', 'end 15%']}
                       aspectRatio="none"
-                      startAt={isDesktop ? 0.125 : 0.17}
-                      endAt={isDesktop ? 0.90 : 0.88}
+                      startAt={isDesktop ? 0.25 : 0.20}
+                      endAt={isDesktop ? 0.90 : 0.86}
                       className="w-full h-full"
                       videoClassName={
                         isDesktop
-                          ? 'w-full h-full object-cover object-[18%_bottom] drop-shadow-[0_25px_60px_rgba(0,0,0,0.7)]'
-                          : 'w-full h-full object-cover object-[center_24%] drop-shadow-[0_20px_45px_rgba(0,0,0,0.6)]'
+                          ? 'w-full h-full object-cover object-[22%_15%] drop-shadow-[0_25px_60px_rgba(0,0,0,0.7)]'
+                          : 'w-full h-full object-cover object-[center_58%] drop-shadow-[0_20px_45px_rgba(0,0,0,0.6)]'
                       }
                     />
                     {/* Bottom gentle gradient fade into page bg */}
@@ -284,9 +286,9 @@ export const HomePage: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Text Layer: right side */}
-                <div className="w-full lg:w-[50%] xl:w-[48%] lg:ml-auto order-1 lg:order-2 space-y-5 sm:space-y-6 text-center lg:text-left pt-2 lg:pt-0 relative z-20 pointer-events-auto">
-                  <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0e1e4a] border border-[#1e3878] text-xs font-semibold text-[#4FD6F4]">
+                {/* Text Layer: right side with refined right typography alignment */}
+                <div className="media-dark-overlay w-full lg:w-[50%] xl:w-[48%] lg:ml-auto order-1 lg:order-2 space-y-5 sm:space-y-6 text-center lg:text-right pt-2 lg:pt-0 relative z-20 pointer-events-auto">
+                  <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0e1e4a] border border-[#1e3878] text-xs font-semibold text-[#4FD6F4] lg:ml-auto">
                     <Compass className="w-3.5 h-3.5 text-[#4FD6F4]" />
                     <span>Clínica, Docência e Formação Continuada</span>
                   </div>
@@ -304,8 +306,8 @@ export const HomePage: React.FC = () => {
                     </p>
                   </div>
 
-                  {/* Action CTAs */}
-                  <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
+                  {/* Action CTAs: aligned right on desktop */}
+                  <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-end gap-4 pt-2">
                     <Link
                       to="/psicanalista-em-jundiai"
                       className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl font-bold text-sm sm:text-base bg-[#4FD6F4] text-[#081331] hover:bg-[#36c5e5] transition-all shadow-md"
@@ -323,7 +325,7 @@ export const HomePage: React.FC = () => {
                   </div>
 
                   {/* Credentials / Badges */}
-                  <div className="pt-2 grid grid-cols-1 sm:grid-cols-3 gap-3 text-left">
+                  <div className="pt-2 grid grid-cols-1 sm:grid-cols-3 gap-3 text-left lg:text-right">
                     <div className="p-3.5 rounded-xl bg-[#081331]/90 border border-[#1e3878]/70">
                       <span className="text-xs text-[#4FD6F4] font-semibold block">Docência Superior</span>
                       <span className="text-xs text-slate-300">Prof. Faculdade Anhanguera</span>
