@@ -129,6 +129,30 @@ h1, h2, h3, h4, h5, h6 {
   animation-delay: 1.5s;
 }
 
+/* Subtle fade-in and slide-down entry animation for header branding/logo */
+@keyframes brand-slide-down {
+  0% {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-brand-slide-down {
+  animation: brand-slide-down 0.65s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-brand-slide-down {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
 /* Smooth entrance animations for Hero and Pinned Sections */
 @keyframes hero-fade-up {
   0% {
@@ -428,6 +452,16 @@ html.light h5:not(.media-dark-overlay *),
 html.light h6:not(.media-dark-overlay *),
 html.light .text-white:not(.media-dark-overlay *):not([aria-label*="Vídeo"] *):not(.bg-\[\#4FD6F4\] *):not(.bg-\[\#25D366\] *) {
   color: #081331 !important;
+}
+
+/* Hero h1 readability text-shadow in dark and light modes */
+section#inicio h1,
+html.dark section#inicio h1 {
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.55);
+}
+
+html.light section#inicio h1 {
+  text-shadow: 0 1px 3px rgba(8, 19, 49, 0.1) !important;
 }
 
 html.light .text-slate-100:not(.media-dark-overlay *) {

@@ -73,7 +73,7 @@ export const Navbar: React.FC = () => {
           {/* Logo brand - protected against text break/wrapping on tablets and desktop */}
           <Link
             to="/"
-            className="flex items-center gap-2 sm:gap-2.5 xl:gap-3 group focus:outline-none focus:ring-2 focus:ring-[#4FD6F4] rounded-lg p-1 shrink-0"
+            className="flex items-center gap-2 sm:gap-2.5 xl:gap-3 group focus:outline-none focus:ring-2 focus:ring-[#4FD6F4] rounded-lg p-1 shrink-0 animate-brand-slide-down"
             aria-label="Daniel Paulo - Página Inicial"
           >
             <img

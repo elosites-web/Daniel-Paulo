@@ -115,14 +115,14 @@ export const HomePage: React.FC = () => {
             animate="visible"
             className="lg:col-span-7 lg:sticky lg:top-24 lg:self-start lg:min-h-[calc(100svh-6rem)] lg:flex lg:flex-col lg:justify-center py-10 lg:py-0 space-y-4 sm:space-y-6 text-center lg:text-left relative z-10"
           >
-            <motion.div variants={heroItemVariants} className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0e1e4a] border border-[#1e3878] text-xs font-semibold text-[#4FD6F4]">
+            <motion.div variants={heroItemVariants} className="w-fit self-center lg:self-start inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0e1e4a] border border-[#1e3878] text-xs font-semibold text-[#4FD6F4]">
               <Sparkles className="w-3.5 h-3.5 text-[#4FD6F4]" />
               <span>Espaço de Escuta e Autoconhecimento</span>
             </motion.div>
 
-            <motion.h1 variants={heroItemVariants} className="text-2xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-bold tracking-tight text-white font-['Plus_Jakarta_Sans'] leading-[1.15]">
+            <motion.h1 variants={heroItemVariants} className="text-2xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-bold tracking-tight text-white font-['Plus_Jakarta_Sans'] leading-[1.15] [text-shadow:_0_2px_12px_rgba(0,0,0,0.45)]">
               Psicanalista e terapeuta em Jundiaí{' '}
-              <span className="text-[#4FD6F4] block sm:inline">
+              <span className="text-[#4FD6F4] block sm:inline-block transition-transform duration-300 ease-out hover:scale-105 origin-center sm:origin-left">
                 | Atendimento online e presencial
               </span>
             </motion.h1>
