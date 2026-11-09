@@ -20,7 +20,7 @@ const reelsData: ReelItem[] = [
     shortCaption: 'Você já sentiu que passa o dia interpretando um personagem para agradar e ser aceito?',
     fullCaption: 'Você já sentiu que passa o dia interpretando um personagem para agradar e ser aceito? No ambiente profissional, nos relacionamentos e nas redes sociais, sustentar uma fachada de perfeição consome uma quantidade enorme de energia psíquica. A psicanálise é um convite para suspender essa armadura e habitar sua verdade com tranquilidade.',
     duration: '0:58',
-    instagramUrl: siteConfig.social.instagram || 'https://www.instagram.com/danielpaulopsi/',
+    instagramUrl: 'https://www.instagram.com/reel/DcO3t7BPchQ/',
   },
   {
     id: 'reel-2',
@@ -29,7 +29,7 @@ const reelsData: ReelItem[] = [
     shortCaption: 'Não é preguiça nem falta de força de vontade. Adiar é uma tentativa de evitar afeto desconfortável.',
     fullCaption: 'Não é preguiça nem falta de força de vontade. Adiar tarefas essenciais é quase sempre uma tentativa inconsciente de regular o humor imediato para se esquivar do medo da crítica, do erro ou da imperfeição. Compreender a raiz emocional da paralisia é o primeiro passo para agir com leveza e clareza.',
     duration: '1:12',
-    instagramUrl: siteConfig.social.instagram || 'https://www.instagram.com/danielpaulopsi/',
+    instagramUrl: 'https://www.instagram.com/p/DcJNOxXxj9O/',
   },
   {
     id: 'reel-3',
@@ -38,7 +38,7 @@ const reelsData: ReelItem[] = [
     shortCaption: 'Falar abertamente sobre o que nos dói sem medo de julgamentos é o início de um novo caminho.',
     fullCaption: 'Falar abertamente sobre o que nos dói sem medo de julgamentos é o início de um novo caminho. Na sessão psicanalítica, o tempo é o seu. Não há cobranças morais, conselhos prontos ou receitas mágicas — há espaço para ressignificar repetições e reconectar-se com seu desejo genuíno.',
     duration: '1:04',
-    instagramUrl: siteConfig.social.instagram || 'https://www.instagram.com/danielpaulopsi/',
+    instagramUrl: 'https://www.instagram.com/reel/DcET9GxR0gz/',
   },
 ];
 

@@ -9,7 +9,7 @@ export const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-[#050d24] text-slate-300 border-t border-[#122456] pt-16 pb-28 sm:pb-32 transition-colors">
+    <footer className="bg-[#050d24] text-slate-300 border-t border-[#122456] pt-14 pb-24 sm:pb-28 lg:pb-32 transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Optional emergency notice (strictly toggled by siteConfig.showEmergencyNotice) */}
@@ -262,6 +262,35 @@ export const Footer: React.FC = () => {
               Mapa do Site
             </Link>
           </div>
+        </div>
+
+        {/* Créditos de desenvolvimento — ēloSites */}
+        <div className="mt-8 pt-6 border-t border-[#122456]/60 flex flex-col sm:flex-row items-center justify-center gap-2 text-xs text-slate-400 text-center">
+          <div className="inline-flex items-center justify-center gap-2">
+            <span className="font-medium tracking-wide uppercase text-slate-400">
+              CRIADO E DESENVOLVIDO POR
+            </span>
+            <a
+              href="https://elosites.ia.br"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center transition-transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#4FD6F4] rounded px-1 py-0.5"
+              aria-label="Acessar o site oficial da ēloSites (abre em nova aba)"
+              title="ēloSites — O melhor site pelo melhor preço"
+            >
+              <img
+                src="/assets/aistudio/logo-elosites.webp"
+                alt="ēloSites"
+                className="h-5 sm:h-5.5 w-auto object-contain brightness-125 hover:brightness-150 transition-all"
+                width="640"
+                height="158"
+                loading="lazy"
+              />
+            </a>
+          </div>
+          <span className="font-medium tracking-wide uppercase text-slate-400">
+            O MELHOR SITE PELO MELHOR PREÇO
+          </span>
         </div>
 
       </div>

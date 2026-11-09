@@ -122,7 +122,7 @@ export const HomePage: React.FC = () => {
             </div>
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full h-full relative z-10 flex items-center">
-              <div className="flex flex-col lg:flex-row items-center justify-between gap-6 lg:gap-10 w-full lg:h-full relative">
+              <div className="flex flex-col lg:flex-row items-center justify-between gap-6 lg:gap-10 w-full lg:h-full relative animate-fade-in">
                 
                 {/* Text Layer: left side */}
                 <motion.div
@@ -137,9 +137,10 @@ export const HomePage: React.FC = () => {
                   </motion.div>
 
                   <motion.h1 variants={heroItemVariants} className="text-3xl sm:text-5xl lg:text-5xl xl:text-6xl font-bold tracking-tight text-white font-['Plus_Jakarta_Sans'] leading-[1.12]">
-                    Psicanalista e terapeuta em Jundiaí{' '}
+                    Psicanalista <br />
+                    Terapia humanizada em Jundiaí{' '}
                     <span className="text-[#4FD6F4] block sm:inline-block">
-                      | Atendimento online e presencial
+                      Atendimento online e presencial
                     </span>
                   </motion.h1>
 
@@ -249,7 +250,7 @@ export const HomePage: React.FC = () => {
             </div>
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full h-full relative z-10 flex items-center">
-              <div className="flex flex-col lg:flex-row items-center justify-between gap-6 lg:gap-10 w-full lg:h-full relative">
+              <div className="flex flex-col lg:flex-row items-center justify-between gap-6 lg:gap-10 w-full lg:h-full relative animate-fade-in">
                 
                 {/* Video Layer: left side (Hero 2 - Terno Escuro WebM transparente com scroll scrub) */}
                 <div className="w-full lg:w-[50%] xl:w-[52%] lg:absolute lg:left-0 lg:bottom-0 lg:top-0 order-2 lg:order-1 flex items-end justify-center lg:justify-start pointer-events-none z-10">
@@ -325,7 +326,7 @@ export const HomePage: React.FC = () => {
                   </div>
 
                   {/* Credentials / Badges */}
-                  <div className="pt-2 grid grid-cols-1 sm:grid-cols-3 gap-3 text-left lg:text-right">
+                  <div className="pt-2 grid grid-cols-1 sm:grid-cols-3 gap-3 text-center">
                     <div className="p-3.5 rounded-xl bg-[#081331]/90 border border-[#1e3878]/70">
                       <span className="text-xs text-[#4FD6F4] font-semibold block">Docência Superior</span>
                       <span className="text-xs text-slate-300">Prof. Faculdade Anhanguera</span>
