@@ -105,7 +105,14 @@ export const ScrollVideo: React.FC<ScrollVideoProps> = ({
       setIsVideoReady(false);
     };
 
+    const handleSeeked = () => {
+      if (rafIdRef.current === null) {
+        rafIdRef.current = requestAnimationFrame(updateVideoFrame);
+      }
+    };
+
     video.addEventListener('loadeddata', handleLoadedData);
+    video.addEventListener('seeked', handleSeeked);
     video.addEventListener('error', handleError);
 
     if (video.readyState >= 2) {
@@ -114,6 +121,7 @@ export const ScrollVideo: React.FC<ScrollVideoProps> = ({
 
     return () => {
       video.removeEventListener('loadeddata', handleLoadedData);
+      video.removeEventListener('seeked', handleSeeked);
       video.removeEventListener('error', handleError);
     };
   }, [isNearViewport, reducedMotion, isDataSaving, startAt]);
@@ -132,24 +140,19 @@ export const ScrollVideo: React.FC<ScrollVideoProps> = ({
   );
 
   // RAF-based frame scrub:
-  // p = clamp(progressoDoScroll / endAt, 0, 1)
-  // tempo = (startAt + p * (1 - startAt)) * video.duration
+  // Interpolates between startAt and endAt smoothly based on scroll progress
   const updateVideoFrame = useCallback(() => {
     const video = videoRef.current;
     const clamped = progressRef.current;
 
     if (video && video.duration && !isNaN(video.duration) && video.readyState >= 1) {
-      const p = Math.max(0, Math.min(1, endAt > 0 ? clamped / endAt : 1));
-      const targetTime = (startAt + p * (1 - startAt)) * video.duration;
+      const startTime = startAt * video.duration;
+      const endTime = endAt * video.duration;
+      const targetTime = startTime + clamped * (endTime - startTime);
 
       if (Math.abs(video.currentTime - targetTime) > 0.02) {
         try {
-          if (
-            'fastSeek' in video &&
-            typeof (video as unknown as { fastSeek: (t: number) => void }).fastSeek === 'function'
-          ) {
-            (video as unknown as { fastSeek: (t: number) => void }).fastSeek(targetTime);
-          } else {
+          if (!video.seeking) {
             video.currentTime = targetTime;
           }
         } catch {
@@ -241,9 +244,9 @@ export const ScrollVideo: React.FC<ScrollVideoProps> = ({
         fetchPriority={priority ? 'high' : 'auto'}
         decoding="async"
         onError={() => setHasError(true)}
-        className={`w-full h-full object-cover select-none pointer-events-none transition-opacity duration-500 ${
+        className={`w-full h-full select-none pointer-events-none transition-opacity duration-500 ${
           showPoster ? 'opacity-100 z-10 relative' : 'opacity-0 z-0 absolute inset-0'
-        } ${videoClassName}`}
+        } ${videoClassName || 'object-cover'}`}
       />
 
       {/* Video element */}
@@ -260,9 +263,9 @@ export const ScrollVideo: React.FC<ScrollVideoProps> = ({
             setHasError(true);
             setIsVideoReady(false);
           }}
-          className={`absolute inset-0 w-full h-full object-cover select-none pointer-events-none transition-opacity duration-500 ${
+          className={`absolute inset-0 w-full h-full select-none pointer-events-none transition-opacity duration-500 ${
             !showPoster ? 'opacity-100 z-10' : 'opacity-0 z-0'
-          } ${videoClassName}`}
+          } ${videoClassName || 'object-cover'}`}
           aria-hidden="true"
         />
       )}

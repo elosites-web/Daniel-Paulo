@@ -121,8 +121,8 @@ export const HomePage: React.FC = () => {
               </div>
             </div>
 
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10">
-              <div className="flex flex-col lg:flex-row items-center justify-between gap-6 lg:gap-10 relative">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full h-full relative z-10 flex items-center">
+              <div className="flex flex-col lg:flex-row items-center justify-between gap-6 lg:gap-10 w-full relative">
                 
                 {/* Text Layer: left side */}
                 <motion.div
@@ -187,8 +187,8 @@ export const HomePage: React.FC = () => {
                 </motion.div>
 
                 {/* Video Layer: right side (Hero 1 - Camisa Azul WebM transparente com scroll scrub) */}
-                <div className="w-full lg:w-[52%] xl:w-[55%] lg:absolute lg:right-0 lg:bottom-0 lg:top-0 flex items-end justify-center lg:justify-end pointer-events-none z-10">
-                  <div className="relative w-full max-w-[360px] sm:max-w-[420px] lg:max-w-none -mt-8 sm:-mt-12 lg:mt-0 h-[440px] sm:h-[500px] lg:h-[88vh] xl:h-[92vh] max-h-[860px] overflow-hidden">
+                <div className="w-full lg:w-[50%] xl:w-[52%] lg:absolute lg:right-0 lg:bottom-0 lg:top-0 flex items-end justify-center lg:justify-end pointer-events-none z-10">
+                  <div className="relative w-full max-w-[360px] sm:max-w-[420px] lg:max-w-none -mt-14 sm:-mt-20 lg:mt-0 h-[440px] sm:h-[500px] lg:h-[calc(100vh-5rem)] max-h-[860px] flex items-end justify-center lg:justify-end overflow-hidden">
                     <ScrollVideo
                       key={isDesktop ? 'desktop-hero-1' : 'mobile-hero-1'}
                       src={
@@ -206,11 +206,13 @@ export const HomePage: React.FC = () => {
                       transparentBg={true}
                       trackRef={hero1TrackRef}
                       aspectRatio="none"
+                      startAt={0.125}
+                      endAt={0.90}
                       className="w-full h-full"
                       videoClassName={
                         isDesktop
-                          ? 'w-full h-full object-contain object-bottom lg:object-right-bottom drop-shadow-[0_25px_60px_rgba(0,0,0,0.7)]'
-                          : 'w-full h-full object-cover object-[center_32%] drop-shadow-[0_20px_45px_rgba(0,0,0,0.6)]'
+                          ? 'w-full h-full object-cover object-[82%_bottom] drop-shadow-[0_25px_60px_rgba(0,0,0,0.7)]'
+                          : 'w-full h-full object-cover object-[center_36%] drop-shadow-[0_20px_45px_rgba(0,0,0,0.6)]'
                       }
                     />
                     {/* Bottom gentle gradient fade into page bg */}
@@ -226,9 +228,8 @@ export const HomePage: React.FC = () => {
         {/* ========================================================
             SEÇÃO 2 — HERO 2: CLÍNICA & FORMAÇÃO (TERNO ESCURO)
             Scroll scrubbing restaurado com ScrollVideo.
-            Daniel posicionado à direita em tamanho ampliado no desktop.
-            Texto e credenciais mantidos integralmente à esquerda.
-            NÃO APLICAR scaleX(-1) (já gravado espelhado).
+            Composição invertida: Daniel ampliado à esquerda, texto à direita.
+            NÃO APLICAR scaleX(-1) (já gravado na orientação correta).
         ======================================================== */}
         <section
           id="sobre-daniel"
@@ -240,17 +241,51 @@ export const HomePage: React.FC = () => {
           <div className="sticky top-18 lg:top-20 min-h-[calc(100svh-4.5rem)] lg:h-[calc(100vh-5rem)] flex items-center overflow-hidden py-6 lg:py-0">
             {/* Subtle glow behind */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
-              <div className="absolute top-1/3 left-1/6 w-[500px] h-[500px] bg-[#4FD6F4]/5 rounded-full blur-[140px]" />
-              <div className="absolute left-0 top-1/2 -translate-y-1/2 text-[12vw] font-black text-white/[0.015] tracking-tighter select-none pointer-events-none uppercase font-['Plus_Jakarta_Sans'] hidden lg:block">
+              <div className="absolute top-1/3 right-1/6 w-[500px] h-[500px] bg-[#4FD6F4]/5 rounded-full blur-[140px]" />
+              <div className="absolute right-0 top-1/2 -translate-y-1/2 text-[12vw] font-black text-white/[0.015] tracking-tighter select-none pointer-events-none uppercase font-['Plus_Jakarta_Sans'] hidden lg:block">
                 Acolhimento
               </div>
             </div>
 
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10">
-              <div className="flex flex-col lg:flex-row items-center justify-between gap-6 lg:gap-10 relative">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full h-full relative z-10 flex items-center">
+              <div className="flex flex-col lg:flex-row items-center justify-between gap-6 lg:gap-10 w-full relative">
                 
-                {/* Text Layer: left side */}
-                <div className="w-full lg:w-[50%] xl:w-[48%] space-y-5 sm:space-y-6 text-center lg:text-left pt-2 lg:pt-0 relative z-20 pointer-events-auto">
+                {/* Video Layer: left side (Hero 2 - Terno Escuro WebM transparente com scroll scrub) */}
+                <div className="w-full lg:w-[50%] xl:w-[52%] lg:absolute lg:left-0 lg:bottom-0 lg:top-0 order-2 lg:order-1 flex items-end justify-center lg:justify-start pointer-events-none z-10">
+                  <div className="relative w-full max-w-[360px] sm:max-w-[420px] lg:max-w-none -mt-14 sm:-mt-20 lg:mt-0 h-[440px] sm:h-[500px] lg:h-[calc(100vh-5rem)] max-h-[860px] flex items-end justify-center lg:justify-start overflow-hidden">
+                    <ScrollVideo
+                      key={isDesktop ? 'desktop-hero-2' : 'mobile-hero-2'}
+                      src={
+                        isDesktop
+                          ? '/assets/videos/hero-02-terno-escuro-desktop.webm'
+                          : '/assets/videos/hero-02-terno-escuro-mobile.webm'
+                      }
+                      poster={
+                        isDesktop
+                          ? '/assets/videos/hero-02-terno-escuro-desktop-poster.webp'
+                          : '/assets/videos/hero-02-terno-escuro-mobile-poster.webp'
+                      }
+                      altText="Daniel Paulo de terno escuro"
+                      orientation={isDesktop ? 'horizontal' : 'vertical'}
+                      transparentBg={true}
+                      trackRef={hero2TrackRef}
+                      aspectRatio="none"
+                      startAt={isDesktop ? 0.125 : 0.17}
+                      endAt={isDesktop ? 0.90 : 0.88}
+                      className="w-full h-full"
+                      videoClassName={
+                        isDesktop
+                          ? 'w-full h-full object-cover object-[18%_bottom] drop-shadow-[0_25px_60px_rgba(0,0,0,0.7)]'
+                          : 'w-full h-full object-cover object-[center_24%] drop-shadow-[0_20px_45px_rgba(0,0,0,0.6)]'
+                      }
+                    />
+                    {/* Bottom gentle gradient fade into page bg */}
+                    <div className="absolute bottom-0 inset-x-0 h-16 bg-gradient-to-t from-[#060e24] to-transparent pointer-events-none z-20" />
+                  </div>
+                </div>
+
+                {/* Text Layer: right side */}
+                <div className="w-full lg:w-[50%] xl:w-[48%] lg:ml-auto order-1 lg:order-2 space-y-5 sm:space-y-6 text-center lg:text-left pt-2 lg:pt-0 relative z-20 pointer-events-auto">
                   <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0e1e4a] border border-[#1e3878] text-xs font-semibold text-[#4FD6F4]">
                     <Compass className="w-3.5 h-3.5 text-[#4FD6F4]" />
                     <span>Clínica, Docência e Formação Continuada</span>
@@ -301,38 +336,6 @@ export const HomePage: React.FC = () => {
                       <span className="text-xs text-[#4FD6F4] font-semibold block">Enquadre Clínico</span>
                       <span className="text-xs text-slate-300">Adultos e Adolescentes</span>
                     </div>
-                  </div>
-                </div>
-
-                {/* Video Layer: right side (Hero 2 - Terno Escuro WebM transparente com scroll scrub) */}
-                <div className="w-full lg:w-[52%] xl:w-[55%] lg:absolute lg:right-0 lg:bottom-0 lg:top-0 flex items-end justify-center lg:justify-end pointer-events-none z-10">
-                  <div className="relative w-full max-w-[360px] sm:max-w-[420px] lg:max-w-none -mt-8 sm:-mt-12 lg:mt-0 h-[440px] sm:h-[500px] lg:h-[88vh] xl:h-[92vh] max-h-[860px] overflow-hidden">
-                    <ScrollVideo
-                      key={isDesktop ? 'desktop-hero-2' : 'mobile-hero-2'}
-                      src={
-                        isDesktop
-                          ? '/assets/videos/hero-02-terno-escuro-desktop.webm'
-                          : '/assets/videos/hero-02-terno-escuro-mobile.webm'
-                      }
-                      poster={
-                        isDesktop
-                          ? '/assets/videos/hero-02-terno-escuro-desktop-poster.webp'
-                          : '/assets/videos/hero-02-terno-escuro-mobile-poster.webp'
-                      }
-                      altText="Daniel Paulo de terno escuro"
-                      orientation={isDesktop ? 'horizontal' : 'vertical'}
-                      transparentBg={true}
-                      trackRef={hero2TrackRef}
-                      aspectRatio="none"
-                      className="w-full h-full"
-                      videoClassName={
-                        isDesktop
-                          ? 'w-full h-full object-cover object-[18%_bottom] drop-shadow-[0_25px_60px_rgba(0,0,0,0.7)]'
-                          : 'w-full h-full object-cover object-[center_30%] drop-shadow-[0_20px_45px_rgba(0,0,0,0.6)]'
-                      }
-                    />
-                    {/* Bottom gentle gradient fade into page bg */}
-                    <div className="absolute bottom-0 inset-x-0 h-16 bg-gradient-to-t from-[#060e24] to-transparent pointer-events-none z-20" />
                   </div>
                 </div>
 
