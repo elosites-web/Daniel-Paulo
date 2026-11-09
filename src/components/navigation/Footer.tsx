@@ -1,14 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { siteConfig, getWhatsAppUrl } from '../../config/siteConfig';
-import { Instagram, Linkedin, MapPin, AlertCircle } from 'lucide-react';
+import { Instagram, Linkedin, Facebook, MapPin, AlertCircle } from 'lucide-react';
+import { TikTokIcon } from '../ui/TikTokIcon';
 import { WhatsAppIcon } from '../ui/WhatsAppIcon';
 
 export const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-[#050d24] text-slate-300 border-t border-[#122456] pt-16 pb-12 transition-colors">
+    <footer className="bg-[#050d24] text-slate-300 border-t border-[#122456] pt-16 pb-28 sm:pb-32 transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Optional emergency notice (strictly toggled by siteConfig.showEmergencyNotice) */}
@@ -25,13 +26,13 @@ export const Footer: React.FC = () => {
           
           {/* Column 1: Brand & Bio */}
           <div className="lg:col-span-2 space-y-4">
-            <Link to="/" className="flex items-center gap-3 group inline-flex" aria-label="Voltar para a página inicial">
+            <Link to="/" className="flex flex-col sm:flex-row items-start sm:items-center gap-4 group inline-flex" aria-label="Voltar para a página inicial">
               <img
-                src="/assets/logo/logo-daniel-paulo-brilho-256.png"
-                alt="Logotipo de Daniel Paulo"
-                className="w-12 h-12 object-contain"
-                width="48"
-                height="48"
+                src="/assets/logo/logo-daniel-paulo-brilho-512.png"
+                alt="Logotipo de Daniel Paulo — Psicanalista Clínico"
+                className="w-28 h-28 sm:w-32 sm:h-32 object-contain flex-shrink-0 drop-shadow-md"
+                width="128"
+                height="128"
                 loading="lazy"
               />
               <div>
@@ -40,6 +41,9 @@ export const Footer: React.FC = () => {
                 </span>
                 <p className="text-xs tracking-wider text-[#4FD6F4] uppercase font-semibold">
                   {siteConfig.profession}
+                </p>
+                <p className="text-xs text-slate-400 mt-1">
+                  Atendimento Clínico & Docência
                 </p>
               </div>
             </Link>
@@ -54,7 +58,7 @@ export const Footer: React.FC = () => {
             </div>
 
             {/* Social Links (only confirmed URLs) */}
-            <div className="flex items-center gap-3 pt-2">
+            <div className="flex flex-wrap items-center gap-2.5 pt-2">
               {siteConfig.social.instagram && (
                 <a
                   href={siteConfig.social.instagram}
@@ -75,6 +79,28 @@ export const Footer: React.FC = () => {
                   aria-label="Perfil do LinkedIn de Daniel Paulo"
                 >
                   <Linkedin className="w-5 h-5" />
+                </a>
+              )}
+              {siteConfig.social.facebook && (
+                <a
+                  href={siteConfig.social.facebook}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 rounded-lg bg-[#0e1e4a] hover:bg-[#4FD6F4] hover:text-[#081331] text-slate-300 flex items-center justify-center transition-all focus:outline-none focus:ring-2 focus:ring-[#4FD6F4]"
+                  aria-label="Perfil do Facebook de Daniel Paulo"
+                >
+                  <Facebook className="w-5 h-5" />
+                </a>
+              )}
+              {siteConfig.social.tiktok && (
+                <a
+                  href={siteConfig.social.tiktok}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 rounded-lg bg-[#0e1e4a] hover:bg-[#4FD6F4] hover:text-[#081331] text-slate-300 flex items-center justify-center transition-all focus:outline-none focus:ring-2 focus:ring-[#4FD6F4]"
+                  aria-label="Perfil do TikTok de Daniel Paulo"
+                >
+                  <TikTokIcon className="w-5 h-5" />
                 </a>
               )}
               {/* WhatsApp direct */}

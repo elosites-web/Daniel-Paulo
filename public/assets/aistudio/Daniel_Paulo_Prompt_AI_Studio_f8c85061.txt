@@ -1,0 +1,366 @@
+# PROMPT FINAL — CONTINUIDADE E REFINAMENTO DO SITE DE DANIEL PAULO
+
+Trabalhe diretamente no projeto já conectado ao repositório `https://github.com/elosites-web/Daniel-Paulo`, branch `main`, no Google AI Studio (Build). **Não recrie o projeto do zero, não substitua a arquitetura existente e não faça uma reformulação genérica.** Primeiro leia os arquivos reais do repositório e compare o estado atual com todas as instruções abaixo. Preserve o que estiver correto e implemente as alterações solicitadas de forma incremental, coerente e testável.
+
+## 1. MODO DE TRABALHO E AUDITORIA INICIAL
+
+1. Antes de editar, inspecione `package.json`, `README.md`, `src/App.tsx`, `src/config/siteConfig.ts`, `src/pages/Home/HomePage.tsx`, `src/components/navigation/Navbar.tsx`, `src/components/navigation/Footer.tsx`, `src/components/media/ScrollVideo.tsx`, `src/components/seo/SeoHead.tsx`, `src/data/blogPosts.ts`, `src/data/futureTopics.ts`, `src/data/services.ts`, `src/data/experience.ts`, `src/data/navigation.ts` e os arquivos de mídia realmente existentes em `public/assets/`.
+2. Não confie cegamente nos comentários e no README atual: há divergências entre a documentação e o código. Confirme cada arquivo, rota, imagem, vídeo e comportamento antes de referenciá-lo.
+3. Faça uma auditoria breve e corrija os problemas identificados neste prompt. Não apague páginas, rotas, componentes ou dados corretos só para simplificar o trabalho.
+4. Preserve React + TypeScript + Vite, React Router e a biblioteca `motion` já instalada (`motion/react`). Não adicione bibliotecas de animação ou dependências pesadas. Não use `any` sem justificativa, não deixe código morto e não introduza segredos, endpoints ou serviços externos fictícios.
+5. Não faça commit, push, deploy ou alteração de configurações de hospedagem. Entregue o projeto funcionando no ambiente Build e um relatório objetivo do que foi alterado.
+
+## 2. CONTEXTO CONFIRMADO E LIMITES DE CONTEÚDO
+
+- Nome profissional: **Daniel Paulo**. Nos certificados consta Daniel Paulo de Arruda Oliveira.
+- Posicionamento principal: **Psicanalista e Terapeuta**. Também atua como professor e palestrante.
+- Localização: Jundiaí, São Paulo. Atendimento online e presencial em Jundiaí. O endereço físico do presencial não foi informado.
+- WhatsApp confirmado: `+55 11 96019-3062`; link: `https://wa.me/5511960193062`.
+- Instagram: `https://www.instagram.com/danielpaulo_psicanalista/`
+- LinkedIn: `https://linkedin.com/in/daniel-paulo-psi`
+- Facebook: `https://www.facebook.com/daniel.paulo.psicanalista`
+- TikTok: `https://www.tiktok.com/@dani.psi.40`
+- E-mail, domínio definitivo, endereço, horários e valores não foram informados. Mantenha esses campos `null` e oculte blocos relacionados.
+- Tom de voz: acolhedor, humanizado, sem julgamentos; espaço seguro e caloroso; autoconhecimento, ressignificação e transformação. Evite promessas, exageros, jargões e linguagem de marketing agressiva.
+- Serviços que foram informados: atendimento psicanalítico presencial e online; orientação familiar; acompanhante terapêutico; palestras; análise comportamental; consultoria online (detalhes ainda a definir). Não invente método, duração, público, frequência, resultados, preço ou escopo detalhado. Não crie serviços novos. Não oferecer hipnose.
+- Em “análise comportamental”, não sugerir vínculo com a Psicologia nem com a ciência “Análise do Comportamento”. A formação citada é Analista Comportamental (IBC), ainda sem comprovante enviado.
+- Texto “Sobre” pode ser melhorado sem acrescentar fatos: atua como palestrante e professor, com treinamentos, palestras e conteúdos de desenvolvimento pessoal e profissional; na área de atendimento atua como psicanalista com abordagem humanizada e sem julgamentos; tem experiência em gestão de pessoas, liderança, gestão comercial e logística; formação multidisciplinar citada em Psicanálise, Coaching, PNL, Análise Comportamental, Neurociência, Psicologia Analítica, ESG, Filosofia, Antropologia e Cadeia Logística; desenvolve ações sociais por meio da música e iniciativas voluntárias, como corte de cabelo gratuito.
+- Experiência confirmada neste briefing: Professor na Faculdade Anhanguera desde abril de 2024; Coordenador Pedagógico na Unika Negócios e Desenvolvimento Humano de janeiro de 2021 a julho de 2025; histórico anterior em logística e gestão comercial. Não publicar nomes, datas ou cargos anteriores adicionais que não estejam sustentados por documentos/fontes existentes no projeto e validados.
+- Certificados comprovados que podem ser exibidos: Pós-graduação lato sensu em Antropologia (FACPRISMA, 2025); Pós-graduação lato sensu em Filosofia (FACPRISMA, 2024); Pós-graduação lato sensu em Neurociências (Faculdade Iguaçu, 2024); Extensão em Neuropsicopedagogia (Faculdade Iguaçu, 2024); Extensão em Neuropsicanálise (Faculdade Iguaçu, 2024); Imersão Estratégica, Estruturação Comercial (BUP, 2024); “Homem ao Máximo” (CMN, 2024).
+- Formações citadas sem comprovante: Psicanalista (CETEP), Coaching, PNL, Analista Comportamental, Constelação Sistêmica e Speaker (IBC), ESG (EXAME), Teologia (ETEQS), Libras (ENAP), Pós em Dependência Química, Psicologia Analítica e Cadeia Logística. Manter ocultas por padrão ou em configuração interna `showUnverifiedFormations: false`. “Hipnólogo” está em andamento: nunca listar como concluído e não criar serviço de hipnose.
+- Não usar como citação factual a frase atribuída a Freud “Volte seus olhos para dentro...” sem fonte confirmada.
+- Não usar “psicólogo”, não mencionar CRP, registro profissional, conselho ou habilitação não informados. Não afirmar “psicoterapia clínica regulamentada”. Evitar “cura”, diagnóstico, garantias e promessas de resultado.
+- Não usar depoimentos, avaliações, números de clientes, prêmios, estatísticas ou provas sociais inventadas.
+- O cliente é cristão, mas não criar conteúdo religioso próprio no site. Os três Reels solicitados abaixo são publicações reais fornecidas pelo contratante e podem aparecer como conteúdo social original, inclusive o Reel 2, sem transformar a fé em posicionamento institucional nem acrescentar comentários religiosos.
+
+## 3. CONFIGURAÇÃO CENTRALIZADA
+
+Atualize `src/config/siteConfig.ts` para ser a única fonte dos dados institucionais:
+
+- `name: "Daniel Paulo"`
+- `fullName: "Daniel Paulo de Arruda Oliveira"` (usar apenas onde necessário, sem expor desnecessariamente)
+- `profession: "Psicanalista e Terapeuta"`
+- `city: "Jundiaí"`, `state: "SP"`, `country: "Brasil"`
+- `whatsapp: "5511960193062"`
+- `email: null`, `address: null`, `businessHours: null`, `prices: null`, `SITE_URL: null`
+- Instagram, LinkedIn, Facebook e TikTok com as URLs exatas da seção 2.
+- `showFaithContent: false`
+- `showUnverifiedFormations: false`
+- `showEmergencyNotice: false` até validação direta do Daniel.
+- Criar `showEditorialReviewNotice: true` para o protótipo, caso necessário para sinalizar que os três artigos são propostas editoriais ainda aguardando aprovação do Daniel.
+
+Garanta que qualquer campo nulo oculte o bloco correspondente. Nunca renderize texto “a informar”, endereço fictício, e-mail de exemplo, horários, preços ou placeholders para visitantes.
+
+## 4. DOIS HERÓIS CINEMATOGRÁFICOS — PRIORIDADE MÁXIMA
+
+O protótipo atual usa vídeos antigos e cards verticais de vídeo. Substitua a apresentação atual por **duas cenas/hero sequenciais completas**, cada uma com seu próprio vídeo de 8 segundos, texto e CTAs. Não use o vídeo antigo de terno escuro como primeira cena: a ordem correta é camisa azul-clara primeiro e terno escuro depois.
+
+### 4.1. Arquivos de mídia novos
+
+O pacote de mídia fornecido junto com este prompt contém os arquivos abaixo. Copie-os para `public/assets/videos/` mantendo os nomes:
+
+**Hero 1 — camisa azul-clara**
+- `hero-01-camisa-azul-desktop.webm`
+- `hero-01-camisa-azul-desktop-poster.webp`
+- `hero-01-camisa-azul-mobile.webm`
+- `hero-01-camisa-azul-mobile-poster.webp`
+
+**Hero 2 — terno escuro**
+- `hero-02-terno-escuro-desktop.webm`
+- `hero-02-terno-escuro-desktop-poster.webp`
+- `hero-02-terno-escuro-mobile.webm`
+- `hero-02-terno-escuro-mobile-poster.webp`
+
+Os vídeos foram preparados com fundo verde removido e transparência VP9/alpha, sem áudio. O metadata `ALPHA_MODE=1` está presente. Verifique no preview real se a transparência é exibida corretamente. **Nunca exibir o fundo verde.** Se o navegador não suportar WebM com alpha, usar o poster transparente ou um recorte PNG/WebP transparente já existente no projeto como fallback. Não aplicar `object-fit: cover` de modo que corte cabeça, mãos ou corpo; preferir `object-fit: contain` e posicionamento calibrado.
+
+Os vídeos têm cerca de 8 segundos, 24 fps e 720p:
+- 0–1 s: quadro vazio (transparente após chroma key).
+- 1–4 s: Daniel entra caminhando.
+- 4–5,2 s: para, olha para a lente e sorri.
+- 5,2–6,7 s: cruza os braços lentamente.
+- 6,7–8 s: permanece parado, com movimento sutil.
+
+### 4.2. Composição e direção de arte
+
+- **Hero 1:** Daniel com blazer azul-marinho e camisa azul-clara. Desktop: entra pela direita e termina no terço direito, deixando espaço de leitura à esquerda. Mobile: entra pela direita e termina centralizado, sem cortar cabeça ou ombros.
+- **Hero 2:** Daniel de terno escuro. Desktop: entra pela esquerda e termina no terço esquerdo, deixando espaço de leitura à direita. Mobile: entra pela esquerda e termina centralizado. A imagem de referência do Hero 2 foi espelhada de propósito para ele olhar para dentro da composição. Preserve a orientação já gravada no vídeo; **não aplique outro `scaleX(-1)` e não espelhe novamente**.
+- Não inverter a ordem dos heróis.
+- Desktop deve usar o arquivo 16:9; mobile deve usar 9:16 com `matchMedia`/hook responsivo. Não carregar as duas versões simultaneamente.
+- Os vídeos devem aparecer como figuras recortadas e transparentes integradas ao fundo azul-marinho, e não dentro de um card vertical estreito. A composição desktop deve aproveitar a largura da tela. No mobile, reserve área superior para título e texto e área inferior/central para Daniel, sem sobrepor o rosto.
+- Identidade e roupa devem permanecer fiéis aos vídeos fornecidos. Não gerar, redesenhar, reconstituir ou alterar o rosto de Daniel.
+- Estética premium, editorial, cinematográfica e acolhedora; azul-marinho `#081331`, ciano `#4FD6F4`, branco e cinzas azulados. Neon apenas em detalhes. Evitar aparência de template genérico, excesso de glow, partículas ou padrões geométricos.
+
+### 4.3. Texto e camadas de movimento
+
+Não inserir texto dentro do vídeo nem usar IA para gerar letras no vídeo. Faça toda a tipografia e os efeitos no código com a biblioteca `motion` já instalada (`motion/react`):
+
+- Criar camadas de texto atrás da figura (z-index inferior ao vídeo transparente) e elementos de texto/CTA na frente (z-index superior), mantendo o rosto, os óculos e as mãos livres.
+- Usar animações de opacidade, deslocamento, máscara/clip-path e escala muito sutis, sincronizadas com a progressão da seção. As camadas podem entrar por trás do Daniel e depois avançar para a frente, sem prejudicar a leitura.
+- O texto deve permanecer HTML real e acessível, selecionável e indexável, nunca ser rasterizado ou gravado no vídeo.
+- Hero 1: mensagem sugerida: “Um espaço para olhar para dentro.” Apoio: “Psicanálise e terapia com acolhimento, escuta e respeito à sua história.” CTA primário “Agendar conversa” para WhatsApp; secundário “Conhecer a psicanálise” para `/psicanalise`.
+- Hero 2: mensagem sugerida: “Sua história merece ser escutada.” Apoio: “Atendimento online e presencial em Jundiaí.” CTA primário “Conhecer o atendimento” para `/psicanalista-em-jundiai`; secundário “Sobre Daniel” para `/sobre`.
+- Não usar afirmações de cura, eficácia garantida ou resultados.
+
+### 4.4. Scroll, reprodução e acessibilidade
+
+- Use `motion/react` (`useScroll`, `useTransform`, `useSpring` ou variantes adequadas) para revelar texto e camadas conforme a rolagem. O vídeo deve tocar integralmente uma vez quando a cena entrar em viewport (`muted`, `playsInline`, sem áudio, sem loop), e o último frame/poster deve permanecer quando terminar. Não dependa de seek frame a frame em vídeos que não foram codificados como all-intra.
+- Pode usar uma seção mais alta com stage `position: sticky` para dar tempo aos efeitos de texto, mas **não bloqueie, capture nem impeça a rolagem natural**. Não use `preventDefault` no wheel/touch, não trave o body durante a cena e não obrigue o visitante a rolar uma quantidade artificial de pixels. A próxima seção deve chegar naturalmente depois da cena.
+- Se preferir scrubbing, primeiro verifique se a busca temporal nos arquivos funciona sem saltos; se não funcionar, mantenha autoplay e animações de texto ligadas ao scroll. Não reencode nem aumente drasticamente o peso sem necessidade.
+- Reproduzir apenas quando a seção estiver visível com `IntersectionObserver`; pausar quando sair da viewport. Carregar hero prioritariamente, mas usar poster imediato e não baixar as versões desktop e mobile ao mesmo tempo.
+- Em `prefers-reduced-motion: reduce`, `Save-Data` ou conexão lenta, não executar animações de entrada nem forçar vídeo: exibir o poster transparente e texto estático. A informação essencial deve estar sempre disponível sem vídeo.
+- Não usar efeitos exagerados de parallax. Testar 360, 375, 390, 430 px, tablet e desktop.
+
+## 5. SEÇÃO “MODALIDADES FLEXÍVEIS” E VÍDEO PENDENTE
+
+O site já possui uma seção sobre atendimento online e presencial e uma versão desktop de vídeo. O pacote inclui também `modalidades-flexiveis-mobile.mp4`, que mostra o próprio Daniel Paulo. O contratante confirmou expressamente que é Daniel, embora apareça com roupas e corte de cabelo diferentes dos vídeos dos heróis.
+
+**O vídeo mobile está aprovado para uso como imagem de Daniel na seção de modalidades.** Copie-o para `public/assets/videos/` e utilize-o na apresentação mobile dessa seção, respeitando sua aparência original. Não tente igualar artificialmente roupa, cabelo, idade aparente ou características visuais aos outros vídeos. A diferença de visual representa outro momento/apresentação do próprio Daniel e não deve ser tratada como erro de identidade. Preserve o vídeo original; não aplique chroma key, espelhamento ou filtros que alterem sua aparência. Verifique separadamente a identidade do vídeo desktop já existente antes de apresentar a pessoa nele como Daniel.
+
+Mantenha o conteúdo textual prudente:
+- Atendimento presencial: realizado em Jundiaí-SP; local e horários são alinhados previamente via WhatsApp. Não inventar endereço, sala ou consultório.
+- Atendimento online: apresentar como modalidade disponível, sem prometer sigilo absoluto ou características técnicas não confirmadas.
+- CTA: “Consultar disponibilidade”, link `https://wa.me/5511960193062?text=Ol%C3%A1%20Daniel%2C%20gostaria%20de%20saber%20sobre%20as%20op%C3%A7%C3%B5es%20de%20atendimento%20online%20e%20presencial%20em%20Jundia%C3%AD.`
+- Link secundário “Saiba mais sobre o atendimento em Jundiaí” para `/psicanalista-em-jundiai` (não usar URL temporária do Google AI Studio como link permanente).
+
+## 6. MENU MOBILE E CABEÇALHO — CORREÇÃO OBRIGATÓRIA
+
+O menu hambúrguer atual (`src/components/navigation/Navbar.tsx`) apresenta problema: quando a página está rolada para baixo, ao abrir o menu ele aparece no topo/fora da posição esperada e não fica acessível junto ao cabeçalho.
+
+Corrija estruturalmente:
+1. O menu deve abrir **imediatamente abaixo do cabeçalho visível**, independentemente da posição de scroll, em qualquer rota e em telas estreitas/tablets.
+2. Use o elemento `<header>` como referência (`getBoundingClientRect`) e posicione o painel mobile com `position: fixed`, `top` calculado a partir da borda inferior real do cabeçalho e largura total da viewport. Se necessário, renderize o painel/backdrop via `createPortal` em `document.body` para escapar de stacking contexts e ancestrais com transform.
+3. Atualize a posição em resize e quando necessário; não use `top-18` fixo nem valores arbitrários que assumam uma altura imutável.
+4. O painel deve ter altura máxima baseada na viewport (`100dvh`/`100svh` menos o cabeçalho), rolagem interna, `overscroll-behavior: contain` e fundo opaco suficiente.
+5. Backdrop deve começar abaixo do cabeçalho, fechar ao tocar fora e nunca cobrir o próprio botão de fechar. Não deixar backdrop atrás de um painel inacessível.
+6. Manter bloqueio de rolagem do documento enquanto o menu está aberto e restaurar os valores originais ao fechar/desmontar.
+7. Manter Escape para fechar, fechar ao trocar de rota, `aria-expanded`, `aria-controls`, foco visível e ordem de foco lógica. Devolver foco ao botão hambúrguer ao fechar quando apropriado.
+8. Testar abrindo o menu no topo, no meio e no final de uma página longa; testar também após rolar em uma subpágina. O painel deve sempre surgir junto ao header visível.
+
+## 7. LOGOTIPO DO CABEÇALHO E RODAPÉ
+
+O logotipo circular completo tem texto pequeno e fica ilegível no cabeçalho.
+
+- No cabeçalho, substituir a imagem atual por uma versão já existente do símbolo sem o texto minúsculo, preferencialmente `public/assets/favicon/favicon-192.png` (ou a versão de favicon de melhor qualidade que exista). Use o ícone em tamanho visual aproximado de 40–48 px, acompanhado do texto HTML “Daniel Paulo” e “Psicanalista e Terapeuta” ao lado. Não recriar o símbolo.
+- No rodapé, manter o logotipo circular completo original com texto, mas aumentar significativamente o tamanho (aprox. 112–144 px, ajustado à composição) para permitir leitura. Usar arquivo `logo-daniel-paulo-brilho-512.png` em fundo escuro, se esse arquivo existir e tiver legibilidade melhor; caso contrário, usar a versão original mais adequada. Não recolorir, redesenhar ou alterar o arquivo.
+- Verificar alinhamento, proporção, nitidez e contraste no desktop e mobile. Não esticar a imagem.
+
+## 8. REDES SOCIAIS
+
+Atualize `siteConfig.ts` e todos os locais de links sociais, especialmente rodapé e menu mobile:
+- Instagram: `https://www.instagram.com/danielpaulo_psicanalista/`
+- LinkedIn: `https://linkedin.com/in/daniel-paulo-psi`
+- Facebook: `https://www.facebook.com/daniel.paulo.psicanalista`
+- TikTok: `https://www.tiktok.com/@dani.psi.40`
+- WhatsApp: `https://wa.me/5511960193062`
+
+Adicionar ícones Lucide adequados para Instagram, LinkedIn, Facebook, TikTok e WhatsApp, com nomes acessíveis/`aria-label`, links externos com `target="_blank"` e `rel="noopener noreferrer"`. Não criar URL para perfil não confirmado. Não exibir ícone sem destino.
+
+## 9. SEÇÃO COM OS TRÊS REELS DO INSTAGRAM
+
+Criar uma seção estratégica na Home, preferencialmente depois de “Terapia e autoconhecimento”/reflexões e antes dos artigos do blog, com título como **“Reflexões em vídeo”** e uma introdução curta. Usar as miniaturas otimizadas do pacote; copiar para `public/assets/reels/`:
+- `reel-01-thumbnail.webp`
+- `reel-02-thumbnail.webp`
+- `reel-03-thumbnail.webp`
+
+Criar três cards responsivos com foto, título e legenda. Cada card deve abrir o Reel original no Instagram em nova aba; não criar player falso, não baixar o vídeo do Instagram, não incorporar iframe pesado e não fingir reprodução dentro do site.
+
+### Reel 1
+URL: `https://www.instagram.com/reel/DcET9GxR0gz/`
+Título: “Papéis ou personagens?”
+Legenda original fornecida: “Na vida, todos nós ocupamos papéis: somos pais, filhos, professores, profissionais, líderes, amigos… Cada papel traz responsabilidades e expectativas sociais. Mas existe uma diferença entre desempenhar um papel e criar um personagem para conseguir viver naquele ambiente. O papel faz parte da vida. O personagem, muitas vezes, nasce da necessidade de ser aceito, reconhecido, admirado ou protegido. E talvez o problema não esteja em usar máscaras sociais, mas em esquecer que estamos usando uma. Quantos personagens você criou ao longo da vida para caber em lugares onde talvez nunca tenha precisado deixar de ser quem é? Autoconhecimento também é perceber quando estamos vivendo um papel… e quando estamos interpretando um personagem.”
+
+### Reel 2
+URL: `https://www.instagram.com/reel/DcJNOxXxj9O/`
+Título: “Eu sou freudiano. Mas não sou ateu.”
+Legenda original fornecida: “Eu sou freudiano. Mas não sou ateu.
+
+Sim, eu estudo Freud. Acredito em todos seus fundamentos da teoria psicanalítica e reconheço a importância dele como pai da psicanálise e sendo a maior figura na construção de toda a psicologia hoje mundo.
+
+Mas isso não significa que eu precise acreditar em tudo aquilo em que Freud acreditava.
+
+Estudar alguém não significa tornar-se alguém.
+
+Posso aprender com a ciência, com a filosofia, com a psicologia e até com pessoas que possuem uma visão de mundo completamente diferente da minha, sem precisar abandonar minhas convicções.
+
+Inclusive, acredito que esse é um dos grandes desafios da nossa mentalidade: aprender a ouvir sem necessariamente concordar; estudar sem perder a identidade; conhecer o diferente sem transformar o diferente em uma ameaça.
+
+E isso vale também para quem está dentro da Igreja.
+
+Não precisamos ter medo de aprender com quem está fora dela.
+
+A verdade não deixa de ser verdade porque foi apresentada por alguém que pensa diferente de nós.
+
+Talvez mudar a mentalidade também seja isso: deixar de perguntar apenas “essa pessoa acredita como eu?” e começar a perguntar: “O que eu posso aprender com aquilo que ela está dizendo?”
+
+Porque podemos aprender com todo mundo.
+
+E aprender não significa perder a fé.
+
+Às vezes, significa apenas ampliar a nossa capacidade de compreender o mundo. 🧠
+
+#Psicanálise #Freud #Freudiano #SigmundFreud #PsicanaliseFreudiana.”
+
+### Reel 3
+URL: `https://www.instagram.com/reel/DcO3t7BPchQ/`
+Título: “Quando eu escolheria Pedro em vez de Judas?”
+Legenda original fornecida: “Quando eu escolheria Pedro em vez de Judas?
+
+No podcast, me fizeram uma pergunta interessante: “Você prefere o Pedro explosivo ou o Judas que beija?”
+
+Minha resposta foi clara: eu prefiro o Pedro.
+
+Não porque a explosividade seja uma qualidade, mas porque Pedro deixa evidente quem ele é. Ele fala, reage, erra, se posiciona. Seu defeito está exposto , e aquilo que conseguimos enxergar, conseguimos trabalhar.
+
+O problema de Judas não está apenas no beijo. Está no que o beijo escondia.
+
+Um impostor consegue frequentar os mesmos lugares, defender os mesmos discursos e até demonstrar afeto, enquanto esconde suas reais intenções.
+
+E como trabalhar uma mudança de mentalidade em alguém que não reconhece ou não revela aquilo que precisa mudar?
+
+Pedro explosivo pode aprender a controlar sua impulsividade.
+Pedro que erra pode reconhecer seu erro.
+Peter que fala demais pode aprender a se calar.
+
+Mas o impostor, enquanto continuar escondido atrás de um personagem, dificilmente permitirá que alguém trabalhe aquilo que realmente precisa ser transformado.
+
+Por isso, entre quem fala a verdade e quem mente, eu prefiro quem fala a verdade, mesmo que ela venha acompanhada de imperfeições.
+
+Porque defeito exposto pode ser tratado.
+Mas aquilo que está escondido atrás de uma máscara dificilmente será transformado.
+
+Talvez a verdadeira mudança de mentalidade comece justamente quando paramos de tentar parecer aquilo que não somos e temos coragem de olhar para aquilo que realmente precisamos mudar.
+
+#MudançaDeMentalidade #Mentalidade #Autoconhecimento #InteligenciaEmocional #Psicanalise.”
+
+Exiba uma legenda curta e fiel em cada card, com opção acessível “Ler legenda completa” para expandir o texto sem sair do site; mantenha botão/link “Assistir no Instagram”. Não invente métricas de visualização, likes ou data de publicação. Não alterar o sentido dos textos. No Reel 2, limitar-se a reproduzir o conteúdo original do próprio Daniel, sem acrescentar conteúdo religioso institucional.
+
+## 10. BLOG — TRÊS ARTIGOS COMPLETOS E CINCO PAUTAS
+
+O código atual mantém os três artigos com `draft: true`, `date: null`, portanto eles não aparecem publicamente. O objetivo deste protótipo é apresentar os três artigos completos como páginas reais para avaliação de Daniel, sem fingir que já foram aprovados ou publicados oficialmente.
+
+1. Reescreva e refine os três artigos existentes em `src/data/blogPosts.ts`, sem duplicá-los. Torne-os visíveis no protótipo (`draft: false` ou estado equivalente), mas inclua `editorialStatus: "Proposta editorial — aguardando validação de Daniel Paulo"` e mostre aviso discreto no topo/listagem do Blog enquanto `showEditorialReviewNotice: true`. Não invente data de publicação: manter `date: null` e omitir `datePublished` do JSON-LD até aprovação e data real. Não marcar conteúdo como aprovado pelo Daniel.
+2. Cada artigo deve ter: título, slug, descrição SEO, imagem de capa real do projeto, autor “Daniel Paulo”, tempo de leitura aproximado, resumo de 2–3 linhas, índice navegável, corpo com subtítulos, referências consultadas com links reais, bloco “Sobre o autor”, artigos relacionados, CTA discreto para WhatsApp e aviso de que o conteúdo é informativo e não substitui acompanhamento individual.
+3. Use apenas imagens existentes no repositório. Verifique os caminhos reais em `public/assets/fotos-daniel/` e `public/assets/ambiente/`. Priorize uma foto coerente com cada tema (p.ex. foto de palestrante para reflexão sobre papéis; retrato profissional sentado para artigo introdutório; imagem de trabalho/ambiente para procrastinação). Não invente uma foto de Daniel. O vídeo mobile de modalidades confirmado pelo contratante pode ser usado nessa seção, mas não deve ser reaproveitado como imagem de artigos sem pertinência editorial.
+4. Não inserir estudos, estatísticas, diagnósticos, citações literais ou afirmações científicas sem fonte verificável. As referências abaixo devem aparecer ao final dos artigos; explique com cuidado o que cada fonte sustenta, sem extrapolar.
+
+### Artigo 1 — Papéis ou personagens? Como perceber quando você está usando uma máscara social
+
+Basear-se no texto do Reel 1 e nas ideias fornecidas pelo próprio Daniel: papéis sociais fazem parte da vida; personagens podem surgir da busca por aceitação, reconhecimento, admiração ou proteção; autoconhecimento inclui perceber a diferença sem condenar a pessoa por isso. Desenvolver reflexão original, sem transformar “máscara social” em diagnóstico ou categoria clínica.
+
+Fonte real de apoio conceitual:
+- Erving Goffman, *The Presentation of Self in Everyday Life*, edição Vintage/Penguin Random House: `https://www.penguinrandomhouse.com/books/61106/the-presentation-of-self-in-everyday-life-by-erving-goffman/9780385094023/`.
+- Explicar que Goffman oferece uma lente sociológica para apresentação de si e interação social; não afirmar que sua obra prova uma teoria psicanalítica nem confundir “papel social” com diagnóstico.
+
+### Artigo 2 — O que é psicanálise e como funciona uma primeira sessão
+
+Explicar a psicanálise em linguagem simples, sem jargão excessivo. A primeira sessão deve ser descrita de modo geral e prudente: é um primeiro contato para conversar sobre o motivo da procura, conhecer a proposta de trabalho, tirar dúvidas e alinhar aspectos práticos; não existe roteiro universal e os detalhes específicos da prática de Daniel devem ser confirmados com ele. Não afirmar que toda sessão usa divã, associação livre, silêncio ou uma frequência fixa.
+
+Fontes reais de apoio:
+- International Psychoanalytical Association, “What is Psychoanalysis?”: `https://www.ipa.world/ipa/IPADev/Psychoanalysis/What_is_Psychoanalysis/Dev/About_Psychoanalysis/What_is_Psychoanalysis.aspx`
+- American Psychoanalytic Association, “About Psychoanalysis”: `https://apsa.org/about-psychoanalysis/`
+
+### Artigo 3 — Procrastinação: por que adiamos o que importa
+
+Abordar procrastinação sem reduzi-la a preguiça, sem afirmar que todas as pessoas procrastinam pela mesma razão e sem diagnosticar. Pode explicar que tarefas percebidas como aversivas podem envolver desconforto emocional e que adiar pode oferecer alívio de curto prazo, mas não apresentar essa explicação como causa única. Incluir reflexão prática cuidadosa, sem prometer solução ou produtividade garantida.
+
+Fonte real:
+- Sirois, F. & Pychyl, T. (2013), “Procrastination and the Priority of Short-Term Mood Regulation: Consequences for Future Self”, *Social and Personality Psychology Compass*, 7(2), 115–127. DOI: `https://doi.org/10.1111/spc3.12011`.
+- Não dizer “estudos convergem” sem outras referências. Atribuir a interpretação de regulação do humor de curto prazo especificamente a esses autores.
+
+### Cinco pautas futuras (somente título, descrição e palavra-chave)
+
+Criar exatamente cinco pautas em `src/data/futureTopics.ts` e exibi-las separadas dos artigos, sob título “Próximas reflexões em pauta — para avaliação”:
+1. “Terapia online e presencial: semelhanças e particularidades” — palavra-chave: `terapia online x presencial`.
+2. “Neuropsicanálise: o que é e quais perguntas aproxima” — palavra-chave: `o que é neuropsicanálise`.
+3. “Quando buscar acompanhamento terapêutico?” — palavra-chave: `quando buscar acompanhamento terapêutico`.
+4. “Inteligência emocional no trabalho e na liderança” — palavra-chave: `inteligência emocional no trabalho`.
+5. “Máscaras sociais no ambiente de trabalho” — palavra-chave: `máscaras sociais no trabalho`.
+
+Não criar corpo de artigo para essas pautas. Marcar internamente como ideias futuras, ainda não aprovadas. Não exibir “Diferença entre psicanálise, psicologia e psiquiatria” como pauta nesta versão, a menos que Daniel peça depois.
+
+### Blog: experiência e SEO
+
+- Manter busca simples, filtro por categoria e paginação.
+- Categorias: Psicanálise; Autoconhecimento; Comportamento e emoções; Vida profissional e liderança; Terapia online.
+- Feed RSS somente se puder ser gerado corretamente com as datas e URLs disponíveis; não inventar domínio. Atualizar sitemap conforme status editorial e configuração de `SITE_URL`.
+- Não indexar pautas futuras. Para artigos ainda em revisão, evitar sinalizar aprovação ou datas falsas; no protótipo podem ser navegáveis com aviso de revisão.
+
+## 11. AJUSTES DE CONTEÚDO E AUDITORIA DO CÓDIGO EXISTENTE
+
+1. Audite `src/data/services.ts`: há descrições e bullets que extrapolam o briefing (por exemplo, promessas de reinserção social, autonomia, formatos específicos, encontros individuais, planejamento estratégico, mediação familiar e outros detalhes). Reduza os textos a descrições gerais e prudentes baseadas apenas nos nomes dos serviços fornecidos. Não afirmar duração, método, público, frequência, modalidade ou resultados que não foram confirmados.
+2. Audite FAQs da Home e demais páginas. Remova afirmações específicas sobre frequência, formato, confidencialidade absoluta, diagnósticos ou funcionamento da prática que não tenham sido confirmadas pelo Daniel. Use respostas informativas e convide o visitante a esclarecer detalhes pelo WhatsApp.
+3. Audite `src/data/experience.ts` e o README. Não publicar cargos, empresas e períodos anteriores que não estejam sustentados por fonte fornecida e validada. Manter apenas professor na Faculdade Anhanguera desde abr/2024, coordenador pedagógico na Unika de jan/2021 a jul/2025 e referência geral a histórico anterior em logística/gestão comercial, a menos que o repositório contenha comprovantes confiáveis.
+4. A lista de serviços deve incluir apenas atendimento psicanalítico online/presencial, orientação familiar, acompanhante terapêutico, análise comportamental, consultoria online e palestras/treinamentos. Docência pode aparecer como atuação profissional, não como serviço clínico.
+5. Não expor CPF ou outros dados pessoais nos certificados. Os arquivos de certificados já foram preparados sem CPF; não modificar nem revelar dados ocultos.
+6. O vídeo/ambiente com estante de livros é ambientação visual, nunca afirmar que é o consultório real. Não inventar endereço nem sala de atendimento.
+7. Não exibir conteúdo religioso além da reprodução estritamente fiel do Reel 2 solicitado. Manter `showFaithContent: false`.
+8. Não usar imagens de crianças/adolescentes, mascotes de terceiros ou eventos religiosos. Usar somente mídia fornecida e já existente no projeto, respeitando direitos de uso.
+
+## 12. SEO LOCAL, GEO E DADOS ESTRUTURADOS
+
+- Manter as rotas reais já existentes no React Router. Não remover páginas/subpáginas corretas.
+- Manter `/psicanalista-em-jundiai` como página local única, com conteúdo útil e distinto. Não criar páginas quase idênticas por cidades vizinhas.
+- Em cada rota, título e descrição próprios, H1 único, resposta direta nos primeiros parágrafos, links internos descritivos e breadcrumbs.
+- Atualizar `src/components/seo/SeoHead.tsx` para `sameAs` incluir Instagram, LinkedIn, Facebook e TikTok. Incluir WhatsApp apenas se fizer sentido e como contato; não inventar outras URLs.
+- Corrigir JSON-LD: Person e ProfessionalService com dados reais; `areaServed` Jundiaí-SP e atendimento online; BreadcrumbList e FAQPage quando aplicável; BlogPosting apenas com dados verdadeiros. Não incluir `AggregateRating`, `Review`, endereço físico, horário, preço, telefone em schema ou credencial não informada. Remover `PostalAddress` fictício/incompleto do Person se puder sugerir endereço físico não confirmado.
+- `SITE_URL` continua `null` até domínio definitivo. Não inventar canonical absoluto, domínio ou link permanente. Quando `SITE_URL` for nulo, não criar canonical falso nem `og:url` absoluto. Manter OG/Twitter com imagem `/assets/social/og-image-1200x630.png` enquanto caminho existir.
+- Manter `robots.txt`, `sitemap.xml`, `manifest.webmanifest`, favicons e `llms.txt`; atualizar links sociais e conteúdos conforme os dados novos. Não incluir artigos sem data real como se já tivessem data de publicação.
+- GEO: definir a entidade de modo consistente: “Daniel Paulo é psicanalista, terapeuta e professor em Jundiaí, SP”. Responder claramente às perguntas nos primeiros parágrafos; não repetir palavras-chave artificialmente.
+- Documentar no README que a SPA React/Vite exige pré-renderização estática (SSG) ou renderização no servidor para que cada rota entregue HTML completo aos buscadores em produção. Não afirmar que isso já está implementado se não estiver.
+
+## 13. ACESSIBILIDADE, PERFORMANCE E SEGURANÇA
+
+- Mobile first, sem overflow horizontal, alvos de toque de pelo menos 44 × 44 px.
+- WCAG AA: HTML semântico, skip link, foco visível, contraste suficiente, labels em formulários, navegação por teclado, lightbox de certificados com Escape e setas, nomes acessíveis nos botões/ícones.
+- `prefers-reduced-motion` deve desligar animações não essenciais e vídeos com scroll; conteúdo textual permanece completo.
+- Usar imagens WebP/PNG existentes com `width` e `height`, `loading="lazy"` abaixo da dobra e `alt` descritivo quando informativo; `alt=""` em decorativas.
+- Não carregar todos os vídeos ao entrar na Home. Hero tem prioridade; os demais vídeos e imagens carregam sob demanda.
+- Não adicionar Google Analytics, Meta Pixel, Google Maps, Tag Manager, banner de cookies, fontes de rastreamento, SMTP, endpoints ou chaves de API automaticamente.
+- Formulário continua protótipo front-end: nome, forma de contato, mensagem e consentimento com link para política. Não simular envio nem criar backend. Se houver WhatsApp configurado, abrir WhatsApp com mensagem pré-preenchida; visitante revisa e envia por lá.
+- Política de Privacidade e Termos são modelos técnicos e precisam de revisão jurídica antes da publicação. Não declarar conformidade LGPD como fato consumado.
+- Nunca incluir segredos no front-end.
+
+## 14. LOGOTIPOS E ARQUIVOS DE MÍDIA: CAMINHOS E CONFERÊNCIA
+
+Antes de usar qualquer arquivo, confirme que ele existe no projeto. Não criar caminho imaginário.
+
+- Cabeçalho: preferir `public/assets/favicon/favicon-192.png` (ou favicon de maior qualidade sem texto minúsculo).
+- Rodapé: preferir `public/assets/logo/logo-daniel-paulo-brilho-512.png` em fundo escuro; aumentar para leitura.
+- OG: `public/assets/social/og-image-1200x630.png`.
+- Fotos profissionais: usar somente arquivos reais em `public/assets/fotos-daniel/`.
+- Certificados: `public/assets/certificados/`.
+- Vídeos novos: quatro WebM e quatro posters transparentes do pacote, em `public/assets/videos/`.
+- Reels: três WebP em `public/assets/reels/`.
+- O vídeo `modalidades-flexiveis-mobile.mp4` deve ser copiado para `public/assets/videos/` e usado na seção de modalidades mobile como imagem confirmada de Daniel; preservar roupa, cabelo e aparência originais.
+
+## 15. TESTES E CRITÉRIOS DE ACEITE
+
+Antes de concluir:
+1. Executar `npm run lint` e `npm run build`; corrigir todos os erros de TypeScript/build.
+2. Verificar todas as rotas da seção 4 e confirmar que nenhuma retorna página vazia ou 404 indevido.
+3. Testar menu hambúrguer no topo, meio e final de páginas longas, em Home e subpáginas, em larguras 360, 390, 430 e tablet.
+4. Testar ordem e orientação dos heróis: camisa azul-clara primeiro, terno escuro depois; desktop 16:9; mobile 9:16; transparência real; sem fundo verde; sem crop de rosto; sem espelhamento adicional.
+5. Testar reprodução, poster, fim do vídeo, navegação normal e `prefers-reduced-motion`. Não bloquear rolagem.
+6. Testar CTAs de WhatsApp e todos os links sociais, inclusive Facebook e TikTok.
+7. Testar os três cards de Reels: miniatura certa, legenda certa e link abre o Reel correto no Instagram.
+8. Testar o vídeo mobile de modalidades: é o próprio Daniel, conforme confirmação do contratante; conferir proporção, enquadramento e reprodução sem alterar sua aparência.
+9. Testar os três artigos completos e as cinco pautas; as pautas não podem aparecer como artigos publicados.
+10. Verificar meta tags, canonical condicionado a `SITE_URL`, JSON-LD sem campos inventados e sitemap/llms atualizados.
+10. Conferir console sem erros, links sem destino, imagens quebradas, overflow horizontal, foco por teclado e contraste.
+
+## 16. README E RELATÓRIO FINAL
+
+Atualize o `README.md` com:
+- Estrutura atual do projeto e como executar (`npm run dev`, `npm run lint`, `npm run build`).
+- Como editar `src/config/siteConfig.ts` e os artigos/pautas.
+- Mapeamento dos quatro WebM e posters, seus tamanhos/formatos e fallback de transparência.
+- Como os dois heróis funcionam e como respeitam `prefers-reduced-motion`.
+- URLs sociais confirmadas.
+- Os três Reels e suas URLs.
+- Os três artigos como propostas aguardando revisão, sem data fictícia.
+- Cinco pautas futuras.
+- Pendências do cliente: e-mail, endereço do atendimento presencial (se desejar divulgar), domínio, horários, valores/condições, comprovantes das formações sem comprovante, validação do vídeo de modalidades, aprovação dos artigos, foto profissional em alta resolução e revisão jurídica de Política de Privacidade/Termos.
+- O que foi verificado e o que não foi verificado (não declarar testes que não executou).
+- Nota de SEO: pré-renderização SSG/SSR ainda necessária para indexação robusta em produção, caso não tenha sido implementada.
+
+Ao final, apresente um relatório curto com: alterações realizadas, arquivos principais modificados/criados, testes efetivamente executados e pendências que dependem de Daniel/contratante. **Não declare sucesso de build, transparência, acessibilidade ou testes sem executar/verificar.**

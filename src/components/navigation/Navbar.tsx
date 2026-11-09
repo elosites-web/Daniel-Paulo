@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { createPortal } from 'react-dom';
 import { Link, useLocation } from 'react-router-dom';
 import { mainNavItems } from '../../data/navigation';
 import { siteConfig, getWhatsAppUrl } from '../../config/siteConfig';
-import { Menu, X, ChevronDown } from 'lucide-react';
+import { Menu, X, ChevronDown, Instagram, Linkedin, Facebook } from 'lucide-react';
 import { WhatsAppIcon } from '../ui/WhatsAppIcon';
+import { TikTokIcon } from '../ui/TikTokIcon';
 import { ThemeSwitcher } from '../ui/ThemeSwitcher';
 import { motion, useScroll, useSpring } from 'motion/react';
 import { useReducedMotion } from '../../hooks/useReducedMotion';
@@ -11,6 +13,9 @@ import { useReducedMotion } from '../../hooks/useReducedMotion';
 export const Navbar: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const [headerBottom, setHeaderBottom] = useState<number>(72);
+  const headerRef = useRef<HTMLElement>(null);
+  const hamburgerButtonRef = useRef<HTMLButtonElement>(null);
   const location = useLocation();
   const reducedMotion = useReducedMotion();
 
@@ -22,28 +27,51 @@ export const Navbar: React.FC = () => {
     restDelta: 0.001,
   });
 
+  // Calculate actual bottom of header in real-time
+  const updateHeaderPosition = () => {
+    if (headerRef.current) {
+      const rect = headerRef.current.getBoundingClientRect();
+      const bottom = Math.round(rect.bottom);
+      setHeaderBottom(bottom > 0 ? bottom : (headerRef.current.offsetHeight || 72));
+    }
+  };
+
+  useEffect(() => {
+    updateHeaderPosition();
+    window.addEventListener('resize', updateHeaderPosition);
+    window.addEventListener('scroll', updateHeaderPosition, { passive: true });
+    return () => {
+      window.removeEventListener('resize', updateHeaderPosition);
+      window.removeEventListener('scroll', updateHeaderPosition);
+    };
+  }, []);
+
   // Close menus on route change
   useEffect(() => {
     setIsMobileMenuOpen(false);
     setActiveDropdown(null);
   }, [location.pathname]);
 
-  // Handle Escape key to close mobile menu
+  // Handle Escape key to close mobile menu and return focus to hamburger button
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
-        setIsMobileMenuOpen(false);
+        if (isMobileMenuOpen) {
+          setIsMobileMenuOpen(false);
+          hamburgerButtonRef.current?.focus();
+        }
         setActiveDropdown(null);
       }
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, []);
+  }, [isMobileMenuOpen]);
 
   // Lock page scroll behind the menu when hamburger menu is open
   useEffect(() => {
     if (!isMobileMenuOpen) return;
 
+    updateHeaderPosition();
     const originalBodyOverflow = document.body.style.overflow;
     const originalHtmlOverflow = document.documentElement.style.overflow;
 
@@ -53,6 +81,8 @@ export const Navbar: React.FC = () => {
     const handleResize = () => {
       if (window.innerWidth >= 1024) {
         setIsMobileMenuOpen(false);
+      } else {
+        updateHeaderPosition();
       }
     };
 
@@ -66,29 +96,32 @@ export const Navbar: React.FC = () => {
   }, [isMobileMenuOpen]);
 
   return (
-    <header className="sticky top-0 z-[100] bg-[#081331]/95 backdrop-blur-[14px] border-b border-[#162c66]/80 transition-colors duration-300">
+    <header
+      ref={headerRef}
+      className="sticky top-0 z-[100] bg-[#081331]/95 backdrop-blur-[14px] border-b border-[#162c66]/80 transition-colors duration-300"
+    >
       <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-4 xl:px-6 2xl:px-8 relative z-[110]">
         <div className="flex items-center justify-between h-18 lg:h-20 gap-2">
           
-          {/* Logo brand - protected against text break/wrapping on tablets and desktop */}
+          {/* Logo brand - using symbol icon without tiny text, sized 44x44 with clear HTML text */}
           <Link
             to="/"
-            className="flex items-center gap-2 sm:gap-2.5 xl:gap-3 group focus:outline-none focus:ring-2 focus:ring-[#4FD6F4] rounded-lg p-1 shrink-0 animate-brand-slide-down"
+            className="flex items-center gap-2.5 sm:gap-3 group focus:outline-none focus:ring-2 focus:ring-[#4FD6F4] rounded-lg p-1 shrink-0 animate-brand-slide-down"
             aria-label="Daniel Paulo - Página Inicial"
           >
             <img
-              src="/assets/logo/logo-daniel-paulo-sem-brilho-256.png"
-              alt="Logotipo circular de Daniel Paulo com silhuetas em perfil"
-              className="w-9 h-9 sm:w-10 sm:h-10 lg:w-9 lg:h-9 xl:w-11 xl:h-11 object-contain group-hover:scale-105 transition-transform shrink-0"
+              src="/assets/favicon/favicon-192.png"
+              alt="Símbolo de Daniel Paulo"
+              className="w-10 h-10 sm:w-11 sm:h-11 lg:w-11 lg:h-11 object-contain group-hover:scale-105 transition-transform shrink-0"
               width="44"
               height="44"
             />
             <div className="flex flex-col shrink-0 min-w-0">
               <span className="text-sm sm:text-base lg:text-sm xl:text-base 2xl:text-lg font-bold tracking-tight text-white group-hover:text-[#4FD6F4] transition-colors font-['Plus_Jakarta_Sans'] whitespace-nowrap">
-                Daniel Paulo
+                {siteConfig.name}
               </span>
               <span className="text-[10px] lg:text-[10px] xl:text-[11px] 2xl:text-xs tracking-wider text-[#94a9c9] uppercase font-medium whitespace-nowrap">
-                Psicanalista e Terapeuta
+                {siteConfig.profession}
               </span>
             </div>
           </Link>
@@ -206,12 +239,16 @@ export const Navbar: React.FC = () => {
             </a>
             <ThemeSwitcher />
             <button
+              ref={hamburgerButtonRef}
               type="button"
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              onClick={() => {
+                updateHeaderPosition();
+                setIsMobileMenuOpen(!isMobileMenuOpen);
+              }}
               className="p-2 sm:p-2.5 rounded-lg text-slate-300 hover:text-white hover:bg-[#0e1e4a] focus:outline-none focus:ring-2 focus:ring-[#4FD6F4]"
               aria-label={isMobileMenuOpen ? 'Fechar menu de navegação' : 'Abrir menu de navegação'}
               aria-expanded={isMobileMenuOpen}
-              aria-controls="mobile-navigation"
+              aria-controls="mobile-navigation-portal"
             >
               {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
@@ -234,84 +271,139 @@ export const Navbar: React.FC = () => {
         />
       </div>
 
+      {/* Mobile Drawer Menu — rendered into document.body via Portal to guarantee positioning immediately below the header */}
+      {isMobileMenuOpen &&
+        typeof document !== 'undefined' &&
+        createPortal(
+          <div id="mobile-navigation-portal" className="fixed inset-x-0 bottom-0 z-[9999] lg:hidden" style={{ top: `${headerBottom}px` }}>
+            {/* Backdrop: starts immediately below the header, clicking closes the menu */}
+            <div
+              className="absolute inset-0 bg-black/70 backdrop-blur-sm transition-opacity"
+              onClick={() => {
+                setIsMobileMenuOpen(false);
+                hamburgerButtonRef.current?.focus();
+              }}
+              aria-hidden="true"
+            />
 
-      {/* Mobile Drawer Menu */}
-      {isMobileMenuOpen && (
-        <>
-          <div
-            id="mobile-navigation"
-            className="lg:hidden bg-[#081331] border-b border-[#1e3878] px-4 pt-3 pb-6 max-h-[calc(100svh-4.5rem)] overflow-y-auto overscroll-contain relative z-[101]"
-          >
-            <div className="space-y-1">
-              {mainNavItems.map((item) => {
-                const isActive = location.pathname === item.href || (item.href !== '/' && location.pathname.startsWith(item.href));
-                const hasChildren = item.children && item.children.length > 0;
+            {/* Menu Panel: anchored to the top of this container (immediately below header) */}
+            <div
+              id="mobile-navigation"
+              role="dialog"
+              aria-modal="true"
+              aria-label="Menu principal de navegação"
+              className="relative w-full max-h-full bg-[#081331] border-b border-[#1e3878] px-4 pt-3 pb-8 overflow-y-auto overscroll-contain shadow-2xl"
+              style={{ maxHeight: `calc(100dvh - ${headerBottom}px)` }}
+            >
+              <div className="space-y-1">
+                {mainNavItems.map((item) => {
+                  const isActive = location.pathname === item.href || (item.href !== '/' && location.pathname.startsWith(item.href));
+                  const hasChildren = item.children && item.children.length > 0;
 
-                return (
-                  <div key={item.label} className="border-b border-[#122456]/60 pb-1">
-                    <div className="flex items-center justify-between">
-                      <Link
-                        to={item.href}
-                        onClick={() => setIsMobileMenuOpen(false)}
-                        className={`block py-2.5 text-base font-medium rounded-md px-2 ${
-                          isActive ? 'text-[#4FD6F4] bg-[#0e1e4a]' : 'text-slate-200 hover:text-white'
-                        }`}
-                      >
-                        {item.label}
-                      </Link>
-                    </div>
-
-                    {hasChildren && (
-                      <div className="pl-4 pr-1 py-1 space-y-1 bg-[#0a183d]/40 rounded-lg my-1">
-                        {item.children!.map((child) => (
-                          <Link
-                            key={child.href}
-                            to={child.href}
-                            onClick={() => setIsMobileMenuOpen(false)}
-                            className={`block py-2 text-sm rounded-md px-2 transition-colors ${
-                              location.pathname === child.href
-                                ? 'text-[#4FD6F4] font-medium bg-[#122456]'
-                                : 'text-slate-300 hover:text-white'
-                            }`}
-                          >
-                            {child.label}
-                          </Link>
-                        ))}
+                  return (
+                    <div key={item.label} className="border-b border-[#122456]/60 pb-1">
+                      <div className="flex items-center justify-between">
+                        <Link
+                          to={item.href}
+                          onClick={() => setIsMobileMenuOpen(false)}
+                          className={`block py-2.5 text-base font-medium rounded-md px-2 ${
+                            isActive ? 'text-[#4FD6F4] bg-[#0e1e4a]' : 'text-slate-200 hover:text-white'
+                          }`}
+                        >
+                          {item.label}
+                        </Link>
                       </div>
-                    )}
-                  </div>
-                );
-              })}
-            </div>
 
-            <div className="mt-5 pt-4 border-t border-[#1e3878] space-y-3">
-              <div className="flex items-center justify-between px-2 py-1">
-                <span className="text-sm font-medium text-slate-300">Aparência do site</span>
-                <ThemeSwitcher showLabel={true} />
+                      {hasChildren && (
+                        <div className="pl-4 pr-1 py-1 space-y-1 bg-[#0a183d]/40 rounded-lg my-1">
+                          {item.children!.map((child) => (
+                            <Link
+                              key={child.href}
+                              to={child.href}
+                              onClick={() => setIsMobileMenuOpen(false)}
+                              className={`block py-2 text-sm rounded-md px-2 transition-colors ${
+                                location.pathname === child.href
+                                  ? 'text-[#4FD6F4] font-medium bg-[#122456]'
+                                  : 'text-slate-300 hover:text-white'
+                              }`}
+                            >
+                              {child.label}
+                            </Link>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
               </div>
 
-              <a
-                href={getWhatsAppUrl()}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="w-full flex items-center justify-center gap-2 py-3 rounded-xl font-semibold bg-[#4FD6F4] text-[#081331] hover:bg-[#36c5e5] transition-colors shadow-md text-base"
-              >
-                <WhatsAppIcon className="w-5 h-5" />
-                <span>Agendar pelo WhatsApp</span>
-              </a>
-            </div>
-          </div>
+              {/* Mobile Actions: Appearance, Social Links & Direct WhatsApp CTA */}
+              <div className="mt-5 pt-4 border-t border-[#1e3878] space-y-4">
+                <div className="flex items-center justify-between px-2 py-1">
+                  <span className="text-sm font-medium text-slate-300">Aparência do site</span>
+                  <ThemeSwitcher showLabel={true} />
+                </div>
 
-          {/* Backdrop locking scroll and closing on tap outside */}
-          <div
-            className="fixed inset-0 top-18 lg:hidden bg-black/60 backdrop-blur-xs -z-10"
-            onClick={() => setIsMobileMenuOpen(false)}
-            onTouchMove={(e) => e.preventDefault()}
-            aria-hidden="true"
-          />
-        </>
-      )}
+                {/* Social media links confirmed */}
+                <div className="px-2 pt-1">
+                  <span className="text-xs uppercase tracking-wider text-[#94a9c9] font-semibold block mb-2">
+                    Redes Oficiais
+                  </span>
+                  <div className="flex items-center gap-3">
+                    <a
+                      href={siteConfig.social.instagram}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-9 h-9 rounded-lg bg-[#0e1e4a] hover:bg-[#4FD6F4] hover:text-[#081331] text-slate-300 flex items-center justify-center transition-colors"
+                      aria-label="Instagram de Daniel Paulo"
+                    >
+                      <Instagram className="w-4 h-4" />
+                    </a>
+                    <a
+                      href={siteConfig.social.linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-9 h-9 rounded-lg bg-[#0e1e4a] hover:bg-[#4FD6F4] hover:text-[#081331] text-slate-300 flex items-center justify-center transition-colors"
+                      aria-label="LinkedIn de Daniel Paulo"
+                    >
+                      <Linkedin className="w-4 h-4" />
+                    </a>
+                    <a
+                      href={siteConfig.social.facebook}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-9 h-9 rounded-lg bg-[#0e1e4a] hover:bg-[#4FD6F4] hover:text-[#081331] text-slate-300 flex items-center justify-center transition-colors"
+                      aria-label="Facebook de Daniel Paulo"
+                    >
+                      <Facebook className="w-4 h-4" />
+                    </a>
+                    <a
+                      href={siteConfig.social.tiktok}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-9 h-9 rounded-lg bg-[#0e1e4a] hover:bg-[#4FD6F4] hover:text-[#081331] text-slate-300 flex items-center justify-center transition-colors"
+                      aria-label="TikTok de Daniel Paulo"
+                    >
+                      <TikTokIcon className="w-4 h-4" />
+                    </a>
+                  </div>
+                </div>
+
+                <a
+                  href={getWhatsAppUrl()}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="w-full flex items-center justify-center gap-2 py-3 rounded-xl font-semibold bg-[#4FD6F4] text-[#081331] hover:bg-[#36c5e5] transition-colors shadow-md text-base"
+                >
+                  <WhatsAppIcon className="w-5 h-5" />
+                  <span>Agendar pelo WhatsApp</span>
+                </a>
+              </div>
+            </div>
+          </div>,
+          document.body
+        )}
     </header>
   );
 };

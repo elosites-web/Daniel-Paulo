@@ -23,13 +23,15 @@ export interface SiteConfig {
   social: {
     instagram: string;
     linkedin: string;
-    facebookName: string;
-    facebookUrl: string | null;
+    facebook: string;
+    tiktok: string;
+    whatsappUrl: string;
   };
   /** Flags de visibilidade de conteúdo condicional */
   showFaithContent: boolean;
   showUnverifiedFormations: boolean;
   showEmergencyNotice: boolean;
+  showEditorialReviewNotice: boolean;
   showSpeakerTopicsDraft: boolean;
 }
 
@@ -52,13 +54,15 @@ export const siteConfig: SiteConfig = {
   social: {
     instagram: "https://www.instagram.com/danielpaulo_psicanalista/",
     linkedin: "https://linkedin.com/in/daniel-paulo-psi",
-    facebookName: "Daniel Paulo Psicanalista",
-    facebookUrl: null,
+    facebook: "https://www.facebook.com/daniel.paulo.psicanalista",
+    tiktok: "https://www.tiktok.com/@dani.psi.40",
+    whatsappUrl: "https://wa.me/5511960193062",
   },
   showFaithContent: false,
   showUnverifiedFormations: false,
   showEmergencyNotice: false,
-  showSpeakerTopicsDraft: false,
+  showEditorialReviewNotice: true,
+  showSpeakerTopicsDraft: true,
 };
 
 export function getWhatsAppUrl(customMessage?: string): string {

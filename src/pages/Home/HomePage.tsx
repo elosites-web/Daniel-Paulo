@@ -4,6 +4,7 @@ import { motion, type Variants } from 'motion/react';
 import { SeoHead } from '../../components/seo/SeoHead';
 import { ScrollVideo } from '../../components/media/ScrollVideo';
 import { CertificateGallery } from '../../components/certificates/CertificateGallery';
+import { ReelsSection } from '../../components/home/ReelsSection';
 import { servicesData } from '../../data/services';
 import { siteConfig, getWhatsAppUrl } from '../../config/siteConfig';
 import { useMediaQuery } from '../../hooks/useMediaQuery';
@@ -20,7 +21,8 @@ import {
   MapPin, 
   CheckCircle2, 
   ChevronDown, 
-  Sparkles
+  Sparkles,
+  Award
 } from 'lucide-react';
 
 const heroContainerVariants: Variants = {
@@ -73,8 +75,9 @@ export const HomePage: React.FC = () => {
   const isDesktop = useMediaQuery('(min-width: 1024px)');
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
   const publishedBlogPosts = initialBlogPosts.filter((post) => !post.draft);
-  const heroTrackRef = useRef<HTMLDivElement>(null);
-  const aboutTrackRef = useRef<HTMLDivElement>(null);
+  
+  const hero1TrackRef = useRef<HTMLDivElement>(null);
+  const hero2TrackRef = useRef<HTMLDivElement>(null);
   const section3TrackRef = useRef<HTMLDivElement>(null);
   const section5TrackRef = useRef<HTMLDivElement>(null);
   const section11TrackRef = useRef<HTMLDivElement>(null);
@@ -95,196 +98,251 @@ export const HomePage: React.FC = () => {
       <div className="space-y-16 md:space-y-28 pb-20">
         
         {/* ========================================================
-            SEÇÃO 1 — HERO PRINCIPAL (PINNED SCROLL VIDEO)
+            SEÇÃO 1 — HERO 1: APRESENTAÇÃO INSTITUCIONAL (CAMISA AZUL)
+            Scroll scrubbing restaurado com ScrollVideo.
+            Desktop: Daniel ampliado à direita, texto à esquerda.
+            Mobile: Daniel posicionado acima sem cortes e sem espaço vazio.
         ======================================================== */}
         <section
           id="inicio"
-          className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 lg:grid lg:grid-cols-12 lg:gap-10 relative"
+          ref={hero1TrackRef}
+          className="relative min-h-[170svh] lg:min-h-[195vh] -mt-6 sm:-mt-8"
           aria-label="Apresentação institucional Daniel Paulo"
         >
-          {/* Subtle gradient radial background */}
-          <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            <div className="absolute top-0 right-1/4 w-[600px] h-[600px] bg-[#4FD6F4]/5 rounded-full blur-[140px]" />
-            <div className="absolute bottom-10 left-10 w-[450px] h-[450px] bg-[#0e1e4a]/40 rounded-full blur-[100px]" />
-          </div>
-
-          {/* Coluna de texto: sticky no desktop, fluxo normal no mobile */}
-          <motion.div
-            variants={heroContainerVariants}
-            initial="hidden"
-            animate="visible"
-            className="lg:col-span-7 lg:sticky lg:top-24 lg:self-start lg:min-h-[calc(100svh-6rem)] lg:flex lg:flex-col lg:justify-center py-10 lg:py-0 space-y-4 sm:space-y-6 text-center lg:text-left relative z-10"
-          >
-            <motion.div variants={heroItemVariants} className="w-fit self-center lg:self-start inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0e1e4a] border border-[#1e3878] text-xs font-semibold text-[#4FD6F4]">
-              <Sparkles className="w-3.5 h-3.5 text-[#4FD6F4]" />
-              <span>Espaço de Escuta e Autoconhecimento</span>
-            </motion.div>
-
-            <motion.h1 variants={heroItemVariants} className="text-2xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-bold tracking-tight text-white font-['Plus_Jakarta_Sans'] leading-[1.15] [text-shadow:_0_2px_12px_rgba(0,0,0,0.45)]">
-              Psicanalista e terapeuta em Jundiaí{' '}
-              <span className="text-[#4FD6F4] block sm:inline-block transition-transform duration-300 ease-out hover:scale-105 origin-center sm:origin-left">
-                | Atendimento online e presencial
-              </span>
-            </motion.h1>
-
-            <motion.p variants={heroItemVariants} className="text-sm sm:text-base md:text-lg text-slate-300 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-light">
-              Uma abordagem humanizada, calorosa e sem julgamentos morais. Um lugar seguro para contemplar suas profundezas, elaborar conflitos e reencontrar sua autenticidade.
-            </motion.p>
-
-            {/* CTAs */}
-            <motion.div variants={heroItemVariants} className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-1">
-              <a
-                href={getWhatsAppUrl('Olá Daniel, conheci seu site institucional e gostaria de agendar uma conversa sobre atendimento.')}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-3.5 sm:px-7 sm:py-4 rounded-xl font-bold text-sm sm:text-base bg-[#4FD6F4] text-[#081331] hover:bg-[#36c5e5] transition-all transform hover:-translate-y-0.5 shadow-xl shadow-[#4FD6F4]/20 focus:outline-none focus:ring-4 focus:ring-[#4FD6F4]/40"
-                aria-label="Agendar conversa pelo WhatsApp com Daniel Paulo"
-              >
-                <WhatsAppIcon className="w-5 h-5" />
-                <span>Agendar Conversa</span>
-              </a>
-
-              <Link
-                to="/psicanalise"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3.5 sm:px-6 sm:py-4 rounded-xl font-semibold text-sm sm:text-base bg-[#0e1e4a] text-slate-200 hover:text-white hover:bg-[#162c66] border border-[#1e3878] transition-all"
-              >
-                <span>Conhecer a Psicanálise</span>
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-            </motion.div>
-
-            {/* Key feature pills */}
-            <motion.div variants={heroItemVariants} className="pt-2 flex flex-wrap items-center justify-center lg:justify-start gap-4 sm:gap-6 text-xs text-slate-400">
-              <div className="flex items-center gap-2">
-                <ShieldCheck className="w-4 h-4 text-[#4FD6F4]" />
-                <span>Sigilo e Ética Profissional</span>
+          {/* Pinned inner container */}
+          <div className="sticky top-18 lg:top-20 min-h-[calc(100svh-4.5rem)] lg:h-[calc(100vh-5rem)] flex items-center overflow-hidden py-6 lg:py-0">
+            {/* Subtle atmospheric glow behind */}
+            <div className="absolute inset-0 overflow-hidden pointer-events-none">
+              <div className="absolute top-1/4 right-1/6 w-[550px] h-[550px] bg-[#4FD6F4]/10 rounded-full blur-[140px]" />
+              <div className="absolute bottom-10 left-10 w-[400px] h-[400px] bg-[#0e1e4a]/60 rounded-full blur-[120px]" />
+              {/* Background typographic watermark */}
+              <div className="absolute right-0 top-1/2 -translate-y-1/2 text-[12vw] font-black text-white/[0.02] tracking-tighter select-none pointer-events-none uppercase font-['Plus_Jakarta_Sans'] hidden lg:block">
+                Psicanálise
               </div>
-              <div className="flex items-center gap-2">
-                <MapPin className="w-4 h-4 text-[#4FD6F4]" />
-                <span>Presencial em Jundiaí & Online</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <GraduationCap className="w-4 h-4 text-[#4FD6F4]" />
-                <span>Formação Multidisciplinar</span>
-              </div>
-            </motion.div>
-          </motion.div>
+            </div>
 
-          {/* Coluna do vídeo: trilha de scroll */}
-          <div ref={heroTrackRef} className="lg:col-span-5 relative h-[200svh] lg:h-[240vh]">
-            <div className="sticky top-20 h-[calc(100svh-5rem)] flex items-center justify-center">
-              <div className="relative aspect-[9/16] h-[min(calc(100svh-7rem),calc((100vw-2rem)*16/9))] max-w-full rounded-3xl overflow-hidden shadow-2xl border border-[#1e3878]/80 bg-[#060e24] transition-shadow duration-500 hover:shadow-[0_0_35px_rgba(79,214,244,0.25)]">
-                <ScrollVideo
-                  src={
-                    isDesktop
-                      ? '/assets/videos/hero-escuro-desktop-scroll.mp4'
-                      : '/assets/videos/hero-escuro-mobile-scroll.mp4'
-                  }
-                  poster={
-                    isDesktop
-                      ? '/assets/videos/hero-escuro-desktop-poster.jpg'
-                      : '/assets/videos/hero-escuro-mobile-poster.jpg'
-                  }
-                  altText="Daniel Paulo de terno azul com braços cruzados em ambiente noturno com vista ao mar"
-                  className="w-full h-full"
-                  videoClassName="object-cover object-center lg:object-[80%_center]"
-                  priority={true}
-                  trackRef={heroTrackRef}
-                  topOffset={80}
-                  endAt={0.8}
-                />
-                {/* Subtle edge overlay for visual blend */}
-                <div className="absolute inset-0 ring-1 ring-inset ring-white/10 rounded-3xl pointer-events-none" />
-                <div className="absolute bottom-0 inset-x-0 h-24 bg-gradient-to-t from-[#081331] via-[#081331]/40 to-transparent pointer-events-none" />
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10">
+              <div className="flex flex-col lg:flex-row items-center justify-between gap-6 lg:gap-10 relative">
+                
+                {/* Text Layer: left side */}
+                <motion.div
+                  variants={heroContainerVariants}
+                  initial="hidden"
+                  animate="visible"
+                  className="w-full lg:w-[50%] xl:w-[48%] space-y-5 sm:space-y-6 text-center lg:text-left pt-2 lg:pt-0 relative z-20 pointer-events-auto"
+                >
+                  <motion.div variants={heroItemVariants} className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0e1e4a] border border-[#1e3878] text-xs font-semibold text-[#4FD6F4]">
+                    <Sparkles className="w-3.5 h-3.5 text-[#4FD6F4]" />
+                    <span>Espaço de Escuta e Autoconhecimento</span>
+                  </motion.div>
+
+                  <motion.h1 variants={heroItemVariants} className="text-3xl sm:text-5xl lg:text-5xl xl:text-6xl font-bold tracking-tight text-white font-['Plus_Jakarta_Sans'] leading-[1.12]">
+                    Psicanalista e terapeuta em Jundiaí{' '}
+                    <span className="text-[#4FD6F4] block sm:inline-block">
+                      | Atendimento online e presencial
+                    </span>
+                  </motion.h1>
+
+                  <motion.p variants={heroItemVariants} className="text-base sm:text-lg text-slate-300 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-light">
+                    Uma abordagem humanizada, acolhedora e sem julgamentos morais. Um lugar seguro para contemplar suas profundezas, elaborar conflitos e reencontrar sua autenticidade.
+                  </motion.p>
+
+                  {/* CTAs */}
+                  <motion.div variants={heroItemVariants} className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
+                    <a
+                      href={getWhatsAppUrl('Olá Daniel, conheci seu site institucional e gostaria de agendar uma conversa sobre atendimento.')}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-7 py-4 rounded-xl font-bold text-base bg-[#4FD6F4] text-[#081331] hover:bg-[#36c5e5] transition-all transform hover:-translate-y-0.5 shadow-xl shadow-[#4FD6F4]/20 focus:outline-none focus:ring-4 focus:ring-[#4FD6F4]/40"
+                      aria-label="Agendar conversa pelo WhatsApp com Daniel Paulo"
+                    >
+                      <WhatsAppIcon className="w-5 h-5 fill-current" />
+                      <span>Agendar Conversa</span>
+                    </a>
+
+                    <Link
+                      to="/psicanalise"
+                      className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl font-semibold text-base bg-[#0e1e4a] text-slate-200 hover:text-white hover:bg-[#162c66] border border-[#1e3878] transition-all"
+                    >
+                      <span>Conhecer a Psicanálise</span>
+                      <ArrowRight className="w-4 h-4" />
+                    </Link>
+                  </motion.div>
+
+                  {/* Key feature pills */}
+                  <motion.div variants={heroItemVariants} className="pt-2 flex flex-wrap items-center justify-center lg:justify-start gap-4 sm:gap-6 text-xs text-slate-400">
+                    <div className="flex items-center gap-2">
+                      <ShieldCheck className="w-4 h-4 text-[#4FD6F4]" />
+                      <span>Sigilo e Ética Profissional</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <MapPin className="w-4 h-4 text-[#4FD6F4]" />
+                      <span>Presencial em Jundiaí & Online</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <GraduationCap className="w-4 h-4 text-[#4FD6F4]" />
+                      <span>Formação Multidisciplinar</span>
+                    </div>
+                  </motion.div>
+                </motion.div>
+
+                {/* Video Layer: right side (Hero 1 - Camisa Azul WebM transparente com scroll scrub) */}
+                <div className="w-full lg:w-[52%] xl:w-[55%] lg:absolute lg:right-0 lg:bottom-0 lg:top-0 flex items-end justify-center lg:justify-end pointer-events-none z-10">
+                  <div className="relative w-full max-w-[360px] sm:max-w-[420px] lg:max-w-none -mt-8 sm:-mt-12 lg:mt-0 h-[440px] sm:h-[500px] lg:h-[88vh] xl:h-[92vh] max-h-[860px] overflow-hidden">
+                    <ScrollVideo
+                      key={isDesktop ? 'desktop-hero-1' : 'mobile-hero-1'}
+                      src={
+                        isDesktop
+                          ? '/assets/videos/hero-01-camisa-azul-desktop.webm'
+                          : '/assets/videos/hero-01-camisa-azul-mobile.webm'
+                      }
+                      poster={
+                        isDesktop
+                          ? '/assets/videos/hero-01-camisa-azul-desktop-poster.webp'
+                          : '/assets/videos/hero-01-camisa-azul-mobile-poster.webp'
+                      }
+                      altText="Daniel Paulo, psicanalista e terapeuta"
+                      orientation={isDesktop ? 'horizontal' : 'vertical'}
+                      transparentBg={true}
+                      trackRef={hero1TrackRef}
+                      aspectRatio="none"
+                      className="w-full h-full"
+                      videoClassName={
+                        isDesktop
+                          ? 'w-full h-full object-contain object-bottom lg:object-right-bottom drop-shadow-[0_25px_60px_rgba(0,0,0,0.7)]'
+                          : 'w-full h-full object-cover object-[center_32%] drop-shadow-[0_20px_45px_rgba(0,0,0,0.6)]'
+                      }
+                    />
+                    {/* Bottom gentle gradient fade into page bg */}
+                    <div className="absolute bottom-0 inset-x-0 h-16 bg-gradient-to-t from-[#081331] to-transparent pointer-events-none z-20" />
+                  </div>
+                </div>
+
               </div>
             </div>
           </div>
         </section>
 
         {/* ========================================================
-            SEÇÃO 2 — QUEM É DANIEL PAULO (PINNED SCROLL VIDEO)
+            SEÇÃO 2 — HERO 2: CLÍNICA & FORMAÇÃO (TERNO ESCURO)
+            Scroll scrubbing restaurado com ScrollVideo.
+            Daniel posicionado à direita em tamanho ampliado no desktop.
+            Texto e credenciais mantidos integralmente à esquerda.
+            NÃO APLICAR scaleX(-1) (já gravado espelhado).
         ======================================================== */}
         <section
-          id="sobre"
-          className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 lg:grid lg:grid-cols-12 lg:gap-10 relative"
-          aria-label="Sobre o profissional Daniel Paulo"
+          id="sobre-daniel"
+          ref={hero2TrackRef}
+          className="relative min-h-[170svh] lg:min-h-[195vh] border-t border-[#122456]/60 bg-gradient-to-b from-[#081331] via-[#060e24] to-[#081331]"
+          aria-label="Clínica, Docência e Formação Continuada de Daniel Paulo"
         >
-          {/* Coluna de texto: ordem 1 no mobile para leitura direta */}
-          <div className="lg:col-span-7 order-1 lg:order-2 lg:sticky lg:top-24 lg:self-start lg:min-h-[calc(100svh-6rem)] lg:flex lg:flex-col lg:justify-center py-10 lg:py-0 space-y-4 sm:space-y-6">
-            <div className="inline-flex items-center gap-2 text-xs font-semibold tracking-wider text-[#4FD6F4] uppercase">
-              <Compass className="w-4 h-4" />
-              <span>Sobre o Profissional</span>
+          {/* Pinned inner container */}
+          <div className="sticky top-18 lg:top-20 min-h-[calc(100svh-4.5rem)] lg:h-[calc(100vh-5rem)] flex items-center overflow-hidden py-6 lg:py-0">
+            {/* Subtle glow behind */}
+            <div className="absolute inset-0 overflow-hidden pointer-events-none">
+              <div className="absolute top-1/3 left-1/6 w-[500px] h-[500px] bg-[#4FD6F4]/5 rounded-full blur-[140px]" />
+              <div className="absolute left-0 top-1/2 -translate-y-1/2 text-[12vw] font-black text-white/[0.015] tracking-tighter select-none pointer-events-none uppercase font-['Plus_Jakarta_Sans'] hidden lg:block">
+                Acolhimento
+              </div>
             </div>
 
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white font-['Plus_Jakarta_Sans']">
-              Uma escuta atenta, humanizada e acolhedora
-            </h2>
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10">
+              <div className="flex flex-col lg:flex-row items-center justify-between gap-6 lg:gap-10 relative">
+                
+                {/* Text Layer: left side */}
+                <div className="w-full lg:w-[50%] xl:w-[48%] space-y-5 sm:space-y-6 text-center lg:text-left pt-2 lg:pt-0 relative z-20 pointer-events-auto">
+                  <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0e1e4a] border border-[#1e3878] text-xs font-semibold text-[#4FD6F4]">
+                    <Compass className="w-3.5 h-3.5 text-[#4FD6F4]" />
+                    <span>Clínica, Docência e Formação Continuada</span>
+                  </div>
 
-            <div className="space-y-3.5 sm:space-y-4 text-slate-300 text-sm sm:text-base md:text-lg leading-relaxed font-light">
-              <p>
-                Daniel Paulo atua como psicanalista, terapeuta, professor acadêmico e palestrante, desenvolvendo conteúdos e processos voltados ao desenvolvimento pessoal e profissional.
-              </p>
-              <p>
-                Na área de atendimento psicanalítico, prioriza uma abordagem sem julgamentos morais, proporcionando aos analisandos um espaço de diálogo sincero onde as próprias angústias e questionamentos possam ser elaborados.
-              </p>
-              <p>
-                Sua trajetória profissional também reúne sólida vivência em gestão de pessoas, liderança e coordenação pedagógica, complementada por estudos em Psicanálise, Neurociências, Filosofia e Antropologia.
-              </p>
-            </div>
+                  <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white font-['Plus_Jakarta_Sans'] leading-[1.18]">
+                    Uma escuta atenta, humanizada e fundamentada
+                  </h2>
 
-            <div className="pt-2 flex flex-wrap gap-4">
-              <Link
-                to="/sobre"
-                className="inline-flex items-center gap-2 text-sm font-semibold text-[#4FD6F4] hover:text-[#36c5e5] group"
-              >
-                <span>Conhecer a biografia completa</span>
-                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-              </Link>
-              <span className="text-slate-600 hidden sm:inline">•</span>
-              <Link
-                to="/sobre/trajetoria"
-                className="inline-flex items-center gap-2 text-sm font-semibold text-slate-300 hover:text-white group"
-              >
-                <span>Ver linha do tempo profissional</span>
-                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-              </Link>
-            </div>
-          </div>
+                  <div className="space-y-4 text-slate-300 text-sm sm:text-base md:text-lg leading-relaxed font-light">
+                    <p>
+                      O atendimento psicanalítico oferece um espaço neutro e confidencial para que você fale livremente sobre o que incomoda, investigando o inconsciente e ressignificando repetições que geram sofrimento.
+                    </p>
+                    <p>
+                      A prática clínica de Daniel Paulo é sustentada por permanente dedicação acadêmica, atuando como professor na Faculdade Anhanguera e aprofundando pesquisas em Neurociências, Filosofia e Antropologia.
+                    </p>
+                  </div>
 
-          {/* Coluna do vídeo: trilha de scroll */}
-          <div ref={aboutTrackRef} className="lg:col-span-5 order-2 lg:order-1 relative h-[200svh] lg:h-[240vh]">
-            <div className="sticky top-20 h-[calc(100svh-5rem)] flex items-center justify-center">
-              <div className="relative aspect-[9/16] h-[min(calc(100svh-7rem),calc((100vw-2rem)*16/9))] max-w-full rounded-3xl overflow-hidden shadow-2xl border border-[#1e3878] bg-[#060e24] transition-shadow duration-500 hover:shadow-[0_0_35px_rgba(79,214,244,0.25)]">
-                <ScrollVideo
-                  src={
-                    isDesktop
-                      ? '/assets/videos/hero-claro-desktop-scroll.mp4'
-                      : '/assets/videos/hero-claro-mobile-scroll.mp4'
-                  }
-                  poster={
-                    isDesktop
-                      ? '/assets/videos/hero-claro-desktop-poster.jpg'
-                      : '/assets/videos/hero-claro-mobile-poster.jpg'
-                  }
-                  altText="Daniel Paulo em ambiente claro e acolhedor de atendimento com vista ao mar"
-                  className="w-full h-full"
-                  videoClassName="object-cover object-center lg:object-[80%_center]"
-                  trackRef={aboutTrackRef}
-                  topOffset={80}
-                  endAt={0.68}
-                />
-                <div className="absolute bottom-3 inset-x-3 p-3 rounded-xl bg-[#081331]/80 backdrop-blur-md border border-[#1e3878]/60 text-center pointer-events-none z-10">
-                  <p className="text-[11px] text-slate-400">
-                    Ambientação visual e simbólica de estudo contínuo
-                  </p>
+                  {/* Action CTAs */}
+                  <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
+                    <Link
+                      to="/psicanalista-em-jundiai"
+                      className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl font-bold text-sm sm:text-base bg-[#4FD6F4] text-[#081331] hover:bg-[#36c5e5] transition-all shadow-md"
+                    >
+                      <span>Atendimento em Jundiaí</span>
+                      <ArrowRight className="w-4 h-4" />
+                    </Link>
+
+                    <Link
+                      to="/sobre"
+                      className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-semibold text-sm sm:text-base bg-[#0e1e4a] text-slate-200 hover:text-white hover:bg-[#162c66] border border-[#1e3878] transition-all"
+                    >
+                      <span>Conhecer a Biografia</span>
+                    </Link>
+                  </div>
+
+                  {/* Credentials / Badges */}
+                  <div className="pt-2 grid grid-cols-1 sm:grid-cols-3 gap-3 text-left">
+                    <div className="p-3.5 rounded-xl bg-[#081331]/90 border border-[#1e3878]/70">
+                      <span className="text-xs text-[#4FD6F4] font-semibold block">Docência Superior</span>
+                      <span className="text-xs text-slate-300">Prof. Faculdade Anhanguera</span>
+                    </div>
+                    <div className="p-3.5 rounded-xl bg-[#081331]/90 border border-[#1e3878]/70">
+                      <span className="text-xs text-[#4FD6F4] font-semibold block">Especializações</span>
+                      <span className="text-xs text-slate-300">Neurociências & Filosofia</span>
+                    </div>
+                    <div className="p-3.5 rounded-xl bg-[#081331]/90 border border-[#1e3878]/70">
+                      <span className="text-xs text-[#4FD6F4] font-semibold block">Enquadre Clínico</span>
+                      <span className="text-xs text-slate-300">Adultos e Adolescentes</span>
+                    </div>
+                  </div>
                 </div>
+
+                {/* Video Layer: right side (Hero 2 - Terno Escuro WebM transparente com scroll scrub) */}
+                <div className="w-full lg:w-[52%] xl:w-[55%] lg:absolute lg:right-0 lg:bottom-0 lg:top-0 flex items-end justify-center lg:justify-end pointer-events-none z-10">
+                  <div className="relative w-full max-w-[360px] sm:max-w-[420px] lg:max-w-none -mt-8 sm:-mt-12 lg:mt-0 h-[440px] sm:h-[500px] lg:h-[88vh] xl:h-[92vh] max-h-[860px] overflow-hidden">
+                    <ScrollVideo
+                      key={isDesktop ? 'desktop-hero-2' : 'mobile-hero-2'}
+                      src={
+                        isDesktop
+                          ? '/assets/videos/hero-02-terno-escuro-desktop.webm'
+                          : '/assets/videos/hero-02-terno-escuro-mobile.webm'
+                      }
+                      poster={
+                        isDesktop
+                          ? '/assets/videos/hero-02-terno-escuro-desktop-poster.webp'
+                          : '/assets/videos/hero-02-terno-escuro-mobile-poster.webp'
+                      }
+                      altText="Daniel Paulo de terno escuro"
+                      orientation={isDesktop ? 'horizontal' : 'vertical'}
+                      transparentBg={true}
+                      trackRef={hero2TrackRef}
+                      aspectRatio="none"
+                      className="w-full h-full"
+                      videoClassName={
+                        isDesktop
+                          ? 'w-full h-full object-cover object-[18%_bottom] drop-shadow-[0_25px_60px_rgba(0,0,0,0.7)]'
+                          : 'w-full h-full object-cover object-[center_30%] drop-shadow-[0_20px_45px_rgba(0,0,0,0.6)]'
+                      }
+                    />
+                    {/* Bottom gentle gradient fade into page bg */}
+                    <div className="absolute bottom-0 inset-x-0 h-16 bg-gradient-to-t from-[#060e24] to-transparent pointer-events-none z-20" />
+                  </div>
+                </div>
+
               </div>
             </div>
           </div>
         </section>
 
         {/* ========================================================
-            SEÇÃO 3 — OLHAR PARA DENTRO: AUTOCONHECIMENTO (PINNED SCROLL VIDEO)
+            SEÇÃO 3 — OLHAR PARA DENTRO: AUTOCONHECIMENTO (SCROLL VIDEO)
         ======================================================== */}
         <section
           id="autoconhecimento"
@@ -417,7 +475,9 @@ export const HomePage: React.FC = () => {
         </section>
 
         {/* ========================================================
-            SEÇÃO 5 — ATENDIMENTO ONLINE E PRESENCIAL (PINNED SCROLL VIDEO)
+            SEÇÃO 5 — ATENDIMENTO ONLINE E PRESENCIAL (MODALIDADES FLEXÍVEIS)
+            Mobile: utiliza modalidades-flexiveis-mobile.mp4 conforme briefing
+            Desktop: utiliza daniel-mesa-telefone-horizontal-scroll.mp4
         ======================================================== */}
         <section
           id="modalidades"
@@ -450,7 +510,7 @@ export const HomePage: React.FC = () => {
                 <div>
                   <h4 className="font-bold text-white text-base">Atendimento Online</h4>
                   <p className="text-xs sm:text-sm text-slate-300 mt-1">
-                    Realizado com sigilo e ética profissional e comodidade, em atendimento online.
+                    Realizado com sigilo, ética profissional e comodidade geográfica para qualquer localidade do Brasil ou exterior.
                   </p>
                 </div>
               </div>
@@ -458,12 +518,12 @@ export const HomePage: React.FC = () => {
 
             <div className="pt-2 flex flex-wrap gap-4">
               <a
-                href={getWhatsAppUrl('Olá Daniel, gostaria de saber sobre as opções de atendimento online e presencial em Jundiaí.')}
+                href={getWhatsAppUrl('Olá Daniel, gostaria de consultar a disponibilidade para atendimento [online / presencial em Jundiaí].')}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl font-bold text-sm bg-[#4FD6F4] text-[#081331] hover:bg-[#36c5e5] transition-all shadow-md"
               >
-                <WhatsAppIcon className="w-4 h-4" />
+                <WhatsAppIcon className="w-4 h-4 fill-current" />
                 <span>Consultar Disponibilidade</span>
               </a>
               
@@ -476,18 +536,31 @@ export const HomePage: React.FC = () => {
             </div>
           </div>
 
-          {/* Coluna do vídeo: mesa/telefone - no celular quadro aspect-video w-full e trilha curta h-[140svh] */}
+          {/* Coluna do vídeo: no celular modalidades-flexiveis-mobile-scroll.mp4; no desktop daniel-mesa-telefone-horizontal-scroll.mp4 */}
           <div ref={section5TrackRef} className="lg:col-span-5 relative h-[140svh] lg:h-[240vh]">
             <div className="sticky top-20 h-[calc(100svh-5rem)] flex items-center justify-center">
               <div className="relative aspect-video w-full max-w-full rounded-3xl overflow-hidden shadow-2xl border border-[#1e3878] bg-[#060e24]">
                 <ScrollVideo
-                  src="/assets/videos/daniel-mesa-telefone-horizontal-scroll.mp4"
-                  poster="/assets/videos/daniel-mesa-telefone-horizontal-poster.jpg"
+                  key={isDesktop ? 'desktop-modalidades' : 'mobile-modalidades'}
+                  src={
+                    isDesktop
+                      ? '/assets/videos/daniel-mesa-telefone-horizontal-scroll.mp4'
+                      : '/assets/videos/modalidades-flexiveis-mobile-scroll.mp4'
+                  }
+                  poster={
+                    isDesktop
+                      ? '/assets/videos/daniel-mesa-telefone-horizontal-poster.jpg'
+                      : '/assets/videos/modalidades-flexiveis-mobile-poster.webp'
+                  }
                   altText="Daniel ao telefone organizando contatos"
                   className="w-full h-full"
                   aspectRatio="none"
+                  orientation="horizontal"
                   trackRef={section5TrackRef}
                 />
+                <div className="absolute bottom-2 right-3 text-[10px] text-slate-400/80 bg-black/40 px-2 py-0.5 rounded backdrop-blur-sm pointer-events-none z-20">
+                  Flexibilidade de atendimento
+                </div>
               </div>
             </div>
           </div>
@@ -644,8 +717,12 @@ export const HomePage: React.FC = () => {
         </section>
 
         {/* ========================================================
+            SEÇÃO NOVIDADE — REFLEXÕES EM VÍDEO (REELS INSTAGRAM)
+        ======================================================== */}
+        <ReelsSection />
+
+        {/* ========================================================
             SEÇÃO 9 — ARTIGOS E REFLEXÕES (BLOG)
-            Exibida apenas quando houver ao menos 1 artigo publicado (draft: false)
         ======================================================== */}
         {publishedBlogPosts.length > 0 && (
           <section id="artigos" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -671,26 +748,45 @@ export const HomePage: React.FC = () => {
               {publishedBlogPosts.map((post) => (
                 <article
                   key={post.slug}
-                  className="bg-[#0e1e4a]/60 border border-[#1e3878] rounded-2xl p-6 flex flex-col justify-between hover:border-[#4FD6F4]/50 transition-colors"
+                  className="bg-[#0e1e4a]/60 border border-[#1e3878] rounded-2xl overflow-hidden flex flex-col justify-between hover:border-[#4FD6F4]/50 transition-colors group shadow-lg"
                 >
-                  <div className="space-y-3">
-                    <span className="text-xs font-semibold text-[#4FD6F4] uppercase">
-                      {post.category}
-                    </span>
-                    <h3 className="text-lg font-bold text-white font-['Plus_Jakarta_Sans']">
-                      {post.title}
-                    </h3>
-                    <p className="text-sm text-slate-300 font-light leading-relaxed">
-                      {post.description}
-                    </p>
+                  {post.coverImage && (
+                    <div className="aspect-[16/9] w-full overflow-hidden bg-[#081331]">
+                      <img
+                        src={post.coverImage}
+                        alt={post.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        loading="lazy"
+                      />
+                    </div>
+                  )}
+
+                  <div className="p-6 space-y-3 flex-1 flex flex-col justify-between">
+                    <div>
+                      <div className="flex items-center justify-between text-xs mb-2">
+                        <span className="text-xs font-semibold text-[#4FD6F4] uppercase">
+                          {post.category}
+                        </span>
+                        <span className="text-slate-400 text-[11px]">{post.readingTime}</span>
+                      </div>
+                      
+                      <h3 className="text-lg font-bold text-white font-['Plus_Jakarta_Sans'] group-hover:text-[#4FD6F4] transition-colors leading-snug">
+                        {post.title}
+                      </h3>
+                      
+                      <p className="text-xs sm:text-sm text-slate-300 font-light leading-relaxed mt-2 line-clamp-3">
+                        {post.description}
+                      </p>
+                    </div>
+
+                    <Link
+                      to={`/blog/${post.slug}`}
+                      className="inline-flex items-center gap-1.5 text-xs font-bold text-[#4FD6F4] hover:underline pt-4 border-t border-[#1e3878]/60 mt-4"
+                    >
+                      <span>Ler artigo completo</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </Link>
                   </div>
-                  <Link
-                    to={`/blog/${post.slug}`}
-                    className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#4FD6F4] hover:underline pt-4 border-t border-[#1e3878]/60 mt-4"
-                  >
-                    <span>Ler artigo</span>
-                    <ArrowRight className="w-4 h-4" />
-                  </Link>
                 </article>
               ))}
             </div>
@@ -813,7 +909,7 @@ export const HomePage: React.FC = () => {
                       rel="noopener noreferrer"
                       className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-3 sm:px-8 sm:py-4 rounded-xl font-bold text-sm sm:text-base bg-[#4FD6F4] text-[#081331] hover:bg-[#36c5e5] transition-all transform hover:-translate-y-0.5 shadow-xl shadow-[#4FD6F4]/20"
                     >
-                      <WhatsAppIcon className="w-5 h-5" />
+                      <WhatsAppIcon className="w-5 h-5 fill-current" />
                       <span>Conversar no WhatsApp</span>
                     </a>
 

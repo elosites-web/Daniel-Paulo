@@ -84,7 +84,7 @@ export const TrajetoriaPage: React.FC = () => {
                 </p>
 
                 <p className="text-xs text-slate-400 mt-2">
-                  Informação profissional confirmada para o histórico curricular de Daniel Paulo.
+                  {exp.notes || 'Informação profissional confirmada para o histórico curricular de Daniel Paulo.'}
                 </p>
               </div>
 

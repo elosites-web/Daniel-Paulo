@@ -122,11 +122,9 @@ export const SeoHead: React.FC<SeoHeadProps> = ({
     const sameAsUrls = [
       siteConfig.social.instagram,
       siteConfig.social.linkedin,
+      siteConfig.social.facebook,
+      siteConfig.social.tiktok,
     ].filter(Boolean);
-
-    if (siteConfig.social.facebookUrl) {
-      sameAsUrls.push(siteConfig.social.facebookUrl);
-    }
 
     const personSchema = {
       '@context': 'https://schema.org',

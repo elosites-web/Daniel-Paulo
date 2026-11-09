@@ -5,6 +5,7 @@ export interface ExperienceItem {
   period: string;
   isCurrent?: boolean;
   category: 'educacao' | 'gestao' | 'lideranca';
+  notes?: string;
 }
 
 export const professionalExperiences: ExperienceItem[] = [
@@ -15,6 +16,7 @@ export const professionalExperiences: ExperienceItem[] = [
     period: 'Desde 01/04/2024 (Ativo)',
     isCurrent: true,
     category: 'educacao',
+    notes: 'Docência no ensino superior em desenvolvimento humano e áreas afins.',
   },
   {
     id: 'unika',
@@ -22,26 +24,14 @@ export const professionalExperiences: ExperienceItem[] = [
     organization: 'Unika Negócios e Desenvolvimento Humano',
     period: 'Janeiro de 2021 a Julho de 2025',
     category: 'educacao',
+    notes: 'Coordenação pedagógica e facilitação de cursos e treinamentos.',
   },
   {
-    id: 'risso',
-    role: 'Gerente Comercial',
-    organization: 'Transportadora Risso',
-    period: 'Agosto de 2019 a Janeiro de 2020',
+    id: 'gestao-corporativa-anterior',
+    role: 'Atuação Prévia em Gestão Logística e Liderança Comercial',
+    organization: 'Setor Corporativo e Operacional',
+    period: 'Experiência Anterior Consolidada',
     category: 'gestao',
-  },
-  {
-    id: 'bsm',
-    role: 'Supervisor de Logística',
-    organization: 'BSM Logística e Transportes',
-    period: 'Abril de 2017 a Julho de 2019',
-    category: 'gestao',
-  },
-  {
-    id: 'sao-carlos',
-    role: 'Supervisor Geral',
-    organization: 'Casa São Carlos',
-    period: 'Março de 2014 a Março de 2017',
-    category: 'lideranca',
+    notes: 'Supervisão de operações logísticas, liderança de equipes e gestão comercial prévia à consolidação clínica e acadêmica.',
   },
 ];

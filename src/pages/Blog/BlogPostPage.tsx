@@ -1,13 +1,12 @@
 import React, { useRef } from 'react';
-import { useParams, Link, Navigate } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { SeoHead } from '../../components/seo/SeoHead';
 import { Breadcrumbs } from '../../components/breadcrumbs/Breadcrumbs';
 import { ReadingProgressBar } from '../../components/ui/ReadingProgressBar';
 import { initialBlogPosts } from '../../data/blogPosts';
 import { siteConfig, getWhatsAppUrl } from '../../config/siteConfig';
-import { Clock, User, ArrowLeft, ArrowRight, AlertCircle, BookOpen, ShieldCheck, Tag } from 'lucide-react';
+import { Clock, User, ArrowLeft, ArrowRight, AlertCircle, BookOpen, ShieldCheck, Tag, Library } from 'lucide-react';
 import { WhatsAppIcon } from '../../components/ui/WhatsAppIcon';
-
 import { NotFoundPage } from '../NotFound/NotFoundPage';
 
 export const BlogPostPage: React.FC = () => {
@@ -16,8 +15,7 @@ export const BlogPostPage: React.FC = () => {
 
   const post = initialBlogPosts.find((p) => p.slug === slug);
 
-  // Return 404 for draft: true in production (show drafts only with import.meta.env.DEV)
-  if (!post || (post.draft && !import.meta.env.DEV)) {
+  if (!post) {
     return <NotFoundPage />;
   }
 
@@ -105,17 +103,6 @@ export const BlogPostPage: React.FC = () => {
         title={post.title}
         description={post.description}
         canonicalPath={`/blog/${post.slug}`}
-        noindex={Boolean(post.draft)}
-        articleSchema={
-          !post.draft
-            ? {
-                headline: post.title,
-                description: post.description,
-                datePublished: post.date || undefined,
-                dateModified: post.updated || post.date || undefined,
-              }
-            : undefined
-        }
         breadcrumbs={[
           { name: 'Blog', url: '/blog' },
           { name: post.title, url: `/blog/${post.slug}` }
@@ -125,7 +112,7 @@ export const BlogPostPage: React.FC = () => {
       {/* Reading Progress Bar at the top of the viewport */}
       <ReadingProgressBar label={`Progresso de leitura: ${post.title}`} />
 
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12 space-y-12">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12 space-y-10">
         
         <Breadcrumbs
           items={[
@@ -142,10 +129,10 @@ export const BlogPostPage: React.FC = () => {
               <span className="px-3 py-1 rounded-full bg-[#122456] text-[#4FD6F4] font-semibold uppercase tracking-wider">
                 {post.category}
               </span>
-              {post.draft && (
-                <span className="px-3 py-1 rounded-full bg-amber-950/80 border border-amber-600/50 text-amber-300 font-semibold flex items-center gap-1">
-                  <span className="w-1.5 h-1.5 rounded-full bg-amber-400"></span>
-                  Rascunho Editorial em Revisão
+              {post.editorialStatus && (
+                <span className="px-3 py-1 rounded-full bg-amber-950/80 border border-amber-500/40 text-amber-300 font-medium flex items-center gap-1.5">
+                  <AlertCircle className="w-3.5 h-3.5 text-amber-400" />
+                  {post.editorialStatus}
                 </span>
               )}
             </div>
@@ -169,6 +156,28 @@ export const BlogPostPage: React.FC = () => {
               </div>
             </div>
           </header>
+
+          {/* Cover Image */}
+          {post.coverImage && (
+            <div className="rounded-2xl overflow-hidden border border-[#1e3878] aspect-[16/9] w-full bg-[#081331] shadow-2xl">
+              <img
+                src={post.coverImage}
+                alt={`Imagem de capa: ${post.title}`}
+                className="w-full h-full object-cover"
+                loading="eager"
+              />
+            </div>
+          )}
+
+          {/* Editorial Banner */}
+          {siteConfig.showEditorialReviewNotice && (
+            <div className="p-4 rounded-xl bg-amber-950/30 border border-amber-600/40 text-amber-200/90 flex items-start gap-3 text-xs leading-relaxed">
+              <AlertCircle className="w-4 h-4 flex-shrink-0 text-amber-400 mt-0.5" />
+              <p>
+                <strong>Nota Editorial:</strong> Este artigo é uma proposta estruturada para avaliação e homologação de Daniel Paulo, integrando embasamento científico e referências bibliográficas verificáveis.
+              </p>
+            </div>
+          )}
 
           {/* TL;DR Summary Box (2-3 lines) */}
           <div id="resumo" className="p-6 rounded-2xl bg-[#0e1e4a]/80 border border-[#4FD6F4]/40 shadow-lg space-y-2">
@@ -203,6 +212,26 @@ export const BlogPostPage: React.FC = () => {
           <div className="text-slate-200 space-y-6 text-base sm:text-lg leading-relaxed font-light">
             {renderArticleContent(post.content)}
           </div>
+
+          {/* Academic References Section */}
+          {post.academicReferences && post.academicReferences.length > 0 && (
+            <div id="referencias" className="p-6 rounded-2xl bg-[#081331] border border-[#1e3878] space-y-3 mt-8">
+              <div className="flex items-center gap-2 text-[#4FD6F4]">
+                <Library className="w-4 h-4" />
+                <h4 className="text-sm font-bold uppercase tracking-wider">
+                  Referências Bibliográficas & Científicas
+                </h4>
+              </div>
+              <ul className="space-y-3 text-xs text-slate-300">
+                {post.academicReferences.map((ref, idx) => (
+                  <li key={idx} className="p-3 rounded-lg bg-[#0e1e4a]/50 border border-[#1e3878]/60 space-y-1">
+                    <p className="font-mono text-slate-200">{ref.citation}</p>
+                    <p className="text-slate-400 text-[11px]">{ref.note}</p>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
 
           {/* Tags */}
           <div id="tags" className="pt-6 border-t border-[#1e3878] flex flex-wrap items-center gap-2">

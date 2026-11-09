@@ -3,10 +3,12 @@ import { Link } from 'react-router-dom';
 import { SeoHead } from '../../components/seo/SeoHead';
 import { Breadcrumbs } from '../../components/breadcrumbs/Breadcrumbs';
 import { initialBlogPosts } from '../../data/blogPosts';
-import { BookOpen, Clock, ArrowRight } from 'lucide-react';
+import { futureTopicsList } from '../../data/futureTopics';
+import { siteConfig } from '../../config/siteConfig';
+import { BookOpen, ArrowRight, AlertCircle, Sparkles, Clock, FileText } from 'lucide-react';
 
 export const BlogPage: React.FC = () => {
-  // Only published articles (draft: false)
+  // Articles proposals available for evaluation
   const publishedPosts = initialBlogPosts.filter((post) => !post.draft);
 
   return (
@@ -39,55 +41,130 @@ export const BlogPage: React.FC = () => {
           </p>
         </div>
 
-        {/* Articles List or Short Notice */}
-        {publishedPosts.length === 0 ? (
-          <div id="aviso-artigos" className="py-16 max-w-xl mx-auto text-center space-y-4 bg-[#0e1e4a]/40 border border-[#1e3878] rounded-3xl p-8 sm:p-12">
-            <div className="w-12 h-12 rounded-2xl bg-[#122456] text-[#4FD6F4] flex items-center justify-center mx-auto">
-              <Clock className="w-6 h-6" />
+        {/* Editorial Status Notice (Section 7 from brief) */}
+        {siteConfig.showEditorialReviewNotice && (
+          <div className="p-4 sm:p-5 rounded-2xl bg-[#0e1e4a]/80 border border-amber-500/40 text-amber-200 flex items-start gap-3.5 shadow-md">
+            <AlertCircle className="w-5 h-5 flex-shrink-0 mt-0.5 text-amber-400" />
+            <div className="space-y-1 text-xs sm:text-sm leading-relaxed">
+              <strong className="text-amber-300 font-semibold">Proposta Editorial em Avaliação:</strong>
+              <p className="text-amber-200/90 font-light">
+                Os artigos abaixo constituem propostas de conteúdo estruturadas para o projeto institucional de Daniel Paulo, acompanhadas de fundamentação científica e referências bibliográficas, disponibilizadas para leitura, apreciação e validação do autor.
+              </p>
             </div>
-            <h2 className="text-xl sm:text-2xl font-bold text-white font-['Plus_Jakarta_Sans']">
-              Em breve, novos artigos
-            </h2>
-            <p className="text-sm text-slate-300 font-light leading-relaxed">
-              Novos artigos e publicações reflexivas serão disponibilizados em breve.
-            </p>
           </div>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {publishedPosts.map((post) => (
-              <article
-                key={post.slug}
-                className="bg-[#0e1e4a]/70 border border-[#1e3878] rounded-2xl p-6 hover:border-[#4FD6F4]/50 transition-all flex flex-col justify-between group shadow-xl"
-              >
-                <div className="space-y-3">
-                  <div className="flex items-center justify-between text-xs">
-                    <span className="text-[#4FD6F4] font-semibold uppercase tracking-wider">{post.category}</span>
-                    <span className="text-slate-400">{post.readingTime}</span>
+        )}
+
+        {/* Articles Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {publishedPosts.map((post) => (
+            <article
+              key={post.slug}
+              className="bg-[#0e1e4a]/70 border border-[#1e3878] rounded-2xl overflow-hidden hover:border-[#4FD6F4]/50 transition-all flex flex-col justify-between group shadow-xl"
+            >
+              <div>
+                {/* Cover Image */}
+                {post.coverImage && (
+                  <div className="aspect-[16/9] w-full overflow-hidden bg-[#081331] relative">
+                    <img
+                      src={post.coverImage}
+                      alt={`Imagem ilustrativa do artigo: ${post.title}`}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0e1e4a] via-transparent to-transparent opacity-80" />
+                    <span className="absolute bottom-3 left-4 text-[11px] font-semibold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-[#081331]/90 text-[#4FD6F4] backdrop-blur-sm border border-[#4FD6F4]/20">
+                      {post.category}
+                    </span>
+                  </div>
+                )}
+
+                <div className="p-6 space-y-3">
+                  <div className="flex items-center justify-between text-xs text-slate-400">
+                    <span className="flex items-center gap-1">
+                      <Clock className="w-3.5 h-3.5 text-[#4FD6F4]" />
+                      {post.readingTime}
+                    </span>
+                    {post.editorialStatus && (
+                      <span className="text-[11px] text-amber-400/90 font-medium">
+                        Proposta em avaliação
+                      </span>
+                    )}
                   </div>
 
-                  <h3 className="text-lg font-bold text-white group-hover:text-[#4FD6F4] transition-colors font-['Plus_Jakarta_Sans'] leading-snug">
-                    {post.title}
-                  </h3>
+                  <h2 className="text-lg font-bold text-white group-hover:text-[#4FD6F4] transition-colors font-['Plus_Jakarta_Sans'] leading-snug">
+                    <Link to={`/blog/${post.slug}`}>
+                      {post.title}
+                    </Link>
+                  </h2>
 
-                  <p className="text-xs sm:text-sm text-slate-300 font-light leading-relaxed">
+                  <p className="text-xs sm:text-sm text-slate-300 font-light leading-relaxed line-clamp-3">
                     {post.description}
                   </p>
                 </div>
+              </div>
 
-                <div className="pt-5 border-t border-[#1e3878]/60 mt-4 flex items-center justify-between">
-                  <span className="text-xs text-slate-400">Por {post.author}</span>
-                  <Link
-                    to={`/blog/${post.slug}`}
-                    className="inline-flex items-center gap-1 text-xs font-bold text-[#4FD6F4] group-hover:underline"
-                  >
-                    <span>Ler Artigo</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </Link>
+              <div className="p-6 pt-0 border-t border-[#1e3878]/60 mt-2 flex items-center justify-between">
+                <span className="text-xs text-slate-400">Por {post.author}</span>
+                <Link
+                  to={`/blog/${post.slug}`}
+                  className="inline-flex items-center gap-1.5 text-xs font-bold text-[#4FD6F4] group-hover:translate-x-1 transition-transform"
+                >
+                  <span>Ler Artigo Completo</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        {/* Section: Próximas Pautas Editoriais em Análise (Future Topics) */}
+        <section className="pt-8 border-t border-[#122456] space-y-6">
+          <div className="flex items-center gap-2.5">
+            <div className="w-8 h-8 rounded-lg bg-[#122456] text-[#4FD6F4] flex items-center justify-center">
+              <Sparkles className="w-4 h-4" />
+            </div>
+            <div>
+              <h2 className="text-xl sm:text-2xl font-bold text-white font-['Plus_Jakarta_Sans']">
+                Próximas Pautas em Análise Editorial
+              </h2>
+              <p className="text-xs sm:text-sm text-slate-400">
+                Pautas temáticas propostas para futuro desenvolvimento de conteúdo, aguardando validação de Daniel Paulo.
+              </p>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            {futureTopicsList.map((topic) => (
+              <div
+                key={topic.id}
+                className="p-5 rounded-2xl bg-[#081331] border border-[#1e3878]/70 space-y-3 relative hover:border-[#4FD6F4]/30 transition-colors"
+              >
+                <div className="flex items-center justify-between text-xs gap-2">
+                  <span className="px-2.5 py-0.5 rounded-full bg-[#122456] text-[#4FD6F4] font-medium text-[11px]">
+                    {topic.category}
+                  </span>
+                  <span className="text-[10px] text-amber-400 px-2 py-0.5 rounded bg-amber-950/40 border border-amber-600/30">
+                    Pauta em estudo
+                  </span>
                 </div>
-              </article>
+
+                <h3 className="text-sm sm:text-base font-bold text-white font-['Plus_Jakarta_Sans'] leading-snug">
+                  {topic.title}
+                </h3>
+
+                <p className="text-xs text-slate-300 font-light leading-relaxed">
+                  {topic.description}
+                </p>
+
+                <div className="pt-2 text-[11px] text-slate-500 flex items-center gap-1">
+                  <FileText className="w-3 h-3 text-[#4FD6F4]" />
+                  <span>{topic.editorialStatus}</span>
+                </div>
+              </div>
             ))}
           </div>
-        )}
+        </section>
+
       </div>
     </>
   );

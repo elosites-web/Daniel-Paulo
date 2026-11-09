@@ -9,8 +9,11 @@ export interface BlogPost {
   author: string;
   readingTime: string;
   draft: boolean;
+  editorialStatus?: string;
+  coverImage?: string;
   tldr: string;
   tableOfContents: { id: string; text: string }[];
+  academicReferences?: { citation: string; note: string }[];
   content: string; // Markdown or structured sections
 }
 
@@ -25,13 +28,22 @@ export const initialBlogPosts: BlogPost[] = [
     tags: ['autoconhecimento', 'identidade', 'máscaras sociais', 'autenticidade'],
     author: 'Daniel Paulo',
     readingTime: '5 min de leitura',
-    draft: true,
+    draft: false,
+    editorialStatus: 'Proposta editorial — aguardando validação de Daniel Paulo',
+    coverImage: '/assets/fotos-daniel/daniel-paulo-palestrante-microfone-pb.webp',
     tldr: 'Desempenhar papéis no trabalho e na família é natural e funcional. O sofrimento começa quando nos forçamos a vestir personagens fictícios para sermos aceitos, distanciando-nos da nossa verdade interior.',
     tableOfContents: [
       { id: 'papeis-vs-personagens', text: '1. A diferença entre papéis e personagens' },
-      { id: 'o-peso-da-mascara', text: '2. O custo psicológico de agradar a todos' },
-      { id: 'reconhecendo-sinais', text: '3. Sinais de que você está atuando em excesso' },
-      { id: 'o-caminho-da-escuta', text: '4. Como a escuta psicanalítica acolhe a autenticidade' }
+      { id: 'a-visao-de-goffman', text: '2. A dramaturgia social segundo Erving Goffman' },
+      { id: 'o-peso-da-mascara', text: '3. O custo psicológico de agradar a todos' },
+      { id: 'reconhecendo-sinais', text: '4. Sinais de que você está atuando em excesso' },
+      { id: 'o-caminho-da-escuta', text: '5. Como a escuta psicanalítica acolhe a autenticidade' }
+    ],
+    academicReferences: [
+      {
+        citation: 'GOFFMAN, Erving. The Presentation of Self in Everyday Life. New York: Doubleday Anchor Books, 1959. (Ed. bras.: A representação do eu na vida cotidiana. Petrópolis: Vozes, 1985).',
+        note: 'Referência sociológica fundamental sobre como os indivíduos constroem fachadas e operam em palcos públicos (front stage) e bastidores privados (backstage).'
+      }
     ],
     content: `
 Todos nós desempenhamos diferentes papéis ao longo de um único dia. Somos profissionais em nossos locais de trabalho, filhos, parceiros, amigos ou cidadãos em uma fila de supermercado. Adaptar nossa postura a cada um desses cenários não é falsidade; é uma competência social saudável que viabiliza a convivência humana.
@@ -49,21 +61,27 @@ Ao criar um personagem:
 - Concordamos com decisões com as quais intimamente não nos alinhamos.
 - Sorrimos em situações em que nosso desejo era apenas silenciar.
 
-### 2. O custo psicológico de agradar a todos {#o-peso-da-mascara}
+### 2. A dramaturgia social segundo Erving Goffman {#a-visao-de-goffman}
 
-Sustentar uma armadura consome uma quantidade imensa de energia psíquica. No final do dia, a sensação recorrente é de exaustão inexplicável, mesmo após jornadas de trabalho relativamente leves. 
+Na sociologia clássica, o pesquisador Erving Goffman (*The Presentation of Self in Everyday Life*, 1959) propôs a célebre metáfora dramatúrgica: na vida social, os indivíduos operam como atores em um palco (*front stage*), mobilizando cenários, vestimentas e posturas expressivas para gerenciar a impressão causada nos outros.
 
-O paradoxo da máscara social é cruel: quando o personagem recebe aplausos ou aprovação, nossa consciência mais profunda não se sente amada. Afinal, pensamos: *"Eles gostam de quem eu finjo ser, não de quem eu realmente sou"*.
+Há, contudo, os bastidores (*backstage*), onde o sujeito deveria poder suspender a performance e repousar sua armadura. O sofrimento contemporâneo se intensifica precisamente quando esse bastidor desaparece: a pessoa passa a acreditar que precisa atuar ininterruptamente, nas redes sociais, na família e no trabalho, perdendo o refúgio seguro onde pode apenas ser quem é.
 
-### 3. Sinais de que você está atuando em excesso {#reconhecendo-sinais}
+### 3. O custo psicológico de agradar a todos {#o-peso-da-mascara}
 
-Existem alguns indícios sutis que merecem nossa atenção:
+Sustentar uma armadura contínua consome imensa energia psíquica. No final do dia, a sensação recorrente é de exaustão inexplicável, mesmo após jornadas de trabalho relativamente leves. 
+
+O paradoxo da máscara social é cruel: quando o personagem recebe aplausos ou aprovação, nossa consciência mais profunda não se sente acolhida. Afinal, pensamos: *"Eles admiram quem eu finjo ser, e não quem eu realmente sou"*.
+
+### 4. Sinais de que você está atuando em excesso {#reconhecendo-sinais}
+
+Existem alguns indícios que merecem nossa atenção cuidadosa:
 1. **Sensação de vazio logo após elogios públicos.**
 2. **Dificuldade de ficar sozinho**, pois o silêncio faz emergir a angústia de não saber quem você é sem plateia.
 3. **Medo constante de ser "descoberto"**, como se você fosse uma fraude.
 4. **Perda de contato com suas preferências básicas**, tendo dificuldade em dizer o que gosta de fazer, ouvir ou comer quando ninguém está olhando.
 
-### 4. Como a escuta psicanalítica acolhe a autenticidade {#o-caminho-da-escuta}
+### 5. Como a escuta psicanalítica acolhe a autenticidade {#o-caminho-da-escuta}
 
 A psicanálise não busca eliminar seus papéis nem exigir que você saia desabafando sem filtro em todas as esferas da sua vida. A proposta de uma escuta acolhedora e sem julgamentos é criar um espaço onde a máscara não seja necessária.
 
@@ -80,24 +98,33 @@ Ao falar livremente sobre suas contradições, medos e desejos reprimidos, você
     tags: ['psicanálise', 'primeira sessão', 'escuta terapêutica', 'inconsciente'],
     author: 'Daniel Paulo',
     readingTime: '6 min de leitura',
-    draft: true,
+    draft: false,
+    editorialStatus: 'Proposta editorial — aguardando validação de Daniel Paulo',
+    coverImage: '/assets/ambiente/ambiente-mar-por-do-sol-daniel.webp',
     tldr: 'A psicanálise é um convite à fala livre em um ambiente de confidencialidade e respeito. A primeira sessão é um momento inicial de acolhimento para que você exponha suas inquietações no seu próprio ritmo.',
     tableOfContents: [
       { id: 'o-que-e-psicanalise', text: '1. O que é a psicanálise na prática?' },
       { id: 'o-inconsciente-cotidiano', text: '2. O inconsciente presente no dia a dia' },
-      { id: 'a-primeira-sessao', text: '3. Como funciona o primeiro contato' },
-      { id: 'sem-roteiro-nem-provas', text: '4. Um espaço sem provas e sem julgamento' }
+      { id: 'o-enquadre-analitico', text: '3. O enquadre analítico segundo diretrizes da IPA e APsaA' },
+      { id: 'a-primeira-sessao', text: '4. Como funciona o primeiro contato' },
+      { id: 'sem-roteiro-nem-provas', text: '5. Um espaço sem provas e sem julgamento' }
+    ],
+    academicReferences: [
+      {
+        citation: 'INTERNATIONAL PSYCHOANALYTICAL ASSOCIATION (IPA) & AMERICAN PSYCHOANALYTIC ASSOCIATION (APsaA). Guidelines on Psychoanalytic Practice, Ethics and Analytic Setting, 2018–2023.',
+        note: 'Normas deontológicas e técnicas internacionais que fundamentam a confidencialidade absoluta, o acolhimento neutro e a preservação do enquadre clínico singular.'
+      }
     ],
     content: `
 Para muitas pessoas que pensam em iniciar um processo terapêutico, a psicanálise ainda vem acompanhada de mitos e imagens estereotipadas: o divã antigo, o analista impassível em silêncio absoluto ou a ideia de que apenas memórias remotas da infância serão discutidas.
 
-Na realidade contemporânea, a psicanálise é, antes de tudo, uma experiência viva de escuta e linguagem.
+Na realidade contemporânea, a psicanálise é, antes de tudo, uma experiência viva de escuta, linguagem e vínculo seguro.
 
 ### 1. O que é a psicanálise na prática? {#o-que-e-psicanalise}
 
 A psicanálise propõe que grande parte de nossas escolhas, angústias, repetições de relacionamento e bloqueios cotidianos é influenciada por processos dos quais não temos consciência plena — o chamado inconsciente.
 
-Diferente de abordagens focadas exclusivamente em treinamento de tarefas ou correção mecânica de condutas, a psicanálise respeita o tempo singular de cada indivíduo. Trata-se de dar voz àquilo que você costuma calar, investigando o significado particular que as coisas têm para você.
+Diferente de abordagens focadas exclusivamente em treinamento de tarefas ou correção mecânica de condutas, a psicanálise respeita o tempo singular de cada indivíduo. Trata-se de dar voz àquilo que você costuma calar, investigando o significado particular que as coisas têm para a sua história.
 
 ### 2. O inconsciente presente no dia a dia {#o-inconsciente-cotidiano}
 
@@ -105,22 +132,31 @@ O inconsciente não é um compartimento misterioso e inalcançável. Ele se mani
 - Naquela decisão que tomamos sabendo racionalmente que trará dor de cabeça, mas repetimos mesmo assim.
 - No esquecimento repetitivo de compromissos com certas pessoas.
 - Em sensações físicas de aperto no peito sem causa médica aparente diante de determinadas conversas.
-- Nos sonhos e nos atos falhos da nossa comunicação.
+- Nos sonhos e nos atos falhos da nossa comunicação cotidiana.
 
 Dar atenção a essas pistas permite compreender a lógica dos nossos próprios sentimentos.
 
-### 3. Como funciona o primeiro contato {#a-primeira-sessao}
+### 3. O enquadre analítico segundo diretrizes da IPA e APsaA {#o-enquadre-analitico}
+
+Conforme articulado pelas diretrizes formativas da Associação Psicanalítica Internacional (IPA) e da American Psychoanalytic Association (APsaA), o enquadre psicanalítico (*setting*) não é uma rigidez protocolar, mas uma salvaguarda ética. 
+
+O enquadre estabelece três pilares indispensáveis:
+1. **Regra fundamental da associação livre:** o paciente é encorajado a dizer tudo o que lhe vier à mente, sem censura prévia.
+2. **Atenção flutuante e neutralidade acolhedora:** o psicanalista suspende conselhos pessoais ou julgamentos morais para sintonizar os significados subjacentes à fala.
+3. **Constância e confidencialidade:** previsibilidade e sigilo absoluto que tornam o espaço seguro para a revelação da dor.
+
+### 4. Como funciona o primeiro contato {#a-primeira-sessao}
 
 A primeira sessão não é uma prova nem uma entrevista inquisitiva. É um momento de aproximação:
-- **Você fala sobre o que o trouxe:** pode ser uma angústia bem definida (um luto, uma mudança de carreira, uma separação) ou simplesmente uma sensação difusa de que algo precisa de atenção.
+- **Você fala sobre o que o trouxe:** pode ser uma angústia bem definida (um luto, uma transição profissional, uma separação) ou simplesmente uma sensação difusa de desorientação.
 - **Não há ordem certa:** você não precisa preparar um resumo cronológico da sua vida. Pode começar pelo que aconteceu hoje de manhã ou por uma lembrança aleatória.
 - **Alinhamento mútuo:** é também uma oportunidade para você sentir como é estar naquele espaço de escuta, tirar dúvidas práticas sobre os encontros e verificar se essa relação de diálogo faz sentido para você.
 
-### 4. Um espaço sem provas e sem julgamento {#sem-roteiro-nem-provas}
+### 5. Um espaço sem provas e sem julgamento {#sem-roteiro-nem-provas}
 
 Em uma conversa analítica não existem respostas "certas" ou "erradas". Ninguém vai avaliar se seus sentimentos são moralmente louváveis ou condenáveis. 
 
-O papel do psicanalista não é dar conselhos de vida prontos, mas ajudar você a escutar a sua própria voz por trás do barulho das expectativas alheias.
+O papel do psicanalista não é ditar regras de vida prontas, mas ajudar você a escutar a sua própria voz por trás do barulho das expectativas externas.
     `,
   },
   {
@@ -133,13 +169,22 @@ O papel do psicanalista não é dar conselhos de vida prontos, mas ajudar você 
     tags: ['procrastinação', 'comportamento', 'inteligência emocional', 'hábitos'],
     author: 'Daniel Paulo',
     readingTime: '5 min de leitura',
-    draft: true,
+    draft: false,
+    editorialStatus: 'Proposta editorial — aguardando validação de Daniel Paulo',
+    coverImage: '/assets/ambiente/ambiente-praia-entardecer.webp',
     tldr: 'Adiar tarefas essenciais raramente tem a ver com falta de tempo ou preguiça. Frequentemente é uma tentativa de evitar emoções desconfortáveis, como o medo da imperfeição, do erro ou da avaliação alheia.',
     tableOfContents: [
       { id: 'alem-da-preguica', text: '1. Por que chamar de preguiça não resolve' },
-      { id: 'o-mecanismo-emocional', text: '2. O circuito da evitação emocional' },
-      { id: 'perfeccionismo-e-adiamento', text: '3. A armadilha do perfeccionismo' },
-      { id: 'passos-para-o-dialogo', text: '4. Como começar a lidar com a paralisia' }
+      { id: 'o-estudo-sirois-pychyl', text: '2. A ciência da evitação emocional (Sirois & Pychyl, 2013)' },
+      { id: 'o-mecanismo-emocional', text: '3. O circuito da evitação do afeto' },
+      { id: 'perfeccionismo-e-adiamento', text: '4. A armadilha do perfeccionismo' },
+      { id: 'passos-para-o-dialogo', text: '5. Como começar a lidar com a paralisia' }
+    ],
+    academicReferences: [
+      {
+        citation: 'SIROIS, Fuschia; PYCHYL, Timothy. Procrastination and the priority of short-term mood regulation: Consequences for future self. Social and Personality Psychology Compass, v. 7, n. 2, p. 115-127, 2013.',
+        note: 'Estudo seminal demonstrando que a procrastinação é primordialmente um problema de regulação de humor de curto prazo diante de tarefas estressantes, e não um déficit de gestão de tempo.'
+      }
     ],
     content: `
 Quase todo mundo já vivenciou a clássica experiência de sentar em frente ao computador para produzir algo importante e, meia hora depois, se pegar limpando gavetas, respondendo mensagens secundárias ou navegando em redes sociais.
@@ -148,36 +193,40 @@ No fim do dia, restam a frustração e a autocobrança: *"Por que não consigo s
 
 ### 1. Por que chamar de preguiça não resolve {#alem-da-preguica}
 
-Reduzir a procrastinação a uma falha de caráter ou a um suposto "defeito de fábrica" chamado preguiça é um erro comum que apenas aprofunda a culpa.
+Reduzir a procrastinação a uma falha de caráter ou a um suposto "defeito de fábrica" chamado preguiça é um erro comum que apenas aprofunda a culpa e a paralisia.
 
-A preguiça envolve o desejo deliberado de não fazer nada e desfrutar do descanso. Quem procrastina, ao contrário, não descansa: sofre intensamente durante todo o tempo em que adia a tarefa. A cabeça permanece ocupada pela cobrança interna, gerando um estado contínuo de estresse.
+A preguiça envolve o desejo deliberado de não fazer nada e desfrutar genuinamente do descanso. Quem procrastina, ao contrário, não descansa: sofre intensamente durante todo o tempo em que adia a tarefa. A cabeça permanece ocupada pela cobrança interna, gerando um estado contínuo de estresse e angústia.
 
-### 2. O circuito da evitação emocional {#o-mecanismo-emocional}
+### 2. A ciência da evitação emocional (Sirois & Pychyl, 2013) {#o-estudo-sirois-pychyl}
 
-Estudos do comportamento e reflexões psicanalíticas convergem em um ponto fundamental: **a procrastinação é uma estratégia de regulação emocional**.
+Em um estudo de referência amplamente citado na psicologia comportamental, os pesquisadores Fuschia Sirois e Timothy Pychyl (*Procrastination and the priority of short-term mood regulation*, 2013) demonstraram que a procrastinação não é uma deficiência na gestão do tempo ou nas ferramentas de agenda.
 
-Adiamos aquilo que, em nosso íntimo, desperta desconforto:
-- Medo de descobrir que não somos tão competentes quanto gostaríamos.
-- Tédio ou sensação de falta de sentido na tarefa.
-- Ansiedade diante da possibilidade de reprovação por superiores ou colegas.
-- Sensação de estar sobrecarregado sem saber por onde partir.
+Segundo Sirois & Pychyl, adiar tarefas decorre da **priorização imediata do humor de curto prazo**. Quando uma tarefa desperta ansiedade, insegurança, tédio ou medo de fracassar, o cérebro opta pelo alívio instantâneo, esquivando-se da tarefa presente para proteger o humor no momento — transferindo o custo ampliado para o "eu do futuro".
 
-Quando você desvia para uma distração rápida, seu cérebro experimenta um alívio momentâneo daquela ansiedade. O custo, contudo, é acumulá-la para as horas seguintes.
+### 3. O circuito da evitação do afeto {#o-mecanismo-emocional}
 
-### 3. A armadilha do perfeccionismo {#perfeccionismo-e-adiamento}
+Tanto as pesquisas comportamentais quanto a reflexão psicanalítica apontam para a mesma constatação: adiamos aquilo que mobiliza afetos difíceis de tolerar:
+- Medo de descobrir que nosso desempenho não alcança o ideal imaginado.
+- Tédio ou sensação de falta de sentido pessoal na demanda imposta.
+- Ansiedade diante do julgamento ou reprovação alheia.
+- Sensação de sobrecarga diante de um projeto que parece grande demais.
 
-Muitas vezes, quem mais procrastina é justamente quem tem os padrões mais elevados. A fantasia do trabalho impecável paralisa: *"Se eu não posso fazer de maneira brilhante hoje, prefiro não começar agora"*.
+Quando você se esquiva para uma distração imediata, há um breve alívio químico de ansiedade. Mas esse alívio é temporário e cobra juros altos em culpa e autocrítica.
 
-Essa ilusão de controle cria uma barreira quase intransponível. A única forma de o trabalho nascer passa a ser sob a pressão desesperada do prazo final, quando a adrenalina da urgência supera o medo da crítica.
+### 4. A armadilha do perfeccionismo {#perfeccionismo-e-adiamento}
 
-### 4. Como começar a lidar com a paralisia {#passos-para-o-dialogo}
+Muitas vezes, quem mais procrastina é justamente quem tem as exigências internas mais severas. A fantasia do trabalho impecável paralisa: *"Se eu não posso fazer de maneira brilhante hoje, prefiro não começar agora"*.
 
-Não existem fórmulas milagrosas de produtividade tóxica, mas alguns caminhos reflexivos ajudam a reatar a relação com suas ações:
-- **Reduza o primeiro passo ao ridículo:** se escrever um relatório de dez páginas parece assustador, comprometa-se a abrir o documento e redigir apenas dois parágrafos.
-- **Tolere o rascunho inicial imperfeito:** permita-se produzir algo mediano no primeiro momento para ter matéria-prima sobre a qual trabalhar depois.
-- **Investigue o que a tarefa desperta em você:** pergunte-se honestamente: *"O que realmente me assusta ao concluir este projeto?"*.
+Essa ilusão de controle cria uma barreira quase intransponível. A única forma de o trabalho nascer passa a ser sob a pressão desesperada do prazo final, quando o medo do prejuízo prático finalmente supera o medo da crítica.
 
-Aprender a acolher a própria vulnerabilidade é o início de uma relação mais leve e honesta com o trabalho e consigo mesmo.
+### 5. Como começar a lidar com a paralisia {#passos-para-o-dialogo}
+
+Não existem fórmulas mágicas de produtividade artificial, mas alguns passos reflexivos ajudam a restabelecer a relação com a ação:
+- **Reduza o primeiro passo ao mínimo:** se redigir um relatório parece assustador, comprometa-se a abrir o arquivo e escrever apenas duas linhas de rascunho.
+- **Tolere a imperfeição da primeira versão:** permita-se produzir algo preliminar para ter matéria-prima sobre a qual trabalhar depois.
+- **Investigue o que a tarefa desperta em você:** pergunte-se com honestidade: *"O que realmente me amedronta caso eu termine isso agora?"*.
+
+Aprender a acolher a própria vulnerabilidade é o início de uma convivência mais lúcida e generosa com o trabalho e consigo mesmo.
     `,
   },
 ];

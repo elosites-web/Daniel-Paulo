@@ -14,6 +14,10 @@ interface ScrollVideoProps {
   onProgress?: (progress: number) => void;
   keepPosterOnZeroProgress?: boolean;
   aspectRatio?: string;
+  orientation?: 'horizontal' | 'vertical';
+  posterWidth?: number | string;
+  posterHeight?: number | string;
+  transparentBg?: boolean;
   animateOnView?: boolean;
   startAt?: number;
   endAt?: number;
@@ -30,6 +34,10 @@ export const ScrollVideo: React.FC<ScrollVideoProps> = ({
   onProgress,
   keepPosterOnZeroProgress = false,
   aspectRatio = 'aspect-[9/16]',
+  orientation,
+  posterWidth,
+  posterHeight,
+  transparentBg = false,
   animateOnView = false,
   startAt = 0,
   endAt = 1,
@@ -187,15 +195,14 @@ export const ScrollVideo: React.FC<ScrollVideoProps> = ({
 
   const containerAspectClass = aspectRatio === 'none' ? '' : aspectRatio;
   const isHorizontal =
-    aspectRatio.includes('16/9') ||
-    aspectRatio.includes('aspect-video') ||
-    src.includes('horizontal') ||
-    poster.includes('horizontal') ||
-    src.includes('desktop') ||
-    poster.includes('desktop');
+    orientation !== undefined
+      ? orientation === 'horizontal'
+      : aspectRatio.includes('16/9') || aspectRatio.includes('aspect-video');
 
-  const posterWidth = isHorizontal ? '800' : '450';
-  const posterHeight = isHorizontal ? '450' : '800';
+  const defaultWidth = isHorizontal ? '800' : '450';
+  const defaultHeight = isHorizontal ? '450' : '800';
+  const resolvedPosterWidth = posterWidth !== undefined ? String(posterWidth) : defaultWidth;
+  const resolvedPosterHeight = posterHeight !== undefined ? String(posterHeight) : defaultHeight;
 
   // Informative vs decorative accessibility
   const isInformative = Boolean(altText && altText !== 'Vídeo institucional Daniel Paulo');
@@ -208,10 +215,12 @@ export const ScrollVideo: React.FC<ScrollVideoProps> = ({
     isDataSaving ||
     (keepPosterOnZeroProgress && !isPastZeroProgress);
 
+  const bgClass = transparentBg ? 'bg-transparent' : 'bg-[#060e24]';
+
   return (
     <motion.div
       ref={containerRef}
-      className={`relative overflow-hidden isolate z-0 ${containerAspectClass} bg-[#060e24] ${className}`}
+      className={`relative overflow-hidden isolate z-0 ${containerAspectClass} ${bgClass} ${className}`}
       {...(isInformative ? { role: 'img', 'aria-label': altText } : { 'aria-hidden': 'true' })}
       {...(animateOnView && !reducedMotion
         ? {
@@ -226,8 +235,8 @@ export const ScrollVideo: React.FC<ScrollVideoProps> = ({
       <img
         src={poster}
         alt={isInformative ? altText : ''}
-        width={posterWidth}
-        height={posterHeight}
+        width={resolvedPosterWidth}
+        height={resolvedPosterHeight}
         loading={priority ? 'eager' : 'lazy'}
         fetchPriority={priority ? 'high' : 'auto'}
         decoding="async"
