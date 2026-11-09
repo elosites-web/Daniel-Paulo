@@ -25,7 +25,7 @@ export const ThemeSwitcher: React.FC<ThemeSwitcherProps> = ({
       onClick={toggleTheme}
       aria-label={labelText}
       title={labelText}
-      className={`relative inline-flex items-center justify-center gap-2 p-2.5 rounded-xl border border-[#1e3878] bg-[#0e1e4a]/70 hover:bg-[#122456] text-slate-200 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-[#4FD6F4] focus:ring-offset-2 focus:ring-offset-[#081331] cursor-pointer ${className}`}
+      className={`relative inline-flex items-center justify-center gap-2 p-2.5 rounded-xl border border-[#1e3878] bg-[#0e1e4a]/70 hover:bg-[#122456] text-slate-200 hover:text-white transition-colors focus:outline-none cursor-pointer ${className}`}
     >
       <div className="relative w-5 h-5 flex items-center justify-center">
         <AnimatePresence mode="wait" initial={false}>

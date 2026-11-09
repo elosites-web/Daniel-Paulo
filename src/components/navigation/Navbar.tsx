@@ -106,7 +106,7 @@ export const Navbar: React.FC = () => {
           {/* Logo brand - using symbol icon without tiny text, sized 44x44 with clear HTML text */}
           <Link
             to="/"
-            className="flex items-center gap-2.5 sm:gap-3 group focus:outline-none focus:ring-2 focus:ring-[#4FD6F4] rounded-lg p-1 shrink-0 animate-brand-slide-down"
+            className="flex items-center gap-2.5 sm:gap-3 group focus:outline-none rounded-lg p-1 shrink-0 animate-brand-slide-down"
             aria-label="Daniel Paulo - Página Inicial"
           >
             <img
@@ -150,7 +150,7 @@ export const Navbar: React.FC = () => {
                   >
                     <button
                       type="button"
-                      className={`flex items-center gap-0.5 px-1.5 xl:px-2.5 2xl:px-3 py-1.5 text-xs xl:text-sm font-medium rounded-md transition-colors whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-[#4FD6F4] ${
+                      className={`flex items-center gap-0.5 px-1.5 xl:px-2.5 2xl:px-3 py-1.5 text-xs xl:text-sm font-medium rounded-md transition-colors whitespace-nowrap focus:outline-none ${
                         isActive
                           ? 'text-[#4FD6F4] bg-[#0e1e4a]'
                           : 'text-slate-200 hover:text-white hover:bg-[#0e1e4a]/60'
@@ -197,7 +197,7 @@ export const Navbar: React.FC = () => {
                 <Link
                   key={item.label}
                   to={item.href}
-                  className={`px-1.5 xl:px-2.5 2xl:px-3 py-1.5 text-xs xl:text-sm font-medium rounded-md transition-colors whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-[#4FD6F4] ${
+                  className={`px-1.5 xl:px-2.5 2xl:px-3 py-1.5 text-xs xl:text-sm font-medium rounded-md transition-colors whitespace-nowrap focus:outline-none ${
                     isActive
                       ? 'text-[#4FD6F4] bg-[#0e1e4a]'
                       : 'text-slate-200 hover:text-white hover:bg-[#0e1e4a]/60'
@@ -216,7 +216,7 @@ export const Navbar: React.FC = () => {
               href={getWhatsAppUrl()}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-2.5 xl:px-4 py-2 rounded-lg text-xs xl:text-sm font-semibold bg-[#4FD6F4] text-[#081331] hover:bg-[#36c5e5] transition-all transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#4FD6F4] focus:ring-offset-[#081331] shadow-lg shadow-[#4FD6F4]/10 whitespace-nowrap shrink-0"
+              className="inline-flex items-center gap-1.5 px-2.5 xl:px-4 py-2 rounded-lg text-xs xl:text-sm font-semibold bg-[#4FD6F4] text-[#081331] hover:bg-[#36c5e5] transition-all transform hover:-translate-y-0.5 focus:outline-none shadow-lg shadow-[#4FD6F4]/10 whitespace-nowrap shrink-0"
               aria-label="Abrir conversa no WhatsApp com Daniel Paulo"
             >
               <WhatsAppIcon className="w-3.5 h-3.5 xl:w-4 xl:h-4" />
@@ -231,7 +231,7 @@ export const Navbar: React.FC = () => {
               href={getWhatsAppUrl()}
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-[#4FD6F4] text-[#081331] hover:bg-[#36c5e5] transition-all shadow-md shrink-0 whitespace-nowrap"
+              className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-[#4FD6F4] text-[#081331] hover:bg-[#36c5e5] transition-all focus:outline-none shadow-md shrink-0 whitespace-nowrap"
               aria-label="Agendar via WhatsApp"
             >
               <WhatsAppIcon className="w-3.5 h-3.5" />
@@ -245,7 +245,7 @@ export const Navbar: React.FC = () => {
                 updateHeaderPosition();
                 setIsMobileMenuOpen(!isMobileMenuOpen);
               }}
-              className="p-2 sm:p-2.5 rounded-lg text-slate-300 hover:text-white hover:bg-[#0e1e4a] focus:outline-none focus:ring-2 focus:ring-[#4FD6F4]"
+              className="p-2 sm:p-2.5 rounded-lg text-slate-300 hover:text-white hover:bg-[#0e1e4a] focus:outline-none"
               aria-label={isMobileMenuOpen ? 'Fechar menu de navegação' : 'Abrir menu de navegação'}
               aria-expanded={isMobileMenuOpen}
               aria-controls="mobile-navigation-portal"

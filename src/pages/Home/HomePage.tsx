@@ -8,6 +8,7 @@ import { ReelsSection } from '../../components/home/ReelsSection';
 import { servicesData } from '../../data/services';
 import { siteConfig, getWhatsAppUrl } from '../../config/siteConfig';
 import { useMediaQuery } from '../../hooks/useMediaQuery';
+import { useReducedMotion } from '../../hooks/useReducedMotion';
 import { WhatsAppIcon } from '../../components/ui/WhatsAppIcon';
 import { initialBlogPosts } from '../../data/blogPosts';
 import { 
@@ -73,6 +74,7 @@ const homeFaqs = [
 
 export const HomePage: React.FC = () => {
   const isDesktop = useMediaQuery('(min-width: 1024px)');
+  const reducedMotion = useReducedMotion();
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
   const publishedBlogPosts = initialBlogPosts.filter((post) => !post.draft);
   
@@ -106,11 +108,11 @@ export const HomePage: React.FC = () => {
         <section
           id="inicio"
           ref={hero1TrackRef}
-          className="relative min-h-0 py-6 sm:py-10 lg:py-0 lg:min-h-[195vh] -mt-6 sm:-mt-8"
+          className="relative min-h-0 py-4 sm:py-6 lg:py-0 lg:min-h-[195vh]"
           aria-label="Apresentação institucional Daniel Paulo"
         >
           {/* Pinned inner container on desktop, natural flow on mobile */}
-          <div className="relative lg:sticky lg:top-20 min-h-0 lg:h-[calc(100vh-5rem)] flex items-center overflow-visible lg:overflow-hidden py-4 sm:py-6 lg:py-0">
+          <div className="relative lg:sticky lg:top-20 min-h-0 lg:min-h-[calc(100vh-5rem)] lg:h-[calc(100vh-5rem)] flex items-start lg:items-center overflow-visible py-4 sm:py-6 lg:py-2 xl:py-0">
             {/* Subtle atmospheric glow behind */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
               <div className="absolute top-1/4 right-1/6 w-[550px] h-[550px] bg-[#4FD6F4]/10 rounded-full blur-[140px]" />
@@ -122,39 +124,38 @@ export const HomePage: React.FC = () => {
             </div>
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full h-full relative z-10 flex items-center">
-              <div className="flex flex-col lg:flex-row items-center justify-between gap-6 lg:gap-10 w-full lg:h-full relative animate-fade-in">
+              <div className="flex flex-col lg:flex-row items-center justify-between gap-6 lg:gap-10 w-full lg:h-full relative">
                 
                 {/* Text Layer: left side */}
                 <motion.div
-                  variants={heroContainerVariants}
-                  initial="hidden"
+                  variants={reducedMotion ? undefined : heroContainerVariants}
+                  initial={reducedMotion ? false : 'hidden'}
                   animate="visible"
-                  className="w-full lg:w-[50%] xl:w-[48%] space-y-5 sm:space-y-6 text-center lg:text-left pt-2 lg:pt-0 relative z-20 pointer-events-auto"
+                  className="w-full lg:w-[50%] xl:w-[48%] space-y-3.5 sm:space-y-4 lg:space-y-3.5 xl:space-y-5 2xl:space-y-6 text-center lg:text-left pt-1 sm:pt-2 lg:pt-0 relative z-20 pointer-events-auto"
                 >
-                  <motion.div variants={heroItemVariants} className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0e1e4a] border border-[#1e3878] text-xs font-semibold text-[#4FD6F4]">
-                    <Sparkles className="w-3.5 h-3.5 text-[#4FD6F4]" />
-                    <span>Espaço de Escuta e Autoconhecimento</span>
+                  <motion.div variants={reducedMotion ? undefined : heroItemVariants} className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0e1e4a] border border-[#1e3878] text-[11px] sm:text-xs font-semibold text-[#4FD6F4] shrink-0 max-w-full">
+                    <Sparkles className="w-3.5 h-3.5 text-[#4FD6F4] shrink-0" />
+                    <span className="truncate sm:whitespace-normal">Espaço de Escuta e Autoconhecimento</span>
                   </motion.div>
 
-                  <motion.h1 variants={heroItemVariants} className="text-3xl sm:text-5xl lg:text-5xl xl:text-6xl font-bold tracking-tight text-white font-['Plus_Jakarta_Sans'] leading-[1.12]">
-                    Psicanalista <br />
-                    Terapia humanizada em Jundiaí{' '}
-                    <span className="text-[#4FD6F4] block sm:inline-block">
+                  <motion.h1 variants={reducedMotion ? undefined : heroItemVariants} className="text-3xl sm:text-4xl lg:text-[2.25rem] xl:text-5xl 2xl:text-6xl font-bold tracking-tight text-white font-['Plus_Jakarta_Sans'] leading-[1.14]">
+                    Psicanalista | Terapia humanizada em Jundiaí <br />
+                    <span className="text-[#4FD6F4] block">
                       Atendimento online e presencial
                     </span>
                   </motion.h1>
 
-                  <motion.p variants={heroItemVariants} className="text-base sm:text-lg text-slate-300 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-light">
+                  <motion.p variants={reducedMotion ? undefined : heroItemVariants} className="text-sm sm:text-base lg:text-sm xl:text-base 2xl:text-lg text-slate-300 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-light">
                     Uma abordagem humanizada, acolhedora e sem julgamentos morais. Um lugar seguro para contemplar suas profundezas, elaborar conflitos e reencontrar sua autenticidade.
                   </motion.p>
 
                   {/* CTAs */}
-                  <motion.div variants={heroItemVariants} className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
+                  <motion.div variants={reducedMotion ? undefined : heroItemVariants} className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 sm:gap-4 pt-1 sm:pt-2">
                     <a
                       href={getWhatsAppUrl('Olá Daniel, conheci seu site institucional e gostaria de agendar uma conversa sobre atendimento.')}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-7 py-4 rounded-xl font-bold text-base bg-[#4FD6F4] text-[#081331] hover:bg-[#36c5e5] transition-all transform hover:-translate-y-0.5 shadow-xl shadow-[#4FD6F4]/20 focus:outline-none focus:ring-4 focus:ring-[#4FD6F4]/40"
+                      className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-3.5 xl:px-7 xl:py-4 rounded-xl font-bold text-sm sm:text-base bg-[#4FD6F4] text-[#081331] hover:bg-[#36c5e5] transition-all transform hover:-translate-y-0.5 shadow-xl shadow-[#4FD6F4]/20 focus:outline-none focus:ring-4 focus:ring-[#4FD6F4]/40"
                       aria-label="Agendar conversa pelo WhatsApp com Daniel Paulo"
                     >
                       <WhatsAppIcon className="w-5 h-5 fill-current" />
@@ -163,7 +164,7 @@ export const HomePage: React.FC = () => {
 
                     <Link
                       to="/psicanalise"
-                      className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl font-semibold text-base bg-[#0e1e4a] text-slate-200 hover:text-white hover:bg-[#162c66] border border-[#1e3878] transition-all"
+                      className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3.5 xl:px-6 xl:py-4 rounded-xl font-semibold text-sm sm:text-base bg-[#0e1e4a] text-slate-200 hover:text-white hover:bg-[#162c66] border border-[#1e3878] transition-all"
                     >
                       <span>Conhecer a Psicanálise</span>
                       <ArrowRight className="w-4 h-4" />
@@ -171,17 +172,17 @@ export const HomePage: React.FC = () => {
                   </motion.div>
 
                   {/* Key feature pills */}
-                  <motion.div variants={heroItemVariants} className="pt-2 flex flex-wrap items-center justify-center lg:justify-start gap-4 sm:gap-6 text-xs text-slate-400">
+                  <motion.div variants={reducedMotion ? undefined : heroItemVariants} className="pt-1 xl:pt-2 flex flex-wrap items-center justify-center lg:justify-start gap-3 sm:gap-4 xl:gap-6 text-xs text-slate-400">
                     <div className="flex items-center gap-2">
-                      <ShieldCheck className="w-4 h-4 text-[#4FD6F4]" />
+                      <ShieldCheck className="w-4 h-4 text-[#4FD6F4] shrink-0" />
                       <span>Sigilo e Ética Profissional</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <MapPin className="w-4 h-4 text-[#4FD6F4]" />
+                      <MapPin className="w-4 h-4 text-[#4FD6F4] shrink-0" />
                       <span>Presencial em Jundiaí & Online</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <GraduationCap className="w-4 h-4 text-[#4FD6F4]" />
+                      <GraduationCap className="w-4 h-4 text-[#4FD6F4] shrink-0" />
                       <span>Formação Multidisciplinar</span>
                     </div>
                   </motion.div>
@@ -240,7 +241,7 @@ export const HomePage: React.FC = () => {
           aria-label="Clínica, Docência e Formação Continuada de Daniel Paulo"
         >
           {/* Pinned inner container on desktop, natural flow on mobile */}
-          <div className="relative lg:sticky lg:top-20 min-h-0 lg:h-[calc(100vh-5rem)] flex items-center overflow-visible lg:overflow-hidden py-4 sm:py-6 lg:py-0">
+          <div className="relative lg:sticky lg:top-20 min-h-0 lg:min-h-[calc(100vh-5rem)] lg:h-[calc(100vh-5rem)] flex items-start lg:items-center overflow-visible py-4 sm:py-6 lg:py-2 xl:py-0">
             {/* Subtle glow behind */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
               <div className="absolute top-1/3 right-1/6 w-[500px] h-[500px] bg-[#4FD6F4]/5 rounded-full blur-[140px]" />
