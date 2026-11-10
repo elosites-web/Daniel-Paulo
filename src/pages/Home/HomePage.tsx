@@ -108,7 +108,7 @@ export const HomePage: React.FC = () => {
         <section
           id="inicio"
           ref={hero1TrackRef}
-          className="relative min-h-0 py-4 sm:py-6 lg:py-0 lg:min-h-[195vh]"
+          className="relative z-10 min-h-0 py-4 sm:py-6 lg:py-0 lg:min-h-[195vh] bg-[#081331]"
           aria-label="Apresentação institucional Daniel Paulo"
         >
           {/* Pinned inner container on desktop, natural flow on mobile */}
@@ -237,11 +237,11 @@ export const HomePage: React.FC = () => {
         <section
           id="sobre-daniel"
           ref={hero2TrackRef}
-          className="relative min-h-0 py-6 sm:py-10 lg:py-0 lg:min-h-[195vh] border-t border-[#122456]/60 bg-gradient-to-b from-[#081331] via-[#060e24] to-[#081331]"
+          className="relative z-20 min-h-0 py-6 sm:py-10 lg:py-0 lg:min-h-[195vh] border-t border-[#122456]/60 bg-gradient-to-b from-[#081331] via-[#060e24] to-[#081331]"
           aria-label="Clínica, Docência e Formação Continuada de Daniel Paulo"
         >
           {/* Pinned inner container on desktop, natural flow on mobile */}
-          <div className="relative lg:sticky lg:top-20 min-h-0 lg:min-h-[calc(100vh-5rem)] lg:h-[calc(100vh-5rem)] flex items-start lg:items-center overflow-visible py-4 sm:py-6 lg:py-2 xl:py-0">
+          <div className="relative lg:sticky lg:top-20 min-h-0 lg:min-h-[calc(100vh-5rem)] flex items-center overflow-visible py-4 sm:py-6 lg:py-3 xl:py-4">
             {/* Subtle glow behind */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
               <div className="absolute top-1/3 right-1/6 w-[500px] h-[500px] bg-[#4FD6F4]/5 rounded-full blur-[140px]" />
@@ -250,38 +250,27 @@ export const HomePage: React.FC = () => {
               </div>
             </div>
 
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full h-full relative z-10 flex items-center">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10 flex items-center py-2 lg:py-4">
               <div className="flex flex-col lg:flex-row items-center justify-between gap-6 lg:gap-10 w-full lg:h-full relative animate-fade-in">
                 
-                {/* Video Layer: left side (Hero 2 - Terno Escuro WebM transparente com scroll scrub) */}
-                <div className="w-full lg:w-[50%] xl:w-[52%] lg:absolute lg:left-0 lg:bottom-0 lg:top-0 order-2 lg:order-1 flex items-end justify-center lg:justify-start pointer-events-none z-10">
+                {/* Video Layer: left side (Hero 2 - Terno Escuro com scroll scrub vertical perfeito) */}
+                <div className="w-full lg:w-[48%] xl:w-[50%] lg:absolute lg:left-0 lg:bottom-0 lg:top-0 order-2 lg:order-1 flex items-end justify-center lg:justify-start pointer-events-none z-10 h-full">
                   <div className="relative w-full max-w-[340px] sm:max-w-[400px] lg:max-w-none h-[380px] sm:h-[440px] lg:h-full max-h-[820px] flex items-end justify-center lg:justify-start overflow-hidden mx-auto mt-2 sm:mt-4 lg:mt-0">
                     <ScrollVideo
-                      key={isDesktop ? 'desktop-hero-2' : 'mobile-hero-2'}
-                      src={
-                        isDesktop
-                          ? '/assets/videos/hero-02-terno-escuro-desktop.webm'
-                          : '/assets/videos/hero-02-terno-escuro-mobile.webm'
-                      }
-                      poster={
-                        isDesktop
-                          ? '/assets/videos/hero-02-terno-escuro-desktop-poster.webp'
-                          : '/assets/videos/hero-02-terno-escuro-mobile-poster.webp'
-                      }
+                      key="hero-2-video"
+                      src="/assets/videos/hero-02-terno-escuro-mobile.webm"
+                      poster="/assets/videos/hero-02-terno-escuro-mobile-poster.webp"
                       altText="Daniel Paulo de terno escuro"
-                      orientation={isDesktop ? 'horizontal' : 'vertical'}
+                      orientation="vertical"
                       transparentBg={true}
                       trackRef={hero2TrackRef}
                       scrollOffset={isDesktop ? ['start start', 'end end'] : ['start 85%', 'end 15%']}
                       aspectRatio="none"
-                      startAt={isDesktop ? 0.25 : 0.20}
-                      endAt={isDesktop ? 0.90 : 0.86}
+                      keepPosterOnZeroProgress={true}
+                      startAt={0.48}
+                      endAt={0.92}
                       className="w-full h-full"
-                      videoClassName={
-                        isDesktop
-                          ? 'w-full h-full object-cover object-[22%_15%] drop-shadow-[0_25px_60px_rgba(0,0,0,0.7)]'
-                          : 'w-full h-full object-cover object-[center_58%] drop-shadow-[0_20px_45px_rgba(0,0,0,0.6)]'
-                      }
+                      videoClassName="w-full h-full object-cover object-[center_35%] drop-shadow-[0_25px_60px_rgba(0,0,0,0.7)]"
                     />
                     {/* Bottom gentle gradient fade into page bg */}
                     <div className="absolute bottom-0 inset-x-0 h-16 bg-gradient-to-t from-[#060e24] to-transparent pointer-events-none z-20" />
@@ -289,17 +278,17 @@ export const HomePage: React.FC = () => {
                 </div>
 
                 {/* Text Layer: right side with refined right typography alignment */}
-                <div className="media-dark-overlay w-full lg:w-[50%] xl:w-[48%] lg:ml-auto order-1 lg:order-2 space-y-5 sm:space-y-6 text-center lg:text-right pt-2 lg:pt-0 relative z-20 pointer-events-auto">
-                  <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0e1e4a] border border-[#1e3878] text-xs font-semibold text-[#4FD6F4] lg:ml-auto">
+                <div className="media-dark-overlay w-full lg:w-[50%] xl:w-[48%] lg:ml-auto order-1 lg:order-2 space-y-3 sm:space-y-4 lg:space-y-3 xl:space-y-4 2xl:space-y-5 text-center lg:text-right pt-2 lg:pt-0 relative z-20 pointer-events-auto">
+                  <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full bg-[#0e1e4a] border border-[#1e3878] text-[11px] sm:text-xs font-semibold text-[#4FD6F4] lg:ml-auto">
                     <Compass className="w-3.5 h-3.5 text-[#4FD6F4]" />
                     <span>Clínica, Docência e Formação Continuada</span>
                   </div>
 
-                  <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white font-['Plus_Jakarta_Sans'] leading-[1.18]">
+                  <h2 className="text-2xl sm:text-3xl lg:text-[1.85rem] xl:text-[2.25rem] 2xl:text-4xl font-bold tracking-tight text-white font-['Plus_Jakarta_Sans'] leading-[1.18]">
                     Uma escuta atenta, humanizada e fundamentada
                   </h2>
 
-                  <div className="space-y-4 text-slate-300 text-sm sm:text-base md:text-lg leading-relaxed font-light">
+                  <div className="space-y-2 lg:space-y-2.5 xl:space-y-3 text-slate-300 text-xs sm:text-sm lg:text-xs xl:text-sm 2xl:text-base leading-relaxed font-light">
                     <p>
                       O atendimento psicanalítico oferece um espaço neutro e confidencial para que você fale livremente sobre o que incomoda, investigando o inconsciente e ressignificando repetições que geram sofrimento.
                     </p>
@@ -309,10 +298,10 @@ export const HomePage: React.FC = () => {
                   </div>
 
                   {/* Action CTAs: aligned right on desktop */}
-                  <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-end gap-4 pt-2">
+                  <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-end gap-2.5 sm:gap-3 pt-1 xl:pt-2">
                     <Link
                       to="/psicanalista-em-jundiai"
-                      className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl font-bold text-sm sm:text-base bg-[#4FD6F4] text-[#081331] hover:bg-[#36c5e5] transition-all shadow-md"
+                      className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 xl:px-6 xl:py-3.5 rounded-xl font-bold text-xs sm:text-sm xl:text-base bg-[#4FD6F4] text-[#081331] hover:bg-[#36c5e5] transition-all shadow-md"
                     >
                       <span>Atendimento em Jundiaí</span>
                       <ArrowRight className="w-4 h-4" />
@@ -320,25 +309,25 @@ export const HomePage: React.FC = () => {
 
                     <Link
                       to="/sobre"
-                      className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-semibold text-sm sm:text-base bg-[#0e1e4a] text-slate-200 hover:text-white hover:bg-[#162c66] border border-[#1e3878] transition-all"
+                      className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 xl:px-6 xl:py-3.5 rounded-xl font-semibold text-xs sm:text-sm xl:text-base bg-[#0e1e4a] text-slate-200 hover:text-white hover:bg-[#162c66] border border-[#1e3878] transition-all"
                     >
                       <span>Conhecer a Biografia</span>
                     </Link>
                   </div>
 
                   {/* Credentials / Badges */}
-                  <div className="pt-2 grid grid-cols-1 sm:grid-cols-3 gap-3 text-center">
-                    <div className="p-3.5 rounded-xl bg-[#081331]/90 border border-[#1e3878]/70">
-                      <span className="text-xs text-[#4FD6F4] font-semibold block">Docência Superior</span>
-                      <span className="text-xs text-slate-300">Prof. Faculdade Anhanguera</span>
+                  <div className="pt-1 xl:pt-2 grid grid-cols-1 sm:grid-cols-3 gap-2 xl:gap-3 text-center">
+                    <div className="p-2 xl:p-2.5 2xl:p-3 rounded-xl bg-[#081331]/90 border border-[#1e3878]/70">
+                      <span className="text-[11px] xl:text-xs text-[#4FD6F4] font-semibold block">Docência Superior</span>
+                      <span className="text-[10px] xl:text-[11px] text-slate-300">Prof. Faculdade Anhanguera</span>
                     </div>
-                    <div className="p-3.5 rounded-xl bg-[#081331]/90 border border-[#1e3878]/70">
-                      <span className="text-xs text-[#4FD6F4] font-semibold block">Especializações</span>
-                      <span className="text-xs text-slate-300">Neurociências & Filosofia</span>
+                    <div className="p-2 xl:p-2.5 2xl:p-3 rounded-xl bg-[#081331]/90 border border-[#1e3878]/70">
+                      <span className="text-[11px] xl:text-xs text-[#4FD6F4] font-semibold block">Especializações</span>
+                      <span className="text-[10px] xl:text-[11px] text-slate-300">Neurociências & Filosofia</span>
                     </div>
-                    <div className="p-3.5 rounded-xl bg-[#081331]/90 border border-[#1e3878]/70">
-                      <span className="text-xs text-[#4FD6F4] font-semibold block">Enquadre Clínico</span>
-                      <span className="text-xs text-slate-300">Adultos e Adolescentes</span>
+                    <div className="p-2 xl:p-2.5 2xl:p-3 rounded-xl bg-[#081331]/90 border border-[#1e3878]/70">
+                      <span className="text-[11px] xl:text-xs text-[#4FD6F4] font-semibold block">Enquadre Clínico</span>
+                      <span className="text-[10px] xl:text-[11px] text-slate-300">Adultos e Adolescentes</span>
                     </div>
                   </div>
                 </div>
