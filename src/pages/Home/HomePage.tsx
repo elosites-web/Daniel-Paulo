@@ -112,7 +112,7 @@ export const HomePage: React.FC = () => {
           aria-label="Apresentação institucional Daniel Paulo"
         >
           {/* Pinned inner container on desktop, natural flow on mobile */}
-          <div className="relative lg:sticky lg:top-20 min-h-0 lg:min-h-[calc(100vh-5rem)] lg:h-[calc(100vh-5rem)] flex items-start lg:items-center overflow-visible py-4 sm:py-6 lg:py-2 xl:py-0">
+          <div className="relative lg:sticky lg:top-20 min-h-0 lg:min-h-[calc(100vh-5rem)] flex items-start lg:items-center overflow-visible py-4 sm:py-6 lg:pt-7 lg:pb-5 xl:py-0">
             {/* Subtle atmospheric glow behind */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
               <div className="absolute top-1/4 right-1/6 w-[550px] h-[550px] bg-[#4FD6F4]/10 rounded-full blur-[140px]" />
@@ -123,8 +123,8 @@ export const HomePage: React.FC = () => {
               </div>
             </div>
 
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full h-full relative z-10 flex items-center">
-              <div className="flex flex-col lg:flex-row items-center justify-between gap-6 lg:gap-10 w-full lg:h-full relative">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full min-h-[calc(100vh-5rem)] relative z-10 flex items-center">
+              <div className="flex flex-col lg:flex-row items-center justify-between gap-6 lg:gap-10 w-full min-h-[calc(100vh-5rem)] relative">
                 
                 {/* Text Layer: left side */}
                 <motion.div

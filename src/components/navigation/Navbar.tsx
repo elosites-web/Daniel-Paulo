@@ -98,8 +98,15 @@ export const Navbar: React.FC = () => {
   return (
     <header
       ref={headerRef}
-      className="sticky top-0 z-[100] bg-[#081331]/95 backdrop-blur-[14px] border-b border-[#162c66]/80 transition-colors duration-300"
+      className="sticky top-0 z-[100] glass-header transition-colors duration-300"
     >
+      {/* Specular sheen & subtle light reflection overlay for mirrored glass effect */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
+        <div className="absolute inset-0 glass-header-reflection" />
+        <div className="absolute top-0 inset-x-0 h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+        <div className="absolute bottom-0 inset-x-0 h-[1px] bg-gradient-to-r from-transparent via-[#4FD6F4]/40 to-transparent" />
+      </div>
+
       <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-4 xl:px-6 2xl:px-8 relative z-[110]">
         <div className="flex items-center justify-between h-18 lg:h-20 gap-2">
           
@@ -164,7 +171,7 @@ export const Navbar: React.FC = () => {
 
                     {activeDropdown === item.label && (
                       <div className="absolute top-full left-0 pt-1.5 min-w-[220px] max-w-[280px] z-[150] animate-in fade-in slide-in-from-top-1 duration-150">
-                        <div className="bg-[#0b183d] border border-[#1e3878] rounded-xl p-1.5 shadow-2xl backdrop-blur-xl relative z-[151]">
+                        <div className="bg-[#0b183d]/90 border border-[#1e3878]/90 rounded-xl p-1.5 shadow-[0_20px_50px_rgba(0,0,0,0.6)] backdrop-blur-2xl relative z-[151]">
                           {item.children!.map((child) => {
                             const isChildActive = location.pathname === child.href;
                             return (

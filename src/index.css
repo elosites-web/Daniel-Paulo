@@ -312,20 +312,55 @@ html.light ::-webkit-scrollbar-thumb:hover {
   background: #0284c7;
 }
 
-/* Nav & Sticky Header (Selector 1 & 2) */
+/* Nav & Sticky Header — Mirrored Glass Surface (Vidro Espelhado Premium) */
+.glass-header,
 div#root > div > header,
 header {
-  backdrop-filter: blur(12px) !important;
-  -webkit-backdrop-filter: blur(12px) !important;
+  background: linear-gradient(
+    135deg,
+    rgba(8, 19, 49, 0.78) 0%,
+    rgba(10, 26, 68, 0.72) 38%,
+    rgba(14, 32, 80, 0.68) 68%,
+    rgba(8, 20, 52, 0.78) 100%
+  ) !important;
+  backdrop-filter: blur(18px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(180%) !important;
+  border-bottom: 1px solid rgba(79, 214, 244, 0.18) !important;
+  box-shadow: 
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.14),
+    inset 0 -1px 0 0 rgba(79, 214, 244, 0.15),
+    0 10px 30px -5px rgba(2, 6, 23, 0.35) !important;
 }
 
+.glass-header-reflection {
+  background: 
+    radial-gradient(ellipse 70% 120% at 50% -30%, rgba(79, 214, 244, 0.12), transparent 70%),
+    linear-gradient(108deg, transparent 20%, rgba(255, 255, 255, 0.035) 38%, rgba(79, 214, 244, 0.05) 50%, transparent 68%);
+}
+
+html.light .glass-header,
 html.light div#root > div > header,
 html.light header {
-  background-color: rgba(255, 255, 255, 0.82) !important;
-  border-bottom-color: rgba(203, 213, 225, 0.85) !important;
-  box-shadow: 0 4px 20px -2px rgba(8, 19, 49, 0.05) !important;
-  backdrop-filter: blur(12px) !important;
-  -webkit-backdrop-filter: blur(12px) !important;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.82) 0%,
+    rgba(246, 249, 254, 0.76) 40%,
+    rgba(240, 246, 255, 0.74) 70%,
+    rgba(255, 255, 255, 0.84) 100%
+  ) !important;
+  border-bottom-color: rgba(203, 213, 225, 0.80) !important;
+  box-shadow: 
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.95),
+    inset 0 -1px 0 0 rgba(79, 214, 244, 0.2),
+    0 8px 24px -4px rgba(8, 19, 49, 0.06) !important;
+  backdrop-filter: blur(18px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(180%) !important;
+}
+
+html.light .glass-header-reflection {
+  background: 
+    radial-gradient(ellipse 70% 120% at 50% -30%, rgba(79, 214, 244, 0.08), transparent 70%),
+    linear-gradient(108deg, transparent 20%, rgba(255, 255, 255, 0.5) 38%, rgba(79, 214, 244, 0.08) 50%, transparent 68%) !important;
 }
 
 /* Light mode alternating colors for Header inner container (Selector 2) */
