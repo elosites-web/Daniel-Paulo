@@ -2,6 +2,7 @@ import React from 'react';
 import { Navbar } from '../navigation/Navbar';
 import { Footer } from '../navigation/Footer';
 import { FloatingWhatsApp } from '../ui/FloatingWhatsApp';
+import { ReadingProgressBar } from '../ui/ReadingProgressBar';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -14,6 +15,9 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
       <a href="#main-content" className="skip-link sr-only focus:not-sr-only">
         Pular para o conteúdo principal
       </a>
+
+      {/* Indicador visual de progresso de leitura no topo da página */}
+      <ReadingProgressBar />
 
       <Navbar />
 

@@ -144,7 +144,7 @@ export const HomePage: React.FC = () => {
                   >
                     Psicanalista{' '}
                     <span
-                      className="inline-block text-[0.6em] align-middle leading-none text-[#4FD6F4] animate-pulse drop-shadow-[0_0_8px_rgba(79,214,244,0.85)] mx-1 sm:mx-1.5 select-none"
+                      className="inline-block text-[0.6em] align-middle leading-none relative -top-[1px] text-[#4FD6F4] animate-pulse drop-shadow-[0_0_8px_rgba(79,214,244,0.85)] mx-1 sm:mx-1.5 select-none"
                       aria-hidden="true"
                     >
                       •

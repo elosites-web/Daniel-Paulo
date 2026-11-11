@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { SeoHead } from '../../components/seo/SeoHead';
 import { Breadcrumbs } from '../../components/breadcrumbs/Breadcrumbs';
-import { ReadingProgressBar } from '../../components/ui/ReadingProgressBar';
+
 import { getWhatsAppUrl } from '../../config/siteConfig';
 import { Compass, ArrowRight, CheckCircle2, ShieldCheck } from 'lucide-react';
 import { WhatsAppIcon } from '../../components/ui/WhatsAppIcon';
@@ -20,7 +20,6 @@ export const OQueEAPsicanalisePage: React.FC = () => {
         ]}
       />
 
-      <ReadingProgressBar label="Progresso de leitura: O que é Psicanálise" />
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12 space-y-12">
         

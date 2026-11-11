@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { motion, useScroll, useSpring, useMotionValueEvent } from 'motion/react';
+import React, { useState } from 'react';
+import { motion, useScroll, useSpring, useMotionValueEvent, useTransform } from 'motion/react';
 import { useReducedMotion } from '../../hooks/useReducedMotion';
 
 interface ReadingProgressBarProps {
@@ -36,14 +36,19 @@ export const ReadingProgressBar: React.FC<ReadingProgressBarProps> = ({
     restDelta: 0.001,
   });
 
-  // Track value for accessible screen readers
+  const width = useTransform(
+    reducedMotion ? scrollYProgress : scaleX,
+    (v) => `${Math.max(0, Math.min(1, v)) * 100}%`
+  );
+
+  // Track value for accessible screen readers and conditional silver tip
   useMotionValueEvent(scrollYProgress, 'change', (latest) => {
     setCurrentPercent(Math.round(Math.max(0, Math.min(1, latest)) * 100));
   });
 
   return (
     <aside
-      className={`fixed top-0 left-0 right-0 z-30 w-full h-1 sm:h-1.5 bg-[#081331]/30 backdrop-blur-[2px] pointer-events-none ${className}`}
+      className={`fixed top-0 left-0 right-0 z-[9999] w-full h-[3px] bg-transparent pointer-events-none ${className}`}
       role="progressbar"
       aria-valuenow={currentPercent}
       aria-valuemin={0}
@@ -51,12 +56,17 @@ export const ReadingProgressBar: React.FC<ReadingProgressBarProps> = ({
       aria-label={label}
     >
       <motion.div
-        className="h-full bg-gradient-to-r from-[#4FD6F4] via-[#36c5e5] to-[#25D366] shadow-[0_0_12px_rgba(79,214,244,0.75)] origin-left"
-        style={{
-          scaleX: reducedMotion ? scrollYProgress : scaleX,
-          transformOrigin: '0% 50%',
-        }}
-      />
+        className="h-full bg-[#4FD6F4] relative shadow-[0_0_8px_rgba(79,214,244,0.5)]"
+        style={{ width }}
+      >
+        {/* Ponta levemente brilhante em prata, com o brilho da espessura da barra */}
+        {currentPercent > 0 && (
+          <div
+            className="absolute top-0 right-0 h-full w-3 bg-gradient-to-r from-transparent via-[#E2E8F0] to-[#FFFFFF] shadow-[0_0_3px_1px_rgba(255,255,255,0.95)] rounded-r-[1px]"
+            aria-hidden="true"
+          />
+        )}
+      </motion.div>
     </aside>
   );
 };

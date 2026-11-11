@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { SeoHead } from '../../components/seo/SeoHead';
 import { Breadcrumbs } from '../../components/breadcrumbs/Breadcrumbs';
-import { ReadingProgressBar } from '../../components/ui/ReadingProgressBar';
+
 import { initialBlogPosts } from '../../data/blogPosts';
 import { siteConfig, getWhatsAppUrl } from '../../config/siteConfig';
 import { Clock, User, ArrowLeft, ArrowRight, AlertCircle, BookOpen, ShieldCheck, Tag, Library } from 'lucide-react';
@@ -110,8 +110,6 @@ export const BlogPostPage: React.FC = () => {
         ]}
       />
 
-      {/* Reading Progress Bar at the top of the viewport */}
-      <ReadingProgressBar label={`Progresso de leitura: ${post.title}`} />
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12 space-y-10">
         

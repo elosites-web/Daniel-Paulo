@@ -30,9 +30,9 @@ export const Footer: React.FC = () => {
               <img
                 src="/assets/logo/logo-daniel-paulo-sem-brilho-512.png"
                 alt="Logotipo de Daniel Paulo, Psicanalista e Terapeuta"
-                className="w-44 sm:w-56 h-auto aspect-square object-contain flex-shrink-0 drop-shadow-md"
-                width="224"
-                height="224"
+                className="w-36 sm:w-[124px] landscape:w-[124px] lg:w-[124px] h-auto aspect-square object-contain flex-shrink-0 drop-shadow-md"
+                width="124"
+                height="124"
                 loading="lazy"
                 decoding="async"
               />
@@ -65,7 +65,7 @@ export const Footer: React.FC = () => {
                   href={siteConfig.social.instagram}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-lg bg-[#0e1e4a] hover:bg-[#4FD6F4] hover:text-[#081331] text-slate-300 flex items-center justify-center transition-all focus:outline-none focus:ring-2 focus:ring-[#4FD6F4]"
+                  className="w-10 h-10 rounded-lg bg-[#0e1e4a] hover:bg-[#4FD6F4] hover:text-[#081331] text-slate-300 flex items-center justify-center transition-all duration-300 ease-out hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-[#4FD6F4]"
                   aria-label="Perfil do Instagram de Daniel Paulo"
                 >
                   <Instagram className="w-5 h-5" />
@@ -76,7 +76,7 @@ export const Footer: React.FC = () => {
                   href={siteConfig.social.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-lg bg-[#0e1e4a] hover:bg-[#4FD6F4] hover:text-[#081331] text-slate-300 flex items-center justify-center transition-all focus:outline-none focus:ring-2 focus:ring-[#4FD6F4]"
+                  className="w-10 h-10 rounded-lg bg-[#0e1e4a] hover:bg-[#4FD6F4] hover:text-[#081331] text-slate-300 flex items-center justify-center transition-all duration-300 ease-out hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-[#4FD6F4]"
                   aria-label="Perfil do LinkedIn de Daniel Paulo"
                 >
                   <Linkedin className="w-5 h-5" />
@@ -87,7 +87,7 @@ export const Footer: React.FC = () => {
                   href={siteConfig.social.facebook}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-lg bg-[#0e1e4a] hover:bg-[#4FD6F4] hover:text-[#081331] text-slate-300 flex items-center justify-center transition-all focus:outline-none focus:ring-2 focus:ring-[#4FD6F4]"
+                  className="w-10 h-10 rounded-lg bg-[#0e1e4a] hover:bg-[#4FD6F4] hover:text-[#081331] text-slate-300 flex items-center justify-center transition-all duration-300 ease-out hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-[#4FD6F4]"
                   aria-label="Perfil do Facebook de Daniel Paulo"
                 >
                   <Facebook className="w-5 h-5" />
@@ -98,7 +98,7 @@ export const Footer: React.FC = () => {
                   href={siteConfig.social.tiktok}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-lg bg-[#0e1e4a] hover:bg-[#4FD6F4] hover:text-[#081331] text-slate-300 flex items-center justify-center transition-all focus:outline-none focus:ring-2 focus:ring-[#4FD6F4]"
+                  className="w-10 h-10 rounded-lg bg-[#0e1e4a] hover:bg-[#4FD6F4] hover:text-[#081331] text-slate-300 flex items-center justify-center transition-all duration-300 ease-out hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-[#4FD6F4]"
                   aria-label="Perfil do TikTok de Daniel Paulo"
                 >
                   <TikTokIcon className="w-5 h-5" />
@@ -109,7 +109,7 @@ export const Footer: React.FC = () => {
                 href={getWhatsAppUrl()}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-lg bg-[#0e1e4a] hover:bg-[#25D366] hover:text-white text-slate-300 flex items-center justify-center transition-all focus:outline-none focus:ring-2 focus:ring-[#25D366]"
+                className="w-10 h-10 rounded-lg bg-[#0e1e4a] hover:bg-[#25D366] hover:text-white text-slate-300 flex items-center justify-center transition-all duration-300 ease-out hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-[#25D366]"
                 aria-label="Contato direto via WhatsApp"
               >
                 <WhatsAppIcon className="w-5 h-5" />

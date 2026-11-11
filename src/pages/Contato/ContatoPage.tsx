@@ -91,9 +91,9 @@ export const ContatoPage: React.FC = () => {
                     href={siteConfig.social.instagram}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-3 text-slate-300 hover:text-[#4FD6F4] transition-colors"
+                    className="flex items-center gap-3 text-slate-300 hover:text-[#4FD6F4] transition-colors group"
                   >
-                    <Instagram className="w-5 h-5 text-[#4FD6F4]" />
+                    <Instagram className="w-5 h-5 text-[#4FD6F4] transition-transform duration-300 ease-out group-hover:scale-105" />
                     <span>@danielpaulo_psicanalista</span>
                   </a>
                 )}
@@ -102,9 +102,9 @@ export const ContatoPage: React.FC = () => {
                     href={siteConfig.social.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-3 text-slate-300 hover:text-[#4FD6F4] transition-colors"
+                    className="flex items-center gap-3 text-slate-300 hover:text-[#4FD6F4] transition-colors group"
                   >
-                    <Linkedin className="w-5 h-5 text-[#4FD6F4]" />
+                    <Linkedin className="w-5 h-5 text-[#4FD6F4] transition-transform duration-300 ease-out group-hover:scale-105" />
                     <span>LinkedIn / Daniel Paulo</span>
                   </a>
                 )}

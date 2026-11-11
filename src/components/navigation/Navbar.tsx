@@ -6,8 +6,7 @@ import { siteConfig, getWhatsAppUrl } from '../../config/siteConfig';
 import { Menu, X, ChevronDown, Instagram, Linkedin, Facebook } from 'lucide-react';
 import { WhatsAppIcon } from '../ui/WhatsAppIcon';
 import { TikTokIcon } from '../ui/TikTokIcon';
-import { motion, useScroll, useSpring } from 'motion/react';
-import { useReducedMotion } from '../../hooks/useReducedMotion';
+
 
 export const Navbar: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -16,15 +15,7 @@ export const Navbar: React.FC = () => {
   const headerRef = useRef<HTMLElement>(null);
   const hamburgerButtonRef = useRef<HTMLButtonElement>(null);
   const location = useLocation();
-  const reducedMotion = useReducedMotion();
 
-  // Full-page scroll progress
-  const { scrollYProgress } = useScroll();
-  const scaleX = useSpring(scrollYProgress, {
-    stiffness: 140,
-    damping: 30,
-    restDelta: 0.001,
-  });
 
   // Calculate actual height of header in real-time
   const updateHeaderPosition = () => {
@@ -264,20 +255,6 @@ export const Navbar: React.FC = () => {
           </div>
         </div>
 
-        {/* Slim, full-width scroll progress bar immediately below the header */}
-        <div
-          className="absolute top-full inset-x-0 w-full h-[2.5px] bg-[#081331]/30 pointer-events-none overflow-hidden z-10"
-          role="progressbar"
-          aria-label="Progresso de rolagem da página"
-        >
-          <motion.div
-            className="h-full bg-gradient-to-r from-[#4FD6F4] via-[#36c5e5] to-[#25D366] shadow-[0_0_8px_rgba(79,214,244,0.7)] origin-left"
-            style={{
-              scaleX: reducedMotion ? scrollYProgress : scaleX,
-              transformOrigin: '0% 50%',
-            }}
-          />
-        </div>
       </header>
 
       {/* Spacer to prevent page jump when header enters fixed mode upon opening mobile menu */}
@@ -367,7 +344,7 @@ export const Navbar: React.FC = () => {
                       href={siteConfig.social.instagram}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-9 h-9 rounded-lg bg-[#0e1e4a] hover:bg-[#4FD6F4] hover:text-[#081331] text-slate-300 flex items-center justify-center transition-colors"
+                      className="w-9 h-9 rounded-lg bg-[#0e1e4a] hover:bg-[#4FD6F4] hover:text-[#081331] text-slate-300 flex items-center justify-center transition-all duration-300 ease-out hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-[#4FD6F4]"
                       aria-label="Instagram de Daniel Paulo"
                     >
                       <Instagram className="w-4 h-4" />
@@ -376,7 +353,7 @@ export const Navbar: React.FC = () => {
                       href={siteConfig.social.linkedin}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-9 h-9 rounded-lg bg-[#0e1e4a] hover:bg-[#4FD6F4] hover:text-[#081331] text-slate-300 flex items-center justify-center transition-colors"
+                      className="w-9 h-9 rounded-lg bg-[#0e1e4a] hover:bg-[#4FD6F4] hover:text-[#081331] text-slate-300 flex items-center justify-center transition-all duration-300 ease-out hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-[#4FD6F4]"
                       aria-label="LinkedIn de Daniel Paulo"
                     >
                       <Linkedin className="w-4 h-4" />
@@ -385,7 +362,7 @@ export const Navbar: React.FC = () => {
                       href={siteConfig.social.facebook}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-9 h-9 rounded-lg bg-[#0e1e4a] hover:bg-[#4FD6F4] hover:text-[#081331] text-slate-300 flex items-center justify-center transition-colors"
+                      className="w-9 h-9 rounded-lg bg-[#0e1e4a] hover:bg-[#4FD6F4] hover:text-[#081331] text-slate-300 flex items-center justify-center transition-all duration-300 ease-out hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-[#4FD6F4]"
                       aria-label="Facebook de Daniel Paulo"
                     >
                       <Facebook className="w-4 h-4" />
@@ -394,7 +371,7 @@ export const Navbar: React.FC = () => {
                       href={siteConfig.social.tiktok}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-9 h-9 rounded-lg bg-[#0e1e4a] hover:bg-[#4FD6F4] hover:text-[#081331] text-slate-300 flex items-center justify-center transition-colors"
+                      className="w-9 h-9 rounded-lg bg-[#0e1e4a] hover:bg-[#4FD6F4] hover:text-[#081331] text-slate-300 flex items-center justify-center transition-all duration-300 ease-out hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-[#4FD6F4]"
                       aria-label="TikTok de Daniel Paulo"
                     >
                       <TikTokIcon className="w-4 h-4" />

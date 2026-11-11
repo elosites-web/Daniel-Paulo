@@ -123,12 +123,27 @@ export const CertificateGallery: React.FC = () => {
       </div>
 
       {/* Grid of Verified Certificates */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filteredCerts.map((cert) => (
-          <div
-            key={cert.id}
-            className="group relative bg-[#0e1e4a]/70 border border-[#1e3878] rounded-2xl overflow-hidden hover:border-[#4FD6F4]/50 transition-all duration-300 flex flex-col hover:shadow-2xl hover:shadow-[#4FD6F4]/5"
-          >
+      <div
+        className={`grid grid-cols-1 md:grid-cols-2 ${
+          filteredCerts.length === 2 ? 'lg:grid-cols-2 lg:max-w-4xl lg:mx-auto' : 'lg:grid-cols-3'
+        } gap-6`}
+      >
+        {filteredCerts.map((cert, index) => {
+          const isLastSingleItemLg = filteredCerts.length % 3 === 1 && index === filteredCerts.length - 1;
+          const isLastSingleItemMd = filteredCerts.length % 2 === 1 && index === filteredCerts.length - 1;
+
+          const centeringClasses = [
+            isLastSingleItemMd ? 'md:col-span-2 md:max-w-md md:w-full md:mx-auto' : '',
+            isLastSingleItemLg ? 'lg:col-span-1 lg:col-start-2 lg:max-w-none' : '',
+          ]
+            .filter(Boolean)
+            .join(' ');
+
+          return (
+            <div
+              key={cert.id}
+              className={`group relative bg-[#0e1e4a]/70 border border-[#1e3878] rounded-2xl overflow-hidden hover:border-[#4FD6F4]/50 transition-all duration-300 flex flex-col hover:shadow-2xl hover:shadow-[#4FD6F4]/5 ${centeringClasses}`}
+            >
             {/* Certificate image preview button */}
             <button
               type="button"
@@ -196,8 +211,9 @@ export const CertificateGallery: React.FC = () => {
               </div>
             </div>
           </div>
-        ))}
-      </div>
+        );
+      })}
+    </div>
 
       {/* Accessible Lightbox Modal */}
       {selectedCert && (
