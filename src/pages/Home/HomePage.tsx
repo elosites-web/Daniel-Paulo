@@ -138,8 +138,18 @@ export const HomePage: React.FC = () => {
                     <span className="truncate sm:whitespace-normal">Espaço de Escuta e Autoconhecimento</span>
                   </motion.div>
 
-                  <motion.h1 variants={reducedMotion ? undefined : heroItemVariants} className="text-3xl sm:text-4xl lg:text-[2.25rem] xl:text-5xl 2xl:text-6xl font-bold tracking-tight text-white font-['Plus_Jakarta_Sans'] leading-[1.14]">
-                    Psicanalista | Terapia humanizada em Jundiaí <br />
+                  <motion.h1
+                    variants={reducedMotion ? undefined : heroItemVariants}
+                    className="animate-fade-in text-3xl sm:text-4xl lg:text-[2.25rem] xl:text-5xl 2xl:text-6xl font-bold tracking-tight text-white font-['Plus_Jakarta_Sans'] leading-[1.14]"
+                  >
+                    Psicanalista{' '}
+                    <span
+                      className="inline-block text-[0.6em] align-middle leading-none text-[#4FD6F4] animate-pulse drop-shadow-[0_0_8px_rgba(79,214,244,0.85)] mx-1 sm:mx-1.5 select-none"
+                      aria-hidden="true"
+                    >
+                      •
+                    </span>{' '}
+                    Terapia humanizada em Jundiaí <br />
                     <span className="text-[#4FD6F4] block">
                       Atendimento online e presencial
                     </span>

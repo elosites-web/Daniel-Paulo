@@ -99,7 +99,7 @@ export const FloatingWhatsApp: React.FC = () => {
         <WhatsAppIcon className="w-7 h-7 relative z-10 text-white drop-shadow-[0_1px_2px_rgba(8,19,49,0.55)]" />
         
         {/* Tooltip on hover (desktop only) */}
-        <span className="hidden sm:inline-block pointer-events-none absolute right-full mr-3 px-3 py-1.5 rounded-lg bg-[#081331] text-xs font-medium text-white border border-[#1e3878] whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity shadow-lg z-20">
+        <span className="hidden sm:inline-block pointer-events-none absolute right-full mr-3 px-3.5 py-1.5 rounded-lg bg-[#081331]/95 backdrop-blur-sm text-xs font-medium text-white border border-[#1e3878] whitespace-nowrap opacity-0 translate-x-2 scale-95 group-hover:opacity-100 group-hover:translate-x-0 group-hover:scale-100 transition-all duration-300 ease-out shadow-xl shadow-[#081331]/60 z-20">
           Conversar pelo WhatsApp
         </span>
       </a>

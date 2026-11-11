@@ -108,8 +108,8 @@ export const Navbar: React.FC = () => {
           <div className="absolute bottom-0 inset-x-0 h-[1px] bg-gradient-to-r from-transparent via-[#4FD6F4]/40 to-transparent" />
         </div>
 
-        <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-4 xl:px-6 2xl:px-8 relative z-[110]">
-          <div className="flex items-center justify-between h-18 lg:h-20 gap-2">
+        <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-4 xl:px-6 2xl:px-8 relative z-[110] flex items-center justify-center">
+          <div className="flex items-center justify-between h-18 lg:h-20 gap-2 w-full">
             
             {/* Logo brand - using symbol icon without tiny text, sized 44x44 with clear HTML text */}
             <Link
