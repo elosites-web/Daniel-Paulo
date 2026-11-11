@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { siteConfig, getWhatsAppUrl } from '../../config/siteConfig';
-import { Instagram, Linkedin, Facebook, MapPin, AlertCircle } from 'lucide-react';
+import { Instagram, Linkedin, Facebook, MapPin, AlertCircle, Phone, Clock, ShieldCheck, FileText, ChevronRight } from 'lucide-react';
 import { TikTokIcon } from '../ui/TikTokIcon';
 import { WhatsAppIcon } from '../ui/WhatsAppIcon';
 
@@ -22,10 +22,10 @@ export const Footer: React.FC = () => {
           </div>
         )}
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-[#122456]">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-12 border-b border-[#122456]">
           
-          {/* Column 1: Brand & Bio */}
-          <div className="lg:col-span-2 space-y-4">
+          {/* Column 1: Brand, Bio & Redes Sociais */}
+          <div className="lg:col-span-4 space-y-4">
             <Link to="/" className="flex flex-col sm:flex-row items-start sm:items-center gap-4 group inline-flex" aria-label="Voltar para a página inicial">
               <img
                 src="/assets/logo/logo-daniel-paulo-sem-brilho-512.png"
@@ -50,75 +50,75 @@ export const Footer: React.FC = () => {
             </Link>
             
             <p className="text-sm text-slate-400 leading-relaxed max-w-sm">
-              Atendimento psicanalítico e terapêutico pautado no acolhimento, escuta humanizada e ausência de julgamentos. Modalidades online e presencial em Jundiaí-SP. Docência e palestras de desenvolvimento humano.
+              Atendimento psicanalítico e terapêutico pautado no acolhimento, escuta humanizada e ausência de julgamentos. Modalidades online para todo o Brasil e presencial em Jundiaí-SP.
             </p>
 
-            <div className="flex items-center gap-2 text-sm text-[#8ea5c8]">
-              <MapPin className="w-4 h-4 text-[#4FD6F4]" />
-              <span>{siteConfig.city}, {siteConfig.state} — Brasil</span>
-            </div>
-
-            {/* Social Links (only confirmed URLs) */}
-            <div className="flex flex-wrap items-center gap-2.5 pt-2">
-              {siteConfig.social.instagram && (
+            {/* Social Links com animação de escala suave de 1.05x */}
+            <div className="space-y-2 pt-1">
+              <span className="text-xs font-semibold uppercase tracking-wider text-slate-400 block font-['Plus_Jakarta_Sans']">
+                Redes Sociais Oficiais
+              </span>
+              <div className="flex flex-wrap items-center gap-2.5">
+                {siteConfig.social.instagram && (
+                  <a
+                    href={siteConfig.social.instagram}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 rounded-lg bg-[#0e1e4a] hover:bg-[#4FD6F4] hover:text-[#081331] text-slate-300 flex items-center justify-center transition-all duration-300 ease-out hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-[#4FD6F4]"
+                    aria-label="Perfil do Instagram de Daniel Paulo"
+                  >
+                    <Instagram className="w-5 h-5" />
+                  </a>
+                )}
+                {siteConfig.social.linkedin && (
+                  <a
+                    href={siteConfig.social.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 rounded-lg bg-[#0e1e4a] hover:bg-[#4FD6F4] hover:text-[#081331] text-slate-300 flex items-center justify-center transition-all duration-300 ease-out hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-[#4FD6F4]"
+                    aria-label="Perfil do LinkedIn de Daniel Paulo"
+                  >
+                    <Linkedin className="w-5 h-5" />
+                  </a>
+                )}
+                {siteConfig.social.facebook && (
+                  <a
+                    href={siteConfig.social.facebook}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 rounded-lg bg-[#0e1e4a] hover:bg-[#4FD6F4] hover:text-[#081331] text-slate-300 flex items-center justify-center transition-all duration-300 ease-out hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-[#4FD6F4]"
+                    aria-label="Perfil do Facebook de Daniel Paulo"
+                  >
+                    <Facebook className="w-5 h-5" />
+                  </a>
+                )}
+                {siteConfig.social.tiktok && (
+                  <a
+                    href={siteConfig.social.tiktok}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 rounded-lg bg-[#0e1e4a] hover:bg-[#4FD6F4] hover:text-[#081331] text-slate-300 flex items-center justify-center transition-all duration-300 ease-out hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-[#4FD6F4]"
+                    aria-label="Perfil do TikTok de Daniel Paulo"
+                  >
+                    <TikTokIcon className="w-5 h-5" />
+                  </a>
+                )}
+                {/* WhatsApp direct */}
                 <a
-                  href={siteConfig.social.instagram}
+                  href={getWhatsAppUrl()}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-lg bg-[#0e1e4a] hover:bg-[#4FD6F4] hover:text-[#081331] text-slate-300 flex items-center justify-center transition-all duration-300 ease-out hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-[#4FD6F4]"
-                  aria-label="Perfil do Instagram de Daniel Paulo"
+                  className="w-10 h-10 rounded-lg bg-[#0e1e4a] hover:bg-[#25D366] hover:text-white text-slate-300 flex items-center justify-center transition-all duration-300 ease-out hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-[#25D366]"
+                  aria-label="Contato direto via WhatsApp"
                 >
-                  <Instagram className="w-5 h-5" />
+                  <WhatsAppIcon className="w-5 h-5" />
                 </a>
-              )}
-              {siteConfig.social.linkedin && (
-                <a
-                  href={siteConfig.social.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-lg bg-[#0e1e4a] hover:bg-[#4FD6F4] hover:text-[#081331] text-slate-300 flex items-center justify-center transition-all duration-300 ease-out hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-[#4FD6F4]"
-                  aria-label="Perfil do LinkedIn de Daniel Paulo"
-                >
-                  <Linkedin className="w-5 h-5" />
-                </a>
-              )}
-              {siteConfig.social.facebook && (
-                <a
-                  href={siteConfig.social.facebook}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-lg bg-[#0e1e4a] hover:bg-[#4FD6F4] hover:text-[#081331] text-slate-300 flex items-center justify-center transition-all duration-300 ease-out hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-[#4FD6F4]"
-                  aria-label="Perfil do Facebook de Daniel Paulo"
-                >
-                  <Facebook className="w-5 h-5" />
-                </a>
-              )}
-              {siteConfig.social.tiktok && (
-                <a
-                  href={siteConfig.social.tiktok}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-lg bg-[#0e1e4a] hover:bg-[#4FD6F4] hover:text-[#081331] text-slate-300 flex items-center justify-center transition-all duration-300 ease-out hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-[#4FD6F4]"
-                  aria-label="Perfil do TikTok de Daniel Paulo"
-                >
-                  <TikTokIcon className="w-5 h-5" />
-                </a>
-              )}
-              {/* WhatsApp direct */}
-              <a
-                href={getWhatsAppUrl()}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 rounded-lg bg-[#0e1e4a] hover:bg-[#25D366] hover:text-white text-slate-300 flex items-center justify-center transition-all duration-300 ease-out hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-[#25D366]"
-                aria-label="Contato direto via WhatsApp"
-              >
-                <WhatsAppIcon className="w-5 h-5" />
-              </a>
+              </div>
             </div>
           </div>
 
           {/* Column 2: Psicanálise */}
-          <div>
+          <div className="lg:col-span-2">
             <h3 className="text-sm font-semibold uppercase tracking-wider text-white mb-4 font-['Plus_Jakarta_Sans']">
               Psicanálise
             </h3>
@@ -157,7 +157,7 @@ export const Footer: React.FC = () => {
           </div>
 
           {/* Column 3: Serviços e Atuação */}
-          <div>
+          <div className="lg:col-span-2">
             <h3 className="text-sm font-semibold uppercase tracking-wider text-white mb-4 font-['Plus_Jakarta_Sans']">
               Serviços & Ensino
             </h3>
@@ -195,8 +195,8 @@ export const Footer: React.FC = () => {
             </ul>
           </div>
 
-          {/* Column 4: Institucional & Legal */}
-          <div>
+          {/* Column 4: Institucional & Conteúdo */}
+          <div className="lg:col-span-2">
             <h3 className="text-sm font-semibold uppercase tracking-wider text-white mb-4 font-['Plus_Jakarta_Sans']">
               Institucional
             </h3>
@@ -213,7 +213,7 @@ export const Footer: React.FC = () => {
               </li>
               <li>
                 <Link to="/sobre/formacao-e-certificados" className="hover:text-[#4FD6F4] transition-colors">
-                  Formação
+                  Formação & Certificados
                 </Link>
               </li>
               <li>
@@ -231,12 +231,86 @@ export const Footer: React.FC = () => {
                   Fale Conosco
                 </Link>
               </li>
-              <li>
-                <Link to="/mapa-do-site" className="hover:text-[#4FD6F4] transition-colors">
-                  Mapa do Site
-                </Link>
-              </li>
             </ul>
+          </div>
+
+          {/* Column 5: Contato & Políticas */}
+          <div className="lg:col-span-2 space-y-4">
+            <h3 className="text-sm font-semibold uppercase tracking-wider text-white mb-4 font-['Plus_Jakarta_Sans']">
+              Contato & Legal
+            </h3>
+            
+            <div className="space-y-3 text-xs text-slate-300">
+              <a
+                href={getWhatsAppUrl()}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-start gap-2.5 hover:text-[#4FD6F4] transition-colors group"
+                aria-label="Chamar no WhatsApp"
+              >
+                <Phone className="w-4 h-4 text-[#4FD6F4] shrink-0 mt-0.5 group-hover:scale-110 transition-transform" />
+                <div>
+                  <span className="block font-semibold text-white group-hover:text-[#4FD6F4]">
+                    {siteConfig.whatsappFormatted}
+                  </span>
+                  <span className="text-[11px] text-slate-400">Atendimento via WhatsApp</span>
+                </div>
+              </a>
+
+              <div className="flex items-start gap-2.5 text-slate-300">
+                <MapPin className="w-4 h-4 text-[#4FD6F4] shrink-0 mt-0.5" />
+                <div>
+                  <span className="block font-semibold text-white">
+                    {siteConfig.city}, {siteConfig.state}
+                  </span>
+                  <span className="text-[11px] text-slate-400">Presencial & Online</span>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-2.5 text-slate-300">
+                <Clock className="w-4 h-4 text-[#4FD6F4] shrink-0 mt-0.5" />
+                <div>
+                  <span className="block font-semibold text-white">Segunda a Sexta</span>
+                  <span className="text-[11px] text-slate-400">Agendamento prévio</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Links rápidos para Políticas e Privacidade */}
+            <div className="pt-2 border-t border-[#122456] space-y-2">
+              <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-400 block font-['Plus_Jakarta_Sans']">
+                Políticas e Privacidade
+              </span>
+              <ul className="space-y-1.5 text-xs">
+                <li>
+                  <Link
+                    to="/politica-de-privacidade"
+                    className="flex items-center gap-1.5 text-slate-300 hover:text-[#4FD6F4] transition-colors"
+                  >
+                    <ShieldCheck className="w-3.5 h-3.5 text-[#4FD6F4]" />
+                    <span>Política de Privacidade (LGPD)</span>
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/termos-de-uso"
+                    className="flex items-center gap-1.5 text-slate-300 hover:text-[#4FD6F4] transition-colors"
+                  >
+                    <FileText className="w-3.5 h-3.5 text-[#4FD6F4]" />
+                    <span>Termos de Uso</span>
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/mapa-do-site"
+                    className="flex items-center gap-1.5 text-slate-300 hover:text-[#4FD6F4] transition-colors"
+                  >
+                    <ChevronRight className="w-3.5 h-3.5 text-[#4FD6F4]" />
+                    <span>Mapa do Site</span>
+                  </Link>
+                </li>
+              </ul>
+            </div>
           </div>
 
         </div>
@@ -247,19 +321,19 @@ export const Footer: React.FC = () => {
             <p>
               © {currentYear} Daniel Paulo. Todos os direitos reservados.
             </p>
-            <p className="text-slate-600">
-              Controlador dos dados: Daniel Paulo de Arruda Oliveira. Atendimento ético e confidencial.
+            <p className="text-slate-500">
+              Controlador dos dados: {siteConfig.fullName}. Atendimento ético e confidencial em conformidade com a LGPD.
             </p>
           </div>
 
           <div className="flex flex-wrap items-center justify-center gap-6">
-            <Link to="/politica-de-privacidade" className="hover:text-slate-400 transition-colors">
+            <Link to="/politica-de-privacidade" className="hover:text-[#4FD6F4] transition-colors">
               Política de Privacidade
             </Link>
-            <Link to="/termos-de-uso" className="hover:text-slate-400 transition-colors">
+            <Link to="/termos-de-uso" className="hover:text-[#4FD6F4] transition-colors">
               Termos de Uso
             </Link>
-            <Link to="/mapa-do-site" className="hover:text-slate-400 transition-colors">
+            <Link to="/mapa-do-site" className="hover:text-[#4FD6F4] transition-colors">
               Mapa do Site
             </Link>
           </div>

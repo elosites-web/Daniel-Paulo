@@ -63,11 +63,14 @@ export const ReelsSection: React.FC = () => {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {reelsData.map((reel) => {
+        {reelsData.map((reel, index) => {
+          const isThirdItem = index === 2;
           return (
             <article
               key={reel.id}
-              className="group bg-[#0e1e4a]/70 border border-[#1e3878] rounded-3xl overflow-hidden hover:border-[#4FD6F4]/50 transition-all duration-300 flex flex-col justify-between shadow-xl"
+              className={`group bg-[#0e1e4a]/70 border border-[#1e3878] rounded-3xl overflow-hidden hover:border-[#4FD6F4]/50 transition-all duration-300 flex flex-col justify-between shadow-xl ${
+                isThirdItem ? 'md:col-span-2 md:max-w-md md:w-full md:mx-auto lg:col-span-1 lg:max-w-none' : ''
+              }`}
             >
               <div>
                 {/* Reel Video Thumbnail Container (inteira 9:16) */}

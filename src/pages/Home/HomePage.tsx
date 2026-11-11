@@ -144,7 +144,7 @@ export const HomePage: React.FC = () => {
                   >
                     Psicanalista{' '}
                     <span
-                      className="inline-block text-[0.6em] align-middle leading-none relative -top-[1px] text-[#4FD6F4] animate-pulse drop-shadow-[0_0_8px_rgba(79,214,244,0.85)] mx-1 sm:mx-1.5 select-none"
+                      className="inline-block text-[0.6em] align-middle leading-none relative -top-[1px] text-[#4FD6F4] animate-pulse motion-reduce:animate-none hero-bullet-point drop-shadow-[0_0_8px_rgba(79,214,244,0.85)] mx-1 sm:mx-1.5 select-none"
                       aria-hidden="true"
                     >
                       •
@@ -392,29 +392,29 @@ export const HomePage: React.FC = () => {
               <div className="absolute inset-0 bg-gradient-to-t from-[#081331] via-[#081331]/80 to-transparent lg:bg-gradient-to-r lg:from-[#081331] lg:via-[#081331]/85 lg:to-transparent lg:w-3/4 z-10 pointer-events-none" />
 
               {/* Content inside video component */}
-              <div className="absolute inset-0 z-20 flex items-center p-6 sm:p-10 lg:p-16">
-                <div className="max-w-xl space-y-3.5 sm:space-y-5">
+              <div className="absolute inset-0 z-20 flex flex-col justify-end lg:justify-center p-4 sm:p-5 lg:p-14 xl:p-16">
+                <div className="w-full max-w-full lg:max-w-xl min-w-0 space-y-2 sm:space-y-2.5 lg:space-y-4">
                   <div>
-                    <span className="inline-block px-3 py-1 rounded-full bg-[#122456]/90 border border-[#4FD6F4]/40 text-xs font-semibold text-[#4FD6F4] uppercase tracking-wider backdrop-blur-sm">
+                    <span className="inline-block px-2.5 py-1 rounded-full bg-[#122456]/90 border border-[#4FD6F4]/40 text-[10px] sm:text-[11px] lg:text-xs font-semibold text-[#4FD6F4] uppercase tracking-wider backdrop-blur-sm">
                       Autoconhecimento & Reflexão
                     </span>
                   </div>
                   
-                  <h2 className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-bold text-white font-['Plus_Jakarta_Sans'] leading-tight">
+                  <h2 className="text-sm sm:text-base lg:text-3xl xl:text-4xl font-bold text-white font-['Plus_Jakarta_Sans'] leading-snug lg:leading-tight break-words">
                     Aprender a olhar para dentro e acolher suas próprias profundezas
                   </h2>
 
-                  <p className="text-xs sm:text-sm lg:text-base text-slate-200 leading-relaxed font-light line-clamp-4 sm:line-clamp-none">
+                  <p className="text-[11px] sm:text-xs lg:text-base text-slate-200 leading-relaxed font-light line-clamp-3 lg:line-clamp-none break-words">
                     O processo de autoconhecimento não busca criar uma versão idealizada ou perfeita de si mesmo, mas desatar nós, reconhecer padrões automáticos e construir uma relação de clareza com a própria história.
                   </p>
 
-                  <div className="pt-1 sm:pt-2">
+                  <div className="pt-1 lg:pt-2">
                     <Link
                       to="/terapia-e-autoconhecimento"
-                      className="inline-flex items-center gap-2 px-4 py-2.5 sm:px-5 sm:py-3 rounded-xl font-semibold text-xs sm:text-sm bg-[#4FD6F4] text-[#081331] hover:bg-[#36c5e5] transition-all shadow-md"
+                      className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-3.5 py-2 sm:px-4 sm:py-2.5 lg:px-5 lg:py-3 rounded-xl font-semibold text-xs lg:text-sm bg-[#4FD6F4] text-[#081331] hover:bg-[#36c5e5] transition-all shadow-md text-center"
                     >
-                      <span>Explorar temas de autoconhecimento</span>
-                      <ArrowRight className="w-4 h-4" />
+                      <span className="truncate">Explorar temas de autoconhecimento</span>
+                      <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
                     </Link>
                   </div>
                 </div>
