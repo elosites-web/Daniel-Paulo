@@ -164,8 +164,11 @@ export const BlogPostPage: React.FC = () => {
               <img
                 src={post.coverImage}
                 alt={`Imagem de capa: ${post.title}`}
-                className="w-full h-full object-cover"
-                loading="eager"
+                className="w-full h-full object-cover aspect-[16/9]"
+                loading="lazy"
+                decoding="async"
+                width="1280"
+                height="720"
               />
             </div>
           )}
@@ -227,7 +230,7 @@ export const BlogPostPage: React.FC = () => {
                 {post.academicReferences.map((ref, idx) => (
                   <li key={idx} className="p-3 rounded-lg bg-[#0e1e4a]/50 border border-[#1e3878]/60 space-y-1">
                     <p className="font-mono text-slate-200">{ref.citation}</p>
-                    <p className="text-slate-400 text-[11px]">{ref.note}</p>
+                    {ref.note && <p className="text-slate-400 text-[11px]">{ref.note}</p>}
                   </li>
                 ))}
               </ul>
@@ -257,8 +260,11 @@ export const BlogPostPage: React.FC = () => {
             <img
               src="/assets/fotos-daniel/daniel-paulo-avatar.webp"
               alt="Daniel Paulo"
-              className="w-20 h-20 sm:w-24 sm:h-24 rounded-full object-cover object-center border-2 border-[#4FD6F4] flex-shrink-0 shadow-lg"
+              className="w-20 h-20 sm:w-24 sm:h-24 aspect-square rounded-full object-cover object-center border-2 border-[#4FD6F4] flex-shrink-0 shadow-lg"
+              width="96"
+              height="96"
               loading="lazy"
+              decoding="async"
             />
             <div className="space-y-2 text-center sm:text-left">
               <h3 className="text-lg font-bold text-white font-['Plus_Jakarta_Sans']">

@@ -69,8 +69,11 @@ export const BlogPage: React.FC = () => {
                     <img
                       src={post.coverImage}
                       alt={`Imagem ilustrativa do artigo: ${post.title}`}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      className="w-full h-full object-cover aspect-[16/9] group-hover:scale-105 transition-transform duration-500"
+                      width="640"
+                      height="360"
                       loading="lazy"
+                      decoding="async"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#0e1e4a] via-transparent to-transparent opacity-80" />
                     <span className="absolute bottom-3 left-4 text-[11px] font-semibold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-[#081331]/90 text-[#4FD6F4] backdrop-blur-sm border border-[#4FD6F4]/20">

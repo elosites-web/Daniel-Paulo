@@ -30,7 +30,7 @@ export const SobrePage: React.FC = () => {
               <img
                 src="/assets/fotos-daniel/daniel-paulo-terno-sofa.webp"
                 alt="Daniel Paulo sentado em sofá claro vestindo terno azul-marinho"
-                className="w-full h-full object-cover object-top"
+                className="w-full h-full object-cover object-top aspect-[4/5]"
                 loading="eager"
                 decoding="async"
                 width="480"
@@ -106,7 +106,7 @@ export const SobrePage: React.FC = () => {
               Sigilo e Neutralidade
             </h3>
             <p className="text-sm text-slate-300 leading-relaxed font-light">
-              Espaço absolutamente confidencial e neutro, onde não há julgamentos morais sobre sentimentos, histórias ou escolhas pessoais.
+              Espaço confidencial e neutro, onde não há julgamentos morais sobre sentimentos, histórias ou escolhas pessoais.
             </p>
           </div>
 

@@ -13,7 +13,7 @@ export interface BlogPost {
   coverImage?: string;
   tldr: string;
   tableOfContents: { id: string; text: string }[];
-  academicReferences?: { citation: string; note: string }[];
+  academicReferences?: { citation: string; note?: string }[];
   content: string; // Markdown or structured sections
 }
 
@@ -39,11 +39,17 @@ export const initialBlogPosts: BlogPost[] = [
       { id: 'reconhecendo-sinais', text: '4. Sinais de que você está atuando em excesso' },
       { id: 'o-caminho-da-escuta', text: '5. Como a escuta psicanalítica acolhe a autenticidade' }
     ],
+    // verificar fonte antes de publicar
     academicReferences: [
       {
-        citation: 'GOFFMAN, Erving. The Presentation of Self in Everyday Life. New York: Doubleday Anchor Books, 1959. (Ed. bras.: A representação do eu na vida cotidiana. Petrópolis: Vozes, 1985).',
-        note: 'Referência sociológica fundamental sobre como os indivíduos constroem fachadas e operam em palcos públicos (front stage) e bastidores privados (backstage).'
-      }
+        citation: 'GOFFMAN, Erving. The Presentation of Self in Everyday Life. New York: Doubleday Anchor Books, 1959. (Ed. bras.: A representação do eu na vida cotidiana. Petrópolis: Vozes, 1985.)',
+      },
+      {
+        citation: 'WINNICOTT, Donald W. Ego distortion in terms of the true and false self (1960). In: The Maturational Processes and the Facilitating Environment. London: Hogarth Press, 1965.',
+      },
+      {
+        citation: 'JUNG, Carl G. As relações entre o eu e o inconsciente (1928). In: Obras completas, v. 7/2. Petrópolis: Vozes.',
+      },
     ],
     content: `
 Todos nós desempenhamos diferentes papéis ao longo de um único dia. Somos profissionais em nossos locais de trabalho, filhos, parceiros, amigos ou cidadãos em uma fila de supermercado. Adaptar nossa postura a cada um desses cenários não é falsidade; é uma competência social saudável que viabiliza a convivência humana.
@@ -82,7 +88,6 @@ Existem alguns indícios que merecem nossa atenção cuidadosa:
 4. **Perda de contato com suas preferências básicas**, tendo dificuldade em dizer o que gosta de fazer, ouvir ou comer quando ninguém está olhando.
 
 ### 5. Como a escuta psicanalítica acolhe a autenticidade {#o-caminho-da-escuta}
-
 A psicanálise não busca eliminar seus papéis nem exigir que você saia desabafando sem filtro em todas as esferas da sua vida. A proposta de uma escuta acolhedora e sem julgamentos é criar um espaço onde a máscara não seja necessária.
 
 Ao falar livremente sobre suas contradições, medos e desejos reprimidos, você começa a perceber que aquilo que você escondia com tanto empenho não é vergonhoso; é apenas humano. O autoconhecimento não consiste em encontrar uma versão perfeita de si mesmo, mas em aprender a habitar a própria verdade com tranquilidade.
@@ -105,18 +110,27 @@ Ao falar livremente sobre suas contradições, medos e desejos reprimidos, você
     tableOfContents: [
       { id: 'o-que-e-psicanalise', text: '1. O que é a psicanálise na prática?' },
       { id: 'o-inconsciente-cotidiano', text: '2. O inconsciente presente no dia a dia' },
-      { id: 'o-enquadre-analitico', text: '3. O enquadre analítico segundo diretrizes da IPA e APsaA' },
+      { id: 'o-enquadre-analitico', text: '3. O enquadre analítico e a técnica clássica' },
       { id: 'a-primeira-sessao', text: '4. Como funciona o primeiro contato' },
       { id: 'sem-roteiro-nem-provas', text: '5. Um espaço sem provas e sem julgamento' }
     ],
+    // verificar fonte antes de publicar
     academicReferences: [
       {
-        citation: 'INTERNATIONAL PSYCHOANALYTICAL ASSOCIATION (IPA) & AMERICAN PSYCHOANALYTIC ASSOCIATION (APsaA). Guidelines on Psychoanalytic Practice, Ethics and Analytic Setting, 2018–2023.',
-        note: 'Normas deontológicas e técnicas internacionais que fundamentam a confidencialidade absoluta, o acolhimento neutro e a preservação do enquadre clínico singular.'
-      }
+        citation: 'FREUD, Sigmund. Recommendations to physicians practising psycho-analysis (1912). In: The Standard Edition of the Complete Psychological Works of Sigmund Freud, v. 12, p. 109-120.',
+      },
+      {
+        citation: 'FREUD, Sigmund. On beginning the treatment (1913). In: The Standard Edition, v. 12, p. 121-144.',
+      },
+      {
+        citation: 'INTERNATIONAL PSYCHOANALYTICAL ASSOCIATION. Ethical Principles and Implementing Procedures (Ethics Code). Disponível em: ipa.world.',
+      },
+      {
+        citation: 'AMERICAN PSYCHOANALYTIC ASSOCIATION. APsA Code of Ethics with Provisions. Disponível em: apsa.org.',
+      },
     ],
     content: `
-Para muitas pessoas que pensam em iniciar um processo terapêutico, a psicanálise ainda vem acompanhada de mitos e imagens estereotipadas: o divã antigo, o analista impassível em silêncio absoluto ou a ideia de que apenas memórias remotas da infância serão discutidas.
+Para muitas pessoas que pensam em iniciar um processo terapêutico, a psicanálise ainda vem acompanhada de mitos e imagens estereotipadas: o divã antigo, o analista impassível em silêncio ou a ideia de que apenas memórias remotas da infância serão discutidas.
 
 Na realidade contemporânea, a psicanálise é, antes de tudo, uma experiência viva de escuta, linguagem e vínculo seguro.
 
@@ -136,14 +150,9 @@ O inconsciente não é um compartimento misterioso e inalcançável. Ele se mani
 
 Dar atenção a essas pistas permite compreender a lógica dos nossos próprios sentimentos.
 
-### 3. O enquadre analítico segundo diretrizes da IPA e APsaA {#o-enquadre-analitico}
+### 3. O enquadre analítico e a técnica clássica {#o-enquadre-analitico}
 
-Conforme articulado pelas diretrizes formativas da Associação Psicanalítica Internacional (IPA) e da American Psychoanalytic Association (APsaA), o enquadre psicanalítico (*setting*) não é uma rigidez protocolar, mas uma salvaguarda ética. 
-
-O enquadre estabelece três pilares indispensáveis:
-1. **Regra fundamental da associação livre:** o paciente é encorajado a dizer tudo o que lhe vier à mente, sem censura prévia.
-2. **Atenção flutuante e neutralidade acolhedora:** o psicanalista suspende conselhos pessoais ou julgamentos morais para sintonizar os significados subjacentes à fala.
-3. **Constância e confidencialidade:** previsibilidade e sigilo absoluto que tornam o espaço seguro para a revelação da dor.
+Na técnica clássica, o analisando é convidado a falar livremente (associação livre) e o analista escuta com atenção flutuante (FREUD, 1912; 1913). O sigilo é um dos fundamentos éticos da prática psicanalítica (IPA; APsA).
 
 ### 4. Como funciona o primeiro contato {#a-primeira-sessao}
 
@@ -180,11 +189,14 @@ O papel do psicanalista não é ditar regras de vida prontas, mas ajudar você a
       { id: 'perfeccionismo-e-adiamento', text: '4. A armadilha do perfeccionismo' },
       { id: 'passos-para-o-dialogo', text: '5. Como começar a lidar com a paralisia' }
     ],
+    // verificar fonte antes de publicar
     academicReferences: [
       {
-        citation: 'SIROIS, Fuschia; PYCHYL, Timothy. Procrastination and the priority of short-term mood regulation: Consequences for future self. Social and Personality Psychology Compass, v. 7, n. 2, p. 115-127, 2013.',
-        note: 'Estudo seminal demonstrando que a procrastinação é primordialmente um problema de regulação de humor de curto prazo diante de tarefas estressantes, e não um déficit de gestão de tempo.'
-      }
+        citation: 'SIROIS, Fuschia; PYCHYL, Timothy. Procrastination and the priority of short-term mood regulation: Consequences for future self. Social and Personality Psychology Compass, v. 7, n. 2, p. 115-127, 2013. DOI 10.1111/spc3.12011.',
+      },
+      {
+        citation: 'STEEL, Piers. The nature of procrastination: a meta-analytic and theoretical review of quintessential self-regulatory failure. Psychological Bulletin, v. 133, n. 1, p. 65-94, 2007.',
+      },
     ],
     content: `
 Quase todo mundo já vivenciou a clássica experiência de sentar em frente ao computador para produzir algo importante e, meia hora depois, se pegar limpando gavetas, respondendo mensagens secundárias ou navegando em redes sociais.
@@ -204,7 +216,6 @@ Em um estudo de referência amplamente citado na psicologia comportamental, os p
 Segundo Sirois & Pychyl, adiar tarefas decorre da **priorização imediata do humor de curto prazo**. Quando uma tarefa desperta ansiedade, insegurança, tédio ou medo de fracassar, o cérebro opta pelo alívio instantâneo, esquivando-se da tarefa presente para proteger o humor no momento — transferindo o custo ampliado para o "eu do futuro".
 
 ### 3. O circuito da evitação do afeto {#o-mecanismo-emocional}
-
 Tanto as pesquisas comportamentais quanto a reflexão psicanalítica apontam para a mesma constatação: adiamos aquilo que mobiliza afetos difíceis de tolerar:
 - Medo de descobrir que nosso desempenho não alcança o ideal imaginado.
 - Tédio ou sensação de falta de sentido pessoal na demanda imposta.

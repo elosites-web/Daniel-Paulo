@@ -1,6 +1,15 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react';
-import { motion, useScroll, useMotionValueEvent } from 'motion/react';
+import { motion, useScroll, useMotionValueEvent, useTransform } from 'motion/react';
 import { useReducedMotion } from '../../hooks/useReducedMotion';
+
+export const isWebKitWithoutWebmAlpha = (): boolean => {
+  if (typeof navigator === 'undefined') return false;
+  const ua = navigator.userAgent;
+  return (
+    /iP(hone|ad|od)/i.test(ua) ||
+    (/safari/i.test(ua) && !/chrome|chromium|crios|fxios|edg|android/i.test(ua))
+  );
+};
 
 interface ScrollVideoProps {
   src: string;
@@ -18,6 +27,7 @@ interface ScrollVideoProps {
   posterWidth?: number | string;
   posterHeight?: number | string;
   transparentBg?: boolean;
+  isHero?: boolean;
   animateOnView?: boolean;
   startAt?: number;
   endAt?: number;
@@ -39,6 +49,7 @@ export const ScrollVideo: React.FC<ScrollVideoProps> = ({
   posterWidth,
   posterHeight,
   transparentBg = false,
+  isHero = false,
   animateOnView = false,
   startAt = 0,
   endAt = 1,
@@ -48,6 +59,9 @@ export const ScrollVideo: React.FC<ScrollVideoProps> = ({
   const videoRef = useRef<HTMLVideoElement>(null);
   const progressRef = useRef(0);
   const rafIdRef = useRef<number | null>(null);
+
+  const isHeroVideo = Boolean(isHero || transparentBg || src.includes('hero-'));
+  const isWebKitHeroFallback = isHeroVideo && isWebKitWithoutWebmAlpha();
 
   const [isNearViewport, setIsNearViewport] = useState(priority);
   const [isVideoReady, setIsVideoReady] = useState(false);
@@ -67,6 +81,9 @@ export const ScrollVideo: React.FC<ScrollVideoProps> = ({
           offset: scrollOffset || ['start end', 'end start'],
         }
   );
+
+  const webkitOpacity = useTransform(scrollYProgress, [0, 1], [0, 1]);
+  const webkitX = useTransform(scrollYProgress, [0, 1], [40, 0]);
 
   // Check data saving preference
   const isDataSaving =
@@ -102,7 +119,7 @@ export const ScrollVideo: React.FC<ScrollVideoProps> = ({
   // Synchronizes immediately with current scrollYProgress even if page was reloaded partially scrolled
   useEffect(() => {
     const video = videoRef.current;
-    if (!video || reducedMotion || isDataSaving || !isNearViewport) return;
+    if (!video || reducedMotion || isDataSaving || !isNearViewport || isWebKitHeroFallback) return;
 
     const handleLoadedData = () => {
       if (video.duration && !isNaN(video.duration)) {
@@ -241,40 +258,61 @@ export const ScrollVideo: React.FC<ScrollVideoProps> = ({
           }
         : {})}
     >
-      {/* Optimized Poster Image with explicit aspect ratio hints */}
-      <img
-        src={poster}
-        alt={isInformative ? altText : ''}
-        width={resolvedPosterWidth}
-        height={resolvedPosterHeight}
-        loading={priority ? 'eager' : 'lazy'}
-        fetchPriority={priority ? 'high' : 'auto'}
-        decoding="async"
-        onError={() => setHasError(true)}
-        className={`w-full h-full select-none pointer-events-none transition-opacity duration-500 ${
-          showPoster ? 'opacity-100 z-10 relative' : 'opacity-0 z-0 absolute inset-0'
-        } ${videoClassName || 'object-cover'}`}
-      />
-
-      {/* Video element */}
-      {!reducedMotion && !isDataSaving && isNearViewport && (
-        <video
-          ref={videoRef}
-          src={src}
-          poster={poster}
-          muted
-          playsInline
-          autoPlay={false}
-          preload={priority ? 'auto' : isNearViewport ? 'metadata' : 'none'}
-          onError={() => {
-            setHasError(true);
-            setIsVideoReady(false);
-          }}
-          className={`absolute inset-0 w-full h-full select-none pointer-events-none transition-opacity duration-500 ${
-            !showPoster ? 'opacity-100 z-10' : 'opacity-0 z-0'
-          } ${videoClassName || 'object-cover'}`}
-          aria-hidden="true"
+      {/* WebKit Fallback: Safari & iOS WebKit lack WebM alpha transparency -> show poster with scroll-driven entry */}
+      {isWebKitHeroFallback ? (
+        <motion.img
+          src={poster}
+          alt={isInformative ? altText : ''}
+          width={resolvedPosterWidth}
+          height={resolvedPosterHeight}
+          loading={priority ? 'eager' : 'lazy'}
+          fetchPriority={priority ? 'high' : 'auto'}
+          decoding="async"
+          className={`w-full h-full select-none pointer-events-none ${videoClassName || 'object-cover'}`}
+          style={
+            reducedMotion || isDataSaving
+              ? { opacity: 1, transform: 'none' }
+              : { opacity: webkitOpacity, x: webkitX }
+          }
         />
+      ) : (
+        <>
+          {/* Optimized Poster Image with explicit aspect ratio hints */}
+          <img
+            src={poster}
+            alt={isInformative ? altText : ''}
+            width={resolvedPosterWidth}
+            height={resolvedPosterHeight}
+            loading={priority ? 'eager' : 'lazy'}
+            fetchPriority={priority ? 'high' : 'auto'}
+            decoding="async"
+            onError={() => setHasError(true)}
+            className={`w-full h-full select-none pointer-events-none transition-opacity duration-500 ${
+              showPoster ? 'opacity-100 z-10 relative' : 'opacity-0 z-0 absolute inset-0'
+            } ${videoClassName || 'object-cover'}`}
+          />
+
+          {/* Video element */}
+          {!reducedMotion && !isDataSaving && isNearViewport && (
+            <video
+              ref={videoRef}
+              src={src}
+              poster={poster}
+              muted
+              playsInline
+              autoPlay={false}
+              preload={priority || isNearViewport ? 'auto' : 'none'}
+              onError={() => {
+                setHasError(true);
+                setIsVideoReady(false);
+              }}
+              className={`absolute inset-0 w-full h-full select-none pointer-events-none transition-opacity duration-500 ${
+                !showPoster ? 'opacity-100 z-10' : 'opacity-0 z-0'
+              } ${videoClassName || 'object-cover'}`}
+              aria-hidden="true"
+            />
+          )}
+        </>
       )}
     </motion.div>
   );

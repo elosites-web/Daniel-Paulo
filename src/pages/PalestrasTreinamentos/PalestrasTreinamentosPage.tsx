@@ -65,8 +65,8 @@ export const PalestrasTreinamentosPage: React.FC = () => {
               <img
                 src="/assets/fotos-daniel/daniel-paulo-palestrante-microfone-pb.webp"
                 alt="Daniel Paulo com microfone em mãos durante palestra"
-                className="w-full h-full object-cover"
-                loading="eager"
+                className="w-full h-full object-cover aspect-[3/4]"
+                loading="lazy"
                 decoding="async"
                 width="400"
                 height="533"

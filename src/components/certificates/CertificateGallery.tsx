@@ -143,7 +143,7 @@ export const CertificateGallery: React.FC = () => {
               <img
                 src={cert.image}
                 alt={`Certificado oficial de ${cert.title} emitido por ${cert.institution}`}
-                className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                className="w-full h-full object-cover object-top aspect-[4/3] transition-transform duration-500 group-hover:scale-105"
                 loading="lazy"
                 decoding="async"
                 width="400"
@@ -260,7 +260,11 @@ export const CertificateGallery: React.FC = () => {
               <img
                 src={selectedCert.image}
                 alt={`Visualização ampliada do certificado de ${selectedCert.title}`}
-                className="max-h-[65vh] w-auto object-contain rounded-lg shadow-lg border border-[#162c66]"
+                className="max-h-[65vh] w-auto aspect-[4/3] object-contain rounded-lg shadow-lg border border-[#162c66]"
+                loading="lazy"
+                decoding="async"
+                width="800"
+                height="600"
               />
             </div>
 

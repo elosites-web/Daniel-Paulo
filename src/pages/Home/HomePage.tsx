@@ -206,6 +206,8 @@ export const HomePage: React.FC = () => {
                       altText="Daniel Paulo, psicanalista e terapeuta"
                       orientation={isDesktop ? 'horizontal' : 'vertical'}
                       transparentBg={true}
+                      isHero={true}
+                      priority={true}
                       trackRef={hero1TrackRef}
                       scrollOffset={isDesktop ? ['start start', 'end end'] : ['start 85%', 'end 15%']}
                       aspectRatio="none"
@@ -257,12 +259,22 @@ export const HomePage: React.FC = () => {
                 <div className="w-full lg:w-[48%] xl:w-[50%] lg:absolute lg:left-0 lg:bottom-0 lg:top-0 order-2 lg:order-1 flex items-end justify-center lg:justify-start pointer-events-none z-10 h-full">
                   <div className="relative w-full max-w-[340px] sm:max-w-[400px] lg:max-w-none h-[380px] sm:h-[440px] lg:h-full max-h-[820px] flex items-end justify-center lg:justify-start overflow-hidden mx-auto mt-2 sm:mt-4 lg:mt-0">
                     <ScrollVideo
-                      key="hero-2-video"
-                      src="/assets/videos/hero-02-terno-escuro-mobile.webm"
-                      poster="/assets/videos/hero-02-terno-escuro-mobile-poster.webp"
+                      key={isDesktop ? 'desktop-hero-2' : 'mobile-hero-2'}
+                      src={
+                        isDesktop
+                          ? '/assets/videos/hero-02-terno-escuro-desktop.webm'
+                          : '/assets/videos/hero-02-terno-escuro-mobile.webm'
+                      }
+                      poster={
+                        isDesktop
+                          ? '/assets/videos/hero-02-terno-escuro-desktop-poster.webp'
+                          : '/assets/videos/hero-02-terno-escuro-mobile-poster.webp'
+                      }
                       altText="Daniel Paulo de terno escuro"
-                      orientation="vertical"
+                      orientation={isDesktop ? 'horizontal' : 'vertical'}
                       transparentBg={true}
+                      isHero={true}
+                      priority={true}
                       trackRef={hero2TrackRef}
                       scrollOffset={isDesktop ? ['start start', 'end end'] : ['start 85%', 'end 15%']}
                       aspectRatio="none"
@@ -512,7 +524,7 @@ export const HomePage: React.FC = () => {
               </div>
             </div>
 
-            <div className="pt-2 flex flex-wrap gap-4">
+            <div className="pt-2 flex flex-wrap justify-center items-center gap-4">
               <a
                 href={getWhatsAppUrl('Olá Daniel, gostaria de consultar a disponibilidade para atendimento [online / presencial em Jundiaí].')}
                 target="_blank"
@@ -651,7 +663,7 @@ export const HomePage: React.FC = () => {
                   <img
                     src="/assets/fotos-daniel/daniel-paulo-palestrante-microfone-pb.webp"
                     alt="Daniel Paulo palestrando com microfone em mãos"
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover aspect-[3/4]"
                     loading="lazy"
                     decoding="async"
                     width="400"
@@ -691,7 +703,7 @@ export const HomePage: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="pt-2 flex flex-wrap gap-4">
+                <div className="pt-2 flex flex-wrap justify-center items-center gap-4">
                   <Link
                     to="/palestras-e-treinamentos"
                     className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm bg-[#4FD6F4] text-[#081331] hover:bg-[#36c5e5] transition-all"
@@ -751,8 +763,11 @@ export const HomePage: React.FC = () => {
                       <img
                         src={post.coverImage}
                         alt={post.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        className="w-full h-full object-cover aspect-[16/9] group-hover:scale-105 transition-transform duration-500"
+                        width="640"
+                        height="360"
                         loading="lazy"
+                        decoding="async"
                       />
                     </div>
                   )}

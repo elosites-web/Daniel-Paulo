@@ -28,12 +28,13 @@ export const Footer: React.FC = () => {
           <div className="lg:col-span-2 space-y-4">
             <Link to="/" className="flex flex-col sm:flex-row items-start sm:items-center gap-4 group inline-flex" aria-label="Voltar para a página inicial">
               <img
-                src="/assets/logo/logo-daniel-paulo-brilho-512.png"
-                alt="Logotipo de Daniel Paulo — Psicanalista Clínico"
-                className="w-28 h-28 sm:w-32 sm:h-32 object-contain flex-shrink-0 drop-shadow-md"
-                width="128"
-                height="128"
+                src="/assets/logo/logo-daniel-paulo-sem-brilho-512.png"
+                alt="Logotipo de Daniel Paulo, Psicanalista e Terapeuta"
+                className="w-44 sm:w-56 h-auto aspect-square object-contain flex-shrink-0 drop-shadow-md"
+                width="224"
+                height="224"
                 loading="lazy"
+                decoding="async"
               />
               <div>
                 <span className="text-xl font-bold tracking-tight text-white font-['Plus_Jakarta_Sans']">
@@ -279,12 +280,13 @@ export const Footer: React.FC = () => {
               title="ēloSites — O melhor site pelo melhor preço"
             >
               <img
-                src="/assets/aistudio/logo-elosites.webp"
+                src="/assets/logo/logo-elosites.webp"
                 alt="ēloSites"
-                className="h-5 sm:h-5.5 w-auto object-contain brightness-125 hover:brightness-150 transition-all"
+                className="h-5 sm:h-5.5 w-auto aspect-[640/158] object-contain brightness-125 hover:brightness-150 transition-all"
                 width="640"
                 height="158"
                 loading="lazy"
+                decoding="async"
               />
             </a>
           </div>

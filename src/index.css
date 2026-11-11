@@ -18,7 +18,7 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 5.5rem; /* 88px offset so sticky header never occludes anchored headings */
+  scroll-padding-top: 5.5rem; /* 88px offset so sticky/fixed header never occludes anchored headings */
   font-family: var(--font-body);
 }
 
@@ -98,34 +98,133 @@ h1, h2, h3, h4, h5, h6 {
   transform: translateY(20px) scale(0.92);
   pointer-events: none;
   visibility: hidden;
+  transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.6s;
 }
 
-/* Subtle periodic pulse animation for Floating WhatsApp button */
+/* Safe area container for floating WhatsApp button */
+.whatsapp-floating-container {
+  bottom: max(1.5rem, calc(1.5rem + env(safe-area-inset-bottom, 0px)));
+  right: max(1.5rem, calc(1.5rem + env(safe-area-inset-right, 0px)));
+}
+
+/* Floating WhatsApp with site brand visual identity: Electric Cyan (#4FD6F4) + Navy (#1e3878 / #081331) */
+.whatsapp-premium-btn {
+  background: linear-gradient(
+    135deg,
+    #4FD6F4 0%,
+    #00d4ff 25%,
+    #0284c7 50%,
+    #1e3878 75%,
+    #4FD6F4 100%
+  );
+  background-size: 250% 250%;
+  background-position: 0% 50%;
+  box-shadow: 
+    0 8px 24px -4px rgba(79, 214, 244, 0.45),
+    0 4px 12px -2px rgba(8, 19, 49, 0.45),
+    inset 0 1px 1px rgba(255, 255, 255, 0.55);
+  border: 1.5px solid rgba(255, 255, 255, 0.65);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, background-position 0.5s ease;
+}
+
+/* Glossy glass reflection on the upper hemisphere */
+.whatsapp-premium-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.08) 100%);
+  border-radius: 9999px 9999px 0 0;
+  pointer-events: none;
+}
+
+/* Hover effect */
+.whatsapp-premium-btn:hover {
+  transform: scale(1.06);
+  background-position: 100% 50%;
+  box-shadow: 
+    0 14px 32px -2px rgba(79, 214, 244, 0.65),
+    0 6px 18px -2px rgba(8, 19, 49, 0.45),
+    0 0 0 3px rgba(79, 214, 244, 0.35);
+}
+
+/* Active click state */
+.whatsapp-premium-btn:active {
+  transform: scale(0.96);
+  box-shadow: 0 4px 14px rgba(79, 214, 244, 0.4);
+}
+
+/* Distinct high-visibility focus effect */
+.whatsapp-premium-btn:focus,
+.whatsapp-premium-btn:focus-visible {
+  outline: none;
+  transform: scale(1.08);
+  box-shadow: 
+    0 0 0 3px #081331,
+    0 0 0 6px #4FD6F4,
+    0 0 28px 6px rgba(79, 214, 244, 0.8),
+    0 12px 28px -2px rgba(8, 19, 49, 0.5) !important;
+}
+
+/* Gradient pulse animation: smooth scale + multi-tier cyan-to-navy gradient halos + shifting gradient */
 @keyframes whatsapp-subtle-pulse {
   0%, 100% {
     transform: scale(1);
-    box-shadow: 0 10px 25px -5px rgba(37, 211, 102, 0.4), 0 8px 10px -6px rgba(37, 211, 102, 0.2);
+    background-position: 0% 50%;
+    box-shadow: 
+      0 8px 24px -4px rgba(79, 214, 244, 0.45),
+      0 4px 12px -2px rgba(8, 19, 49, 0.4),
+      0 0 0 0 rgba(79, 214, 244, 0),
+      0 0 0 0 rgba(56, 189, 248, 0),
+      0 0 0 0 rgba(30, 56, 120, 0);
   }
-  12% {
-    transform: scale(1.06);
-    box-shadow: 0 14px 28px -4px rgba(37, 211, 102, 0.55), 0 0 0 8px rgba(37, 211, 102, 0.2);
+  14% {
+    transform: scale(1.055);
+    background-position: 50% 50%;
+    box-shadow: 
+      0 12px 30px -2px rgba(79, 214, 244, 0.65),
+      0 6px 16px -2px rgba(8, 19, 49, 0.45),
+      0 0 0 6px rgba(79, 214, 244, 0.38),
+      0 0 0 13px rgba(56, 189, 248, 0.22),
+      0 0 0 20px rgba(30, 56, 120, 0.12);
   }
-  24% {
+  28% {
     transform: scale(1);
-    box-shadow: 0 10px 25px -5px rgba(37, 211, 102, 0.4), 0 0 0 14px rgba(37, 211, 102, 0);
+    background-position: 100% 50%;
+    box-shadow: 
+      0 8px 24px -4px rgba(79, 214, 244, 0.45),
+      0 4px 12px -2px rgba(8, 19, 49, 0.4),
+      0 0 0 16px rgba(79, 214, 244, 0),
+      0 0 0 26px rgba(56, 189, 248, 0),
+      0 0 0 36px rgba(30, 56, 120, 0);
   }
-  36% {
-    transform: scale(1.04);
-    box-shadow: 0 12px 26px -5px rgba(37, 211, 102, 0.45), 0 0 0 6px rgba(37, 211, 102, 0.15);
+  40% {
+    transform: scale(1.035);
+    background-position: 50% 50%;
+    box-shadow: 
+      0 10px 26px -3px rgba(79, 214, 244, 0.55),
+      0 5px 14px -2px rgba(8, 19, 49, 0.4),
+      0 0 0 4px rgba(79, 214, 244, 0.3),
+      0 0 0 10px rgba(56, 189, 248, 0.16),
+      0 0 0 16px rgba(30, 56, 120, 0.08);
   }
-  48% {
+  52% {
     transform: scale(1);
-    box-shadow: 0 10px 25px -5px rgba(37, 211, 102, 0.4), 0 0 0 12px rgba(37, 211, 102, 0);
+    background-position: 0% 50%;
+    box-shadow: 
+      0 8px 24px -4px rgba(79, 214, 244, 0.45),
+      0 4px 12px -2px rgba(8, 19, 49, 0.4),
+      0 0 0 12px rgba(79, 214, 244, 0),
+      0 0 0 20px rgba(56, 189, 248, 0);
   }
 }
 
 .animate-whatsapp-pulse {
-  animation: whatsapp-subtle-pulse 5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  animation: whatsapp-subtle-pulse 5.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
   animation-delay: 1.5s;
 }
 
@@ -233,12 +332,12 @@ div#root > div > main#main-content > div > section:nth-of-type(5) > div > div > 
 }
 
 /* Remove cyan focus ring/border from header navigation bar elements */
-header div:nth-of-type(1) > div:nth-of-type(1) a,
-header div:nth-of-type(1) > div:nth-of-type(1) button,
-header div:nth-of-type(1) > div:nth-of-type(1) a:focus,
-header div:nth-of-type(1) > div:nth-of-type(1) button:focus,
-header div:nth-of-type(1) > div:nth-of-type(1) *:focus,
-header div:nth-of-type(1) > div:nth-of-type(1) *:focus-visible {
+.glass-header div:nth-of-type(1) > div:nth-of-type(1) a,
+.glass-header div:nth-of-type(1) > div:nth-of-type(1) button,
+.glass-header div:nth-of-type(1) > div:nth-of-type(1) a:focus,
+.glass-header div:nth-of-type(1) > div:nth-of-type(1) button:focus,
+.glass-header div:nth-of-type(1) > div:nth-of-type(1) *:focus,
+.glass-header div:nth-of-type(1) > div:nth-of-type(1) *:focus-visible {
   outline: none !important;
   box-shadow: none;
   --tw-ring-color: transparent !important;
@@ -284,38 +383,8 @@ header div:nth-of-type(1) > div:nth-of-type(1) *:focus-visible {
   }
 }
 
-/* ========================================================
-   LIGHT THEME ACCESSIBLE COLOR MAPPING
-/* ========================================================
-   LIGHT THEME ACCESSIBLE COLOR MAPPING
-   Ensures WCAG AA contrast (≥ 4.5:1), distinct card surfaces,
-   and crisp readability across all screen sizes
-======================================================== */
-html.light {
-  color-scheme: light;
-}
-
-html.light body,
-html.light #root,
-html.light .bg-\[\#081331\] {
-  background-color: #f8fafc !important;
-  color: #1e293b;
-}
-
-html.light ::-webkit-scrollbar-track {
-  background: #f1f5f9;
-}
-html.light ::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
-}
-html.light ::-webkit-scrollbar-thumb:hover {
-  background: #0284c7;
-}
-
 /* Nav & Sticky Header — Mirrored Glass Surface (Vidro Espelhado Premium) */
-.glass-header,
-div#root > div > header,
-header {
+.glass-header {
   background: linear-gradient(
     135deg,
     rgba(8, 19, 49, 0.78) 0%,
@@ -338,9 +407,7 @@ header {
     linear-gradient(108deg, transparent 20%, rgba(255, 255, 255, 0.035) 38%, rgba(79, 214, 244, 0.05) 50%, transparent 68%);
 }
 
-html.light .glass-header,
-html.light div#root > div > header,
-html.light header {
+html.light .glass-header {
   background: linear-gradient(
     135deg,
     rgba(255, 255, 255, 0.82) 0%,
@@ -363,323 +430,7 @@ html.light .glass-header-reflection {
     linear-gradient(108deg, transparent 20%, rgba(255, 255, 255, 0.5) 38%, rgba(79, 214, 244, 0.08) 50%, transparent 68%) !important;
 }
 
-/* Light mode alternating colors for Header inner container (Selector 2) */
-html.light div#root > div > header > div:nth-of-type(1) nav a:not([class*="bg-"]),
-html.light div#root > div > header > div:nth-of-type(1) nav button {
-  color: #334155 !important;
-}
-
-html.light div#root > div > header > div:nth-of-type(1) nav a:hover,
-html.light div#root > div > header > div:nth-of-type(1) nav button:hover {
-  color: #081331 !important;
-  background-color: rgba(241, 245, 249, 0.85) !important;
-}
-
-html.light div#root > div > header > div:nth-of-type(1) nav a.text-\[\#4FD6F4\],
-html.light div#root > div > header > div:nth-of-type(1) nav button.text-\[\#4FD6F4\] {
-  color: #0284c7 !important;
-  background-color: #e0f2fe !important;
-}
-
-html.light div#root > div > header > div:nth-of-type(1) .bg-\[\#0b183d\] {
-  background-color: rgba(255, 255, 255, 0.96) !important;
-  border-color: #cbd5e1 !important;
-  box-shadow: 0 10px 30px -5px rgba(8, 19, 49, 0.12) !important;
-  backdrop-filter: blur(12px) !important;
-  -webkit-backdrop-filter: blur(12px) !important;
-}
-
-html.light div#root > div > header > div:nth-of-type(1) button[aria-controls="mobile-navigation"] {
-  color: #334155 !important;
-}
-
-html.light div#root > div > header > div:nth-of-type(1) button[aria-controls="mobile-navigation"]:hover {
-  color: #081331 !important;
-  background-color: #f1f5f9 !important;
-}
-
-/* Header scroll progress bar styling */
-header [role="progressbar"] {
-  height: 2.5px;
-  background-color: rgba(8, 19, 49, 0.4);
-}
-
-header [role="progressbar"] > div {
-  background: linear-gradient(to right, #4FD6F4, #36c5e5, #25D366);
-  box-shadow: 0 0 8px rgba(79, 214, 244, 0.7);
-}
-
-html.light header [role="progressbar"] {
-  background-color: rgba(203, 213, 225, 0.5) !important;
-}
-
-html.light header [role="progressbar"] > div {
-  background: linear-gradient(to right, #0284c7, #0ea5e9, #10b981) !important;
-  box-shadow: 0 0 6px rgba(2, 132, 199, 0.45) !important;
-}
-
-/* Mobile navigation drawer */
-html.light #mobile-navigation {
-  background-color: rgba(255, 255, 255, 0.95) !important;
-  border-color: #cbd5e1 !important;
-  backdrop-filter: blur(12px) !important;
-  -webkit-backdrop-filter: blur(12px) !important;
-}
-
-/* Surfaces and Cards: crisp border, elevated shadow, white surface */
-html.light .bg-\[\#0e1e4a\],
-html.light .bg-\[\#0e1e4a\]\/80,
-html.light .bg-\[\#0e1e4a\]\/70,
-html.light .bg-\[\#0e1e4a\]\/60,
-html.light .bg-\[\#0e1e4a\]\/50 {
-  background-color: #ffffff !important;
-  border-color: #cbd5e1 !important;
-  box-shadow: 0 4px 20px -2px rgba(8, 19, 49, 0.07), 0 2px 6px -1px rgba(8, 19, 49, 0.04) !important;
-}
-
-html.light .bg-\[\#0b183d\] {
-  background-color: #ffffff !important;
-  border-color: #cbd5e1 !important;
-  box-shadow: 0 4px 24px -2px rgba(8, 19, 49, 0.08) !important;
-}
-
-html.light .bg-\[\#122456\],
-html.light .bg-\[\#122456\]\/90,
-html.light .bg-\[\#122456\]\/70,
-html.light .bg-\[\#122456\]\/60 {
-  background-color: #f1f5f9 !important;
-  border-color: #cbd5e1 !important;
-}
-
-html.light .bg-\[\#07112d\] {
-  background-color: #07112d !important; /* Preserved dark backdrop for video card */
-}
-
-html.light .bg-\[\#050d24\] {
-  background-color: #f1f5f9 !important;
-}
-
-/* Internal nested card surfaces (e.g. in Section 5 & Section 8) */
-html.light .p-4.rounded-xl.bg-\[\#081331\],
-html.light .p-4.rounded-xl.bg-\[\#081331\]\/80,
-html.light div.rounded-xl.bg-\[\#081331\] {
-  background-color: #f8fafc !important;
-  border-color: #dbe4ef !important;
-  box-shadow: 0 1px 3px rgba(8, 19, 49, 0.05);
-}
-
-/* Service cards icon badge in Section 4 */
-html.light .group .w-12.h-12.bg-\[\#122456\] {
-  background-color: #e0f2fe !important;
-  color: #0284c7 !important;
-}
-
-/* Step cards number "01", "02", "03" in Section 6 */
-html.light .text-\[\#4FD6F4\]\/30 {
-  color: #0284c7 !important;
-  opacity: 0.38 !important;
-}
-
-/* FAQ cards in Section 10 */
-html.light div.rounded-xl.border.bg-\[\#0e1e4a\]\/50 {
-  background-color: #ffffff !important;
-  border-color: #cbd5e1 !important;
-  box-shadow: 0 2px 8px rgba(8, 19, 49, 0.04) !important;
-}
-html.light div.rounded-xl.border.bg-\[\#0e1e4a\]\/50:hover {
-  border-color: #94a3b8 !important;
-}
-
-/* Card hover lift effect */
-html.light .group.bg-\[\#0e1e4a\]\/60:hover {
-  border-color: #0284c7 !important;
-  box-shadow: 0 14px 34px -4px rgba(8, 19, 49, 0.12) !important;
-}
-
-/* Borders */
-html.light .border-\[\#1e3878\],
-html.light .border-\[\#162c66\],
-html.light .border-\[\#122456\] {
-  border-color: #cbd5e1 !important;
-}
-
-html.light .border-\[\#1e3878\]\/80,
-html.light .border-\[\#1e3878\]\/60,
-html.light .border-\[\#1e3878\]\/40 {
-  border-color: #dbe4ef !important;
-}
-
-/* Typography contrast mapping for accessibility */
-html.light h1:not(.media-dark-overlay *),
-html.light h2:not(.media-dark-overlay *),
-html.light h3:not(.media-dark-overlay *),
-html.light h4:not(.media-dark-overlay *),
-html.light h5:not(.media-dark-overlay *),
-html.light h6:not(.media-dark-overlay *),
-html.light .text-white:not(.media-dark-overlay *):not([aria-label*="Vídeo"] *):not(.bg-\[\#4FD6F4\] *):not(.bg-\[\#25D366\] *) {
-  color: #081331 !important;
-}
-
-/* Hero h1 readability text-shadow in dark and light modes */
-section#inicio h1,
-html.dark section#inicio h1 {
+/* Hero h1 readability text-shadow */
+section#inicio h1 {
   text-shadow: 0 2px 14px rgba(0, 0, 0, 0.55);
 }
-
-html.light section#inicio h1 {
-  text-shadow: 0 1px 3px rgba(8, 19, 49, 0.1) !important;
-}
-
-html.light .text-slate-100:not(.media-dark-overlay *) {
-  color: #0f172a !important;
-}
-
-html.light .text-slate-200:not(.media-dark-overlay *) {
-  color: #1e293b !important;
-}
-
-html.light .text-slate-300:not(.media-dark-overlay *) {
-  color: #334155 !important;
-}
-
-html.light .text-slate-400:not(.media-dark-overlay *) {
-  color: #64748b !important;
-}
-
-html.light .text-\[\#94a9c9\],
-html.light .text-\[\#8ea5c8\] {
-  color: #475569 !important;
-}
-
-/* Brand Accent Cyan (WCAG AA ≥ 4.5:1 contrast against light background: #0284c7) */
-html.light .text-\[\#4FD6F4\]:not(.media-dark-overlay *):not([aria-label*="Vídeo"] *) {
-  color: #0284c7 !important;
-}
-html.light .text-\[\#36c5e5\]:not(.media-dark-overlay *) {
-  color: #0369a1 !important;
-}
-html.light a:hover .text-\[\#4FD6F4\],
-html.light .hover\:text-\[\#4FD6F4\]:hover {
-  color: #0284c7 !important;
-}
-html.light .hover\:text-\[\#36c5e5\]:hover {
-  color: #0369a1 !important;
-}
-
-/* Cyan Action Buttons (Primary CTAs) */
-html.light .bg-\[\#4FD6F4\] {
-  background-color: #0284c7 !important;
-  color: #ffffff !important;
-}
-html.light .bg-\[\#4FD6F4\] * {
-  color: #ffffff !important;
-}
-html.light .hover\:bg-\[\#36c5e5\]:hover {
-  background-color: #0369a1 !important;
-  color: #ffffff !important;
-}
-
-/* Secondary Buttons & Links */
-html.light a.bg-\[\#0e1e4a\],
-html.light button.bg-\[\#0e1e4a\],
-html.light .hover\:bg-\[\#162c66\]:hover {
-  background-color: #ffffff !important;
-  color: #081331 !important;
-  border-color: #cbd5e1 !important;
-}
-html.light a.bg-\[\#122456\],
-html.light button.bg-\[\#122456\] {
-  background-color: #f1f5f9 !important;
-  color: #081331 !important;
-  border-color: #cbd5e1 !important;
-}
-
-/* Badges / Pill tags in light mode */
-html.light .inline-flex.bg-\[\#0e1e4a\].border-\[\#1e3878\] {
-  background-color: #e0f2fe !important;
-  border-color: #bae6fd !important;
-  color: #0369a1 !important;
-}
-html.light .inline-flex.bg-\[\#0e1e4a\].border-\[\#1e3878\] * {
-  color: #0369a1 !important;
-}
-
-/* Form inputs & controls in light mode */
-html.light input,
-html.light textarea,
-html.light select {
-  background-color: #ffffff !important;
-  color: #0f172a !important;
-  border-color: #cbd5e1 !important;
-}
-html.light input::placeholder,
-html.light textarea::placeholder {
-  color: #94a3b8 !important;
-}
-
-/* Exceptions: Elements that preserve contrast inside media containers */
-html.light .aspect-\[9\/16\],
-html.light [aria-label*="Vídeo"],
-html.light [aria-label*="vídeo"],
-html.light .bg-\[\#060e24\],
-html.light .bg-\[\#060d21\] {
-  background-color: #060e24 !important;
-}
-
-html.light [aria-label*="Vídeo"] .text-white,
-html.light [aria-label*="vídeo"] .text-white,
-html.light [aria-label*="Vídeo"] [class*="text-slate"],
-html.light [aria-label*="vídeo"] [class*="text-slate"] {
-  color: #ffffff !important;
-}
-
-/* ========================================================
-   DARK MEDIA OVERLAYS PRESERVATION IN LIGHT MODE
-   Ensures text on Section 3 (Autoconhecimento) and Section 11 (Chamada Final)
-   remains crisp, luminous white/light slate over dark video scrims
-======================================================== */
-html.light .media-dark-overlay,
-html.light .media-dark-overlay h1,
-html.light .media-dark-overlay h2,
-html.light .media-dark-overlay h3,
-html.light .media-dark-overlay h4,
-html.light .media-dark-overlay .text-white {
-  color: #ffffff !important;
-}
-
-html.light .media-dark-overlay p,
-html.light .media-dark-overlay .text-slate-100,
-html.light .media-dark-overlay .text-slate-200,
-html.light .media-dark-overlay .text-slate-300 {
-  color: #f1f5f9 !important;
-}
-
-html.light .media-dark-overlay .text-slate-400 {
-  color: #cbd5e1 !important;
-}
-
-html.light .media-dark-overlay .bg-\[\#122456\],
-html.light .media-dark-overlay .bg-\[\#122456\]\/90 {
-  background-color: rgba(18, 36, 86, 0.92) !important;
-  border-color: rgba(79, 214, 244, 0.45) !important;
-}
-
-html.light .media-dark-overlay .text-\[\#4FD6F4\] {
-  color: #4FD6F4 !important;
-}
-
-html.light .media-dark-overlay a.bg-\[\#0e1e4a\] {
-  background-color: rgba(14, 30, 74, 0.9) !important;
-  color: #ffffff !important;
-  border-color: rgba(79, 214, 244, 0.3) !important;
-}
-
-html.light .bg-\[\#25D366\] {
-  background-color: #25D366 !important;
-  color: #ffffff !important;
-}
-html.light .bg-\[\#25D366\] * {
-  color: #ffffff !important;
-}
-
-

@@ -62,7 +62,7 @@ export const siteConfig: SiteConfig = {
   showUnverifiedFormations: false,
   showEmergencyNotice: false,
   showEditorialReviewNotice: true,
-  showSpeakerTopicsDraft: true,
+  showSpeakerTopicsDraft: false,
 };
 
 export function getWhatsAppUrl(customMessage?: string): string {
